@@ -2,6 +2,7 @@
 // 그 다음 클라이언트의 토큰과 데이터베이스의 토큰이 일치하는지 확인한다.
 
 const { User } = require("../models/users.js");
+// const cookieParser = require("cookie-parser");
 
 let Auth = (req, res, next) => {
   // 클라이언트 쿠키에서 토큰 가져오기
