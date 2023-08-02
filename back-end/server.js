@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const redis = require("redis");
+// const redis = require("redis");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
