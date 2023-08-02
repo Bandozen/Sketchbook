@@ -17,7 +17,7 @@ import MotionCheck from "./pages/Check/MotionCheck";
 import CaptureCheck from "./pages/Check/CaptureCheck";
 import DistanceCheck from "./pages/Check/DistanceCheck";
 import CombineCheck from "./pages/Check/CombineCheck";
-import Ready from "./pages/Check/Ready";
+import Ready from "./pages/Ready";
 import Play from "./pages/Play/index";
 import Profile from "./pages/Profile/index";
 import Code from "./pages/Code/index";
@@ -59,8 +59,11 @@ const router = createBrowserRouter([
       { path: "motion", element: <MotionCheck /> },
       { path: "sound", element: <SoundCheck /> },
       { path: "combine", element: <CombineCheck /> },
-      { path: "ready", element: <Ready /> },
     ],
+  },
+  {
+    path: "/ready",
+    element: <Ready />,
   },
   {
     path: "/play",

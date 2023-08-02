@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import SoundWrapper from "./styles";
 
+import { connect } from "react-redux";
+import { soundOn, soundOff } from "../../../redux/modules/device";
+
 const SoundCheck = () => {
   const [audioStream, setAudioStream] = useState(null);
   const [volume, setVolume] = useState(0);
 
   const handleMicrophone = () => {
-    console.log(audioStream);
     if (audioStream) {
       setAudioStream(null);
       setVolume(0);
+      soundOff(); // 버튼이 '끄기'일 때 soundOff 액션을 dispatch
     } else {
       async function getMicrophone() {
         try {
@@ -17,6 +20,7 @@ const SoundCheck = () => {
             audio: true,
           });
           setAudioStream(stream);
+          soundOn(stream); // 버튼이 '켜기'일 때 soundOn 액션을 dispatch
         } catch (err) {
           console.error("마이크 연결 오류 : ", err);
         }
@@ -24,6 +28,7 @@ const SoundCheck = () => {
 
       getMicrophone();
     }
+    console.log(audioStream);
   };
 
   useEffect(() => {
@@ -60,23 +65,25 @@ const SoundCheck = () => {
     <SoundWrapper>
       <h2>4. 음성 인식 확인하기</h2>
       <div className="box">
-        <img
-          className="volume"
-          src={process.env.PUBLIC_URL + "/assets/volume.png"}
-        />
-        <div className="sound">
-          <img src={process.env.PUBLIC_URL + "/assets/sound.png"} alt="" />
-          <div
-            className="gauge"
-            style={{
-              width: `${volume}px`,
-            }}
+        <div className="images">
+          <img alt="volume-icon"
+            className="volume"
+            src={process.env.PUBLIC_URL + "/assets/volume.png"}
           />
+          <div className="sound">
+            <img src={process.env.PUBLIC_URL + "/assets/sound.png"} alt="" />
+            <div
+              className="gauge"
+              style={{
+                width: `${volume}px`,
+              }}
+            />
+          </div>
+        </div>
         <div className="button">
           <button onClick={handleMicrophone}>
             {audioStream ? "끄기" : "켜기"}
           </button>
-        </div>
         </div>
       </div>
       <h4>
@@ -86,4 +93,17 @@ const SoundCheck = () => {
   );
 };
 
-export default SoundCheck;
+const mapStateToProps = (state) => {
+  return {
+    sound: state.device.sound,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    soundOn: (audioStream) => dispatch(soundOn(audioStream)),
+    soundOff: () => dispatch(soundOff()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SoundCheck);
