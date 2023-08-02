@@ -44,8 +44,16 @@ img{
   }
 
   .message{
-    font-size : 12px;
+    font-size : 14px;
   }
+
+  .input-group-text{
+    height : 45px;
+    cursor : pointer;
+    margin-top : 8px;
+    border-radius: 5px;
+  }
+  
 
 
 `
