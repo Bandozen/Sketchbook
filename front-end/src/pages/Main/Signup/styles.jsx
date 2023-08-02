@@ -107,6 +107,12 @@ const Wrapper = styled.div`
   background-color: #FFEE59;
 }
 
+@media screen and (max-width: 1020px) {
+  .signup {
+    right: 50%;
+  }
+}
+
 `
 
 export default Wrapper;
