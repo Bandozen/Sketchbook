@@ -15,7 +15,7 @@ function Header() {
       .then((res) => {
         if (res.data.success) {
           console.log('Logout successful');
-          navigate('/main');
+          navigate('/');
         } else {
           console.error('Logout failed:', res.data.err);
         }
