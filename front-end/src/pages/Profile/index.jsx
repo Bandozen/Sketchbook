@@ -80,10 +80,10 @@ function Profile() {
         <h2>비밀번호 <span>변경</span></h2>
         <Form>
           <Form.Group className="mt-5">
-            <Form.Control name='pw' value={form.pw} onChange={onChangePw} size="lg" className="my-3" type="text" placeholder="기존 비밀번호" style={{height: '45px'}}/>
-            <Form.Control name='newPw' value={form.newPw} onChange={onChangeNewPw} size="lg" className="my-2" type="text" placeholder="새로운 비밀번호" style={{height: '45px'}}/>
+            <Form.Control name='pw' value={form.pw} onChange={onChangePw} size="lg" className="my-3" type="password" placeholder="기존 비밀번호" style={{height: '45px'}}/>
+            <Form.Control name='newPw' value={form.newPw} onChange={onChangeNewPw} size="lg" className="my-2" type="password" placeholder="새로운 비밀번호" style={{height: '45px'}}/>
             <span className='message'>{form.newPwMessage}</span>
-            <Form.Control name='newPwCheck' value={form.newPwCheck} onChange={onChangeNewPwCheck} size="lg" className="my-3" type="text" placeholder="새로운 비밀번호 확인" style={{height: '45px'}}/>
+            <Form.Control name='newPwCheck' value={form.newPwCheck} onChange={onChangeNewPwCheck} size="lg" className="my-3" type="password" placeholder="새로운 비밀번호 확인" style={{height: '45px'}}/>
             <span className='message'>{form.newPwCheckMessage}</span>
           </Form.Group>
           <Form.Control className="btn my-3" type="submit" value="변경하기" onClick={onSubmitForm} />

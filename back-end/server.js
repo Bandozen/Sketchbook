@@ -3,10 +3,12 @@
 
 const express = require("express");
 const helmet = require("helmet");
-// const cors = require("cors");
+const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const redis = require("redis");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 dotenv.config();
@@ -18,9 +20,11 @@ app.use(
     extended: true,
   })
 );
-// app.use(cors());
+app.use(cors());
 app.use(morgan("tiny"));
 app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 
 /* PORT 지정 */
@@ -36,6 +40,8 @@ app.get("/", (req, res) => res.send("안녕하세요!"));
 // client.on("connect", () => console.log("Redis에 연결되었습니다."));
 
 // client.connect();
+
+// exports.client = client;
 
 /* mongoDB 연결 */
 const { dbConnect } = require("./modules/dbConnect");
@@ -58,3 +64,8 @@ dbConnect()
 const userRouter = require("./routers/usersRouter.js");
 
 app.use("/api/users", userRouter);
+
+//deviceDB();
+const deviceRouter = require("./routers/deviceRouter.js");
+
+app.use("/api/devices", deviceRouter);
