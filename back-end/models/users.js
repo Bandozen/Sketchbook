@@ -1,13 +1,7 @@
-const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
-const cookieParser = require("cookie-parser");
+const saltRounds = 10;;
 const jwt = require("jsonwebtoken");
-
-// 토큰을 쿠키에 저장하기 위해 사용
-app.use(cookieParser());
 
 const userSchema = new mongoose.Schema(
   {
