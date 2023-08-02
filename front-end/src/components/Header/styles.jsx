@@ -14,6 +14,14 @@ const Wrapper = styled.div`
     display: flex;
     margin-right: 20px;
   }
+  
+  p {
+    display: flex;
+    margin-right: 20px;
+    margin : auto 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
 
   .active{
     font-weight: bold;

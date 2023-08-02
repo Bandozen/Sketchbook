@@ -11,5 +11,6 @@ usersRouter.route('/login').post(UsersDB.login);
 usersRouter.route('/auth').get(Auth, UsersDB.auth);
 usersRouter.route('/logout').get(Auth, UsersDB.logout);
 usersRouter.route('/mail').post(UsersDB.mail);
+usersRouter.route('/checkVerificationCode').post(UsersDB.checkVerificationCode);
 
 module.exports = usersRouter;

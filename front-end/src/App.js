@@ -27,16 +27,16 @@ import MainThird from "./pages/MainThird/index";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", // 첫화면은 로그인
     element: <Main />,
+  },
+  {
+    path: "/main", // 헷갈림 ㅠㅠ 메인 third가 메인임..
+    element: <MainThird />,
   },
   {
     path: "/main/signup",
     element: <MainSecond />,
-  },
-  {
-    path: "/main/choose",
-    element: <MainThird />,
   },
   {
     path: "/connect",

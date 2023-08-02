@@ -18,7 +18,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false); //패스워드 보여줘?
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); //패스워드 확인 보여줘?
   const [isValidEmail, setIsValidEmail] = useState(false); // 이메일 유효성 검사 결과
-  
+  var Codeblock = 0 // 이메일 인증 안하면 회원가입 막는 용도
 
   const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
   const passwordRegEx = /^[a-zA-Z0-9!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]{8,20}$/;
@@ -63,13 +63,27 @@ export default function Signup() {
 
   const handleDuplicateCheck = (e) => {
     e.preventDefault(); // 새로고침 방지
+  
     axios.post("/api/users/idCheck", { email: useremail })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         const { registerService, message } = res.data;
-        if (registerService) {
+        if (!isValidEmail) {
+          alert("이메일 형식을 확인해주세요")
+        }
+        else if (registerService) {
           alert(message); // 이메일 사용 가능
-        } else {
+          axios.post("/api/users/mail", { email: useremail })
+            .then((res) => {
+              // console.log(res.data);
+              alert("인증 코드를 이메일로 발송했습니다.");
+            })
+            .catch((err) => {
+              console.log(err);
+              alert("인증 코드 발송에 실패했습니다.");
+            });
+        }
+        else {
           alert(message); // 이메일 중복
         }
       })
@@ -78,22 +92,51 @@ export default function Signup() {
         alert("이메일 중복 확인에 실패했습니다.");
       });
   };
+  
+  const handleVerifyCode = (e) => {
+  e.preventDefault(); // 새로고침 방지
 
-  const handleVerifyCode = () => {
-    // 인증 코드를 확인 로직
-    // 예시: 인증 코드가 유효한 경우, setVerified(true)로 상태를 업데이트합니다.
-    // 예시: 인증 코드가 유효하지 않은 경우, setError(true)로 상태를 업데이트합니다.
-  };
+  // 인증 코드 확인 로직
+  if (!verificationCode) {
+    alert("인증 코드를 입력해주세요.");
+    return;
+  }
+
+  axios
+    .post("/api/users/checkVerificationCode", {
+      verificationCode: verificationCode,
+      email: useremail // 이메일 주소도 함께 전송
+    })
+    .then((res) => {
+      if (res.data.success) {
+        // console.log(res.data.message);
+        alert("인증이 완료되었습니다.");
+        Codeblock = 1
+      } else {
+        // console.log(res.data.message);
+        alert("인증 코드가 유효하지 않습니다.");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      alert("인증 코드 확인에 실패했습니다.");
+    });
+};
+  
 
   const signup = (e) => {
     e.preventDefault();
 
+    // console.log(Codeblock)
     if (password !== confirmPassword) {
       setConfirmPasswordWarning('비밀번호가 일치하지 않습니다.');
       alert("비밀번호가 일치하지 않습니다.");
       return;
     } else if (!isValidEmail) {
       alert("이메일 형식을 확인해주세요")
+      return;
+    } else if (Codeblock == 0) {
+      alert("이메일을 인증해주세요.")
       return;
     }
 
@@ -103,13 +146,13 @@ export default function Signup() {
         password: password,
       })
       .then((res) => {
-        if (res.data.success===false){
+        if (res.data.success === false) {
           alert('잘못된 회원 정보입니다.')
-          console.log(res)
+          // console.log(res)
           return
         } else {
-        navigate('/');
-        console.log(res.data);
+          navigate('/');
+          // console.log(res.data);
         }
       })
       .catch((err) => {
