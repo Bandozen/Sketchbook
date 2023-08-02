@@ -17,8 +17,8 @@ export default function Choose() {
     <Wrapper>
       <div className="Choose">
         <br></br>
-        <h4 style={{ color: "#A451F7", fontWeight: "bold" }}>
-          안녕하세요! 스케치북입니다.
+        <h4 style={{ color: "#9D4FE0", fontWeight: "bold" }}>
+          안녕하세요! 🤭
         </h4>
         <br></br>
         <p style={{ fontWeight: "bold", color: "black", fontSize: "20px" }}>

@@ -8,7 +8,7 @@ function Guide() {
       <Wrapper>
         <div className="box">
           <h2>
-            스케치북, <span>어떻게</span> 이용하나요?
+            스케치북, <span>어떻게</span> 이용하나요? 
             <img src={process.env.PUBLIC_URL + '/assets/emoji.png'} alt="" />
           </h2>
           <ol>
