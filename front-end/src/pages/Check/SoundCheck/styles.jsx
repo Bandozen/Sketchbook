@@ -9,9 +9,14 @@ padding : 30px;
     border : none;
 }
 
+.images{
+    display : flex;
+    align-items : center;
+}
+
 .sound{
     padding : 20px;
-    width : 100%;
+    width : 70%;
     display: flex;
     flex-direction: column;
 }
@@ -24,14 +29,14 @@ padding : 30px;
 
 .gauge{
     max-width: 90%;
-    height: 48%;
+    height: 43%;
     background-color: black;
     position: absolute;
     z-index: 1;
 }
 
 .volume {
-    width : 30%;
+    width : 20%;
     object-fit: contain;
     z-index: 2;
 }
