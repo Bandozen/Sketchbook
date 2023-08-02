@@ -1,5 +1,5 @@
-// import { useState } from 'react';
-import Login from './Login'
+import { Outlet } from 'react-router';
+
 import Wrapper from './styles';
 
 function Main() {
@@ -23,10 +23,8 @@ function Main() {
           <h3 className="introduce">내가 그린 그림이 내가 되는 행복한 세상</h3>
           <h3 style={{ letterSpacing: '0.6px' }} className="introduce">내가 움직여야만 흘러가는 신기한 세상</h3>
 
-
-
         </div>
-        <Login />
+        <Outlet />
       </div>
     </Wrapper>);
 }
