@@ -1,5 +1,5 @@
 const { Device } = require("../models/device");
-const { client } = require("../server.js");
+// const { client } = require("../server.js");
 const otpGenerator = require('otp-generator');
 
 function issue(req, res) {    
@@ -14,10 +14,10 @@ function issue(req, res) {
     });
 
     client.set(otp, email);
-    client.expire(otp, 300);
+    client.expire(otp, 30);
 
     res.status(200).json({
-        email: req.user.email,
+        email: email,
         otp: otp,
       })
 }

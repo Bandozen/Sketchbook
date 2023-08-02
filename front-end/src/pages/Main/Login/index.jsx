@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link, useNavigate } from "react-router-dom";
 import Wrapper from "./styles";
-import PasswordModal from "../../components/PasswordModal";
+import PasswordModal from "../../../components/PasswordModal";
 
 import axios from "axios";
 
@@ -85,7 +85,7 @@ export default function Login() {
             <h3 className="activated">로그인</h3>
           </Link>
           <Link
-            to="/main/signup"
+            to="/signup"
             style={{ textDecoration: "none", color: "gray" }}
           >
             <h3>회원가입</h3>
