@@ -61,6 +61,11 @@ const Wrapper = styled.div`
   font-size: 14px;
 }
 
+@media screen and (max-width: 1020px) {
+  .login {
+    right: 50%;
+  }
+}
 
 `
 

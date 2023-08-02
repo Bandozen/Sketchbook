@@ -49,6 +49,15 @@ const Wrapper = styled.div`
   margin-bottom: 5px;
   font-size: 14px;
 }
+.text-overlay {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .text-overlay {
+    display: block;
+  }
+}
 
 
 `
