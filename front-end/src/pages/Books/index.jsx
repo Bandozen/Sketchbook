@@ -82,7 +82,7 @@ function Books() {
           <input
             type="text"
             className="form-control"
-            placeholder="책 제목을 검색해 보세요!"
+            placeholder="책 제목을 검색해 보세요! 🙆‍♀️"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyPress={handleKeyPress}
