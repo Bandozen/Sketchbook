@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 import Header from "../../components/Header";
 import Wrapper from "./styles";
-
+import axios from "axios";
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -29,22 +29,38 @@ function Connect() {
     buttonText: "OTP 생성하기",
     timerActive: false,
     timerCount: 0,
-    tryCount: 0
+    tryCount: 0,
   });
 
-  const [otp, SetOtp] = useState("");
+  const [otp, setOtp] = useState("");
 
   const handleClick = () => {
-    if (button.timerActive === false || (button.timerCount === 0 && button.tryCount < 3)) {
+    if (
+      button.timerActive === false ||
+      (button.timerCount === 0 && button.tryCount < 3)
+    ) {
+      createOtp();
       setButton((prevButton) => ({
         ...prevButton,
         timerActive: true,
-        timerCount: 5,
-        tryCount : prevButton.tryCount + 1
+        timerCount: 180,
+        tryCount: prevButton.tryCount + 1,
       })); // 3분(180초)로 타이머 설정
-      SetOtp(12345);
-      console.log(button.tryCount);
     }
+  };
+
+  // axios createOtp 
+  const createOtp = () => {
+    axios
+      .get("/api/devices/issue")
+      .then((res) => {
+        setOtp(res.data.otp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // SetOtp(12345);
+    console.log(button.tryCount);
   };
 
   // 타이머 로직을 담당하는 함수
@@ -53,7 +69,9 @@ function Connect() {
       setButton((prevButton) => ({
         ...prevButton,
         timerCount: prevButton.timerCount - 1,
-        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${(prevButton.timerCount - 1) % 60}`,
+        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${
+          (prevButton.timerCount - 1) % 60
+        }`,
       }));
     } else {
       if (button.tryCount < 3) {
@@ -65,43 +83,43 @@ function Connect() {
           buttonText: "OTP 생성하기",
           timerActive: false,
           timerCount: 0,
-          tryCount: 0
+          tryCount: 0,
         }));
-        SetOtp("")
+        setOtp("");
       }
-
-
     }
   };
 
   // useInterval 훅스를 사용하여 1초마다 타이머 업데이트
   useInterval(tick, button.timerActive ? 1000 : null);
 
-  return <>
-    <Header />
-    <Wrapper>
-      <div className="box">
-        <h2>
-          기기연결, <span>어떻게</span> 하나요?
-          <img src={process.env.PUBLIC_URL + '/assets/emoji.png'} alt="" />
-        </h2>
-        <ol>
-          <li>
-            기기의 전원을 켜주세요.
-          </li>
-          <li>기기에 와이파이를 연결해주세요.</li>
-          <li>웹 페이지의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요.</li>
-          <li>기기의 키패드에 해당 OTP 번호를 입력해주세요.</li>
-        </ol>
-        <div className="btndiv">
-          <button type="button" onClick={handleClick}>
-            {button.buttonText}
-          </button>
+  return (
+    <>
+      <Header />
+      <Wrapper>
+        <div className="box">
+          <h2>
+            기기연결, <span>어떻게</span> 하나요?
+            <img src={process.env.PUBLIC_URL + "/assets/emoji.png"} alt="" />
+          </h2>
+          <ol>
+            <li>기기의 전원을 켜주세요.</li>
+            <li>기기에 와이파이를 연결해주세요.</li>
+            <li>
+              웹 페이지의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요.
+            </li>
+            <li>기기의 키패드에 해당 OTP 번호를 입력해주세요.</li>
+          </ol>
+          <div className="btndiv">
+            <button type="button" onClick={handleClick}>
+              {button.buttonText}
+            </button>
+          </div>
+          <div className="timerCount">{otp}</div>
         </div>
-        <div className='timerCount'>{otp}</div>
-      </div>
-    </Wrapper>
-  </>;
+      </Wrapper>
+    </>
+  );
 }
 
 export default Connect;
