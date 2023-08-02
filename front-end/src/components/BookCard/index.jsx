@@ -47,8 +47,8 @@ function BookCard({ book }) {
     <>
       <FontWrap>
         <Card
-          style={{ width: "25rem", margin: "20px 0px 20px 0px" }}
-          onClick={handleModalShow}
+         style={{ width: "100%", maxWidth: "25rem", margin: "20px 0px 20px 0px" }}
+         onClick={handleModalShow}
         >
           <Card.Img
             variant="top"
@@ -73,7 +73,7 @@ function BookCard({ book }) {
               <img
                 src={book.bookcover}
                 alt={book.title}
-                style={{ width: "30rem", height: "35rem" }}
+                style={{ width: "100%", height: "auto", maxWidth: "25rem", maxHeight: "30rem" }}
               />
             </div>
             <div style={{ flex: 2, padding: "10px 40px 10px 40px" }}>
@@ -92,7 +92,7 @@ function BookCard({ book }) {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  marginTop: "100px",
+                  marginTop: "80px",
                 }}
               >
                 <Button

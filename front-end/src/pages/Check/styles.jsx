@@ -12,7 +12,7 @@ font-family: 'Pretendard-Regular';
 
   h1 {
     font-weight: bold;
-    color: #a451f7;
+    color: #9D4FE0;
   }
 
   h2 {
