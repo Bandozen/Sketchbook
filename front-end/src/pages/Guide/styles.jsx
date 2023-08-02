@@ -34,7 +34,7 @@ const Wrapper = styled.div`
   }
 
   li {
-    font-size: 25px;
+    font-size: 23px;
     line-height: 42px;
   }
 
