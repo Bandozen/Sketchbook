@@ -4,6 +4,8 @@ const { smtpTransport } = require("../config/email.js")
 const ejs = require('ejs')
 const path = require('path')
 var appDir = path.dirname(require.main.filename)
+let verificationCodes = {};
+
 
 function register(req, res) {
   // 회원가입할 때 필요한 정보들을
@@ -94,44 +96,69 @@ function logout(req, res) {
   });
 }
 
+/* min ~ max 까지 랜덤으로 숫자를 생성하는 함수 */
+var generateRandom = function (min, max) {
+  var ranNum = Math.floor(Math.random()*(max-min+1)) + min
+  return ranNum
+}
+
 function mail(req, res) {
-  /* min ~ max 까지 랜덤으로 숫자를 생성하는 함수 */
-  var generateRandom = function (min, max) {
-    var ranNum = Math.floor(Math.random()*(max-min+1)) + min
-    return ranNum
-  }
-
   var number = generateRandom(111111, 999999)
+  verificationCodes[req.body.email] = number;
 
-  ejs.renderFile(appDir + '/templates/authMail.ejs', {authCode: number}, function (err, data) {
-    if(err) {
-      console.log(err)
+  ejs.renderFile(appDir + '/templates/authMail.ejs', { authCode: number }, function (err, data) {
+    if (err) {
+      console.log(err);
     }
-    emailTemplate = data
-  })
+    emailTemplate = data;
+  });
 
-
-  // console.log(req.body.email)
+  // console.log(req.body.email);
+  // console.log(number);
 
   let mailOptions = {
     from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
     to: req.body.email,
     subject: "회원가입을 위한 인증번호를 입력해주세요.",
     html: emailTemplate
-  }
+  };
 
   smtpTransport.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error)
+      console.log(error);
     }
-      console.log("메일이 무사히 전송되었습니다.")
-      res.json({
-        message: "메일이 무사히 전송되었습니다."
-      })
-      smtpTransport.close()
-    })
-
+    res.json({
+      message: "메일이 무사히 전송되었습니다.",
+      number: number
+    });
+    smtpTransport.close();
+  });
 }
+
+function checkVerificationCode(req, res) {
+  // 클라이언트에서 보낸 인증 코드와 이메일을 가져옵니다.
+  const { email, verificationCode } = req.body;
+
+  // Get the verification code for this email
+  const number = verificationCodes[email];
+
+  // 사용자가 입력한 인증 코드와 서버에서 생성한 인증 코드를 비교합니다.
+  if (number != verificationCode) {
+    return res.json({
+      success: false,
+      message: "유효하지 않은 인증 코드입니다.",
+    });
+  }
+
+  // 인증 코드가 일치하면 해당 이메일에 대한 인증 코드를 제거합니다.
+  delete verificationCodes[email];
+
+  return res.json({
+    success: true,
+    message: "인증이 완료되었습니다.",
+  });
+}
+
 
 exports.register = register;
 exports.idCheck = idCheck;
@@ -139,3 +166,4 @@ exports.login = login;
 exports.auth = auth;
 exports.logout = logout;
 exports.mail = mail;
+exports.checkVerificationCode = checkVerificationCode;

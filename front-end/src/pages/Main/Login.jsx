@@ -65,7 +65,7 @@ export default function Login() {
           alert('일치하는 회원정보가 없습니다.')
           return
         } else {
-        navigate('/main/choose'); // 기기 연결 페이지로 이동하게 변경
+        navigate('/main'); // 기기 연결 페이지로 이동하게 변경
         }
       })
       .catch((err) => {
