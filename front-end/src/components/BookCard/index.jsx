@@ -102,6 +102,7 @@ function BookCard({ book }) {
                 >
                   캐릭터 출력하기
                 </Button>
+                <a href="/check/capture">
                 <Button
                   variant="outline-primary"
                   className="custom-button-style"
@@ -109,6 +110,7 @@ function BookCard({ book }) {
                 >
                   시작하기
                 </Button>
+                </a>
               </div>
             </div>
           </Wrapper>
