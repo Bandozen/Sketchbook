@@ -14,7 +14,7 @@ function issue(req, res) {
     });
 
     client.set(otp, email);
-    client.expire(otp, 30);
+    client.expire(otp, 300);
 
     res.status(200).json({
         email: req.user.email,
