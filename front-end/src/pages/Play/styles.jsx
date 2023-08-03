@@ -17,7 +17,15 @@ const Wrapper = styled.div`
     height: 100vh;
     width: 100vw;
   }
-
+  
+  .png-image {
+    width: 450px;
+    height: 410px;
+    position: absolute;
+    bottom: 7%;
+    right: -1.5%;
+  }
+  
   .numbering {
     display: flex;
     align-items: center;
@@ -27,18 +35,6 @@ const Wrapper = styled.div`
     bottom: 10px;
     font-size: 15px;
   }
-
-  // .arrow-set {
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-content: center;
-  // }
-
-  // .arrow {
-  //   cursor: pointer;
-  //   font-size: 30px;
-  //   margin: 0 20px 0 20px;
-  // }
 `;
 
 export default Wrapper;
