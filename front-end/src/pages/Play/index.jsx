@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Wrapper from './styles';
 
 const imagesCount = 17; // 이미지의 총 개수
 
 function Play() {
+  const navigate = useNavigate(); 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [hasPngImage, setHasPngImage] = useState(true);
 
   // 이전 페이지로 이동
   const handleNextImage = useCallback(() => {
     if (currentImageIndex === imagesCount - 1) {
-      alert('마지막 페이지에요.');
+      if (window.confirm('마지막 페이지에요. 책장으로 이동할까요?')){
+        navigate('/books'); // 책장 페이지로 이동
+      }
     } else {
       setCurrentImageIndex((prevIndex) => prevIndex + 1);
     }
-  }, [currentImageIndex]);
+  }, [currentImageIndex, navigate]);
 
   // 다음 페이지로 이동
   const handlePrevImage = useCallback(() => {
