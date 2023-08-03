@@ -40,14 +40,14 @@ async function connect(req, res) {
 }
 
 function checkConnect(req, res) {
-  console.log(req.user);
+  console.log(req.user.isConnected);
   User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) {
       return res.json({
         err,
       });
     }
-    return res.json({
+    return res.cookie("isConnected", user.isConnected).status(200).json({
       isConnected: user.isConnected,
     });
   });
