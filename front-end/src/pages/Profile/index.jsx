@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
+import axios from 'axios';
 
 
 // sytled_components
@@ -14,6 +15,8 @@ import Header from "../../components/Header";
 ///////////////////////////////////////////////
 
 function Profile() {
+  const [pw, setPw] = useState("");
+  const [newPw, setnewPw] = useState("");
   const [form, setForm] = useState({
     pw: "",
     newPw: "",
@@ -41,6 +44,7 @@ function Profile() {
       ...prevForm,
       pw: currentPw
     }));
+    setPw(currentPw);
   }
 
   const onChangeNewPw = (e) => {
@@ -49,6 +53,8 @@ function Profile() {
       ...prevForm,
       newPw: currentNewPW
     }));
+    setnewPw(currentNewPW)
+
     const newPwRegExp = /^[a-zA-Z0-9!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]{8,20}$/;
 
     if (!newPwRegExp.test(currentNewPW) & currentNewPW !== "") {
@@ -84,7 +90,18 @@ function Profile() {
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log("제출")
+
+    axios
+    .post("/api/users/changePassword", {
+      prePassword : pw,
+      newPassword : newPw
+    })
+    .then((res)=> {
+      console.log(res);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   }
 
   return (
@@ -95,7 +112,7 @@ function Profile() {
           <h2>비밀번호 <span>변경</span></h2>
 
           <InputGroup size="lg">
-            <Form.Control name='pw' value={form.pw} onChange={onChangePw} size="lg" className="my-2 form-control" type={showPassword.pw ? "text" : "password"} placeholder="기존 비밀번호" style={{ height: '45px', borderRadius: '5px', fontSize: '1rem' }} />
+            <Form.Control aria-label='pw' value={form.pw} onChange={onChangePw} size="lg" className="my-2 form-control" type={showPassword.pw ? "text" : "password"} placeholder="기존 비밀번호" style={{ height: '45px', borderRadius: '5px', fontSize: '1rem' }} />
             <InputGroup.Text id="inputGroup-sizing-lg" onClick={() => togglePasswordVisibility('pw')}>
               <i className={showPassword.pw ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
             </InputGroup.Text>
@@ -103,7 +120,7 @@ function Profile() {
 
 
           <InputGroup size="lg">
-            <Form.Control name='newPw' value={form.newPw} onChange={onChangeNewPw} size="lg" className="my-2 form-control" type={showPassword.newPw ? "text" : "password"} placeholder="새로운 비밀번호" style={{ height: '45px', borderRadius: '5px', fontSize: '1rem' }} />
+            <Form.Control aria-label='newPw' value={form.newPw} onChange={onChangeNewPw} size="lg" className="my-2 form-control" type={showPassword.newPw ? "text" : "password"} placeholder="새로운 비밀번호" style={{ height: '45px', borderRadius: '5px', fontSize: '1rem' }} />
             <InputGroup.Text id="inputGroup-sizing-lg" onClick={() => togglePasswordVisibility('newPw')}>
               <i className={showPassword.newPw ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
             </InputGroup.Text>
