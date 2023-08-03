@@ -12,8 +12,10 @@ font-family: 'Pretendard-Regular';
 }
 
 img{
-    width: 80%;
+    width: 70%;
     height: 40%;
+    margin-left: 50px;
+    margin-top: 30px;
 }
 
 .box {
