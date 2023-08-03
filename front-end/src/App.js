@@ -25,61 +25,72 @@ import NotFound from "./pages/NotFound/index";
 import Login from "./pages/Main/Login/index";
 import Signup from "./pages/Main/Signup/index";
 import Choose from "./pages/Main/Choose/index";
+import ProtectedRoute from "./pages/ProtectedRoute/index";
 ///////////////////////////////////
 
 const router = createBrowserRouter([
+  { path: "*", element: <NotFound /> },
   {
     path: "/", // 첫화면은 로그인
     element: <Main />,
     children: [
-      { index:'default', element: <Login /> },
+      { index: 'default', element: <Login /> },
       { path: "signup", element: <Signup /> },
-      { path: "main", element: <Choose /> },
     ]
   },
   {
-    path: "/connect",
-    element: <Connect />,
-  },
-  {
-    path: "/guide",
-    element: <Guide />,
-  },
-  {
-    path: "/books",
-    element: <Books />,
-  },
-  {
-    path: "/check",
-    element: <Check />,
+    path: "/",
+    element: <ProtectedRoute />,
     children: [
-      { path: "capture", element: <CaptureCheck /> },
-      { path: "distance", element: <DistanceCheck /> },
-      { path: "motion", element: <MotionCheck /> },
-      { path: "sound", element: <SoundCheck /> },
-      { path: "combine", element: <CombineCheck /> },
-    ],
+      {
+        path: "/",
+        element: <Main />,
+        children: [
+          { path: "main", element: <Choose /> },
+        ]
+      },
+      {
+        path: "/connect",
+        element: <Connect />,
+      },
+      {
+        path: "/guide",
+        element: <Guide />,
+      },
+      {
+        path: "/books",
+        element: <Books />,
+      },
+      {
+        path: "/check",
+        element: <Check />,
+        children: [
+          { path: "capture", element: <CaptureCheck /> },
+          { path: "distance", element: <DistanceCheck /> },
+          { path: "motion", element: <MotionCheck /> },
+          { path: "sound", element: <SoundCheck /> },
+          { path: "combine", element: <CombineCheck /> },
+        ],
+      },
+      {
+        path: "/ready",
+        element: <Ready />,
+      },
+      {
+        path: "/play",
+        element: <Play />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/code",
+        element: <Code />,
+      },
+    ]
   },
-  {
-    path: "/ready",
-    element: <Ready />,
-  },
-  {
-    path: "/play",
-    element: <Play />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/code",
-    element: <Code />,
-  },
-  {
-    path: "/*",
-    element: <NotFound />,
-  },
+
 ]);
 
 function App() {

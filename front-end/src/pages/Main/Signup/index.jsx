@@ -72,11 +72,11 @@ export default function Signup() {
           alert("이메일 형식을 확인해주세요")
         }
         else if (registerService) {
-          alert(message); // 이메일 사용 가능
+          alert("사용 가능한 이메일입니다. \n인증 코드를 이메일로 발송했습니다."); // 이메일 사용 가능
           axios.post("/api/users/mail", { email: useremail })
             .then((res) => {
               // console.log(res.data);
-              alert("인증 코드를 이메일로 발송했습니다.");
+              // alert("인증 코드를 이메일로 발송했습니다.");
             })
             .catch((err) => {
               console.log(err);
