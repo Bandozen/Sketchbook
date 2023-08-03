@@ -1,3 +1,4 @@
+const { User } = require("../models/users.js");
 const { Device } = require("../models/device");
 const { client } = require("../server.js");
 const otpGenerator = require("otp-generator");
@@ -12,8 +13,8 @@ function issue(req, res) {
     specialChars: false,
   });
 
-  client.set(email, otp);
-  client.expire(email, 20); // 입력시간을 고려하여 3분 20초 설정
+  client.set(otp, email);
+  client.expire(otp, 2000); // 입력시간을 고려하여 3분 20초 설정
 
   res.status(200).json({
     email: email,
@@ -26,11 +27,32 @@ async function connect(req, res) {
 
   const useremail = await client.get(otp);
 
+  await User.findOneAndUpdate(
+    { email: useremail },
+    { isConnected: true },
+    { new: true },
+    (err, user) => {}
+  );
+
   return res.status(200).json({
     loginSuccess: true,
     useremail: useremail,
   });
 }
 
+function checkConnect(req, res) {
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) {
+      return res.json({
+        err,
+      });
+    }
+    return res.json({
+      isConnected: user.isConnected,
+    });
+  });
+}
+
 exports.issue = issue;
 exports.connect = connect;
+exports.checkConnect = checkConnect;
