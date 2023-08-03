@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import SoundWrapper from "./styles";
-
+import { useNavigate } from 'react-router-dom';
 import { connect } from "react-redux";
 import { soundOn, soundOff } from "../../../redux/modules/device";
 
 const SoundCheck = () => {
+  let navigate = useNavigate();
+
+  const next = () => {
+    navigate('/check/combine');
+  };
   const [audioStream, setAudioStream] = useState(null);
   const [volume, setVolume] = useState(0);
 
@@ -61,9 +66,13 @@ const SoundCheck = () => {
     }
   }, [audioStream]);
 
+  handleMicrophone()
+
   return (
+
+    
     <SoundWrapper>
-      <h2>4. 음성 인식 확인하기</h2>
+      <h3 style={{fontSize: '45px', fontWeight: 'bold'}}> 4. 음성 인식 확인하기 </h3>
       <div className="box">
         <div className="images">
           <img alt="volume-icon"
@@ -71,7 +80,6 @@ const SoundCheck = () => {
             src={process.env.PUBLIC_URL + "/assets/volume.png"}
           />
           <div className="sound">
-            <img src={process.env.PUBLIC_URL + "/assets/sound.png"} alt="" />
             <div
               className="gauge"
               style={{
@@ -80,15 +88,19 @@ const SoundCheck = () => {
             />
           </div>
         </div>
-        <div className="button">
-          <button onClick={handleMicrophone}>
-            {audioStream ? "끄기" : "켜기"}
-          </button>
-        </div>
+
       </div>
       <h4>
+        마이크를 켰어요.🎤
         "출발"이라고 외쳐 보세요!
       </h4>
+
+      <img
+          className="arrow"
+          src={process.env.PUBLIC_URL + "/assets/arrow.png"}
+          alt=""
+          onClick={next}
+        />
     </SoundWrapper>
   );
 };

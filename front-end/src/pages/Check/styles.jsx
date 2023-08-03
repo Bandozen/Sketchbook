@@ -7,11 +7,10 @@ const Wrapper = styled.div`
   margin: 0 auto;
 
   .container {
-    padding: 50px;
+    margin-top: 30px;
   }
 
   h1 {
-    font-weight: bold;
     color: #9D4FE0;
   }
 
@@ -24,7 +23,6 @@ const Wrapper = styled.div`
   .box {
     border: 1px solid black;
     padding: 10px;
-    // display: flex;
     height: 800px;
     border-radius: 10px;
     border: 1px solid black;
