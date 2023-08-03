@@ -5,8 +5,6 @@ const path = require("path");
 var appDir = path.dirname(require.main.filename);
 let verificationCodes = {};
 const otpGenerator = require("otp-generator");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;;
 
 function register(req, res) {
   // 회원가입할 때 필요한 정보들을
