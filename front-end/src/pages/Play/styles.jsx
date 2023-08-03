@@ -41,11 +41,14 @@ const Wrapper = styled.div`
     position: absolute;
     bottom: 9%;
     right: 0%;
+    opacity: 0;
 
-    // fadeInStyle 스타일 적용
-    opacity: 0; /* 초기에 투명 상태로 설정 */
     animation: ${fadeInAnimation} 1s ease 3s both; /* 3초 뒤에 애니메이션 실행 */
+
+    /* animation-fill-mode를 both로 설정하여 애니메이션 실행 후도 스타일 유지 */
+    animation-fill-mode: both;
   }
+
 
   .png-image[data-index="4"] {
     width: 350px;

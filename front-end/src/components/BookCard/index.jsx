@@ -3,8 +3,11 @@ import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Wrapper, FontWrap } from "./styles";
+import { useNavigate } from 'react-router-dom';
+
 
 function BookCard({ book }) {
+  let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
   const handleModalShow = () => {
@@ -13,6 +16,10 @@ function BookCard({ book }) {
 
   const handleModalClose = () => {
     setShowModal(false);
+  };
+
+  const StartPlay = () => {
+    navigate('/check/capture');
   };
 
   // 출력 버튼 클릭
@@ -106,7 +113,7 @@ function BookCard({ book }) {
                 <Button
                   variant="outline-primary"
                   className="custom-button-style"
-                  onClick={() => console.log("두 번째 버튼 클릭")}
+                  onClick={StartPlay}
                 >
                   시작하기
                 </Button>

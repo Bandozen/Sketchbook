@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
 export const SoundWrapper = styled.div`
-padding : 30px;
 
 .box{
-    padding : 60px;
     box-shadow: 1px 2px 10px grey;
     border : none;
+    width: 100%;
+    height: 400px;
+    margin-top :30px;
+    margin-bottom :30px;
+
 }
 
 .images{
@@ -45,7 +48,7 @@ button{
     border : none;
     border-radius : 10px;
     font-weight : bold;
-    padding : 20px;
+    padding : 10px;
     background-color : #D3B2FF;
 }
 
