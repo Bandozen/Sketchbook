@@ -1,6 +1,6 @@
 const { User } = require("../models/users.js");
 const { Device } = require("../models/device");
-// const { client } = require("../server.js");
+const { client } = require("../server.js");
 const otpGenerator = require("otp-generator");
 
 function issue(req, res) {
