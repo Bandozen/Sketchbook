@@ -95,14 +95,12 @@ function logout(req, res) {
   });
 }
 
-/* min ~ max 까지 랜덤으로 숫자를 생성하는 함수 */
-var generateRandom = function (min, max) {
-  var ranNum = Math.floor(Math.random() * (max - min + 1)) + min;
-  return ranNum;
-};
-
 function mail(req, res) {
-  var number = generateRandom(111111, 999999);
+  const number = otpGenerator.generate(6, {
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
   verificationCodes[req.body.email] = number;
 
   ejs.renderFile(

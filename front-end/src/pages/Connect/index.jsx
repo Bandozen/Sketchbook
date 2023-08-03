@@ -43,7 +43,7 @@ function Connect() {
       setButton((prevButton) => ({
         ...prevButton,
         timerActive: true,
-        timerCount: 180,
+        timerCount: 20,
         tryCount: prevButton.tryCount + 1,
       })); // 3분(180초)로 타이머 설정
     }

@@ -12,8 +12,8 @@ function issue(req, res) {
     specialChars: false,
   });
 
-  client.set(otp, email);
-  client.expire(otp, 200); // 입력시간을 고려하여 3분 20초 설정
+  client.set(email, otp);
+  client.expire(email, 20); // 입력시간을 고려하여 3분 20초 설정
 
   res.status(200).json({
     email: email,
@@ -21,20 +21,14 @@ function issue(req, res) {
   });
 }
 
-function connect(req, res) {
+async function connect(req, res) {
   const otp = req.body.otp;
 
-  client.on(otp, (err, value) => {
-    if (err) {
-      return res.json({
-        message: "해당 OTP가 존재하지 않습니다.",
-      });
-    }
+  const useremail = await client.get(otp);
 
-    return res.status(200).json({
-      loginSuccess: true,
-      useremail: value,
-    });
+  return res.status(200).json({
+    loginSuccess: true,
+    useremail: useremail,
   });
 }
 
