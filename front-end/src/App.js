@@ -26,19 +26,26 @@ import Login from "./pages/Main/Login/index";
 import Signup from "./pages/Main/Signup/index";
 import Choose from "./pages/Main/Choose/index";
 import ProtectedRoute from "./pages/ProtectedRoute/index";
-import Device from './pages/Device/index';
-import DeviceOTP from './pages/DeviceOTP/index';
+import PublicRoute from "./pages/PublicRoute/index";
+import Device from "./pages/Device/index";
+import DeviceOTP from "./pages/DeviceOTP/index";
 ///////////////////////////////////
 
 const router = createBrowserRouter([
   { path: "*", element: <NotFound /> },
   {
-    path: "/", // 첫화면은 로그인
-    element: <Main />,
+    path: "/",
+    element: <PublicRoute />,
     children: [
-      { index: 'default', element: <Login /> },
-      { path: "signup", element: <Signup /> },
-    ]
+      {
+        path: "/", // 첫화면은 로그인
+        element: <Main />,
+        children: [
+          { index: "default", element: <Login /> },
+          { path: "signup", element: <Signup /> },
+        ],
+      },
+    ],
   },
   {
     path: "/",
@@ -47,9 +54,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
-        children: [
-          { path: "main", element: <Choose /> },
-        ]
+        children: [{ path: "main", element: <Choose /> }],
       },
       {
         path: "/connect",
@@ -98,9 +103,8 @@ const router = createBrowserRouter([
         path: "/deviceOTP",
         element: <DeviceOTP />,
       },
-    ]
+    ],
   },
-
 ]);
 
 function App() {
