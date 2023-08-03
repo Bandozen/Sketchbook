@@ -217,6 +217,7 @@ function tempPassword(req, res) {
 
 function changePassword(req, res) {
 
+    const prePassword = req.body.prePassword
     const newPassword = req.body.newPassword
 
     User.findOne({ _id: req.user._id }, (err, user) => {
@@ -226,7 +227,12 @@ function changePassword(req, res) {
           err,
         });
       }
-
+      user.comparePassword(prePassword, (err, isMatch) => {
+        if (!isMatch)
+          return res.json({
+            message: "현재 비밀번호가 틀렸습니다.",
+          });
+      })
       // console.log(user.password)
       user.password = newPassword;
       user.save();
