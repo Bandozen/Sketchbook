@@ -215,6 +215,29 @@ function tempPassword(req, res) {
   });
 }
 
+function changePassword(req, res) {
+
+    const newPassword = req.body.newPassword
+
+    User.findOne({ _id: req.user._id }, (err, user) => {
+      if (err) {
+        return res.json({
+          success: false,
+          err,
+        });
+      }
+
+      // console.log(user.password)
+      user.password = newPassword;
+      user.save();
+      
+      return res.status(200).send({
+        success: true,
+        message: "비밀번호 변경 완료!"
+      });
+    });
+}
+
 exports.register = register;
 exports.idCheck = idCheck;
 exports.login = login;
@@ -223,3 +246,4 @@ exports.logout = logout;
 exports.mail = mail;
 exports.checkVerificationCode = checkVerificationCode;
 exports.tempPassword = tempPassword;
+exports.changePassword = changePassword;
