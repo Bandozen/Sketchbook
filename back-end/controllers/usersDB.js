@@ -4,6 +4,9 @@ const ejs = require("ejs");
 const path = require("path");
 var appDir = path.dirname(require.main.filename);
 let verificationCodes = {};
+const otpGenerator = require("otp-generator");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;;
 
 function register(req, res) {
   // 회원가입할 때 필요한 정보들을
@@ -88,7 +91,7 @@ function logout(req, res) {
       });
     return res.clearCookie("x_auth").status(200).send({
       success: true,
-    })
+    });
   });
 }
 
@@ -159,6 +162,61 @@ function checkVerificationCode(req, res) {
   });
 }
 
+function tempPassword(req, res) {
+  const email = req.body.email;
+
+  // 임시비밀번호는 특수문자를 제외한 무작위 조합
+  const tempPassword = otpGenerator.generate(10, {
+    specialChars: false,
+  });
+
+  ejs.renderFile(
+    appDir + "/templates/tempPassword.ejs",
+    { tempPassword: tempPassword },
+    function (err, data) {
+      if (err) {
+        console.log(err);
+      }
+      emailTemplate = data;
+    }
+    );
+    
+    let mailOptions = {
+      from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
+      to: email,
+      subject: "임시비밀번호를 발급했습니다.",
+      html: emailTemplate,
+  };
+  
+  smtpTransport.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    }
+    res.json({
+      message: "메일이 무사히 전송되었습니다.",
+      tempPassword: tempPassword
+    });
+    smtpTransport.close();
+  });
+  
+  User.findOneAndUpdate({ email: req.body.email }, { password: tempPassword }, (err, user) => {
+    if (err)
+      return res.json({
+        success: false,
+        err,
+      });
+
+      user.save((err, userInfo) => {
+        if (err) return console.log(err);
+        return console.log(userInfo);
+      });
+    return res.status(200).send({
+      success: true,
+      message: "비밀번호 변경 완료!"
+    });
+  });
+}
+
 exports.register = register;
 exports.idCheck = idCheck;
 exports.login = login;
@@ -166,3 +224,4 @@ exports.auth = auth;
 exports.logout = logout;
 exports.mail = mail;
 exports.checkVerificationCode = checkVerificationCode;
+exports.tempPassword = tempPassword;
