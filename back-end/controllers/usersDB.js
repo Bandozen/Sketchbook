@@ -81,7 +81,8 @@ function auth(req, res) {
 }
 
 function logout(req, res) {
-  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, { new: true }, (err, user) => {
+    console.log(user);
     if (err)
       return res.json({
         success: false,
@@ -93,14 +94,12 @@ function logout(req, res) {
   });
 }
 
-/* min ~ max 까지 랜덤으로 숫자를 생성하는 함수 */
-var generateRandom = function (min, max) {
-  var ranNum = Math.floor(Math.random() * (max - min + 1)) + min;
-  return ranNum;
-};
-
 function mail(req, res) {
-  var number = generateRandom(111111, 999999);
+  const number = otpGenerator.generate(6, {
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
   verificationCodes[req.body.email] = number;
 
   ejs.renderFile(
