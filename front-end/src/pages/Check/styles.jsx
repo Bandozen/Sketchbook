@@ -14,9 +14,10 @@ const Wrapper = styled.div`
     color: #9D4FE0;
   }
 
+  // 1~5단계별 제목
   h2 {
     font-weight: bold;
-    font-size: 50px;
+    font-size: 40px;
     margin-top: 20px;
   }
 
