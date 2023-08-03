@@ -58,14 +58,18 @@ function Play() {
 
   return (
     <Wrapper>
-      <div>
+      <div className="image-wrap">
         <div className="image-container">
           <img src={backgroundImageSource} alt={`엄마는카멜레온_${currentImageIndex}`} />
           {hasPngImage && (
-            <img className="png-image" src={pngImageSource} alt={`엄마는카멜레온_${currentImageIndex}`} />
+            <img
+              className="png-image"
+              src={pngImageSource}
+              alt={`${currentImageIndex}_엄마는카멜레온`}
+              data-index={currentImageIndex} // 인덱스를 데이터 속성으로 추가합니다.
+            />
           )}
         </div>
-        {/* 페이지 번호 표시 (현 페이지 / 전체 페이지) */}
         <div className='numbering' >{currentImageIndex + 1}/{imagesCount}</div>
       </div>
     </Wrapper>
