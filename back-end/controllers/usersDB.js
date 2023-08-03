@@ -81,8 +81,8 @@ function auth(req, res) {
 }
 
 function logout(req, res) {
-  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, { new: true }, (err, user) => {
-    console.log(user);
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "", isConnected: false }, (err, user) => {
+
     if (err)
       return res.json({
         success: false,
