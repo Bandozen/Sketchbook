@@ -1,6 +1,6 @@
 const { User } = require("../models/users.js");
 const { Device } = require("../models/device");
-// const { client } = require("../server.js");
+const { client } = require("../server.js");
 const otpGenerator = require("otp-generator");
 
 function issue(req, res) {
@@ -30,17 +30,17 @@ async function connect(req, res) {
   await User.findOneAndUpdate(
     { email: useremail },
     { isConnected: true },
-    { new: true },
     (err, user) => {}
   );
 
   return res.status(200).json({
-    loginSuccess: true,
+    connectSuccess: true,
     useremail: useremail,
   });
 }
 
 function checkConnect(req, res) {
+  console.log(req.user);
   User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) {
       return res.json({
