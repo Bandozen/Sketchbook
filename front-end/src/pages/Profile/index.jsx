@@ -15,6 +15,8 @@ import isConnected from "../../utils/isConnected";
 ///////////////////////////////////////////////
 
 function Profile() {
+  const connection = isConnected();
+
   const [form, setForm] = useState({
     pw: "",
     newPw: "",
@@ -187,11 +189,11 @@ function Profile() {
               기기 <span>연결</span>
             </h2>
             <h5 className="mt-3" style={{ fontSize: "20px" }}>
-              {isConnected
+              {connection
                 ? "기기 연결 되어 있어요."
                 : "기기 연결이 안되어 있어요."}
             </h5>
-            <h5 style={{ display: isConnected ? "none" : "block" }}>
+            <h5 style={{ display: connection ? "none" : "block" }}>
               <a href="/connect" style={{ fontSize: "20px", color: "black" }}>
                 기기 연결하기 💁‍♀️
               </a>
