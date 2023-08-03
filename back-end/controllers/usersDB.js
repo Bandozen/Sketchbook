@@ -88,7 +88,7 @@ function logout(req, res) {
         success: false,
         err,
       });
-    return res.clearCookie("x_auth").status(200).send({
+    return res.clearCookie("x_auth", "isConnected").status(200).send({
       success: true,
     });
   });
