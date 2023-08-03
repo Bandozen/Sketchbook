@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema(
     tokenExp: {
       type: Number,
     },
+    isConnected: {
+      type: Boolean,
+      default: "false"
+    }
   },
   {
     versionKey: false,
