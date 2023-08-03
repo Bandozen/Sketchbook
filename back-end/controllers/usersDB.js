@@ -1,10 +1,10 @@
 const { User } = require("../models/users.js");
-const { smtpTransport } = require("../config/email.js")
-const ejs = require('ejs')
-const path = require('path')
-var appDir = path.dirname(require.main.filename)
+const { smtpTransport } = require("../config/email.js");
+const ejs = require("ejs");
+const path = require("path");
+var appDir = path.dirname(require.main.filename);
 let verificationCodes = {};
-
+const otpGenerator = require("otp-generator");
 
 function register(req, res) {
   // 회원가입할 때 필요한 정보들을
@@ -24,15 +24,15 @@ function idCheck(req, res) {
     if (user) {
       return res.json({
         registerService: false,
-        message: "중복된 이메일이 있습니다."
-      })
+        message: "중복된 이메일이 있습니다.",
+      });
     } else {
       return res.json({
         registerService: true,
-        message: "사용 가능한 이메일입니다."
-      })
+        message: "사용 가능한 이메일입니다.",
+      });
     }
-  })
+  });
 }
 
 function login(req, res) {
@@ -54,7 +54,7 @@ function login(req, res) {
         });
 
       // 비밀번호가 맞다면 토큰을 생성
-      user.generateToken(req.body.password, (err, user) => {        
+      user.generateToken(req.body.password, (err, user) => {
         if (err) return res.status(400).send(err);
 
         // 정상적이라면 토큰을 쿠키 혹은 로컬스토리지에 저장
@@ -71,44 +71,47 @@ function login(req, res) {
 function auth(req, res) {
   // 여기까지 미들웨어(auth.js)를 통과해 왔다는 이야기는 인증이 true
   // 클라이언트에게 유저 정보를 전달
-    res.status(200).json({
-      _id: req.user._id,
-      isAdmin: req.user.role == 0 ? false : true, // role이 0이면 일반 유저, 그외는 관리자
-      isAuth: true,
-      email: req.user.email,
-      role: req.user.role,
-    })
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role == 0 ? false : true, // role이 0이면 일반 유저, 그외는 관리자
+    isAuth: true,
+    email: req.user.email,
+    role: req.user.role,
+  });
 }
 
 function logout(req, res) {
-  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, { new: true }, (err, user) => {
+    console.log(user);
     if (err)
       return res.json({
         success: false,
         err,
       });
-    return res.status(200).send({
+    return res.clearCookie("x_auth").status(200).send({
       success: true,
     });
   });
 }
 
-/* min ~ max 까지 랜덤으로 숫자를 생성하는 함수 */
-var generateRandom = function (min, max) {
-  var ranNum = Math.floor(Math.random()*(max-min+1)) + min
-  return ranNum
-}
-
 function mail(req, res) {
-  var number = generateRandom(111111, 999999)
+  const number = otpGenerator.generate(6, {
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
   verificationCodes[req.body.email] = number;
 
-  ejs.renderFile(appDir + '/templates/authMail.ejs', { authCode: number }, function (err, data) {
-    if (err) {
-      console.log(err);
+  ejs.renderFile(
+    appDir + "/templates/authMail.ejs",
+    { authCode: number },
+    function (err, data) {
+      if (err) {
+        console.log(err);
+      }
+      emailTemplate = data;
     }
-    emailTemplate = data;
-  });
+  );
 
   // console.log(req.body.email);
   // console.log(number);
@@ -117,7 +120,7 @@ function mail(req, res) {
     from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
     to: req.body.email,
     subject: "회원가입을 위한 인증번호를 입력해주세요.",
-    html: emailTemplate
+    html: emailTemplate,
   };
 
   smtpTransport.sendMail(mailOptions, function (error, info) {
@@ -126,7 +129,7 @@ function mail(req, res) {
     }
     res.json({
       message: "메일이 무사히 전송되었습니다.",
-      number: number
+      number: number,
     });
     smtpTransport.close();
   });
@@ -156,6 +159,89 @@ function checkVerificationCode(req, res) {
   });
 }
 
+function tempPassword(req, res) {
+  const email = req.body.email;
+
+  // 임시비밀번호는 특수문자를 제외한 무작위 조합
+  const tempPassword = otpGenerator.generate(10, {
+    specialChars: false,
+  });
+
+  ejs.renderFile(
+    appDir + "/templates/tempPassword.ejs",
+    { tempPassword: tempPassword },
+    function (err, data) {
+      if (err) {
+        console.log(err);
+      }
+      emailTemplate = data;
+    }
+  );
+
+  let mailOptions = {
+    from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
+    to: email,
+    subject: "임시비밀번호를 발급했습니다.",
+    html: emailTemplate,
+  };
+
+  smtpTransport.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    }
+    res.json({
+      message: "메일이 무사히 전송되었습니다.",
+      tempPassword: tempPassword,
+    });
+    smtpTransport.close();
+  });
+
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err,
+      });
+    }
+    user.password = tempPassword;
+    user.save();
+
+    return res.status(200).send({
+      success: true,
+      message: "비밀번호 변경 완료!",
+      password: user.password,
+    });
+  });
+}
+
+function changePassword(req, res) {
+  const prePassword = req.body.prePassword;
+  const newPassword = req.body.newPassword;
+
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err,
+      });
+    }
+    user.comparePassword(prePassword, (err, isMatch) => {
+      if (!isMatch) {
+        return res.json({
+          message: "현재 비밀번호가 틀렸습니다.",
+        });
+      }
+      // console.log(user.password)
+      user.password = newPassword;
+      user.save();
+
+      return res.status(200).send({
+        success: true,
+        message: "비밀번호 변경 완료!",
+      });
+    });
+  });
+}
 
 exports.register = register;
 exports.idCheck = idCheck;
@@ -164,3 +250,5 @@ exports.auth = auth;
 exports.logout = logout;
 exports.mail = mail;
 exports.checkVerificationCode = checkVerificationCode;
+exports.tempPassword = tempPassword;
+exports.changePassword = changePassword;

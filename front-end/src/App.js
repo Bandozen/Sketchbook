@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import Main from "./pages/Main/index";
-import MainSecond from "./pages/MainSecond/index";
+// import MainSecond from "./pages/MainSecond/index";
 import Connect from "./pages/Connect/index";
 import Guide from "./pages/Guide/index";
 import Books from "./pages/Books/index";
@@ -22,64 +22,88 @@ import Play from "./pages/Play/index";
 import Profile from "./pages/Profile/index";
 import Code from "./pages/Code/index";
 import NotFound from "./pages/NotFound/index";
-import MainThird from "./pages/MainThird/index";
+import Login from "./pages/Main/Login/index";
+import Signup from "./pages/Main/Signup/index";
+import Choose from "./pages/Main/Choose/index";
+import ProtectedRoute from "./pages/ProtectedRoute/index";
+import PublicRoute from "./pages/PublicRoute/index";
+import Device from "./pages/Device/index";
+import DeviceOTP from "./pages/DeviceOTP/index";
 ///////////////////////////////////
 
 const router = createBrowserRouter([
+  { path: "*", element: <NotFound /> },
   {
-    path: "/", // 첫화면은 로그인
-    element: <Main />,
-  },
-  {
-    path: "/main", // 헷갈림 ㅠㅠ 메인 third가 메인임..
-    element: <MainThird />,
-  },
-  {
-    path: "/main/signup",
-    element: <MainSecond />,
-  },
-  {
-    path: "/connect",
-    element: <Connect />,
-  },
-  {
-    path: "/guide",
-    element: <Guide />,
-  },
-  {
-    path: "/books",
-    element: <Books />,
-  },
-  {
-    path: "/check",
-    element: <Check />,
+    path: "/",
+    element: <PublicRoute />,
     children: [
-      { path: "capture", element: <CaptureCheck /> },
-      { path: "distance", element: <DistanceCheck /> },
-      { path: "motion", element: <MotionCheck /> },
-      { path: "sound", element: <SoundCheck /> },
-      { path: "combine", element: <CombineCheck /> },
+      {
+        path: "/", // 첫화면은 로그인
+        element: <Main />,
+        children: [
+          { index: "default", element: <Login /> },
+          { path: "signup", element: <Signup /> },
+        ],
+      },
     ],
   },
   {
-    path: "/ready",
-    element: <Ready />,
-  },
-  {
-    path: "/play",
-    element: <Play />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/code",
-    element: <Code />,
-  },
-  {
-    path: "/*",
-    element: <NotFound />,
+    path: "/",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/",
+        element: <Main />,
+        children: [{ path: "main", element: <Choose /> }],
+      },
+      {
+        path: "/connect",
+        element: <Connect />,
+      },
+      {
+        path: "/guide",
+        element: <Guide />,
+      },
+      {
+        path: "/books",
+        element: <Books />,
+      },
+      {
+        path: "/check",
+        element: <Check />,
+        children: [
+          { path: "capture", element: <CaptureCheck /> },
+          { path: "distance", element: <DistanceCheck /> },
+          { path: "motion", element: <MotionCheck /> },
+          { path: "sound", element: <SoundCheck /> },
+          { path: "combine", element: <CombineCheck /> },
+        ],
+      },
+      {
+        path: "/ready",
+        element: <Ready />,
+      },
+      {
+        path: "/play",
+        element: <Play />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/code",
+        element: <Code />,
+      },
+      {
+        path: "/device",
+        element: <Device />,
+      },
+      {
+        path: "/deviceOTP",
+        element: <DeviceOTP />,
+      },
+    ],
   },
 ]);
 
