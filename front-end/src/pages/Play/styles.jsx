@@ -1,4 +1,18 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+// fadeIn 애니메이션 효과 정의
+const fadeInAnimation = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeInStyle = css`
+  animation: ${fadeInAnimation} 1s ease forwards; /* animation-fill-mode를 forwards로 설정 */
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,36 +31,29 @@ const Wrapper = styled.div`
   img {
     object-fit: cover;
     height: 100vh;
-    width: 100vw;
+    width: 85vw;
   }
 
-  /* 각 png 이미지에 다른 스타일을 적용하기 위해 data-index 속성을 활용합니다. */
+  /* 각 png 이미지에 다른 스타일을 적용하기 위해 data-index 속성을 활용 */
   .png-image[data-index="2"] {
-    /* 원하는 스타일을 추가하시면 됩니다. 예시로 border를 추가해 보겠습니다. */
-    width: 450px;
-    height: 610px;
+    width: 365px;
+    height: 478px;
     position: absolute;
-    bottom: 0%;
-    right: -1.5%;
+    bottom: 9%;
+    right: 0%;
+
+    // fadeInStyle 스타일 적용
+    opacity: 0; /* 초기에 투명 상태로 설정 */
+    animation: ${fadeInAnimation} 1s ease 3s both; /* 3초 뒤에 애니메이션 실행 */
   }
 
   .png-image[data-index="4"] {
-    /* 원하는 스타일을 추가하시면 됩니다. 예시로 box-shadow를 추가해 보겠습니다. */
     width: 350px;
     height: 500px;
     position: absolute;
     bottom: 10%;
     left: 2%;
-  }
-
-  .numbering {
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    position: absolute; 
-    right: 15px; 
-    bottom: 10px;
-    font-size: 15px;
+    ${fadeInStyle}
   }
 `;
 

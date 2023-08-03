@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from './styles';
 
+
 const imagesCount = 17; // 이미지의 총 개수
 
 function Play() {
   const navigate = useNavigate(); 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [hasPngImage, setHasPngImage] = useState(true);
+  const [isAnimationStarted, setIsAnimationStarted] = useState(false);
 
   // 이전 페이지로 이동
   const handleNextImage = useCallback(() => {
@@ -58,6 +60,15 @@ function Play() {
       setHasPngImage(false);
     };
     img.src = pngImageSource;
+
+    // 3초 뒤에 애니메이션 시작을 표시합니다.
+    const timer = setTimeout(() => {
+      setIsAnimationStarted(true);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [pngImageSource]);
 
   return (
@@ -67,14 +78,13 @@ function Play() {
           <img src={backgroundImageSource} alt={`엄마는카멜레온_${currentImageIndex}`} />
           {hasPngImage && (
             <img
-              className="png-image"
+            className={`png-image ${isAnimationStarted ? 'fadeIn' : ''}`}
               src={pngImageSource}
               alt={`${currentImageIndex}_엄마는카멜레온`}
               data-index={currentImageIndex} // 인덱스를 데이터 속성으로 추가합니다.
             />
           )}
         </div>
-        <div className='numbering' >{currentImageIndex + 1}/{imagesCount}</div>
       </div>
     </Wrapper>
   );
