@@ -26,6 +26,8 @@ import Login from "./pages/Main/Login/index";
 import Signup from "./pages/Main/Signup/index";
 import Choose from "./pages/Main/Choose/index";
 import ProtectedRoute from "./pages/ProtectedRoute/index";
+import Device from './pages/Device/index';
+import DeviceOTP from './pages/DeviceOTP/index';
 ///////////////////////////////////
 
 const router = createBrowserRouter([
@@ -87,6 +89,14 @@ const router = createBrowserRouter([
       {
         path: "/code",
         element: <Code />,
+      },
+      {
+        path: "/device",
+        element: <Device />,
+      },
+      {
+        path: "/deviceOTP",
+        element: <DeviceOTP />,
       },
     ]
   },
