@@ -34,7 +34,7 @@ async function connect(req, res) {
   );
 
   return res.status(200).json({
-    connectSuccess: true,
+    isConnected: true,
     useremail: useremail,
   });
 }
