@@ -198,21 +198,21 @@ function tempPassword(req, res) {
     });
     smtpTransport.close();
   });
-  
-  User.findOneAndUpdate({ email: req.body.email }, { password: tempPassword }, (err, user) => {
-    if (err)
+
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (err) {
       return res.json({
         success: false,
         err,
       });
-
-      user.save((err, userInfo) => {
-        if (err) return console.log(err);
-        return console.log(userInfo);
-      });
+    }
+    user.password = tempPassword;  
+    user.save();
+    
     return res.status(200).send({
       success: true,
-      message: "비밀번호 변경 완료!"
+      message: "비밀번호 변경 완료!",
+      password: user.password
     });
   });
 }
