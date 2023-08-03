@@ -13,5 +13,6 @@ usersRouter.route('/logout').get(Auth, UsersDB.logout);
 usersRouter.route('/mail').post(UsersDB.mail);
 usersRouter.route('/checkVerificationCode').post(UsersDB.checkVerificationCode);
 usersRouter.route('/tempPassword').post(UsersDB.tempPassword);
+usersRouter.route('/changePassword').post(Auth, UsersDB.changePassword);
 
 module.exports = usersRouter;
