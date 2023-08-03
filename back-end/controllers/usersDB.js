@@ -177,22 +177,22 @@ function tempPassword(req, res) {
       }
       emailTemplate = data;
     }
-    );
-    
-    let mailOptions = {
-      from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
-      to: email,
-      subject: "임시비밀번호를 발급했습니다.",
-      html: emailTemplate,
+  );
+
+  let mailOptions = {
+    from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
+    to: email,
+    subject: "임시비밀번호를 발급했습니다.",
+    html: emailTemplate,
   };
-  
+
   smtpTransport.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
     }
     res.json({
       message: "메일이 무사히 전송되었습니다.",
-      tempPassword: tempPassword
+      tempPassword: tempPassword,
     });
     smtpTransport.close();
   });
@@ -204,44 +204,44 @@ function tempPassword(req, res) {
         err,
       });
     }
-    user.password = tempPassword;  
+    user.password = tempPassword;
     user.save();
-    
+
     return res.status(200).send({
       success: true,
       message: "비밀번호 변경 완료!",
-      password: user.password
+      password: user.password,
     });
   });
 }
 
 function changePassword(req, res) {
+  const prePassword = req.body.prePassword;
+  const newPassword = req.body.newPassword;
 
-    const prePassword = req.body.prePassword
-    const newPassword = req.body.newPassword
-
-    User.findOne({ _id: req.user._id }, (err, user) => {
-      if (err) {
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) {
+      return res.json({
+        success: false,
+        err,
+      });
+    }
+    user.comparePassword(prePassword, (err, isMatch) => {
+      if (!isMatch) {
         return res.json({
-          success: false,
-          err,
+          message: "현재 비밀번호가 틀렸습니다.",
         });
       }
-      user.comparePassword(prePassword, (err, isMatch) => {
-        if (!isMatch)
-          return res.json({
-            message: "현재 비밀번호가 틀렸습니다.",
-          });
-      })
       // console.log(user.password)
       user.password = newPassword;
       user.save();
-      
+
       return res.status(200).send({
         success: true,
-        message: "비밀번호 변경 완료!"
+        message: "비밀번호 변경 완료!",
       });
     });
+  });
 }
 
 exports.register = register;
