@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Navigate } from "react";
 
 import Header from "../../components/Header";
 import Wrapper from "./styles";
@@ -49,7 +49,7 @@ function Connect() {
     }
   };
 
-  // axios createOtp 
+  // axios createOtp
   const createOtp = () => {
     axios
       .get("/api/devices/issue")
@@ -73,6 +73,20 @@ function Connect() {
           (prevButton.timerCount - 1) % 60
         }`,
       }));
+
+      axios
+        .get("/api/devices/checkConnect")
+        .then((res) => {
+          const isConnected = res.data.isConnected;
+          if (isConnected) {
+            return <Navigate to="/books" />;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // SetOtp(12345);
+      console.log(button.tryCount);
     } else {
       if (button.tryCount < 3) {
         handleClick();
