@@ -13,7 +13,11 @@ color : #9D4FE0;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+p {
+  color: black;
+  font-size: 18px;
+  margin-top: 10px;
+}
 h2 {
     font-weight: bold;
     margin: 0px;
