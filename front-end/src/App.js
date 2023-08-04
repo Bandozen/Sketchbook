@@ -30,6 +30,7 @@ import PublicRoute from "./pages/PublicRoute/index";
 import Device from "./pages/Device/index";
 import DeviceOTP from "./pages/DeviceOTP/index";
 import Story1 from "./pages/Play/Story1";
+//////////////////////////////////////////
 import P1 from "./pages/Play/Story1/P1/index";
 import P2 from "./pages/Play/Story1/P2/index";
 import P3 from "./pages/Play/Story1/P3/index";
@@ -47,7 +48,6 @@ import P14 from "./pages/Play/Story1/P14/index";
 import P15 from "./pages/Play/Story1/P15/index";
 import P16 from "./pages/Play/Story1/P16/index";
 import P17 from "./pages/Play/Story1/P17/index";
-
 
 ///////////////////////////////////
 
