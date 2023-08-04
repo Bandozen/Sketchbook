@@ -1,7 +1,13 @@
 import Header from "../../components/Header";
 import Wrapper from "./styles";
+import { useNavigate } from "react-router";
 
 function Guide() {
+  const navigate = useNavigate();
+  const goToConnect = () => {
+    navigate("/connect");
+  }
+
   return (
     <>
       <Header />
@@ -25,11 +31,9 @@ function Guide() {
             </li>
           </ol>
           <div className="btndiv">
-            <a href="/connect">
-              <button type="button">
+              <button type="button" onClick={goToConnect}>
                 기기 연결하기
               </button>
-            </a>
           </div>
         </div>
       </Wrapper>
