@@ -174,7 +174,7 @@ function Profile() {
             </h2>
             <h5 className="mt-3" style={{ fontSize: "20px" }}>
               {connection
-                ? "기기 연결 되어 있어요."
+                ? "기기 연결 되어 있어요.🙆‍♀️"
                 : "기기 연결이 안되어 있어요."}
             </h5>
             <h5 style={{ display: connection ? "none" : "block" }}>

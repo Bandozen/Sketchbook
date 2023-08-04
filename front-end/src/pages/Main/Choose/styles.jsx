@@ -22,6 +22,13 @@ const Wrapper = styled.div`
   margin-bottom: 20px;
 }
 
+@media screen and (max-width: 1020px) {
+  .Choose {
+    right: 50%;
+  }
+}
+
+
 `
 
 export default Wrapper;
