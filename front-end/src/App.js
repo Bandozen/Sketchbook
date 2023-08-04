@@ -30,6 +30,7 @@ import PublicRoute from "./pages/PublicRoute/index";
 import Device from "./pages/Device/index";
 import DeviceOTP from "./pages/DeviceOTP/index";
 import Story1 from "./pages/Play/Story1";
+//////////////////////////////////////////
 import P1 from "./pages/Play/Story1/P1/index";
 import P2 from "./pages/Play/Story1/P2/index";
 import P3 from "./pages/Play/Story1/P3/index";

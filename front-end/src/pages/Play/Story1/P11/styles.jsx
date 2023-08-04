@@ -9,3 +9,9 @@ img{
 }
 `;
 export default Wrapper;
+img{
+    width: 100%;
+    background-size: cover
+}
+`;
+export default Wrapper;

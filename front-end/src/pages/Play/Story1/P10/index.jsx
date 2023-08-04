@@ -1,7 +1,7 @@
 import Wrapper from "./styles";
-import image1 from '../../../../play-background/엄마는카멜레온_1.jpg';
+import image1 from '../../../../play-background/엄마는카멜레온_10.jpg';
 
-function P1() {
+function P10() {
 
     return (
         <Wrapper>
@@ -11,4 +11,4 @@ function P1() {
     )
 }
 
-export default P1;
+export default P10;

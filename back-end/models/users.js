@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;;
 const jwt = require("jsonwebtoken");
 
+/* 유저 스키마 */
 const userSchema = new mongoose.Schema(
   {
     email: {
@@ -42,7 +43,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// 비밀번호 암호화
+/* 비밀번호 암호화 */
 userSchema.pre("save", function (next) {
   var user = this;
   if (user.isModified("password")) {
@@ -59,7 +60,7 @@ userSchema.pre("save", function (next) {
   }
 });
 
-// 로그인 - 비밀번호를 비교
+/* 로그인 - 비밀번호를 비교 */
 userSchema.methods.comparePassword = function (plainPassword, cb) {
   // 입력된 비밀번호와 데이터베이스에 있는 암호화된 비밀번호가 같은지 확인
   bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
@@ -68,8 +69,7 @@ userSchema.methods.comparePassword = function (plainPassword, cb) {
   });
 };
 
-
-//로그인 - 토큰 생성
+/* 로그인 - JWT 토큰 생성 */
 userSchema.methods.generateToken = function (plainPassword, cb) {
   var user = this;
   // JWT 토큰 생성
@@ -85,7 +85,7 @@ userSchema.methods.generateToken = function (plainPassword, cb) {
   });
 };
 
-// auth 인증 - 복호화 (토큰을 디코드)
+/* auth 인증 - 복호화 (토큰을 디코드) */
 userSchema.statics.findByToken = function(token, cb) {
   var user = this
 
