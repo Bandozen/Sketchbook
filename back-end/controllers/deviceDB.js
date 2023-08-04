@@ -47,7 +47,7 @@ function checkConnect(req, res) {
         err,
       });
     }
-    return res.cookie("isConnected", user.isConnected).status(200).json({
+    res.cookie("isConnected", user.isConnected).status(200).json({
       isConnected: user.isConnected,
     });
   });
