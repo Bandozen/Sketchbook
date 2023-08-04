@@ -1,5 +1,5 @@
 import Wrapper from "./styles";
-import image16 from '../../../../play-background/엄마는카멜레온_16.jpg';
+import image16 from '../../../../play-background/엄마는 카멜레온_16.gif';
 
 function P1() {
 
