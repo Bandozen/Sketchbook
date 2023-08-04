@@ -1,4 +1,5 @@
-import { Outlet, Navigate, useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 import isLogin from "../../utils/isLogin";
 
 const ProtectedRoute = () => {
@@ -12,7 +13,7 @@ const ProtectedRoute = () => {
   alert('로그인이 필요한 페이지입니다.');
   return (
     <div>
-      <Navigate to="/" />
+      <useNavigate to="/" />
     </div>
   );
 }

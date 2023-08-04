@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, Navigate } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Wrapper from "./styles";
@@ -79,7 +80,7 @@ function Connect() {
         .then((res) => {
           const isConnected = res.data.isConnected;
           if (isConnected) {
-            return <Navigate to="/books" />;
+            return <useNavigate to="/books" />;
           }
         })
         .catch((err) => {
