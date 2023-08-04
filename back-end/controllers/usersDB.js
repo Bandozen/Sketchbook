@@ -95,7 +95,7 @@ function logout(req, res) {
         err,
       });
     // 쿠키삭제를 먼저 진행시켜서 로그아웃을 진행시킨다.
-    return res.clearCookie("x_auth", "isConnected").status(200).send({
+    return res.clearCookie("x_auth").clearCookie("isConnected").status(200).send({
       success: true,
     });
   });
