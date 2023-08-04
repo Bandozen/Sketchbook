@@ -1,4 +1,5 @@
-import { Outlet, Navigate, useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 import isLogin from "../../utils/isLogin";
 
 const PublicRoute = () => {
@@ -10,7 +11,7 @@ const PublicRoute = () => {
 
   return (
     <div>
-      <Navigate to="/main" />
+      <useNavigate to="/main" />
     </div>
   );
 };
