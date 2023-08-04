@@ -29,6 +29,10 @@ import ProtectedRoute from "./pages/ProtectedRoute/index";
 import PublicRoute from "./pages/PublicRoute/index";
 import Device from "./pages/Device/index";
 import DeviceOTP from "./pages/DeviceOTP/index";
+import Story1 from "./pages/Play/Story1";
+import P1 from "./pages/Play/Story1/P1/index";
+
+
 ///////////////////////////////////
 
 const router = createBrowserRouter([
@@ -86,6 +90,12 @@ const router = createBrowserRouter([
       {
         path: "/play",
         element: <Play />,
+        children: [
+          {
+            path: "story1", element: <Story1 />,
+            children: [{ path: "p1", element: <P1 /> }]
+          },
+        ],
       },
       {
         path: "/profile",
