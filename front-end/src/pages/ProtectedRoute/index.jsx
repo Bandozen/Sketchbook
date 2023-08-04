@@ -1,5 +1,5 @@
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import isLogin from "../../utils/isLogin";
 import isConnected from "../../utils/isConnected";
 
@@ -11,15 +11,17 @@ const ProtectedRoute = () => {
 
   useEffect(() => {
     if (!auth) {
-      alert('로그인이 필요한 페이지입니다.');
-      navigate('/');
+      alert("로그인이 필요한 페이지입니다.");
+      navigate("/");
     }
   }, [auth, navigate]);
 
   if (auth) {
-    return <Outlet />;
+    if (connection && location.pathname === "/connect") {
+      navigate("/profile")
+    }
+    return <Outlet/>
   }
-
-}
+};
 
 export default ProtectedRoute;
