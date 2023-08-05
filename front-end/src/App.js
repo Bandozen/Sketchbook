@@ -29,6 +29,7 @@ import ProtectedRoute from "./pages/ProtectedRoute/index";
 import PublicRoute from "./pages/PublicRoute/index";
 import Device from "./pages/Device/index";
 import DeviceOTP from "./pages/DeviceOTP/index";
+import AboutUs from "./pages/AboutUs/index";
 import Story1 from "./pages/Play/Story1";
 //////////////////////////////////////////
 import P1 from "./pages/Play/Story1/P1/index";
@@ -147,6 +148,10 @@ const router = createBrowserRouter([
       {
         path: "/deviceOTP",
         element: <DeviceOTP />,
+      },
+      {
+        path: "/aboutUs",
+        element: <AboutUs />,
       },
     ],
   },
