@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, Navigate } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header";
 import Wrapper from "./styles";
 import axios from "axios";
@@ -63,6 +63,7 @@ function Connect() {
     console.log(button.tryCount);
   };
 
+  const navigate = useNavigate();
   // 타이머 로직을 담당하는 함수
   const tick = () => {
     if (button.timerCount > 0) {
@@ -79,7 +80,7 @@ function Connect() {
         .then((res) => {
           const isConnected = res.data.isConnected;
           if (isConnected) {
-            return <Navigate to="/books" />;
+            return navigate("/books");
           }
         })
         .catch((err) => {

@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Pagination from 'react-bootstrap/Pagination';
 
 // Styles, Icons
-import { Wrapper, IconWrap } from './styles';
+import Wrapper from './styles';
 import { BiSearchAlt2 } from "react-icons/bi";
 
 // Components
@@ -75,10 +75,10 @@ function Books() {
     <div>
       <Header />
         {/* 검색 입력 상자와 검색 버튼 추가 */}
-        <IconWrap>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div className="input-group mb-3"
-          style={{ margin: '50px', width: '700px', height: '50px' }}>
+        <Wrapper>
+      <div className='search-container'> 
+        <div 
+        className="input-group mb-3">
           <input
             type="text"
             className="form-control"
@@ -86,14 +86,12 @@ function Books() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyPress={handleKeyPress}
-            style={{ boxShadow: 'none', borderColor: '#9D4FE0' }} // shadow 효과 없애기
           />
               <button className="btn btn-primary" onClick={handleSearch} style={{ backgroundColor: '#9D4FE0', border: 'none' }}>
                 <BiSearchAlt2 />
               </button>
         </div>
       </div>
-          </IconWrap>
       <br />
       {/* BookCard 컴포넌트 */}
       <div className="container">
@@ -106,7 +104,6 @@ function Books() {
         </Row>
       </div>
       <br />
-      <Wrapper>
         {/* 페이지네이션 */}
         <Pagination>
           {[...Array(Math.ceil((searchTerm ? searchedBooks.length : books.length) / booksPerPage)).keys()].map((number) => (

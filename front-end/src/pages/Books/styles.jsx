@@ -1,12 +1,41 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+const Wrapper = styled.div`
+font-family: 'Pretendard-Regular';
 
+  // 검색창
+  .search-container {
+    display: flex;
+    justify-content: center;
+  }
 
+ .input-group {
+    margin: 50px;
+    width: 700px;
+    height: 50px;
+  }
+
+  .form-control {
+    boxShadow: none; //shadow 효과 없애기
+    borderColor: #9D4FE0;
+  }
+
+  // 검색 돋보기 이모지
+  svg {
+		color: #ffffff;
+      	font-size: 30px;
+    }
+
+  .btn {
+    backgroundColor: #9D4FE0;
+    border: none; 
+  }
+
+  // 페이지네이션
   .pagination {
+    display: flex;
+    justify-content: center;
+    
     li {
       a {
         color: #9D4FE0;
@@ -34,11 +63,4 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const IconWrap = styled.div`
-font-family: 'Pretendard-Regular';
-
-    svg {
-		color: #ffffff;
-      	font-size: 30px;
-    }
-`;
+export default Wrapper;
