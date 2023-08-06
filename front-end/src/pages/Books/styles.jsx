@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
 font-family: 'Pretendard-Regular';
 
   // 검색창
@@ -62,3 +62,5 @@ font-family: 'Pretendard-Regular';
     }
   }
 `;
+
+export default Wrapper;
