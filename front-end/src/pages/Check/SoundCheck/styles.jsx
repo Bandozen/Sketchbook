@@ -56,6 +56,12 @@ h4{
     font-weight : bold;
     margin : 20px;
 }
+
+.arrow {
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+}
 `;
 
 export default SoundWrapper;

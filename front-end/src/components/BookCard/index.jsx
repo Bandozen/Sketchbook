@@ -4,9 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Wrapper, FontWrap } from "./styles";
 import { useNavigate } from 'react-router-dom';
+import isConnected from "../../utils/isConnected";
 
 
 function BookCard({ book }) {
+  const connection = isConnected();
   let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
@@ -21,6 +23,10 @@ function BookCard({ book }) {
   const StartPlay = () => {
     navigate('/check/capture');
   };
+
+  const goToConnect = () => {
+    navigate('/connect');
+  }
 
   // 출력 버튼 클릭
   const handlePrint = () => {
@@ -108,7 +114,8 @@ function BookCard({ book }) {
                   onClick={handlePrint}
                 >
                   캐릭터 출력하기
-                </Button>
+                </Button> 
+                {connection ? <a href="/check/capture">
                 <Button
                   variant="outline-primary"
                   className="custom-button-style"
@@ -116,6 +123,15 @@ function BookCard({ book }) {
                 >
                   시작하기
                 </Button>
+                </a>:
+                <Button
+                variant="outline-primary"
+                className="custom-button-style"
+                onClick={goToConnect}
+              >
+                연결하러 가기
+              </Button>}
+                
               </div>
             </div>
           </Wrapper>

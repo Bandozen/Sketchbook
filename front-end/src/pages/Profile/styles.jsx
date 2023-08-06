@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-margin-top: 100px;
+margin: 100px;
 display : flex;
 justify-content : center;
 font-family: 'Pretendard-Regular';
@@ -12,10 +12,7 @@ font-family: 'Pretendard-Regular';
 }
 
 img{
-    width: 70%;
-    height: 40%;
-    margin-left: 50px;
-    margin-top: 30px;
+  width: 90%;
 }
 
 .box {
