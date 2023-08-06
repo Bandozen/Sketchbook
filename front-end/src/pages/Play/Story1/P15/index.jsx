@@ -2,7 +2,7 @@ import Wrapper from "./styles";
 import image from '../../../../play-background/엄마는 카멜레온_15.gif';
 import audio15 from '../../../../play-background/ske_15.mp3';
 
-function P15() {
+function P1() {
 
     return (
         <Wrapper>
@@ -14,4 +14,4 @@ function P15() {
     )
 }
 
-export default P15;
+export default P1;

@@ -1,7 +1,9 @@
-import { Outlet } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import { useEffect } from 'react';
 
 function Story1() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       // 페이지 이동 로직 구현
@@ -10,8 +12,18 @@ function Story1() {
       let nextPageNumber;
 
       if (event.key === 'ArrowLeft') {
+        if (pageNumber === 1) {
+          alert('첫 페이지에요.');
+          return;
+        }
         nextPageNumber = Math.max(1, pageNumber - 1);
       } else if (event.key === 'ArrowRight') {
+        if (pageNumber === 17) {
+          if (window.confirm('마지막 페이지에요. 책장으로 돌아갈까요?')) {
+            navigate('/books');
+          }
+          return;
+        }
         nextPageNumber = Math.min(17, pageNumber + 1);
       } else {
         return;
@@ -31,7 +43,7 @@ function Story1() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, );
 
   return (
     <div>
