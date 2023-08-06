@@ -27,7 +27,7 @@ function Header() {
 
   return (
     <Wrapper>
-      <Link to="/main">
+      <Link to="/aboutUs">
         <img
           className="logo"
           src={process.env.PUBLIC_URL + '/assets/logo_without.png'}
