@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Pagination from 'react-bootstrap/Pagination';
 
 // Styles, Icons
-import { Wrapper } from './styles';
+import Wrapper from './styles';
 import { BiSearchAlt2 } from "react-icons/bi";
 
 // Components
