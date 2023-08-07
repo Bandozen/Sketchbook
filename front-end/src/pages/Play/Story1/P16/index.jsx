@@ -1,4 +1,3 @@
-import image from '../../../../play-background/엄마는 카멜레온_16.gif';
 // import { useState, useEffect } from 'react';
 // import Image16 from '../../../../play-png/16_엄마손.png';
 import Wrapper from "./styles";
