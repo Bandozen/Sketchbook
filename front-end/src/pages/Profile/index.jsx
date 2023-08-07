@@ -177,7 +177,7 @@ function Profile() {
             <h5 className="mt-3" style={{ fontSize: "20px" }}>
                 {connection === 'true' ? "기기 연결 되어 있어요.🙆‍♀️" : "기기 연결이 안되어 있어요."}
             </h5>
-            <h5 style={{ display: connection===false ? "none" : "block" }}>
+            <h5 style={{ display: connection==='true' ? "none" : "block" }}>
               <a href="/connect" style={{ fontSize: "20px", color: "black" }}>
                 기기 연결하기 💁‍♀️
               </a>
