@@ -7,6 +7,7 @@ WORKDIR /server
 
 # host pc의 현재경로의 폴더를 workdir의 폴더로 복사
 ADD ./ ./
+ADD ./ /use/bin/env
 
 RUN node server.js
 
