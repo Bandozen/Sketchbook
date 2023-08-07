@@ -1,57 +1,103 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
 font-family: 'Pretendard-Regular';
 
-display: flex;
-justify-content: center;
-align-items: center;
-height: 80vh;
-
-img{
-  width : 100px;
-  margin-left : 10px;
+.img-container {
+  display: flex
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-h2 {
+.img-container2 {
+  background-color: #e5e1db;
+  display: flex
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.img-container3 {
+  background-color: #e5e1db;
+  display: flex
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.kid-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Pretendard-Regular';
+  text-align: center;
+}
+
+.text-overlay2 {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  font-family: 'Pretendard-Regular';
+
+}
+
+.text-overlay_h1 {
+  font-size: 70px;
+  color: black;
+  line-height: 1;
   font-weight: bold;
+  letter-spacing: -2px;
 }
 
-span {
-  color: #a451f7
+.text-overlay2_h1 {
+  font-size: 50px;
+  color: black;
+  line-height: 1;
+  font-weight: bold;
+  letter-spacing: -2px;
+}
+
+.text-overlay_h3 {
+  font-size: 30px;
+  color: black;
+  
+}
+
+.text-overlay_h4 {
+  font-size: 25px;
+  color: black;
+}
+
+.boxes-container {
+  display: flex;
+  justify-content: space-between;
+
 }
 
 .box {
-  margin-top: 50px;
-  
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  padding: 3% 5%;    
+  width: 200px;
+  height: 150px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  text-align: center;
 }
 
-ol{
-  margin: 20px 0 40px;
-}
-
-li {
-  font-size: 23px;
-  line-height: 42px;
-}
-
-.btndiv{
-  display: flex;
-  justify-content: center; 
-}
-
-button {
-  color: #a451f7;
-  border-radius: 8px;
-  border: 1px solid #a451f7;
-  background-color: #ffffff;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 20px;
-}
-`;
+`
 
 export default Wrapper;
