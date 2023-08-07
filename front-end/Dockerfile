@@ -2,7 +2,7 @@
 FROM node:14.21.3
 
 # 80 포트 오픈
-EXPOSE 80 3000
+EXPOSE 80 443 3000
 
 # container 실행 시 자동으로 실행할 command. nginx 시작함
 CMD ["npm", "start"]
