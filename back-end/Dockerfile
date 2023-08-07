@@ -1,8 +1,8 @@
-# nginx 이미지를 사용합니다.
+# nginx, node 이미지를 사용합니다.
 FROM nginx
 
 # node 이미지를 사용합니다. 
-FROM node:14.21.3
+# FROM node:14.21.3
 
 # work dir 고정
 WORKDIR /server
@@ -22,7 +22,7 @@ EXPOSE 80
 EXPOSE 443
 
 # container 실행 시 자동으로 실행할 command. nginx 시작함
-CMD ["node", "server.js"]
+# CMD ["node", "server.js"]
 
 # container 실행 시 자동으로 실행할 command. nginx 시작함
 CMD ["nginx", "-g", "daemon off;"]
