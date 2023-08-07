@@ -135,7 +135,7 @@ export default function Signup() {
     } else if (!isValidEmail) {
       alert("이메일 형식을 확인해주세요")
       return;
-    } else if (Codeblock == 0) {
+    } else if (Codeblock === 0) {
       alert("이메일을 인증해주세요.")
       return;
     }

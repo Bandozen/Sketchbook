@@ -8,6 +8,7 @@ const Wrapper = styled.div`
 
   .logo{
     width:150px;
+    margin: 8px;
   }
 
   .links{
