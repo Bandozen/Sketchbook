@@ -1,5 +1,6 @@
 # nginx, node 이미지를 사용합니다.
-FROM nginx node:14.21.3
+FROM nginx 
+FROM node:14.21.3
 
 # work dir 고정
 WORKDIR /server
