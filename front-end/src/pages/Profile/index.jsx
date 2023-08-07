@@ -17,8 +17,9 @@ import isConnected from "../../utils/isConnected";
 ///////////////////////////////////////////////
 
 function Profile() {
-  const connection = isConnected();
+  var connection = isConnected();
   console.log(connection);
+  console.log(typeof(connection))
 
   const [pw, setPw] = useState("");
   const [newPw, setnewPw] = useState("");
@@ -174,9 +175,7 @@ function Profile() {
               기기 <span>연결</span>
             </h2>
             <h5 className="mt-3" style={{ fontSize: "20px" }}>
-              {connection === false
-                ? "기기 연결 되어 있어요.🙆‍♀️"
-                : "기기 연결이 안되어 있어요."}
+                {connection === 'true' ? "기기 연결 되어 있어요.🙆‍♀️" : "기기 연결이 안되어 있어요."}
             </h5>
             <h5 style={{ display: connection===false ? "none" : "block" }}>
               <a href="/connect" style={{ fontSize: "20px", color: "black" }}>
