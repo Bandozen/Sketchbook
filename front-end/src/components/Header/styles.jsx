@@ -9,8 +9,9 @@ const Wrapper = styled.div`
   box-shadow: 0 1px 7px -5px black;
   font-family: 'Pretendard-Regular';
 
-  .logo {
-    width: 150px;
+  .logo{
+    width:150px;
+    margin: 8px;
   }
 
   .links {

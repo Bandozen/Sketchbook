@@ -3,14 +3,19 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 1px 7px -5px black;
   font-family: 'Pretendard-Regular';
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 
-  .logo{
-    width:200px;
+  .logo {
+    width: 150px;
+    margin: 8px;
   }
 
-  .links{
+  .links {
     display: flex;
     margin-right: 20px;
   }
@@ -18,22 +23,21 @@ const Wrapper = styled.div`
   p {
     display: flex;
     margin-right: 20px;
-    margin : auto 20px;
+    margin: auto 20px;
     font-size: 18px;
     cursor: pointer;
   }
 
-  .active{
+  .active {
     font-weight: bold;
   }
 
-  a{
-    margin : auto 20px;
+  a {
+    margin: auto 20px;
     text-decoration: none;
     font-size: 18px;
     color: #000000;
-    }
   }
-`
+`;
 
 export default Wrapper;
