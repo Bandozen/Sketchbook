@@ -5,7 +5,7 @@ FROM nginx
 FROM redis
 
 # redis 실행
-RUN docker run -p 6379:6379 --name redis -d redis:latest --requirepass 3btic102
+RUN redis-server --requirepass 3btic102
 
 # work dir 고정
 WORKDIR /server
