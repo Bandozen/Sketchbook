@@ -1,18 +1,19 @@
 # nginx 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용합니다.
 FROM nginx
 
+# redis 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용합니다.
+FROM redis
+
+# redis 실행
+RUN docker run -p 6379:6379 --name redis -d redis:latest --requirepass 3btic102
+
 # work dir 고정
 WORKDIR /server
 
 # host pc의 현재경로의 build 폴더를 workdir 의 build 폴더로 복사
 ADD ./ ./
 
-# nginx 의 default.conf 를 삭제
-RUN rm /etc/nginx/conf.d/default.conf
-
-# host pc 의 nginx.conf 를 아래 경로에 복사
-COPY ./nginx.conf /etc/nginx/conf.d
-
+# 실행
 RUN npm start
 
 # 5000 포트 오픈
