@@ -11,7 +11,7 @@ function Header() {
 
   const handleLogout = () => {
     axios
-    .get('/api/users/logout')
+      .get('/api/users/logout')
       .then((res) => {
         if (res.data.success) {
           console.log('Logout successful');
