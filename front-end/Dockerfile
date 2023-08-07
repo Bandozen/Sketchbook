@@ -2,7 +2,7 @@
 FROM nginx
 
 # work dir 고정
-WORKDIR /var/www/html
+WORKDIR /var/www/i9c102.p.ssafy.io
 
 # work dir 에 build 폴더 생성 /app/build
 RUN mkdir ./build
