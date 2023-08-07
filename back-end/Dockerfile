@@ -8,7 +8,7 @@ WORKDIR /server
 # host pc의 현재경로의 폴더를 workdir의 폴더로 복사
 ADD ./ ./
 
-RUN node sever.js
+RUN node server.js
 
 # nginx 의 default.conf 를 삭제
 RUN rm /etc/nginx/conf.d/default.conf
