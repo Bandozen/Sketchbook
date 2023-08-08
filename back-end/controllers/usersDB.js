@@ -63,10 +63,14 @@ async function login(req, res) {
 
         // 정상적이라면 토큰을 쿠키 혹은 로컬스토리지에 저장
         // 지금은 쿠키에 저장
-        res.cookie("x_auth", user.token).status(200).json({
-          loginSuccess: true,
-          userid: user._id,
-        });
+        res
+          .cookie("x_auth", user.token)
+          .cookie("isConnected", user.isConnected)
+          .status(200)
+          .json({
+            loginSuccess: true,
+            userid: user._id,
+          });
       });
     });
   });
@@ -86,19 +90,50 @@ function auth(req, res) {
 }
 
 /* 로그아웃 API */
-async function logout(req, res) {
-  // token을 삭제시킨다.
-  await User.findOneAndUpdate({ _id: req.user._id }, { token: "", isConnected: false }, (err, user) => {
-    if (err)
-      return res.json({
-        success: false,
-        err,
-      });
-    // 쿠키삭제를 먼저 진행시켜서 로그아웃을 진행시킨다.
-    return res.clearCookie("x_auth").clearCookie("isConnected").status(200).send({
-      success: true,
+function logout(req, res) {
+    // connect test 계정  연결정보 유지
+  if (req.user.email == "connect@test.com") {
+    User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+      if (err) {
+        console.log(err);
+        return res.json({
+          success: false,
+          err,
+        });
+      }
+  
+      // 쿠키삭제를 먼저 진행시켜서 로그아웃을 진행시킨다.
+      return res
+        .clearCookie("x_auth")
+        .clearCookie("isConnected")
+        .status(200)
+        .send({
+          success: true,
+        });
     });
-  });
+  }
+
+  else{
+      // token을 삭제시킨다.
+    User.findOneAndUpdate({ _id: req.user._id }, { token: "", isConnected: false }, (err, user) => {
+      if (err) {
+        console.log(err);
+        return res.json({
+          success: false,
+          err,
+        });
+      }
+
+      // 쿠키삭제를 먼저 진행시켜서 로그아웃을 진행시킨다.
+      return res
+        .clearCookie("x_auth")
+        .clearCookie("isConnected")
+        .status(200)
+        .send({
+          success: true,
+        });
+    });
+  }  
 }
 
 /* 이메일 인증 API */
@@ -123,9 +158,6 @@ async function mail(req, res) {
       emailTemplate = data;
     }
   );
-
-  // console.log(req.body.email);
-  // console.log(number);
 
   let mailOptions = {
     from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
@@ -249,7 +281,6 @@ async function changePassword(req, res) {
           message: "현재 비밀번호가 틀렸습니다.",
         });
       }
-      // console.log(user.password)
       user.password = newPassword;
       user.save();
 

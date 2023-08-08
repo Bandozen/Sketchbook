@@ -20,6 +20,17 @@ const Wrapper = styled.div`
     overflow: hidden;
   }
 
+  .img-container3 {
+    background-color: #e5e1db;
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+  }
+
   .kid-img {
     position: absolute;
     top: 0;
@@ -30,8 +41,7 @@ const Wrapper = styled.div`
     opacity: 0.5;
   }
 
-  .text-overlay,
-  .text-overlay2 {
+  .text-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,6 +49,12 @@ const Wrapper = styled.div`
     font-family: 'Pretendard-Regular';
     text-align: center;
   }
+
+  .text-overlay2 {
+    display: flex;
+    flex-direction: column;
+  }
+
 
   .text-overlay_ballon {
     position: absolute;

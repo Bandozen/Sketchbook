@@ -25,6 +25,14 @@ function useInterval(callback, delay) {
 }
 
 function Connect() {
+//   console.log(`
+// ╭ ◜◝ ͡ ◜◝ ͡  ◜◝ ͡ ◜◝ ͡  ◜◝ ╮
+//         기기연결 페이지
+// OTP 기기 연결 해야 동화를 보지요
+// ╰ ◟◞ ͜  ◟ ͜   ◟◞ ͜  ◟ ͜   ◟◞ ╯
+//                   O
+//                 °
+// `)
   const [button, setButton] = useState({
     buttonText: "OTP 생성하기",
     timerActive: false,
@@ -60,7 +68,7 @@ function Connect() {
         console.log(err);
       });
     // SetOtp(12345);
-    console.log(button.tryCount);
+    // console.log(button.tryCount);
   };
 
   const navigate = useNavigate();
@@ -87,7 +95,7 @@ function Connect() {
           console.log(err);
         });
       // SetOtp(12345);
-      console.log(button.tryCount);
+      // console.log(button.tryCount);
     } else {
       if (button.tryCount < 3) {
         handleClick();
