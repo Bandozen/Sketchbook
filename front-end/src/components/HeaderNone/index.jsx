@@ -1,23 +1,18 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
-
-// CSS
 import Wrapper from './styles';
 
-import isLogin from '../../utils/isLogin';
-
 function HeaderNone() {
-  const navigate = useNavigate();
-  const auth = isLogin();
+  let navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
 
   const handleLogout = () => {
     axios
     .get('/api/users/logout')
       .then((res) => {
         if (res.data.success) {
-          // console.log('Logout successful');
+          console.log('Logout successful');
           navigate('/');
         } else {
           console.error('Logout failed:', res.data.err);
@@ -28,8 +23,24 @@ function HeaderNone() {
       });
   };
 
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset > 200 ) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper scrolled={scrolled}>
       <Link to="/aboutUs">
         <img
           className="logo"
@@ -37,24 +48,20 @@ function HeaderNone() {
           alt=""
         />
       </Link>
-      {auth? <div className="links">
-        <NavLink to="/books" >
+      <div className="links">
+        <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
           책장
         </NavLink>
-        <NavLink to="/guide" >
+        <NavLink to="/guide" className={({ isActive }) => isActive ? 'active' : undefined}>
           이용 가이드
         </NavLink>
-        <NavLink to="/profile" >
+        <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : undefined}>
           회원 정보
         </NavLink>
         <p onClick={handleLogout}>
           로그아웃
         </p>
-      </div> :
-      <div className='links'>
-        <NavLink to='/' >로그인하러 가기</NavLink>
       </div>
-      }
     </Wrapper>
   );
 }
