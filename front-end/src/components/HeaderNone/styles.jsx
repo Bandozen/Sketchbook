@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-family: 'Pretendard-Regular';
-  z-index: 9999;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+display: flex;
+justify-content: space-between;
+font-family: 'Pretendard-Regular';
+z-index: 9999;
+width: 100%;
+padding: 5px 10px;
+background-color: transparent;
+
+  
 
   .logo {
     width: 150px;
