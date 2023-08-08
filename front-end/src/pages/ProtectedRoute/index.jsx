@@ -17,7 +17,9 @@ const ProtectedRoute = () => {
   }, [auth, navigate]);
 
   if (auth) {
+
     if (connection === 'true' && location.pathname === "/connect") {
+
       navigate("/profile")
     }
     return <Outlet/>

@@ -115,7 +115,7 @@ function BookCard({ book }) {
                 >
                   캐릭터 출력하기
                 </Button> 
-                {connection ? <a href="/check/capture">
+                {connection ==='true' ? <a href="/check/capture">
                 <Button
                   variant="outline-primary"
                   className="custom-button-style"
