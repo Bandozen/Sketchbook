@@ -18,6 +18,17 @@ import isConnected from "../../utils/isConnected";
 ///////////////////////////////////////////////
 
 function Profile() {
+  // console.log(`
+  // 책 좀 골라볼까나
+  // .　　　 ∧,,_∧
+  // 　　 ⊂ ( ･ω･ )つ-
+  // 　 ／／/　　 /::/
+  // 　 |::|/⊂ヽノ|::|」
+  // ／￣￣☆￣￣￣／|
+  // ＿＿＿＿＿＿／　| |
+  // |------ー----ー|／
+  
+  // `)
   var connection = isConnected();
   let navigate = useNavigate();
 
