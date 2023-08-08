@@ -163,7 +163,7 @@ export default function Signup() {
           <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
             <h3>로그인</h3>
           </Link>
-          <Link to="/main/signup" style={{ textDecoration: "none", color: "gray" }}>
+          <Link to="#" style={{ textDecoration: "none", color: "gray" }}>
             <h3 className='activated'>회원가입</h3>
           </Link>
         </div>
