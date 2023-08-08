@@ -6,8 +6,11 @@ import axios from "axios";
 // CSS
 import Wrapper from './styles';
 
-function Header() {
-  let navigate = useNavigate();
+import isLogin from '../../utils/isLogin';
+
+function HeaderNone() {
+  const navigate = useNavigate();
+  const auth = isLogin();
 
   const handleLogout = () => {
     axios
@@ -34,22 +37,26 @@ function Header() {
           alt=""
         />
       </Link>
-      <div className="links">
-        <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
+      {auth? <div className="links">
+        <NavLink to="/books" >
           책장
         </NavLink>
-        <NavLink to="/guide" className={({ isActive }) => isActive ? 'active' : undefined}>
+        <NavLink to="/guide" >
           이용 가이드
         </NavLink>
-        <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : undefined}>
+        <NavLink to="/profile" >
           회원 정보
         </NavLink>
         <p onClick={handleLogout}>
           로그아웃
         </p>
+      </div> :
+      <div className='links'>
+        <NavLink to='/' >로그인하러 가기</NavLink>
       </div>
+      }
     </Wrapper>
   );
 }
 
-export default Header;
+export default HeaderNone;

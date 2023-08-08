@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+display: flex;
+justify-content: space-between;
+background-color: ${props => props.scrolled ? ' rgba(255, 255, 255, 0.1)' : 'transparent'};
+backdrop-filter: ${props => props.scrolled ? 'blur(10px)' : 'none'};
+
+transition: background-color 0.3s ease;
   font-family: 'Pretendard-Regular';
   z-index: 9999;
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
+  padding: 5px 10px;
+
+  
 
   .logo {
     width: 150px;
