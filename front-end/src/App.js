@@ -54,6 +54,7 @@ import P17 from "./pages/Play/Story1/P17/index";
 
 const router = createBrowserRouter([
   { path: "*", element: <NotFound /> },
+  { path: "/aboutUs", element: <AboutUs /> },
   {
     path: "/",
     element: <PublicRoute />,
@@ -109,7 +110,7 @@ const router = createBrowserRouter([
         element: <Play />,
         children: [
           {
-            path: "story1", 
+            path: "story1",
             element: <Story1 />,
             children: [
               { path: "p1", element: <P1 /> },
@@ -129,7 +130,7 @@ const router = createBrowserRouter([
               { path: "p15", element: <P15 /> },
               { path: "p16", element: <P16 /> },
               { path: "p17", element: <P17 /> },
-            ]
+            ],
           },
         ],
       },
@@ -148,10 +149,6 @@ const router = createBrowserRouter([
       {
         path: "/deviceOTP",
         element: <DeviceOTP />,
-      },
-      {
-        path: "/aboutUs",
-        element: <AboutUs />,
       },
     ],
   },

@@ -46,7 +46,14 @@ const Wrapper = styled.div`
 .forgot-password {
   margin-top: 20px;
   font-size: 14px;
-  text-align: end;
+  display: flex;
+  justify-content:space-between;
+}
+
+.to-about-us {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: start;
 }
 
 .forgot-password a {
