@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
-import Header from '../../components/HeaderNone';
+import HeaderNone from '../../components/HeaderNone';
 import Wrapper from './styles';
 import { Fade, Slide } from "react-awesome-reveal";
+
 
 function AboutUs() {
 
@@ -15,8 +16,8 @@ function AboutUs() {
 
     return (
         <Wrapper>
+                <HeaderNone />
             <div className="img-container">
-                <Header />
                 <img className='kid-img' src="/videos/kids_drawing.jpg" alt=''></img>
                 <div className="text-overlay">
                     <Fade cascade damping={0.2}>
@@ -25,73 +26,73 @@ function AboutUs() {
                         <br></br>
                         <h3 className='text-overlay_h3'>아이의 상상을 현실로 만듭니다.</h3>
                         <div className="arrow-container">
-                            <img src="/videos/down-arrow.png" alt='' className="down-arrow" onClick={scrollToSecondSlide}/>
+                            <img src="/videos/down-arrow.png" alt='' className="down-arrow" onClick={scrollToSecondSlide} />
                         </div>
                     </Fade>
                 </div>
             </div>
             <Slide direction="up" triggerOnce>
-            <div ref={secondSlideRef} className="img-container2">
-                <div className="img-container2">
-                    <div className="text-overlay_ballon">
-                        <Fade cascade damping={0.2} delay={200}>
-                            <div className="container">
-                                <div className="message-container">
-                                    <div className="message-box">
-                                        <p>프로젝트를 어떻게 시작하게 되셨나요? 기획의도가 궁금해요! 🙄</p>
+                <div ref={secondSlideRef} className="img-container2">
+                    <div className="img-container2">
+                        <div className="text-overlay_ballon">
+                            <Fade cascade damping={0.2} delay={200}>
+                                <div className="container">
+                                    <div className="message-container">
+                                        <div className="message-box">
+                                            <p>프로젝트를 어떻게 시작하게 되셨나요? 기획의도가 궁금해요! 🙄</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Fade>
-                    </div>
-                    <div className="text-overlay_ballon2">
-                        <Fade cascade damping={0.2} delay={400}>
-                            <div className="container">
-                                <div className="message-container">
-                                    <div className="message-box2">
-                                        <p>
-                                            16:00 ~ 19:30 까지 돌봄 공백 영유아를 대상으로 어린이집에서는 연장보육제도를
-                                            운영해요. <br></br> 주로 맞벌이 부모님을 둔 자녀들이 이용하죠.
-                                        </p>
+                            </Fade>
+                        </div>
+                        <div className="text-overlay_ballon2">
+                            <Fade cascade damping={0.2} delay={400}>
+                                <div className="container">
+                                    <div className="message-container">
+                                        <div className="message-box2">
+                                            <p>
+                                                16:00 ~ 19:30 까지 돌봄 공백 영유아를 대상으로 어린이집에서는 연장보육제도를
+                                                운영해요. <br></br> 주로 맞벌이 부모님을 둔 자녀들이 이용하죠.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Fade>
-                    </div>
-                    <div className="text-overlay_ballon3">
-                        <Fade cascade damping={0.2} delay={600}>
-                            <div className="container">
-                                <div className="message-container">
-                                    <div className="message-box">
-                                        <p>어랏 몰랐던 사실이네요! 😯</p>
+                            </Fade>
+                        </div>
+                        <div className="text-overlay_ballon3">
+                            <Fade cascade damping={0.2} delay={600}>
+                                <div className="container">
+                                    <div className="message-container">
+                                        <div className="message-box">
+                                            <p>어랏 몰랐던 사실이네요! 😯</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Fade>
-                    </div>
-                    <div className="text-overlay_ballon4">
-                        <Fade cascade damping={0.2} delay={400}>
-                            <div className="container">
-                                <div className="message-container">
-                                    <div className="message-box2">
-                                        <p> 부모님들은
-                                            연장보육시간 동안의 아이 교육적 활동 부족을 늘 안타까워해요.😢 <br></br> 그래서 우리는
-                                            연장보육반 영유아를 위한 동화 프로그램을 개발하기로 결심했어요! <br></br>
-                                        </p>
-                                        <span style={{ color: '#AC8BB8', fontSize: '35px',fontWeight: 'bold' }}>'IoT 기반의 상호작용 동화 프로그램'</span>
+                            </Fade>
+                        </div>
+                        <div className="text-overlay_ballon4">
+                            <Fade cascade damping={0.2} delay={400}>
+                                <div className="container">
+                                    <div className="message-container">
+                                        <div className="message-box2">
+                                            <p> 부모님들은
+                                                연장보육시간 동안의 아이 교육적 활동 부족을 늘 안타까워해요.😢 <br></br> 그래서 우리는
+                                                연장보육반 영유아를 위한 동화 프로그램을 개발하기로 결심했어요! <br></br>
+                                            </p>
+                                            <span style={{ color: '#AC8BB8', fontSize: '35px', fontWeight: 'bold' }}>'IoT 기반의 유아 참여형 동화 프로그램'</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Fade>
+                            </Fade>
+                        </div>
                     </div>
                 </div>
-            </div>
             </Slide>
 
 
-            <Slide direction="up" triggerOnce>
-                <div>
-                    <div className="img-container2">
+            <div className="img-container3">
+                <Slide direction="up" triggerOnce>
+                    <div>
                         <div className="text-overlay2">
                             <Fade cascade damping={0.2}>
                                 <h1 className='text-overlay2_h1'>스케치북을 만든 이들</h1>
@@ -177,8 +178,8 @@ function AboutUs() {
                             </Fade>
                         </div>
                     </div>
-                </div>
-            </Slide>
+                </Slide>
+            </div>
 
 
         </Wrapper>

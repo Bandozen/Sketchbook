@@ -6,7 +6,7 @@ import axios from "axios";
 // CSS
 import Wrapper from './styles';
 
-function Header() {
+function HeaderNone() {
   let navigate = useNavigate();
 
   const handleLogout = () => {
@@ -52,4 +52,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderNone;
