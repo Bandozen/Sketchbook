@@ -13,6 +13,15 @@ iframe {
     position: absolute;
     bottom: 0;
     width: 80px;
+    height : 100%;
+    right: 0;
+    padding : 0 10px;
+    margin : auto 0;
+}
+
+.arrow:hover {
+    background : linear-gradient(to right, white, lightgray);
+    right: 0;
 }
 `;
 
