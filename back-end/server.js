@@ -3,7 +3,7 @@
 
 const express = require("express");
 const helmet = require("helmet");
-// const cors = require("cors");
+const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const redis = require("redis");
@@ -20,7 +20,7 @@ app.use(
     extended: true,
   })
 );
-// app.use(cors());
+app.use(cors());
 app.use(morgan("tiny"));
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
