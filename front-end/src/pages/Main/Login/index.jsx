@@ -61,11 +61,11 @@ export default function Login() {
       })
       .then((res) => {
         // console.log(res.data);
-        if (res.data.loginSuccess==false){
-          alert('일치하는 회원정보가 없습니다.')
-          return
+        if (res.data.loginSuccess == false) {
+          alert("일치하는 회원정보가 없습니다.");
+          return;
         } else {
-        navigate('/main'); // 기기 연결 페이지로 이동하게 변경
+          navigate("/main"); // 기기 연결 페이지로 이동하게 변경
         }
       })
       .catch((err) => {
@@ -84,10 +84,7 @@ export default function Login() {
           >
             <h3 className="activated">로그인</h3>
           </Link>
-          <Link
-            to="/signup"
-            style={{ textDecoration: "none", color: "gray" }}
-          >
+          <Link to="/signup" style={{ textDecoration: "none", color: "gray" }}>
             <h3>회원가입</h3>
           </Link>
         </div>
@@ -138,8 +135,15 @@ export default function Login() {
           <button type="submit" className="start" onClick={login}>
             시작하기
           </button>
-
-          <p className="forgot-password" style={{ textDecoration: 'underline'}}> <a onClick={openModal}>비밀번호 찾기</a></p>
+          <div className="tags">
+            <p
+              className="forgot-password"
+              style={{ textDecoration: "underline" }}
+            >
+              <a href="/aboutUs">어떤 서비스인가요?</a>{" "}
+              <a onClick={openModal}>비밀번호 찾기</a>
+            </p>
+          </div>
         </form>
       </div>
     </Wrapper>

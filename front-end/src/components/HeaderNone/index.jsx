@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate, Link } from 'react-router-dom';
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from "axios";
+
+// CSS
 import Wrapper from './styles';
 
+import isLogin from '../../utils/isLogin';
+
 function HeaderNone() {
-  let navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const auth = isLogin();
 
   const handleLogout = () => {
     axios
@@ -23,24 +28,8 @@ function HeaderNone() {
       });
   };
 
-  const handleScroll = () => {
-    const offset = window.scrollY;
-    if (offset > 200 ) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-
   return (
-    <Wrapper scrolled={scrolled}>
+    <Wrapper>
       <Link to="/aboutUs">
         <img
           className="logo"
@@ -48,20 +37,24 @@ function HeaderNone() {
           alt=""
         />
       </Link>
-      <div className="links">
-        <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
+      {auth? <div className="links">
+        <NavLink to="/books" >
           책장
         </NavLink>
-        <NavLink to="/guide" className={({ isActive }) => isActive ? 'active' : undefined}>
+        <NavLink to="/guide" >
           이용 가이드
         </NavLink>
-        <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : undefined}>
+        <NavLink to="/profile" >
           회원 정보
         </NavLink>
         <p onClick={handleLogout}>
           로그아웃
         </p>
+      </div> :
+      <div className='links'>
+        <NavLink to='/' >로그인하러 가기</NavLink>
       </div>
+      }
     </Wrapper>
   );
 }
