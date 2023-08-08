@@ -7,7 +7,7 @@ const deviceSchema = new mongoose.Schema(
             type: String,
             default: "",
         },
-        isConneted: {
+        isConnected: {
             type: Boolean,
             default: false,
         },
