@@ -60,7 +60,7 @@ function Connect() {
         console.log(err);
       });
     // SetOtp(12345);
-    console.log(button.tryCount);
+    // console.log(button.tryCount);
   };
 
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ function Connect() {
           console.log(err);
         });
       // SetOtp(12345);
-      console.log(button.tryCount);
+      // console.log(button.tryCount);
     } else {
       if (button.tryCount < 3) {
         handleClick();
