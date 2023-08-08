@@ -78,8 +78,7 @@ export default function Login() {
       <PasswordModal closeModal={closeModal} isModalOpen={isModalOpen} />
       <div className="login">
         <div className="login-signup-buttons">
-          <Link
-            to="/main/login"
+          <Link to="#"
             style={{ textDecoration: "none", color: "gray" }}
           >
             <h3 className="activated">로그인</h3>
