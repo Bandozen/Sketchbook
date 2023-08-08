@@ -18,7 +18,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false); //패스워드 보여줘?
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); //패스워드 확인 보여줘?
   const [isValidEmail, setIsValidEmail] = useState(false); // 이메일 유효성 검사 결과
-  var Codeblock = 0 // 이메일 인증 안하면 회원가입 막는 용도
+  const [codeblock, setCodeBlock] = useState(0);  // 이메일 인증 안하면 회원가입 막는 용도
 
   const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
   const passwordRegEx = /^[a-zA-Z0-9!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]{8,20}$/;
@@ -109,11 +109,9 @@ export default function Signup() {
     })
     .then((res) => {
       if (res.data.success) {
-        // console.log(res.data.message);
         alert("인증이 완료되었습니다.");
-        Codeblock = 1
+        setCodeBlock(1);
       } else {
-        // console.log(res.data.message);
         alert("인증 코드가 유효하지 않습니다.");
       }
     })
@@ -127,7 +125,6 @@ export default function Signup() {
   const signup = (e) => {
     e.preventDefault();
 
-    // console.log(Codeblock)
     if (password !== confirmPassword) {
       setConfirmPasswordWarning('비밀번호가 일치하지 않습니다.');
       alert("비밀번호가 일치하지 않습니다.");
@@ -135,7 +132,7 @@ export default function Signup() {
     } else if (!isValidEmail) {
       alert("이메일 형식을 확인해주세요")
       return;
-    } else if (Codeblock === 0) {
+    } else if (codeblock === 0) {
       alert("이메일을 인증해주세요.")
       return;
     }
@@ -148,11 +145,9 @@ export default function Signup() {
       .then((res) => {
         if (res.data.success === false) {
           alert('잘못된 회원 정보입니다.')
-          // console.log(res)
           return
         } else {
           navigate('/');
-          // console.log(res.data);
         }
       })
       .catch((err) => {
