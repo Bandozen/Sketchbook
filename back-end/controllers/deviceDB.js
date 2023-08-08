@@ -29,33 +29,63 @@ async function checkConnect(req, res) {
   const flag = await client.get(OTP);
 
   if (flag === "true") {
-    User.findOneAndUpdate({ _id: req.user._id }, { isConnected: true }, (err, user) => {
-      if (err) {
-        return res.json({
-          err,
+    User.findOneAndUpdate(
+      { _id: req.user._id },
+      { isConnected: true },
+      (err, user) => {
+        if (err) {
+          return res.json({
+            err,
+          });
+        }
+        client.del(OTP);
+        res.cookie("isConnected", user.isConnected).status(200).json({
+          isConnected: user.isConnected,
         });
       }
-      client.del(OTP);
-      res.cookie("isConnected", user.isConnected).status(200).json({
-        isConnected: user.isConnected,
-      });
-    });
-  }
-
-  else {
+    );
+  } else {
     User.findOne({ _id: req.user._id }, (err, user) => {
       if (err) {
         return res.json({
           err,
         });
       }
-      
+
       res.cookie("isConnected", user.isConnected).status(200).json({
         isConnected: user.isConnected,
       });
-    }); 
+    });
   }
+}
+
+function disconnect(req, res) {
+  console.log(req.user.email);
+
+  if(req.user.email == "connect@test.com")
+  {    
+    res.status(200).json({
+      success: true,
+    });  
+  }
+
+  else {
+    User.findOneAndUpdate({ _id: req.user._id }, { isConnected: false }, (err, user) => {
+      if (err) {
+        return res.json({
+          success: false,
+          err,
+        });
+      }
+
+      res.clearCookie("isConnected").cookie("isConnected", false).status(200).json({
+        success: true,
+      });
+    });
+  }
+  
 }
 
 exports.issue = issue;
 exports.checkConnect = checkConnect;
+exports.disconnect = disconnect;
