@@ -18,8 +18,6 @@ import isConnected from "../../utils/isConnected";
 
 function Profile() {
   var connection = isConnected();
-  console.log(connection);
-  console.log(typeof(connection))
 
   const [pw, setPw] = useState("");
   const [newPw, setnewPw] = useState("");
@@ -104,7 +102,14 @@ function Profile() {
       newPassword : newPw
     })
     .then((res)=> {
+      alert("비밀번호가 변경되었습니다.")
       console.log(res);
+      setForm((prevForm) => ({
+        ...prevForm,
+        pw: "",
+        newPw: "",
+        newPwCheck: "",
+      }));
     })
     .catch((err)=>{
       console.log(err);
