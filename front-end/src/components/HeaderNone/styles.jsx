@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div.attrs(props => ({
-  scrolled: props.scrolled ? 'scrolled' : 'not-scrolled',
-}))`
+const Wrapper = styled.div`
+display: flex;
+justify-content: space-between;
+background-color: ${props => props.scrolled ? ' rgba(255, 255, 255, 0.1)' : 'transparent'};
+backdrop-filter: ${props => props.scrolled ? 'blur(10px)' : 'none'};
 
-  display: flex;
-  justify-content: space-between;
-  background-color: ${props => props.scrolled === 'scrolled' ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
-  backdrop-filter: ${props => props.scrolled === 'scrolled' ? 'blur(10px)' : 'none'};
-  transition: background-color 0.3s ease;
+transition: background-color 0.3s ease;
   font-family: 'Pretendard-Regular';
   z-index: 9999;
   position: fixed;
   width: 100%;
   padding: 5px 10px;
+
+  
 
   .logo {
     width: 150px;
