@@ -1,13 +1,11 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
-
-// CSS
 import Wrapper from './styles';
 
 function HeaderNone() {
   let navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
 
   const handleLogout = () => {
     axios
@@ -25,8 +23,24 @@ function HeaderNone() {
       });
   };
 
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset > 200 ) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper scrolled={scrolled}>
       <Link to="/aboutUs">
         <img
           className="logo"
