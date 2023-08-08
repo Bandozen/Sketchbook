@@ -1,27 +1,28 @@
 import { Outlet, useNavigate } from 'react-router';
 import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { CustomDialog } from './styles';
 
 function Story1() {
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      // 페이지 이동 로직 구현
       const currentPath = window.location.pathname;
       const pageNumber = Number(currentPath.split('/').pop().slice(1));
       let nextPageNumber;
 
       if (event.key === 'ArrowLeft') {
         if (pageNumber === 1) {
-          alert('첫 페이지에요.');
+          renderCustomDialog('첫 페이지에요.');
           return;
         }
         nextPageNumber = Math.max(1, pageNumber - 1);
       } else if (event.key === 'ArrowRight') {
         if (pageNumber === 17) {
-          if (window.confirm('마지막 페이지에요. 책장으로 돌아갈까요?')) {
+          renderCustomDialog('동화가 끝났어요. 다른 동화를 보러 가 볼까요?', () => {
             navigate('/books');
-          }
+          });
           return;
         }
         nextPageNumber = Math.min(17, pageNumber + 1);
@@ -29,21 +30,59 @@ function Story1() {
         return;
       }
 
-      // 이동할 페이지 경로 생성
       const nextPagePath = `/Play/story1/p${nextPageNumber}`;
-
-      // 페이지 이동
       window.location.href = nextPagePath;
     };
 
-    // 이벤트 리스너 추가
+    const renderCustomDialog = (message, callback) => {
+      const dialog = document.createElement('div');
+      dialog.setAttribute('id', 'custom-dialog');
+      document.body.appendChild(dialog);
+
+      const handleConfirmClick = () => {
+        closeCustomDialog(callback);
+      };
+
+      const handleCloseDialog = () => {
+        closeCustomDialog(callback);
+      };
+
+      ReactDOM.render(
+        <CustomDialog>
+          <p>{message}</p>
+          <button onClick={handleConfirmClick}>확인</button>
+        </CustomDialog>,
+        dialog
+      );
+
+      // Enter 키 누를 때 모달이 닫히도록 이벤트 리스너 추가
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          handleCloseDialog();
+        }
+      });
+
+      // 바깥을 클릭하면 모달이 닫히도록 이벤트 리스너 추가
+      dialog.addEventListener('click', handleCloseDialog);
+    };
+
+    const closeCustomDialog = (callback) => {
+      const dialog = document.getElementById('custom-dialog');
+      if (dialog) {
+        ReactDOM.unmountComponentAtNode(dialog);
+        document.body.removeChild(dialog);
+        if (typeof callback === 'function') {
+          callback();
+        }
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
 
-    // 컴포넌트 언마운트 시 이벤트 리스너 제거
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, );
+  }, [navigate]);
 
   return (
     <div>
