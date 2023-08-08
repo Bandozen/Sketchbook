@@ -5,6 +5,18 @@ import { Fade, Slide } from "react-awesome-reveal";
 
 
 function AboutUs() {
+    // console.log(`
+    // ┌──────┐
+    // │버그발견시！│
+    // │연락주십쇼！│
+    // └──────┘
+    // ヽ(＾ω＾)ﾉ三三　 　 2
+    // 　 (　 へ )三三　　┗팀┓三
+    // 　　く 三三 　　　 ┏┗　 三
+    // ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+    
+    
+    // `)
 
     const secondSlideRef = useRef(null);
 

@@ -158,6 +158,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // console.log(`
+  // ＼●　 ●＿　　＼●　 　＜●〉　* ● *
+  // 　/>　 <│　　　/∨　　　│ 　* √1∨*
+  // <＼　　∠＼　　/>　　　〈〉　* /＼*
+  // ~ 앗싸~ 오늘도 활기차게 발랄하게~ 오예~~!!! ^^
+  
+  // `);
+  
   return (
     <div>
       <RouterProvider router={router} />
