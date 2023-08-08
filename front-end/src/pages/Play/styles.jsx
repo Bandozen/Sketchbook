@@ -6,6 +6,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
+  img {
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 export default Wrapper;

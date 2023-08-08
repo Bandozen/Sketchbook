@@ -48,19 +48,19 @@ const Wrapper = styled.div`
 
   .text-overlay_ballon2 {
     position: absolute;
-    top: 32%;
+    top: 35%;
     right: 10%;
   }
 
   .text-overlay_ballon3 {
     position: absolute;
-    top: 48%;
+    top: 54%;
     left: 10%;
   }
 
   .text-overlay_ballon4 {
     position: absolute;
-    top: 59%;
+    top: 68%;
     right: 10%;
   }
 
@@ -84,7 +84,7 @@ const Wrapper = styled.div`
     width: auto;
     background-color: #f0f0f0;
     border-radius: 8px;
-    padding: 10px;
+    padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     display: inline-block;
@@ -140,6 +140,30 @@ const Wrapper = styled.div`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-align: center;
   }
+
+  .arrow-container {
+    position: absolute;
+    left: 50%;
+    top : 180%;
+}
+
+.down-arrow {
+    width: 50px; // 원하는 크기로 설정
+    height: auto; // 비율 유지
+    animation: bounce 1s infinite; // 부드러운 애니메이션 효과
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
 `;
 
 export default Wrapper;
