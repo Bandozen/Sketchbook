@@ -15,7 +15,6 @@ function issue(req, res) {
   });
 
   OTP = otp;
-  console.log(OTP);
 
   client.set(otp, email);
   client.expire(otp, 200); // 입력시간을 고려하여 3분 20초 설정
