@@ -3,6 +3,16 @@ import Wrapper from "./styles";
 import { useNavigate } from "react-router";
 
 function Guide() {
+//   console.log(`
+// ╭ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝╮
+//             콘솔창 그만 보시옵소서
+// ╰ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ╯
+// O °
+// ᕱ ᕱ
+// ( ･ω･)
+// / つΦ . .. . ﹢ ⃰ ଂ ಇ
+// `)
+
   const navigate = useNavigate();
   const goToConnect = () => {
     navigate("/connect");
