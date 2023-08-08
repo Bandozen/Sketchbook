@@ -63,7 +63,7 @@ async function login(req, res) {
 
         // 정상적이라면 토큰을 쿠키 혹은 로컬스토리지에 저장
         // 지금은 쿠키에 저장
-        res.cookie("x_auth", user.token).status(200).json({
+        res.cookie("x_auth", user.token).cookie("isConnected", "false").status(200).json({
           loginSuccess: true,
           userid: user._id,
         });
@@ -123,9 +123,6 @@ async function mail(req, res) {
       emailTemplate = data;
     }
   );
-
-  // console.log(req.body.email);
-  // console.log(number);
 
   let mailOptions = {
     from: "3BTI: 스케치북, 아이의 상상은 현실이 된다.",
@@ -249,7 +246,6 @@ async function changePassword(req, res) {
           message: "현재 비밀번호가 틀렸습니다.",
         });
       }
-      // console.log(user.password)
       user.password = newPassword;
       user.save();
 
