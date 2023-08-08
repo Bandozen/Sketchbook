@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const Wrapper = styled.div.attrs(props => ({
   scrolled: props.scrolled ? 'scrolled' : 'not-scrolled',
 }))`
-
   display: flex;
   justify-content: space-between;
   background-color: ${props => props.scrolled === 'scrolled' ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
