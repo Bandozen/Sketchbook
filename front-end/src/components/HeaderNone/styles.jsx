@@ -3,11 +3,15 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
 display: flex;
 justify-content: space-between;
-font-family: 'Pretendard-Regular';
-z-index: 9999;
-width: 100%;
-padding: 5px 10px;
-background-color: transparent;
+background-color: ${props => props.scrolled ? ' rgba(255, 255, 255, 0.1)' : 'transparent'};
+backdrop-filter: ${props => props.scrolled ? 'blur(10px)' : 'none'};
+
+transition: background-color 0.3s ease;
+  font-family: 'Pretendard-Regular';
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  padding: 5px 10px;
 
   
 
