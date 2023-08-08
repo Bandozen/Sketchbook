@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
 
@@ -18,6 +19,7 @@ import isConnected from "../../utils/isConnected";
 
 function Profile() {
   var connection = isConnected();
+  let navigate = useNavigate();
 
   const [pw, setPw] = useState("");
   const [newPw, setnewPw] = useState("");
@@ -116,6 +118,24 @@ function Profile() {
     })
   }
 
+  const disconnect = (e) => {
+    e.preventDefault();
+
+    axios
+    .get("/api/devices/disconnect")
+    .then((res) => {
+      if (res.data.success) {
+        console.log('disconncet successful');
+        navigate('/profile');
+      } else {
+        console.error('disconncet failed:', res.data.success);
+      }
+    })
+    .catch((error) => {
+      console.error('disconncet failed:', error);
+    });
+  }
+
   return (
     <div>
       <Header />
@@ -180,12 +200,10 @@ function Profile() {
               기기 <span>연결</span>
             </h2>
             <h5 className="mt-3" style={{ fontSize: "20px" }}>
-                {connection === 'true' ? "기기 연결 되어 있어요.🙆‍♀️" : "기기 연결이 안되어 있어요."}
-            </h5>
-            <h5 style={{ display: connection==='true' ? "none" : "block" }}>
-              <a href="/connect" style={{ fontSize: "20px", color: "black" }}>
-                기기 연결하기 💁‍♀️
-              </a>
+                {connection === 'true' ? "기기 연결 되어 있어요.🙆‍♀️" : "기기 연결이 안되어 있어요.🙅‍♀️"}
+            </h5>            
+            <h5>
+                {connection === 'true' ? <a href="" style={{ fontSize: "20px", color: "black"}} onClick={disconnect}>기기 연결 해제 🙇‍♀️</a> : <a href="/connect" style={{ fontSize: "20px", color: "black" }}>기기 연결하기 💁‍♀️</a>}                
             </h5>
           </div>
           <img src={process.env.PUBLIC_URL + "/assets/logo_with.png"} alt="" />
