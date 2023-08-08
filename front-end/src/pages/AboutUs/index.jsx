@@ -1,8 +1,18 @@
+import React, { useRef } from 'react';
 import Header from '../../components/HeaderNone';
 import Wrapper from './styles';
 import { Fade, Slide } from "react-awesome-reveal";
 
 function AboutUs() {
+
+    const secondSlideRef = useRef(null);
+
+    const scrollToSecondSlide = () => {
+        if (secondSlideRef.current) {
+            secondSlideRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <Wrapper>
             <div className="img-container">
@@ -14,18 +24,21 @@ function AboutUs() {
                         <h1 className='text-overlay_h1'>가치를 만들고 있습니다.</h1>
                         <br></br>
                         <h3 className='text-overlay_h3'>아이의 상상을 현실로 만듭니다.</h3>
-
+                        <div className="arrow-container">
+                            <img src="/videos/down-arrow.png" alt='' className="down-arrow" onClick={scrollToSecondSlide}/>
+                        </div>
                     </Fade>
                 </div>
             </div>
             <Slide direction="up" triggerOnce>
+            <div ref={secondSlideRef} className="img-container2">
                 <div className="img-container2">
                     <div className="text-overlay_ballon">
                         <Fade cascade damping={0.2} delay={200}>
                             <div className="container">
                                 <div className="message-container">
                                     <div className="message-box">
-                                        <p>프로젝트를 어떻게 시작하시게 된거죠? 기획의도가 궁금해요! 🙄</p>
+                                        <p>프로젝트를 어떻게 시작하게 되셨나요? 기획의도가 궁금해요! 🙄</p>
                                     </div>
                                 </div>
                             </div>
@@ -64,14 +77,15 @@ function AboutUs() {
                                         <p> 부모님들은
                                             연장보육시간 동안의 아이 교육적 활동 부족을 늘 안타까워해요.😢 <br></br> 그래서 우리는
                                             연장보육반 영유아를 위한 동화 프로그램을 개발하기로 결심했어요! <br></br>
-                                            <p style={{color:'purple', fontSize:'35px'}}>'모션과 음성인식 기반의 동화와 아이 간 상호작용 교육'</p>
                                         </p>
+                                        <span style={{ color: '#AC8BB8', fontSize: '35px',fontWeight: 'bold' }}>'IoT 기반의 상호작용 동화 프로그램'</span>
                                     </div>
                                 </div>
                             </div>
                         </Fade>
                     </div>
                 </div>
+            </div>
             </Slide>
 
 
