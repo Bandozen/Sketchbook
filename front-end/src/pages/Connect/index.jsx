@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header";
 import Wrapper from "./styles";
 import axios from "axios";
+import isConnected from "../../utils/isConnected";
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -86,8 +87,8 @@ function Connect() {
       axios
         .get("/api/devices/checkConnect")
         .then((res) => {
-          const isConnected = res.data.isConnected;
-          if (isConnected) {
+          const connection = isConnected();
+          if (connection == "true") {
             return navigate("/books");
           }
         })

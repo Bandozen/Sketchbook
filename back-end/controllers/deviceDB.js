@@ -20,7 +20,7 @@ function issue(req, res) {
   client.expire(otp, 200); // 입력시간을 고려하여 3분 20초 설정
 
   res.status(200).json({
-    email: email,
+    // email: email,
     otp: otp,
   });
 }
@@ -40,7 +40,7 @@ async function checkConnect(req, res) {
         }
         client.del(OTP);
         res.cookie("isConnected", user.isConnected).status(200).json({
-          isConnected: user.isConnected,
+          // isConnected: user.isConnected,
         });
       }
     );
@@ -53,7 +53,7 @@ async function checkConnect(req, res) {
       }
 
       res.cookie("isConnected", user.isConnected).status(200).json({
-        isConnected: user.isConnected,
+        // isConnected: user.isConnected,
       });
     });
   }
@@ -85,6 +85,31 @@ function disconnect(req, res) {
   
 }
 
+function deviceIP(req, res) {
+
+}
+
+async function mission(req, res) {
+  const flag = req.body.flag;
+
+  // 미션 관련은 redis 1번 DB에서 관리
+  await client.select(1);
+
+  if (flag == '1') {
+    client.set('mission', 1);
+    return res.status(200).json({
+      mission: true
+    })
+  }
+  else {
+    client.set('mission', 0);
+    return res.status(200).json({
+      mission: false
+    })
+  }
+}
+
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
+exports.mission = mission;
