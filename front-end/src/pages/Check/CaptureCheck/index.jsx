@@ -21,7 +21,7 @@ export default function CaptureCheck() {
         <h3 style={{ fontSize: '45px', fontWeight: 'bold' }}> 1. 그림 찍기 </h3>
         <iframe
           title="라즈베리파이 캠"
-          src="i9c102.p.ssafy.io:8300"
+          src="192.168.100.246:8300"
           width="100%"
           height="800px"
         ></iframe>
