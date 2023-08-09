@@ -1,22 +1,39 @@
 import Header from "../../components/Header";
+import ConnectedModal from "../../components/ConnectedModal";
 import Wrapper from "./styles";
 import { useNavigate } from "react-router";
+import isConnected from "../../utils/isConnected";
+import { useState } from "react";
 
 function Guide() {
-//   console.log(`
-// ╭ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝╮
-//             콘솔창 그만 보시옵소서
-// ╰ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ╯
-// O °
-// ᕱ ᕱ
-// ( ･ω･)
-// / つΦ . .. . ﹢ ⃰ ଂ ಇ
-// `)
-
+  //   console.log(`
+  // ╭ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝ ͡ ◜◝╮
+  //             콘솔창 그만 보시옵소서
+  // ╰ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ͜ ◟◞ ╯
+  // O °
+  // ᕱ ᕱ
+  // ( ･ω･)
+  // / つΦ . .. . ﹢ ⃰ ଂ ಇ
+  // `)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const connection = isConnected();
   const navigate = useNavigate();
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const goToConnect = () => {
-    navigate("/connect");
-  }
+    if (connection) {
+      openModal();
+    } else {
+      navigate("/connect");
+    }
+  };
 
   return (
     <>
@@ -24,8 +41,8 @@ function Guide() {
       <Wrapper>
         <div className="box">
           <h2>
-            스케치북, <span>어떻게</span> 이용하나요? 
-            <img src={process.env.PUBLIC_URL + '/assets/emoji.png'} alt="" />
+            스케치북, <span>어떻게</span> 이용하나요?
+            <img src={process.env.PUBLIC_URL + "/assets/emoji.png"} alt="" />
           </h2>
           <ol>
             <li>
@@ -41,12 +58,13 @@ function Guide() {
             </li>
           </ol>
           <div className="btndiv">
-              <button type="button" onClick={goToConnect}>
-                기기 연결하기
-              </button>
+            <button type="button" onClick={goToConnect}>
+              기기 연결하기
+            </button>
           </div>
         </div>
       </Wrapper>
+      <ConnectedModal closeModal={closeModal} isModalOpen={isModalOpen}></ConnectedModal>
     </>
   );
 }

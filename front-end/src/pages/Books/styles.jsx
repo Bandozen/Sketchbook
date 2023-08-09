@@ -18,6 +18,7 @@ font-family: 'Pretendard-Regular';
   .form-control {
     boxShadow: none; //shadow 효과 없애기
     borderColor: #9D4FE0;
+    font-size: 18px;
   }
 
   // 검색 돋보기 이모지
