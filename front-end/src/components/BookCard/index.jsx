@@ -25,7 +25,7 @@ function BookCard({ book, onClick }) {
       onClick();
       return;
     } else {
-      navigate('/check/capture');
+      navigate('/check');
     }
   };
 
