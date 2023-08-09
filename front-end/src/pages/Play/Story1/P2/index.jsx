@@ -3,9 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import Wrapper from "./styles";
 import image2 from '../../../../play-background/엄마는 카멜레온_2.gif';
 import audio2 from '../../../../play-background/ske_2.mp3';
+import axios from "axios";
 
 function P2() {
   let navigate = useNavigate();
+
+  const mission = (e) => {
+      
+    axios
+      .post("/api/devices/mission", {
+        flag: "0" // mission이 없으면 0 있으면 1
+      })
+      .then((res) => {
+        console.log(res.data.mission)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,7 +31,7 @@ function P2() {
   }, []); // 빈 의존성 배열을 사용하여 마운트 시에만 타이머 설정
 
   return (
-    <Wrapper>
+    <Wrapper onLoad={mission}>
       <img src={image2} alt="" />
       
       <audio autoPlay>

@@ -85,6 +85,31 @@ function disconnect(req, res) {
   
 }
 
+function deviceIP(req, res) {
+
+}
+
+async function mission(req, res) {
+  const flag = req.body.flag;
+
+  // 미션 관련은 redis 1번 DB에서 관리
+  await client.select(1);
+
+  if (flag == '1') {
+    client.set('mission', 1);
+    return res.status(200).json({
+      mission: true
+    })
+  }
+  else {
+    client.set('mission', 0);
+    return res.status(200).json({
+      mission: false
+    })
+  }
+}
+
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
+exports.mission = mission;
