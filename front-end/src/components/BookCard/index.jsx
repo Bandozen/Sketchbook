@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import isConnected from "../../utils/isConnected";
 
 
-function BookCard({ book }) {
-  console.log(book);
+function BookCard({ book, onClick }) {
   const connection = isConnected();
   let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -22,7 +21,12 @@ function BookCard({ book }) {
   };
 
   const StartPlay = () => {
-    navigate('/check/capture');
+    if (book.id !== 1) {
+      onClick();
+      return;
+    } else {
+      navigate('/check/capture');
+    }
   };
 
   const goToConnect = () => {
@@ -61,8 +65,8 @@ function BookCard({ book }) {
     <>
       <FontWrap>
         <Card
-         style={{ width: "100%", maxWidth: "25rem", margin: "20px 0px 20px 0px" }}
-         onClick={handleModalShow}
+          style={{ width: "100%", maxWidth: "25rem", margin: "20px 0px 20px 0px" }}
+          onClick={handleModalShow}
         >
           <Card.Img
             variant="top"
@@ -77,67 +81,66 @@ function BookCard({ book }) {
         </Card>
       </FontWrap>
 
-      <Modal show={showModal} onHide={handleModalClose} size="xl">
-        <Modal.Header closeButton>
-          {/* <Modal.Title>{book.title}</Modal.Title> */}
-        </Modal.Header>
-        <Modal.Body>
-          <Wrapper>
-            <div style={{ flex: 1 }}>
-              <img
-                src={book.bookcover}
-                alt={book.title}
-                style={{ width: "100%", height: "auto", maxWidth: "25rem", maxHeight: "30rem" }}
-              />
-            </div>
-            <div style={{ flex: 2, padding: "10px 40px 10px 40px" }}>
-              <h2>{book.title}</h2>
-              <h5>{book.writer} 작가</h5>
-              <br />
-              {/* <p>{book.summary}</p> */}
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: book.summary.replace(/\n/g, "<br>"),
-                }}
-              />
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  marginTop: "80px",
-                }}
-              >
-                <Button
-                  variant="outline-primary"
-                  className="custom-button-style"
-                  onClick={handlePrint}
-                >
-                  캐릭터 출력하기
-                </Button> 
-                {connection ==='true' ? <a href="/check/capture">
-                <Button
-                  variant="outline-primary"
-                  className="custom-button-style"
-                  onClick={StartPlay}
-                >
-                  시작하기
-                </Button>
-                </a>:
-                <Button
-                variant="outline-primary"
-                className="custom-button-style"
-                onClick={goToConnect}
-              >
-                연결하러 가기
-              </Button>}
-                
+      <div className='realmodal' style={{display: 'flex'}}>
+        <Modal show={showModal} onHide={handleModalClose} size="xl">
+          <Modal.Header closeButton>
+          </Modal.Header>
+          <Modal.Body>
+            <Wrapper>
+              <div style={{ flex: 1 }}>
+                <img
+                  src={book.bookcover}
+                  alt={book.title}
+                  style={{ width: "100%", height: "auto", maxWidth: "25rem", maxHeight: "30rem" }}
+                />
               </div>
-            </div>
-          </Wrapper>
-        </Modal.Body>
-      </Modal>
+              <div style={{ flex: 2, padding: "10px 40px 10px 40px" }}>
+                <h2>{book.title}</h2>
+                <h5>{book.writer} 작가</h5>
+                <br />
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: book.summary.replace(/\n/g, "<br>"),
+                  }}
+                />
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginTop: "80px",
+                  }}
+                >
+                  <Button
+                    variant="outline-primary"
+                    className="custom-button-style"
+                    onClick={handlePrint}
+                  >
+                    캐릭터 출력하기
+                  </Button>
+                  {connection === 'true' ?
+                    <Button
+                      variant="outline-primary"
+                      className="custom-button-style"
+                      onClick={StartPlay}
+                    >
+                      시작하기
+                    </Button> :
+                    <Button
+                      variant="outline-primary"
+                      className="custom-button-style"
+                      onClick={goToConnect}
+                    >
+                      연결하러 가기
+                    </Button>}
+
+                </div>
+              </div>
+            </Wrapper>
+          </Modal.Body>
+        </Modal>
+      </div>
     </>
   );
 }

@@ -93,13 +93,13 @@ const router = createBrowserRouter([
       {
         path: "/check",
         element: <Check />,
-        children: [
-          { path: "capture", element: <CaptureCheck /> },
-          { path: "distance", element: <DistanceCheck /> },
-          { path: "motion", element: <MotionCheck /> },
-          { path: "sound", element: <SoundCheck /> },
-          { path: "combine", element: <CombineCheck /> },
-        ],
+        // children: [
+        //   { path: "capture", element: <CaptureCheck /> },
+        //   { path: "distance", element: <DistanceCheck /> },
+        //   { path: "motion", element: <MotionCheck /> },
+        //   { path: "sound", element: <SoundCheck /> },
+        //   { path: "combine", element: <CombineCheck /> },
+        // ],
       },
       {
         path: "/ready",
