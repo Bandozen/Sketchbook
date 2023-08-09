@@ -19,12 +19,7 @@ export default function CaptureCheck() {
     <Wrapper>
       <div>
         <h3 style={{ fontSize: '45px', fontWeight: 'bold' }}> 1. 그림 찍기 </h3>
-        <iframe
-          title="라즈베리파이 캠"
-          src="http://192.168.100.246:8300"
-          width="100%"
-          height="800px"
-        ></iframe>
+        <iframe title="라즈베리파이 캠" src="http://192.168.100.246:8300/video_feed" width="100%" height="800px" sandbox="allow-scripts allow-same-origin"></iframe>
         <img
           className="arrow"
           src={process.env.PUBLIC_URL + "/assets/arrow.png"}
