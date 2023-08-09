@@ -9,17 +9,22 @@ font-family: 'Pretendard-Regular';
 
 .grid{
     width : 500px;
+    display : flex;
+    padding : 20px;
+    flex-direction : column;
+    align-items : center;
 }
 
 img{
   width: 90%;
+  margin : 20px;
 }
 
 .box {
     background-color: #F8F8F8;
     border-radius: 10px;
     padding: 50px;
-    margin-right: 50px;
+    width : 100%
   }
 
   input{
