@@ -27,7 +27,7 @@ function issue(req, res) {
 
 async function checkConnect(req, res) {
   const flag = await client.get(OTP);
-
+  
   if (flag === "true") {
     User.findOneAndUpdate(
       { _id: req.user._id },
@@ -60,7 +60,6 @@ async function checkConnect(req, res) {
 }
 
 function disconnect(req, res) {
-  console.log(req.user.email);
 
   if(req.user.email == "connect@test.com")
   {    
