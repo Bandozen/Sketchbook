@@ -8,6 +8,7 @@ import isConnected from "../../utils/isConnected";
 
 
 function BookCard({ book }) {
+  console.log(book);
   const connection = isConnected();
   let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
