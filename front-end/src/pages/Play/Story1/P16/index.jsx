@@ -1,11 +1,10 @@
-import useState from 'react';
+import {useState} from 'react';
 import Wrapper from './styles';
 import image from '../../../../play-background/엄마는 카멜레온_16.png';
 import newImage from '../../../../play-background/엄마는 카멜레온_16_엄마손.png';
-
 import audio16 from '../../../../play-background/ske_16.mp3';
 
-// mp3 30초
+
 function P16() {
   const [currentImage, setCurrentImage] = useState(image);
 
