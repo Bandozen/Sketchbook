@@ -3,7 +3,17 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
 font-family: 'Pretendard-Regular';
 
+
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+
+.modal-box {
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -11,8 +21,11 @@ font-family: 'Pretendard-Regular';
   background-color: #f8f8f8;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  padding: 20px;
   width: 325px;
+  align-items: center;
+  text-align: center;
+}
 
   p {
     margin-bottom: 20px;
