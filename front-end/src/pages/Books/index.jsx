@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 // Bootstrap
@@ -16,6 +17,14 @@ import BookCard from '../../components/BookCard';
 import bookData from '../../dummy-data/bookData';
 
 function Books() {
+
+
+  function handleBookClick(bookId) {
+    if (bookId !== 1) {
+      setShowModal(true);
+    }
+  }
+  const [showModal, setShowModal] = useState(false);
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
   const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태 추가
@@ -38,7 +47,9 @@ function Books() {
     }
   }, [searchTerm, books]);
 
-
+  const closeModal = () => {
+    setShowModal(false);
+  }
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = searchTerm ? searchedBooks.slice(indexOfFirstBook, indexOfLastBook) : books.slice(indexOfFirstBook, indexOfLastBook);
@@ -98,11 +109,20 @@ function Books() {
         <Row xs={1} md={1} lg={2} xl={3} className="g-4">
           {currentBooks.map((book) => (
             <Col key={book.id}>
-              <BookCard book={book} />
+              <BookCard book={book} onClick={() => handleBookClick(book.id)} />
             </Col>
           ))}
         </Row>
       </div>
+      {showModal && (
+  <div className="modal" onClick={closeModal}> {/* 바깥 부분 클릭시 모달 닫기 */}
+    <div className="modal-content" onClick={e => e.stopPropagation()}> {/* 이 부분은 클릭 전파를 막음 */}
+      <span>아직 이야기가 만들어지지 않았어요. <br />다음에 다시 와주세요! 😊📚</span>
+      <button onClick={closeModal}>닫기</button>
+    </div>
+  </div>
+)}
+
       <br />
         {/* 페이지네이션 */}
         <Pagination>
