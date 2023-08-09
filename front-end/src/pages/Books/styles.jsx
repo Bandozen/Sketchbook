@@ -3,6 +3,50 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
 font-family: 'Pretendard-Regular';
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  align-items: center;
+  text-align: center;
+}
+
+span {
+  padding: 10px;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  background-color: #9D4FE0;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 8px;
+  width: 100px;
+}
+
+.modal-content button:hover {
+  background-color: #8133D4;
+}
+
+
   // 검색창
   .search-container {
     display: flex;
@@ -62,6 +106,8 @@ font-family: 'Pretendard-Regular';
       }
     }
   }
+
+  
 `;
 
 export default Wrapper;
