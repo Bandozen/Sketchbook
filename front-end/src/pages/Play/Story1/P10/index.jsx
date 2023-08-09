@@ -6,7 +6,7 @@ import axios from "axios";
 
 function P10() {
   const navigate = useNavigate();
-  
+
   setTimeout(() => {
     navigate("/play/story1/p11");
   }, 6000);
@@ -17,7 +17,7 @@ function P10() {
         flag: "0", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
-        console.log(res.data.mission);
+        // console.log(res.data.mission);
       })
       .catch((err) => {
         console.log(err);
