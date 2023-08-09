@@ -45,7 +45,7 @@ function BookCard({ book }) {
 }
               img { width: 100%; height: auto; page-break-after: always;}
             </style>
-            <img src="${process.env.PUBLIC_URL}/assets/character.jpg" alt="Character">
+            <img src="${process.env.PUBLIC_URL}/assets/print.jpg" alt="print">
       `;
 
     printWindow.document.write(printContent);
@@ -69,7 +69,7 @@ function BookCard({ book }) {
             style={{ width: "24.9rem", height: "30rem" }}
           />
           <Card.Body>
-            <Card.Title style={{ textAlign: "center" }}>
+            <Card.Title style={{ textAlign: "center", fontSize: "24px" }}>
               {book.title}
             </Card.Title>
           </Card.Body>
