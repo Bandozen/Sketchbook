@@ -36,6 +36,10 @@ const userSchema = new mongoose.Schema(
     isConnected: {
       type: Boolean,
       default: "false"
+    },
+    deviceIP: {
+      type: String,
+      default: ""
     }
   },
   {
