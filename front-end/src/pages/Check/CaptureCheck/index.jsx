@@ -14,11 +14,6 @@ export default function CaptureCheck() {
     navigate('/check/distance');
   };
 
-  useEffect(() => {
-    const checkWindow = window.open("", "Print Window", "width=800,height=600");
-    checkWindow.location.href = "http://192.168.100.246:8300";
-  }, [])
-
   return (
     <Wrapper>
       <div>
