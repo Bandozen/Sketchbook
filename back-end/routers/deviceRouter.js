@@ -8,5 +8,6 @@ const { Auth } = require("../middlewares/auth.js");
 deviceRouter.route('/issue').get(Auth, DeviceDB.issue);
 deviceRouter.route('/checkConnect').get(Auth, DeviceDB.checkConnect);
 deviceRouter.route('/disconnect').get(Auth, DeviceDB.disconnect);
+deviceRouter.route('/mission').post(DeviceDB.mission);
 
 module.exports = deviceRouter;

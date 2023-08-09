@@ -107,15 +107,31 @@ function Profile() {
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-
+    if (form.pw == "") {
+      return alert("기존 비밀번호를 입력해주세요")
+    }
+    if (form.newPw == "") {
+      return alert("새로운 비밀번호를 입력해주세요")
+    }
+    if (form.newPwCheck == "") {
+      return alert("새로운 비밀번호 확인을 입력해주세요")
+    }
+    if (form.newPw !== form.newPwCheck) {
+      return alert("새로운 비밀번호가 동일하지 않습니다.")
+    }
     axios
-      .post("/api/users/changePassword", {
-        prePassword: pw,
-        newPassword: newPw,
-      })
-      .then((res) => {
+    .post("/api/users/changePassword", {
+      prePassword: pw,
+      newPassword: newPw,
+    })
+    .then((res) => {
+      if(res.data.success !=='true') {
+        return alert("기존 비밀번호가 틀립니다.")
+      }
+      if (form.pw === form.newPw) {
+        return alert("새로운 비밀번호가 기존 비밀번호와 같습니다.")
+      }
         alert("비밀번호가 변경되었습니다.");
-        console.log(res);
         setForm((prevForm) => ({
           ...prevForm,
           pw: "",
