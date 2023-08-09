@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
 import Wrapper from './styles';
+import isLogin from '../../utils/isLogin';
 
 function HeaderNone() {
   let navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
+  const auth = isLogin();
 
   const handleLogout = () => {
     axios
@@ -48,7 +50,9 @@ function HeaderNone() {
           alt=""
         />
       </Link>
-      <div className="links">
+      {auth?
+
+        <div className="links">
         <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
           책장
         </NavLink>
@@ -62,6 +66,15 @@ function HeaderNone() {
           로그아웃
         </p>
       </div>
+      :
+        <div className="links">
+        <NavLink to="/">
+          로그인
+        </NavLink>
+        
+      </div>
+      
+      }
     </Wrapper>
   );
 }
