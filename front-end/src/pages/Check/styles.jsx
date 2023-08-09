@@ -4,13 +4,16 @@ const Wrapper = styled.div`
   font-family: "Pretendard-Regular";
 
   text-align: center;
-  margin: 0 auto;
+  margin: 80px;
 
-  .container {
+  .container{
     margin-top: 30px;
+    padding: 0 50px;
   }
 
   h1 {
+    font-weight: bold;
+    font-size: 45px;
     color: #9D4FE0;
   }
 
