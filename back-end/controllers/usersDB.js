@@ -69,7 +69,7 @@ async function login(req, res) {
           .status(200)
           .json({
             loginSuccess: true,
-            userid: user._id,
+            // userid: user._id,
           });
       });
     });
@@ -173,7 +173,7 @@ async function mail(req, res) {
     }
     res.json({
       message: "메일이 무사히 전송되었습니다.",
-      number: number,
+      // number: number,
     });
     smtpTransport.close();
   });
@@ -237,7 +237,7 @@ async function tempPassword(req, res) {
     }
     res.json({
       message: "메일이 무사히 전송되었습니다.",
-      tempPassword: tempPassword,
+      // tempPassword: tempPassword,
     });
     smtpTransport.close();
   });
@@ -271,13 +271,13 @@ async function changePassword(req, res) {
   await User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) {
       return res.json({
-        success: false,
         err,
       });
     }
     user.comparePassword(prePassword, (err, isMatch) => {
       if (!isMatch) {
         return res.json({
+          success: false,
           message: "현재 비밀번호가 틀렸습니다.",
         });
       }
