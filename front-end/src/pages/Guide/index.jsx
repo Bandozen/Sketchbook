@@ -28,7 +28,7 @@ function Guide() {
   };
 
   const goToConnect = () => {
-    if (connection) {
+    if (connection == 'true') {
       openModal();
     } else {
       navigate("/connect");
