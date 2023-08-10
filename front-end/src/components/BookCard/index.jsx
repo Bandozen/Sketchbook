@@ -30,7 +30,12 @@ function BookCard({ book, onClick }) {
   };
 
   const goToConnect = () => {
-    navigate('/connect');
+    if (book.id !== 1) {
+      onClick();
+      return;
+    } else {
+      navigate('/connect');
+    }
   }
 
   // 출력 버튼 클릭

@@ -40,8 +40,6 @@ h2 {
 }
 
 .key-icon {
-  // width: 45px;
-  // height: 45px;
   margin-right: 10px;
   margin-left: 3px;
 }
