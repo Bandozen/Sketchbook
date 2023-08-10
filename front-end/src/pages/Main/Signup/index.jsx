@@ -18,7 +18,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false); //패스워드 보여줘?
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); //패스워드 확인 보여줘?
   const [isValidEmail, setIsValidEmail] = useState(false); // 이메일 유효성 검사 결과
-  const [isValidPassWord, setIsValidPassword] = useState(false); // 이메일 유효성 검사 결과
+  const [isValidPassWord, setIsValidPassword] = useState(false); // 비밀번호 형식 검사 결과
   const [codeblock, setCodeBlock] = useState(0);  // 이메일 인증 안하면 회원가입 막는 용도
 
   const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
@@ -38,7 +38,6 @@ export default function Signup() {
 
   const passwordCheck = (password) => {
     const isValidPassword = passwordRegEx.test(password);
-    // setPasswordWarning(isValidPassWord);
 
     if (!isValidPassword && password !== "") {
       setPasswordWarning('대/소문자, 숫자, 특수문자를 포함한 8~20자로 설정해 주세요.');
