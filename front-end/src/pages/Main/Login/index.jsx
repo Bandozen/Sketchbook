@@ -89,8 +89,8 @@ export default function Login() {
         </div>
 
         <form>
-          <div>
-            <InputGroup style={{ height: "45px", marginBottom: "10px" }}>
+          <div style={{height : "70px"}}>
+            <InputGroup style={{ height: "45px" }}>
               <Form.Control
                 placeholder="이메일"
                 aria-label="useremail"
@@ -104,7 +104,7 @@ export default function Login() {
             <span className="warningmsg">{warning}</span>
           </div>
 
-          <div>
+          <div style={{height:"70px"}}>
             <InputGroup style={{ height: "45px" }}>
               <Form.Control
                 type={showPassword ? "text" : "password"}

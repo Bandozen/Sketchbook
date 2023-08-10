@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Wrapper from "./styles";
 import { useNavigate } from 'react-router-dom';
 
 import PI_URL from "../../../utils/PI_URL";
-
-
 
 export default function CaptureCheck() {
   let navigate = useNavigate();
