@@ -80,15 +80,15 @@ span {
   .pagination {
     display: flex;
     justify-content: center;
+    text-align: center;
     
     li {
       a {
         color: #9D4FE0;
         background-color: #ffffff;
         border: 1px solid #9D4FE0;
-        margin: 2px;
-        padding: 6px 12px;
-        
+        margin: 5px;
+        padding: 6px 12px;        
 
         &:hover {
           color: #ffffff;
@@ -102,7 +102,9 @@ span {
     }
       span {
         background-color: #9D4FE0;
-        border: none;   
+        border: none;
+        width: 40px;
+        margin: 5px;
       }
     }
   }

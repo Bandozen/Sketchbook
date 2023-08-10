@@ -7,7 +7,6 @@ import axios from "axios";
 
 function Story1() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const stop = (e) => {
     axios
