@@ -2,34 +2,54 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   font-family: 'Pretendard-Regular';
-  // height: 90vh;
-  // display: flex;
-  // flex-direction: column;
-
-  .real_box{
+  .title {
     display: flex;
-    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+    // width: 2750px;
+  
+    h1 {
+      font-weight: bold;
+      font-size: 35px;
+    }
   }
+  
+  .connect-button {
+    // display: inline-block; 
+    // background-color: #F8F8F8;
+    // border-radius: 8px;
+    // height: 40px;
+    // width: 100px;
+    text-align: center; 
+    line-height: 40px; 
+    color: #8f39ea;
+    font-size: 25px;
+    text-decoration: none; 
+    font-weight: bold;
+  }
+  
+  .connect-button:hover {
+    color: purple;
+  }
+  
+  .real_box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
 
   .boxes{
     display: flex;
     align-items: center; 
     justify-content: center; 
     flex-direction: column;
+    padding: 100px;
   }
 
-  .btndiv{
-    padding: 1em;
-  }
 
-  button {
-    // border: 1.5px solid #a451f7;
-    background-color: #FAC52F;
-    border-radius: 8px;
-    // color: #a451f7;
-    height: 40px;
-    width: 100px;
-  }
 
   .box-name {
     font-size: 25px;
@@ -55,21 +75,12 @@ const Wrapper = styled.div`
     height: 300px;
   }
 
-  .for_text {
-    display: flex;
-  }
 
   h1 {
     font-weight: bold;
-    margin-bottom: 40px;
     font-size: 35px;
   }
 
-  .boxes {
-    display: flex;
-    // justify-content: space-between;
-  }
-  
   .box {
     width: 300px;
     height: 400px;
