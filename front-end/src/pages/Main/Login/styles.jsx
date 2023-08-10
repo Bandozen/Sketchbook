@@ -19,8 +19,7 @@ const Wrapper = styled.div`
   background-color: #FFEE59;
   width: 350px;
   height: 45px;
-  display: block; /* Use block display to occupy the entire width of its container */
-  margin-top: 10px;
+  display: block;
 }
 /* 시작하기 버튼 */
 
@@ -40,7 +39,6 @@ const Wrapper = styled.div`
   justify-content: space-around; 
   width: 100%; 
   margin-bottom: 20px; 
-
 }
 
 .forgot-password {
@@ -73,6 +71,16 @@ const Wrapper = styled.div`
     right: 50%;
   }
 }
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+span{
+  margin-left: 5px;
+}
+
 
 `
 
