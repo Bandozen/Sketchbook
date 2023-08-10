@@ -6,6 +6,7 @@ import axios from "axios";
 import isConnected from "../../utils/isConnected";
 
 function useInterval(callback, delay) {
+
   const savedCallback = useRef();
 
   // Remember the latest callback.
@@ -26,14 +27,16 @@ function useInterval(callback, delay) {
 }
 
 function Connect() {
-//   console.log(`
-// ╭ ◜◝ ͡ ◜◝ ͡  ◜◝ ͡ ◜◝ ͡  ◜◝ ╮
-//         기기연결 페이지
-// OTP 기기 연결 해야 동화를 보지요
-// ╰ ◟◞ ͜  ◟ ͜   ◟◞ ͜  ◟ ͜   ◟◞ ╯
-//                   O
-//                 °
-// `)
+  const [activeBox, setActiveBox] = useState(null);
+
+  //   console.log(`
+  // ╭ ◜◝ ͡ ◜◝ ͡  ◜◝ ͡ ◜◝ ͡  ◜◝ ╮
+  //         기기연결 페이지
+  // OTP 기기 연결 해야 동화를 보지요
+  // ╰ ◟◞ ͜  ◟ ͜   ◟◞ ͜  ◟ ͜   ◟◞ ╯
+  //                   O
+  //                 °
+  // `)
   const [button, setButton] = useState({
     buttonText: "OTP 생성하기",
     timerActive: false,
@@ -79,9 +82,8 @@ function Connect() {
       setButton((prevButton) => ({
         ...prevButton,
         timerCount: prevButton.timerCount - 1,
-        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${
-          (prevButton.timerCount - 1) % 60
-        }`,
+        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${(prevButton.timerCount - 1) % 60
+          }`,
       }));
 
       axios
@@ -117,30 +119,68 @@ function Connect() {
   // useInterval 훅스를 사용하여 1초마다 타이머 업데이트
   useInterval(tick, button.timerActive ? 1000 : null);
 
+  const boxes = [
+    {
+      id: 1,
+      className: 'one',
+      name: "1. 기기 전원 켜기",
+      description: (
+        <div>
+          기기의 전원을 켜주세요.
+        </div>
+      ),
+      image: "/videos/turnon.png"
+    }
+    ,
+    {
+      id: 2, className: 'two', name: "2. 와이파이 연결하기", description: (
+        <div>
+          기기 와이파이를 연결해주세요.
+        </div>
+      ), image: "/videos/wifi.png"
+    },
+    {
+      id: 3, className: 'three', name: "3. OTP 생성하기", description: (
+        <div>
+          하단의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요. <br /> 3분간 유효해요.
+        </div>
+      ), image: "/videos/realotp.png"
+    },
+    {
+      id: 4, className: 'four', name: "4. 기기에 입력하기", description: (
+        <div>
+          기기 키패드에 해당 OTP번호를  <br /> 입력해주세요. <br /> 동화 플레이할 준비 끝! 👍
+        </div>
+      ), image: "/videos/input.png"
+    }
+  ];
+
+
   return (
     <>
       <Header />
       <Wrapper>
-        <div className="box">
-          <h2>
-            기기연결, <span>어떻게</span> 하나요?
-            <img src={process.env.PUBLIC_URL + "/assets/emoji.png"} alt="" />
-          </h2>
-          <ol>
-            <li>기기의 전원을 켜주세요.</li>
-            <li>기기에 와이파이를 연결해주세요.</li>
-            <li>
-              웹 페이지의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요.
-            </li>
-            <li>기기의 키패드에 해당 OTP 번호를 입력해주세요.</li>
-          </ol>
-          <div className="btndiv">
-            <button type="button" onClick={handleClick}>
-              {button.buttonText}
-            </button>
-          </div>
-          <div className="timerCount">{otp}</div>
+        <h1>기기 연결 가이드 👀</h1>
+        <div className="boxes">
+          {boxes.map(box => (
+            <div
+              key={box.id}
+              className={`box ${activeBox === box.id ? 'active' : ''}`}
+              onMouseEnter={() => setActiveBox(box.id)}
+              onMouseLeave={() => setActiveBox(null)}
+            >
+              <img className={box.className} src={box.image} alt={`박스${box.id}`} />
+              {activeBox === box.id && <div className="description">{box.description}</div>}
+              <span className="box-name">{box.name}</span>
+            </div>
+          ))}
         </div>
+        <div className="btndiv">
+          <button type="button" onClick={handleClick}>
+            {button.buttonText}
+          </button>
+        </div>
+        <div className="timerCount">{otp}</div>
       </Wrapper>
     </>
   );

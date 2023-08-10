@@ -108,29 +108,29 @@ function Profile() {
   const onSubmitForm = (e) => {
     e.preventDefault();
     if (form.pw == "") {
-      return alert("기존 비밀번호를 입력해주세요")
+      return alert("기존 비밀번호를 입력해주세요");
     }
     if (form.newPw == "") {
-      return alert("새로운 비밀번호를 입력해주세요")
+      return alert("새로운 비밀번호를 입력해주세요");
     }
     if (form.newPwCheck == "") {
-      return alert("새로운 비밀번호 확인을 입력해주세요")
+      return alert("새로운 비밀번호 확인을 입력해주세요");
     }
     if (form.newPw !== form.newPwCheck) {
-      return alert("새로운 비밀번호가 동일하지 않습니다.")
+      return alert("새로운 비밀번호가 동일하지 않습니다.");
     }
     axios
-    .post("/api/users/changePassword", {
-      prePassword: pw,
-      newPassword: newPw,
-    })
-    .then((res) => {
-      if(res.data.success !=='true') {
-        return alert("기존 비밀번호가 틀립니다.")
-      }
-      if (form.pw === form.newPw) {
-        return alert("새로운 비밀번호가 기존 비밀번호와 같습니다.")
-      }
+      .post("/api/users/changePassword", {
+        prePassword: pw,
+        newPassword: newPw,
+      })
+      .then((res) => {
+        if (res.data.success !== true) {
+          return alert("기존 비밀번호가 틀립니다.");
+        }
+        if (form.pw === form.newPw) {
+          return alert("새로운 비밀번호가 기존 비밀번호와 같습니다.");
+        }
         alert("비밀번호가 변경되었습니다.");
         setForm((prevForm) => ({
           ...prevForm,
@@ -171,102 +171,106 @@ function Profile() {
             <h2>
               비밀번호 <span>변경</span>
             </h2>
+            <form>
+              <InputGroup size="lg">
+                <Form.Control
+                  autoComplete="off"
+                  aria-label="pw"
+                  value={form.pw}
+                  onChange={onChangePw}
+                  size="lg"
+                  className="my-2 form-control"
+                  type={showPassword.pw ? "text" : "password"}
+                  placeholder="기존 비밀번호"
+                  style={{
+                    height: "45px",
+                    borderRadius: "5px",
+                    fontSize: "1rem",
+                  }}
+                />
+                <InputGroup.Text
+                  id="inputGroup-sizing-lg"
+                  onClick={() => togglePasswordVisibility("pw")}
+                >
+                  <i
+                    className={
+                      showPassword.pw
+                        ? "fa-solid fa-eye"
+                        : "fa-solid fa-eye-slash"
+                    }
+                  ></i>
+                </InputGroup.Text>
+              </InputGroup>
 
-            <InputGroup size="lg">
+              <InputGroup size="lg">
+                <Form.Control
+                  autoComplete="off"
+                  aria-label="newPw"
+                  value={form.newPw}
+                  onChange={onChangeNewPw}
+                  size="lg"
+                  className="my-2 form-control"
+                  type={showPassword.newPw ? "text" : "password"}
+                  placeholder="새로운 비밀번호"
+                  style={{
+                    height: "45px",
+                    borderRadius: "5px",
+                    fontSize: "1rem",
+                  }}
+                />
+                <InputGroup.Text
+                  id="inputGroup-sizing-lg"
+                  onClick={() => togglePasswordVisibility("newPw")}
+                >
+                  <i
+                    className={
+                      showPassword.newPw
+                        ? "fa-solid fa-eye"
+                        : "fa-solid fa-eye-slash"
+                    }
+                  ></i>
+                </InputGroup.Text>
+              </InputGroup>
+              <span className="message">{form.newPwMessage}</span>
+
+              <InputGroup size="lg">
+                <Form.Control
+                  autoComplete="off"
+                  name="newPwCheck"
+                  value={form.newPwCheck}
+                  onChange={onChangeNewPwCheck}
+                  size="lg"
+                  className="my-2 form-control"
+                  type={showPassword.newPwCheck ? "text" : "password"}
+                  placeholder="새로운 비밀번호 확인"
+                  style={{
+                    height: "45px",
+                    borderRadius: "5px",
+                    fontSize: "1rem",
+                  }}
+                />
+                <InputGroup.Text
+                  id="inputGroup-sizing-lg"
+                  onClick={() => togglePasswordVisibility("newPwCheck")}
+                >
+                  <i
+                    className={
+                      showPassword.newPwCheck
+                        ? "fa-solid fa-eye"
+                        : "fa-solid fa-eye-slash"
+                    }
+                  ></i>
+                </InputGroup.Text>
+              </InputGroup>
+              <span className="message">{form.newPwCheckMessage}</span>
+
               <Form.Control
-                aria-label="pw"
-                value={form.pw}
-                onChange={onChangePw}
-                size="lg"
-                className="my-2 form-control"
-                type={showPassword.pw ? "text" : "password"}
-                placeholder="기존 비밀번호"
-                style={{
-                  height: "45px",
-                  borderRadius: "5px",
-                  fontSize: "1rem",
-                }}
+                className="btn my-3"
+                type="submit"
+                value="변경하기"
+                onClick={onSubmitForm}
               />
-              <InputGroup.Text
-                id="inputGroup-sizing-lg"
-                onClick={() => togglePasswordVisibility("pw")}
-              >
-                <i
-                  className={
-                    showPassword.pw
-                      ? "fa-solid fa-eye"
-                      : "fa-solid fa-eye-slash"
-                  }
-                ></i>
-              </InputGroup.Text>
-            </InputGroup>
-
-            <InputGroup size="lg">
-              <Form.Control
-                aria-label="newPw"
-                value={form.newPw}
-                onChange={onChangeNewPw}
-                size="lg"
-                className="my-2 form-control"
-                type={showPassword.newPw ? "text" : "password"}
-                placeholder="새로운 비밀번호"
-                style={{
-                  height: "45px",
-                  borderRadius: "5px",
-                  fontSize: "1rem",
-                }}
-              />
-              <InputGroup.Text
-                id="inputGroup-sizing-lg"
-                onClick={() => togglePasswordVisibility("newPw")}
-              >
-                <i
-                  className={
-                    showPassword.newPw
-                      ? "fa-solid fa-eye"
-                      : "fa-solid fa-eye-slash"
-                  }
-                ></i>
-              </InputGroup.Text>
-            </InputGroup>
-            <span className="message">{form.newPwMessage}</span>
-
-            <InputGroup size="lg">
-              <Form.Control
-                name="newPwCheck"
-                value={form.newPwCheck}
-                onChange={onChangeNewPwCheck}
-                size="lg"
-                className="my-2 form-control"
-                type={showPassword.newPwCheck ? "text" : "password"}
-                placeholder="새로운 비밀번호 확인"
-                style={{
-                  height: "45px",
-                  borderRadius: "5px",
-                  fontSize: "1rem",
-                }}
-              />
-              <InputGroup.Text
-                id="inputGroup-sizing-lg"
-                onClick={() => togglePasswordVisibility("newPwCheck")}
-              >
-                <i
-                  className={
-                    showPassword.newPwCheck
-                      ? "fa-solid fa-eye"
-                      : "fa-solid fa-eye-slash"
-                  }
-                ></i>
-              </InputGroup.Text>
-            </InputGroup>
-            <span className="message">{form.newPwCheckMessage}</span>
-
-            <Form.Control
-              className="btn my-3"
-              type="submit"
-              value="변경하기"
-              onClick={onSubmitForm}
-            />
+            </form>
           </div>
         </div>
 

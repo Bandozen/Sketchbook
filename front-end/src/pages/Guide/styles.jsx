@@ -2,56 +2,109 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   font-family: 'Pretendard-Regular';
+  // height: 90vh;
+  // display: flex;
+  // flex-direction: column;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-
-  img{
-    width : 100px;
-    margin-left : 10px;
+  .real_box{
+    display: flex;
+    flex-direction: row;
   }
 
-  h2 {
-    font-weight: bold;
-  }
-  
-  span {
-    color: #a451f7
-  }
-  
-  .box {
-    margin-top: 50px;
-    
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    padding: 3% 5%;    
-  }
-  
-  ol{
-    margin: 20px 0 40px;
-  }
-
-  li {
-    font-size: 23px;
-    line-height: 42px;
+  .boxes{
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
   }
 
   .btndiv{
-    display: flex;
-    justify-content: center; 
+    padding: 1em;
   }
-  
+
   button {
-    color: #a451f7;
+    // border: 1.5px solid #a451f7;
+    background-color: #FAC52F;
     border-radius: 8px;
-    border: 1px solid #a451f7;
-    background-color: #ffffff;
-    padding: 10px 20px;
-    font-weight: bold;
-    font-size: 20px;
+    // color: #a451f7;
+    height: 40px;
+    width: 100px;
   }
-  `;
+
+  .box-name {
+    font-size: 25px;
+  }  
+
+  .box .one{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .two{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .three{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .four{
+    width: 300px;
+    height: 300px;
+  }
+
+  .for_text {
+    display: flex;
+  }
+
+  h1 {
+    font-weight: bold;
+    margin-bottom: 40px;
+    font-size: 35px;
+  }
+
+  .boxes {
+    display: flex;
+    // justify-content: space-between;
+  }
   
-  export default Wrapper;
+  .box {
+    width: 300px;
+    height: 400px;
+    background-color: #F8F8F8;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  
+  .box.active img {
+    opacity: 0.1; /* 이미지 투명도 조정 */
+  }
+
+  .box.active .box-name {
+    color: white;
+  }
+
+  .box.active {
+    background-color: #333;
+    color: white;
+  }
+  
+  .description {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+`;
+
+export default Wrapper;
