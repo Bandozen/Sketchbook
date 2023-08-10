@@ -82,12 +82,19 @@ function disconnect(req, res) {
         success: true,
       });
     });
-  }
-  
+  }  
 }
 
-function deviceIP(req, res) {
+function start(req, res) {
+  client.select(1);
+  client.set('device01','start');
+  return res.status(200).json({});
+}
 
+function stop(req, res) {
+  client.select(1);
+  client.set('device01','stop');
+  return res.status(200).json({});
 }
 
 async function mission(req, res) {
@@ -97,13 +104,13 @@ async function mission(req, res) {
   await client.select(1);
 
   if (flag == '1') {
-    client.set('mission', 1);
+    client.set('device01', 'mission');
     return res.status(200).json({
       mission: true
     })
   }
   else {
-    client.set('mission', 0);
+    client.set('device01', 'story');
     return res.status(200).json({
       mission: false
     })
@@ -113,4 +120,6 @@ async function mission(req, res) {
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
+exports.start = start;
+exports.stop = stop;
 exports.mission = mission;
