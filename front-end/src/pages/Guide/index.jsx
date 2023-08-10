@@ -51,21 +51,27 @@ function Guide() {
       image: "/videos/otp.png"
     }
     ,
-    { id: 2, className: 'two', name: "2. 동화 선택하기", description:(
-      <div>
-      책장에서 책을 골라주세요. <br /> 재밌는 동화가 여러분을 <br />기다리고 있어요!
-    </div>
-    ), image: "/videos/books.png" },
-    { id: 3, className: 'three', name: "3. 출력 후 색칠하기", description: (
-      <div>
-      캐릭터를 출력해 색칠해주세요. <br /> 여러분의 그림이 동화의 주인공!
-    </div>
-    ), image: "/videos/crayon.png" },
-    { id: 4, className: 'four', name: "4. 환경 체크하기", description: (
-      <div>
-      원활한 진행을 위해 필요해요. <br /> 디바이스에 필요한 환경 설정을 <br />꼭 완료해주세요!
-    </div>
-    ), image: "/videos/setting.png" }
+    {
+      id: 2, className: 'two', name: "2. 동화 선택하기", description: (
+        <div>
+          책장에서 책을 골라주세요. <br /> 재밌는 동화가 여러분을 <br />기다리고 있어요!
+        </div>
+      ), image: "/videos/books.png"
+    },
+    {
+      id: 3, className: 'three', name: "3. 출력 후 색칠하기", description: (
+        <div>
+          캐릭터를 출력해 색칠해주세요. <br /> 여러분의 그림이 동화의 주인공!
+        </div>
+      ), image: "/videos/crayon.png"
+    },
+    {
+      id: 4, className: 'four', name: "4. 환경 체크하기", description: (
+        <div>
+          원활한 진행을 위해 필요해요. <br /> 디바이스에 필요한 환경 설정을 <br />꼭 완료해주세요!
+        </div>
+      ), image: "/videos/setting.png"
+    }
   ];
 
 
@@ -73,20 +79,23 @@ function Guide() {
     <>
       <Header />
       <Wrapper>
-        <h1>동화 여행을 떠나고 싶다면? 😙</h1>
         <div className="boxes">
-          {boxes.map(box => (
-            <div
-              key={box.id}
-              className={`box ${activeBox === box.id ? 'active' : ''}`}
-              onMouseEnter={() => setActiveBox(box.id)}
-              onMouseLeave={() => setActiveBox(null)}
-            >
-              <img className={box.className} src={box.image} alt={`박스${box.id}`} />
-              {activeBox === box.id && <div className="description">{box.description}</div>}
-              <span className="box-name">{box.name}</span>
-            </div>
-          ))}
+          <h1>동화 여행을 떠나고 싶다면? 😙</h1>
+          <div className="real_box">
+            {boxes.map(box => (
+
+              <div
+                key={box.id}
+                className={`box ${activeBox === box.id ? 'active' : ''}`}
+                onMouseEnter={() => setActiveBox(box.id)}
+                onMouseLeave={() => setActiveBox(null)}
+              >
+                <img className={box.className} src={box.image} alt={`박스${box.id}`} />
+                {activeBox === box.id && <div className="description">{box.description}</div>}
+                <span className="box-name">{box.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </Wrapper>
       <Modal closeModal={closeModal} isModalOpen={isModalOpen} message={"기기가 이미 연결되어 있어요."} clickResult={goToBooks}></Modal>
