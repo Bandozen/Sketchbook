@@ -37,9 +37,11 @@ function Profile() {
     pw: "",
     newPw: "",
     newPwCheck: "",
+    prePwMessage: "",
     newPwMessage: "",
     newPwCheckMessage: "",
   });
+  
 
   const [showPassword, setShowPassword] = useState({
     pw: false,
@@ -61,6 +63,21 @@ function Profile() {
       pw: currentPw,
     }));
     setPw(currentPw);
+
+    const prePwRegExp = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]).{8,20}$/;
+  
+    if (!prePwRegExp.test(currentPw) & (currentPw !== "")) {
+      setForm((prevForm) => ({
+        ...prevForm,
+        prePwMessage:
+          "대/소문자, 숫자, 특수문자를 포함한 8~20자로 입력해 주세요.",
+      }));
+    } else {
+      setForm((prevForm) => ({
+        ...prevForm,
+        prePwMessage: "",
+      }));
+    }
   };
 
   const onChangeNewPw = (e) => {
@@ -71,13 +88,13 @@ function Profile() {
     }));
     setnewPw(currentNewPW);
 
-    const newPwRegExp = /^[a-zA-Z0-9!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]{8,20}$/;
-
+    const newPwRegExp = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]).{8,20}$/;
+  
     if (!newPwRegExp.test(currentNewPW) & (currentNewPW !== "")) {
       setForm((prevForm) => ({
         ...prevForm,
         newPwMessage:
-          "영어 대/소문자, 숫자를 포함한 8~20자 이내로 설정해 주세요.",
+          "대/소문자, 숫자, 특수문자를 포함한 8~20자로 설정해 주세요.",
       }));
     } else {
       setForm((prevForm) => ({
@@ -125,7 +142,7 @@ function Profile() {
         newPassword: newPw,
       })
       .then((res) => {
-        if (res.data.success !== "true") {
+        if (res.data.success !== true) {
           return alert("기존 비밀번호가 틀립니다.");
         }
         if (form.pw === form.newPw) {
@@ -201,6 +218,8 @@ function Profile() {
                   ></i>
                 </InputGroup.Text>
               </InputGroup>
+              <span className="message">{form.prePwMessage}</span>
+
 
               <InputGroup size="lg">
                 <Form.Control

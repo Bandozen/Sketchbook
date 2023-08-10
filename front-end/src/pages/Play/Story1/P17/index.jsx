@@ -18,6 +18,8 @@ function P17() {
       });
   };
 
+  
+
   return (
     <Wrapper onLoad={mission}>
       <img src={image17} alt="" />
