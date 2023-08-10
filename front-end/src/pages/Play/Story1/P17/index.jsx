@@ -8,7 +8,7 @@ function P17() {
   const mission = (e) => {
     axios
       .post("/api/devices/mission", {
-        flag: "0", // mission이 없으면 0 있으면 1
+        flag: "1", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
         // console.log(res.data.mission);

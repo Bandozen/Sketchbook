@@ -13,14 +13,15 @@ color : #9D4FE0;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 p {
   color: black;
   font-size: 18px;
-  margin-top: 10px;
+  // margin-top: 10px;
 }
+
 h2 {
     font-weight: bold;
-    margin: 0px;
 }
 
 .ready-message {
@@ -30,9 +31,15 @@ h2 {
   margin-left: 100px;
 }
 
-img{
+.icon-ready{
   width : 80px;
   margin : 0 0 5px 20px;
+}
+
+.key-icon {
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
 }
 
 .custom-button-style {
@@ -50,6 +57,7 @@ img{
     border: solid 1px #9D4FE0;
 
   }
+
 `;
 
 export default Wrapper;
