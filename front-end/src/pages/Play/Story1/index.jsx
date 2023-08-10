@@ -84,8 +84,13 @@ function Story1() {
     };
   }, [navigate]);
 
+  const preventClick = (e) => {
+    e.preventDefault();
+    alert("🚨스케치북의 동화 컨텐츠의 저작권은 동화 작가님과 출판사에 있습니다.\n무단으로 도용, 불법으로 복사(캡처)하여 사용할 경우\n사전 경고 없이 민·형사상 법적조치 등 저작권법에 의한 처벌을 받을 수 있습니다.🚨");
+  }
+
   return (
-    <div>
+    <div onContextMenu={preventClick}>
       <Outlet />
     </div>
   );
