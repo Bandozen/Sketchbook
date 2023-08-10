@@ -2,14 +2,18 @@ import { useEffect } from "react";
 import Wrapper from "./styles";
 
 function Modal(props) {
-  
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      props.clickResult();
+    }
+  }
   useEffect(() => {
-    document.addEventListener("keyup", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        props.clickResult();
-      }
-    })
+    document.addEventListener("keyup", handleEnter)
+
+    return () => {
+      document.removeEventListener("keyup", handleEnter)
+    }
   })
 
   return (
