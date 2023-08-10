@@ -15,9 +15,20 @@ import Header from '../../components/Header';
 import BookCard from '../../components/BookCard';
 
 import bookData from '../../dummy-data/bookData';
+import axios from "axios";
+
 
 function Books() {
-
+  const stop = () => {
+    axios
+    .get("/api/devices/stop")
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 
   function handleBookClick(bookId) {
     if (bookId !== 1) {
@@ -86,7 +97,7 @@ function Books() {
     <div>
       <Header />
         {/* 검색 입력 상자와 검색 버튼 추가 */}
-        <Wrapper>
+        <Wrapper onLoad={stop}>
       <div className='search-container'> 
         <div 
         className="input-group mb-3">

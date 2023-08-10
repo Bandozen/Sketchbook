@@ -86,12 +86,14 @@ function disconnect(req, res) {
 }
 
 function start(req, res) {
+  client.select(1);
   client.set('device01','start');
   return res.status(200).json({});
 }
 
 function stop(req, res) {
-  client.set('device01','');
+  client.select(1);
+  client.set('device01','stop');
   return res.status(200).json({});
 }
 
