@@ -32,7 +32,7 @@ export default function Login() {
 
   const emailCheck = (username) => {
     const isValidEmail = emailRegEx.test(username);
-    if (!isValidEmail) {
+    if (!isValidEmail && username !== "") {
       setWarning("이메일 형식을 확인해주세요.");
     } else {
       setWarning("");
@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   const passwordCheck = (password) => {
-    if (password.match(passwordRegEx) === null) {
+    if (password.match(passwordRegEx) === null && password !== "") {
       setPasswordWarning("비밀번호 형식이 일치하지 않습니다.");
     } else {
       setPasswordWarning("");
@@ -89,12 +89,13 @@ export default function Login() {
         </div>
 
         <form>
-          <div>
-            <InputGroup style={{ height: "45px", marginBottom: "10px" }}>
+          <div style={{height : "70px"}}>
+            <InputGroup style={{ height: "45px" }}>
               <Form.Control
                 placeholder="이메일"
                 aria-label="useremail"
                 style={{ backgroundColor: "#E6E6E6" }}
+                autoComplete="off"
                 onChange={(e) => {
                   setUseremail(e.target.value);
                   emailCheck(e.target.value);
@@ -104,12 +105,13 @@ export default function Login() {
             <span className="warningmsg">{warning}</span>
           </div>
 
-          <div>
+          <div style={{height:"70px"}}>
             <InputGroup style={{ height: "45px" }}>
               <Form.Control
                 type={showPassword ? "text" : "password"}
                 placeholder="비밀번호"
                 aria-label="password"
+                autoComplete="off"
                 style={{ backgroundColor: "#E6E6E6" }}
                 value={password}
                 onChange={(e) => {
