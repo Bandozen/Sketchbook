@@ -1,6 +1,16 @@
+import { useEffect } from "react";
 import Wrapper from "./styles";
 
 function Modal(props) {
+  
+  useEffect(() => {
+    document.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        props.clickResult();
+      }
+    })
+  })
 
   return (
     <Wrapper style={{ display: props.isModalOpen ? "block" : "none" }}>
