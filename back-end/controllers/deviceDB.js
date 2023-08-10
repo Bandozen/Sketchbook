@@ -27,6 +27,7 @@ function issue(req, res) {
 }
 
 async function checkConnect(req, res) {
+  client.set(req.user.email, 'ready');
   const flag = await client.get(OTP);
 
   if (flag === "true") {
@@ -76,6 +77,7 @@ function disconnect(req, res) {
             err,
           });
         }
+    client.set(req.user.email, 'logout');
 
         res
           .clearCookie("isConnected")
@@ -91,22 +93,22 @@ function disconnect(req, res) {
 
 async function start(req, res) {
   client.select(1);
-  await client.RPUSHX("tst", "start");
-  // await client.set(req.user.email,'start');
+  // await client.RPUSHX("tst", "start");
+  await client.set(req.user.email,'start');
   return res.status(200).json({});
 }
 
 async function stop(req, res) {
   client.select(1);
-  await client.RPUSHX('tst', "stop");
-  // await client.set(req.user.email, "stop");
+  // await client.RPUSHX('tst', "stop");
+  await client.set(req.user.email, "stop");
   return res.status(200).json({});
 }
 
 async function ready(req, res) {
   client.select(1);
-  await client.RPUSHX('tst', "ready");
-  // await client.set(req.user.email, "ready");
+  // await client.RPUSHX('tst', "ready");
+  await client.set(req.user.email, "ready");
   return res.status(200).json({});
 }
 
@@ -117,14 +119,14 @@ async function mission(req, res) {
   await client.select(1);
 
   if (flag == "1") {
-    client.RPUSHX('tst', "mission");
-    // client.set(req.user.email, "mission");
+    // client.RPUSHX('tst', "mission");
+    client.set(req.user.email, "mission");
     return res.status(200).json({
       mission: true,
     });
   } else {
-    client.RPUSHX('tst', "story");
-    // client.set(req.user.email, "story");
+    // client.RPUSHX('tst', "story");
+    client.set(req.user.email, "story");
     return res.status(200).json({
       mission: false,
     });
