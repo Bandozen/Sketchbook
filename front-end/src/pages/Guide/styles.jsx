@@ -2,11 +2,21 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   font-family: 'Pretendard-Regular';
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* 세로 중앙 정렬 */
-  justify-content: center; /* 가로 중앙 정렬 */
-  height: 80vh;
+  // height: 90vh;
+  // display: flex;
+  // flex-direction: column;
+
+  .real_box{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .boxes{
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
+  }
 
   .btndiv{
     padding: 1em;
@@ -45,6 +55,10 @@ const Wrapper = styled.div`
     height: 300px;
   }
 
+  .for_text {
+    display: flex;
+  }
+
   h1 {
     font-weight: bold;
     margin-bottom: 40px;
@@ -53,7 +67,7 @@ const Wrapper = styled.div`
 
   .boxes {
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
   }
   
   .box {
