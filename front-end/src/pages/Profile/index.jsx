@@ -125,7 +125,7 @@ function Profile() {
         newPassword: newPw,
       })
       .then((res) => {
-        if (res.data.success !== "true") {
+        if (res.data.success !== true) {
           return alert("기존 비밀번호가 틀립니다.");
         }
         if (form.pw === form.newPw) {
