@@ -27,6 +27,34 @@ function useInterval(callback, delay) {
 }
 
 function Connect() {
+  const [isModalOpen, setModalOpen] = useState(false);
+  function Modal({ isOpen, onClose }) {
+    if (!isOpen) return null;
+  
+    const handleBackdropClick = (e) => {
+      // 여기에서 바깥 부분 클릭을 확인
+      if (e.target === e.currentTarget) {
+        onClose();
+      }
+    };
+  
+    return (
+      <div className="modal" onClick={handleBackdropClick}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <span className="close-button" onClick={onClose}>X</span>
+          <h2>OTP 생성</h2>
+          <div className="timerCount">{otp}</div>
+          <div className="btndiv">
+            <button type="button" onClick={handleClick}>
+              {button.buttonText}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  
   const [activeBox, setActiveBox] = useState(null);
 
   //   console.log(`
@@ -142,7 +170,7 @@ function Connect() {
     {
       id: 3, className: 'three', name: "3. OTP 생성하기", description: (
         <div>
-          하단의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요. <br /> 3분간 유효해요.
+          상단의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요. <br /> 3분간 유효해요.
         </div>
       ), image: "/videos/realotp.png"
     },
@@ -160,27 +188,36 @@ function Connect() {
     <>
       <Header />
       <Wrapper>
-        <h1>기기 연결 가이드 👀</h1>
         <div className="boxes">
-          {boxes.map(box => (
-            <div
-              key={box.id}
-              className={`box ${activeBox === box.id ? 'active' : ''}`}
-              onMouseEnter={() => setActiveBox(box.id)}
-              onMouseLeave={() => setActiveBox(null)}
-            >
-              <img className={box.className} src={box.image} alt={`박스${box.id}`} />
-              {activeBox === box.id && <div className="description">{box.description}</div>}
-              <span className="box-name">{box.name}</span>
+          <div className="title">
+            <h1>기기 연결 가이드 👀</h1>
+            <div className="btndiv">
+              <div className="connect-button" onClick={() => setModalOpen(true)}> 
+                OTP 생성하기▸
+              </div>
             </div>
-          ))}
+          </div>
+          <div className="real_box">
+            {boxes.map(box => (
+              <div
+                key={box.id}
+                className={`box ${activeBox === box.id ? 'active' : ''}`}
+                onMouseEnter={() => setActiveBox(box.id)}
+                onMouseLeave={() => setActiveBox(null)}
+              >
+                <img className={box.className} src={box.image} alt={`박스${box.id}`} />
+                {activeBox === box.id && <div className="description">{box.description}</div>}
+                <span className="box-name">{box.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="btndiv">
+        {/* <div className="btndiv">
           <button type="button" onClick={handleClick}>
             {button.buttonText}
           </button>
-        </div>
-        <div className="timerCount">{otp}</div>
+        </div> */}
+        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} /> 
       </Wrapper>
     </>
   );
