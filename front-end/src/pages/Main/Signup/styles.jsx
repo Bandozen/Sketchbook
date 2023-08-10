@@ -60,7 +60,6 @@ const Wrapper = styled.div`
   width: 350px;
   height: 45px;
   display: block; /* Use block display to occupy the entire width of its container */
-  margin-top: 10px;
 }
 /* 시작하기 버튼 */
 
@@ -113,6 +112,14 @@ const Wrapper = styled.div`
   }
 }
 
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+span{
+  margin-left: 5px;
+}
 `
 
 export default Wrapper;

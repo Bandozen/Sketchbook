@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import ConnectedModal from "../../components/ConnectedModal";
+import Modal from "../../components/Modal";
 import Wrapper from "./styles";
 import { useNavigate } from "react-router";
 import isConnected from "../../utils/isConnected";
@@ -26,6 +26,10 @@ function Guide() {
     } else {
       navigate("/connect");
     }
+  };
+
+  const goToBooks = () => {
+    navigate("/books");
   };
 
   const boxes = [
@@ -85,6 +89,7 @@ function Guide() {
           ))}
         </div>
       </Wrapper>
+      <Modal closeModal={closeModal} isModalOpen={isModalOpen} message={"기기가 이미 연결되어 있어요."} clickResult={goToBooks}></Modal>
     </>
   );
 }
