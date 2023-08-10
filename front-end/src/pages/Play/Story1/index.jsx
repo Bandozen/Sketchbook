@@ -3,11 +3,21 @@ import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { CustomDialog } from "./styles";
 import Modal from "../../../components/Modal";
-
+import axios from "axios";
 
 function Story1() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const stop = (e) => {
+    axios
+      .get("/api/devices/stop")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -23,6 +33,7 @@ function Story1() {
         nextPageNumber = Math.max(1, pageNumber - 1);
       } else if (event.key === "ArrowRight") {
         if (pageNumber === 17) {
+          stop()
           renderCustomDialog(
             "동화가 끝났어요. 다른 동화를 보러 가 볼까요?",
             () => {
