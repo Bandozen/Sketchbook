@@ -1,19 +1,13 @@
 import { Outlet, useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CustomDialog } from "./styles";
 import Modal from "../../../components/Modal";
-import axios from "axios";
 
 
 function Story1() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const stop = (e) => {
-    axios
-    .get("/api/devices/stop");
-  }
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -29,7 +23,6 @@ function Story1() {
         nextPageNumber = Math.max(1, pageNumber - 1);
       } else if (event.key === "ArrowRight") {
         if (pageNumber === 17) {
-          stop();
           renderCustomDialog(
             "동화가 끝났어요. 다른 동화를 보러 가 볼까요?",
             () => {
@@ -97,28 +90,9 @@ function Story1() {
     };
   }, [navigate]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const preventClick = (e) => {
-    e.preventDefault();
-    openModal();
-  };
-
   return (
-    <div onContextMenu={preventClick} onDragStart={preventClick}>
+    <div>
       <Outlet />
-      <Modal isModalOpen={isModalOpen}
-        message={
-          "🚨 스케치북의 동화 컨텐츠의 저작권은 동화 작가님과 출판사에 있습니다. 무단으로 도용, 불법으로 복사(캡처)하여 사용할 경우 사전 경고 없이 민·형사상 법적조치 등 저작권법에 의한 처벌을 받을 수 있습니다. 🚨"
-        }
-        clickResult = {closeModal}
-      />
     </div>
   );
 }
