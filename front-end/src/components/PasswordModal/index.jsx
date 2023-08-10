@@ -4,6 +4,7 @@ import Wrapper from './styles';
 import { useState } from 'react';
 import axios from 'axios';
 
+// 비밀번호 이메일 발송 모달창 (노랑 버튼)
 function PasswordModal(props) {
 
   const [email, setEmail] = useState("");
