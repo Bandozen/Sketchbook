@@ -32,7 +32,6 @@ import DeviceOTP from "./pages/DeviceOTP/index";
 import AboutUs from "./pages/AboutUs/index";
 import Story1 from "./pages/Play/Story1";
 //////////////////////////////////////////
-import P0 from "./pages/Play/Story1/P0/index";
 import P1 from "./pages/Play/Story1/P1/index";
 import P2 from "./pages/Play/Story1/P2/index";
 import P3 from "./pages/Play/Story1/P3/index";
@@ -114,7 +113,6 @@ const router = createBrowserRouter([
             path: "story1",
             element: <Story1 />,
             children: [
-              { path: "p0", element: <P0 /> },
               { path: "p1", element: <P1 /> },
               { path: "p2", element: <P2 /> },
               { path: "p3", element: <P3 /> },
