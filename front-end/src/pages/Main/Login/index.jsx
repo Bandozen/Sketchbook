@@ -95,6 +95,7 @@ export default function Login() {
                 placeholder="이메일"
                 aria-label="useremail"
                 style={{ backgroundColor: "#E6E6E6" }}
+                autoComplete="off"
                 onChange={(e) => {
                   setUseremail(e.target.value);
                   emailCheck(e.target.value);
@@ -110,6 +111,7 @@ export default function Login() {
                 type={showPassword ? "text" : "password"}
                 placeholder="비밀번호"
                 aria-label="password"
+                autoComplete="off"
                 style={{ backgroundColor: "#E6E6E6" }}
                 value={password}
                 onChange={(e) => {
