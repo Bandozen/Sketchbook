@@ -103,7 +103,7 @@ function Story1() {
   };
 
   return (
-    <div onContextMenu={preventClick}>
+    <div onContextMenu={preventClick} onDragStart={preventClick}>
       <Outlet />
       <Modal isModalOpen={isModalOpen}
         message={
