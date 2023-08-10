@@ -28,7 +28,8 @@ export default function Login() {
 
   const emailRegEx =
     /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-  const passwordRegEx = /^[a-zA-Z0-9!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]{8,20}$/;
+  const passwordRegEx =
+    /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]).{8,20}$/;
 
   const emailCheck = (username) => {
     const isValidEmail = emailRegEx.test(username);
@@ -41,11 +42,17 @@ export default function Login() {
   };
 
   const passwordCheck = (password) => {
-    if (password.match(passwordRegEx) === null && password !== "") {
-      setPasswordWarning("비밀번호 형식이 일치하지 않습니다.");
+    const isValidPassword = passwordRegEx.test(password);
+
+    if (!isValidPassword && password !== "") {
+      setPasswordWarning(
+        "대/소문자, 숫자, 특수문자를 포함한 8~20자로 입력해 주세요."
+      );
     } else {
       setPasswordWarning("");
     }
+
+    return isValidPassword;
   };
 
   const handleShowPassword = () => {
@@ -78,9 +85,7 @@ export default function Login() {
       <PasswordModal closeModal={closeModal} isModalOpen={isModalOpen} />
       <div className="login">
         <div className="login-signup-buttons">
-          <Link to="#"
-            style={{ textDecoration: "none", color: "gray" }}
-          >
+          <Link to="#" style={{ textDecoration: "none", color: "gray" }}>
             <h3 className="activated">로그인</h3>
           </Link>
           <Link to="/signup" style={{ textDecoration: "none", color: "gray" }}>
@@ -89,7 +94,7 @@ export default function Login() {
         </div>
 
         <form>
-          <div style={{height : "70px"}}>
+          <div style={{ height: "70px" }}>
             <InputGroup style={{ height: "45px" }}>
               <Form.Control
                 placeholder="이메일"
@@ -105,7 +110,7 @@ export default function Login() {
             <span className="warningmsg">{warning}</span>
           </div>
 
-          <div style={{height:"70px"}}>
+          <div style={{ height: "70px" }}>
             <InputGroup style={{ height: "45px" }}>
               <Form.Control
                 type={showPassword ? "text" : "password"}

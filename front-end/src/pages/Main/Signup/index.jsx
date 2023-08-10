@@ -18,14 +18,16 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false); //패스워드 보여줘?
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); //패스워드 확인 보여줘?
   const [isValidEmail, setIsValidEmail] = useState(false); // 이메일 유효성 검사 결과
-  const [codeblock, setCodeBlock] = useState(0); // 이메일 인증 안하면 회원가입 막는 용도
+  const [isValidPassWord, setIsValidPassword] = useState(false); // 비밀번호 형식 검사 결과
+  const [codeblock, setCodeBlock] = useState(0);  // 이메일 인증 안하면 회원가입 막는 용도
 
-  const emailRegEx =
-    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-  const passwordRegEx = /^[a-zA-Z0-9!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]{8,20}$/;
+  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+  const passwordRegEx = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*()\-_=+{}[\]|\\;:'",.<>/?]).{8,20}$/;
 
   const emailCheck = (username) => {
     const isValidEmail = emailRegEx.test(username);
+    // setWarning(isValidEmail);
+
     if (!isValidEmail && username !== "") {
       setWarning("이메일 형식을 확인해주세요.");
     } else {
@@ -35,13 +37,15 @@ export default function Signup() {
   };
 
   const passwordCheck = (password) => {
-    if (password.match(passwordRegEx) === null && password !== "") {
-      setPasswordWarning(
-        "영어 대/소문자, 숫자를 포함한 8~20자 이내로 설정해 주세요."
-      );
+    const isValidPassword = passwordRegEx.test(password);
+
+    if (!isValidPassword && password !== "") {
+      setPasswordWarning('대/소문자, 숫자, 특수문자를 포함한 8~20자로 설정해 주세요.');
     } else {
       setPasswordWarning("");
     }
+
+    setIsValidPassword(isValidPassword);
   };
 
   const confirmPasswordCheck = (confirmPassword) => {
@@ -129,17 +133,23 @@ export default function Signup() {
   const signup = (e) => {
     e.preventDefault();
 
+    if (!isValidEmail) {
+      alert("이메일 형식을 확인해주세요")
+      return;
+    } 
+    if (codeblock === 0) {
+      alert("이메일을 인증해주세요.")
+      return;
+    }
+    if(!isValidPassWord) {
+      alert("비밀번호 형식을 확인해주세요")
+      return;
+    }
     if (password !== confirmPassword) {
       setConfirmPasswordWarning("비밀번호가 일치하지 않습니다.");
       alert("비밀번호가 일치하지 않습니다.");
       return;
-    } else if (!isValidEmail) {
-      alert("이메일 형식을 확인해주세요.");
-      return;
-    } else if (codeblock === 0) {
-      alert("이메일을 인증해주세요.");
-      return;
-    }
+    } 
 
     axios
       .post("/api/users/register", {
@@ -241,7 +251,7 @@ export default function Signup() {
                 ></i>
               </InputGroup.Text>
             </InputGroup>
-            <span className="warningmsg">{passwordwarning}</span>
+            <span className="warningmsg" >{passwordwarning}</span>
           </div>
 
           <div style={{ height: "70px" }}>
