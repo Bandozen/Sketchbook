@@ -26,7 +26,7 @@ export default function Signup() {
 
   const emailCheck = (username) => {
     const isValidEmail = emailRegEx.test(username);
-    if (!isValidEmail) {
+    if (!isValidEmail && username !== "") {
       setWarning("이메일 형식을 확인해주세요.");
     } else {
       setWarning("");
@@ -35,7 +35,7 @@ export default function Signup() {
   };
 
   const passwordCheck = (password) => {
-    if (password.match(passwordRegEx) === null) {
+    if (password.match(passwordRegEx) === null && password !== "") {
       setPasswordWarning(
         "영어 대/소문자, 숫자를 포함한 8~20자 이내로 설정해 주세요."
       );
@@ -45,7 +45,7 @@ export default function Signup() {
   };
 
   const confirmPasswordCheck = (confirmPassword) => {
-    if (confirmPassword !== password) {
+    if (confirmPassword !== password && confirmPassword !== "") {
       setConfirmPasswordWarning("비밀번호가 일치하지 않습니다.");
     } else {
       setConfirmPasswordWarning("");
