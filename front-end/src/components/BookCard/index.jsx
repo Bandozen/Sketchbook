@@ -30,7 +30,12 @@ function BookCard({ book, onClick }) {
   };
 
   const goToConnect = () => {
-    navigate('/connect');
+    if (book.id !== 1) {
+      onClick();
+      return;
+    } else {
+      navigate('/connect');
+    }
   }
 
   // 출력 버튼 클릭
@@ -71,7 +76,9 @@ function BookCard({ book, onClick }) {
           <Card.Img
             variant="top"
             src={book.bookcover}
-            style={{ width: "24.9rem", height: "30rem" }}
+            // style={{ width: "24.9rem", height: "30rem" }}
+            style={{ width: '100%', height: "30rem" }}
+
           />
           <Card.Body>
             <Card.Title style={{ textAlign: "center", fontSize: "24px" }}>

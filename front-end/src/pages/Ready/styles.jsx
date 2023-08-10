@@ -5,7 +5,6 @@ font-family: 'Pretendard-Regular';
 text-align: center;
 height: 100%;
 color : #9D4FE0;
-// margin : 0 auto;
 
 .ready-container {
   position: absolute;
@@ -13,14 +12,14 @@ color : #9D4FE0;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 p {
   color: black;
   font-size: 18px;
-  margin-top: 10px;
 }
+
 h2 {
     font-weight: bold;
-    margin: 0px;
 }
 
 .ready-message {
@@ -30,9 +29,19 @@ h2 {
   margin-left: 100px;
 }
 
-img{
+.key-guide {
+  text-align: left;
+  margin-top: 50px;
+}
+
+.icon-ready{
   width : 80px;
   margin : 0 0 5px 20px;
+}
+
+.key-icon {
+  margin-right: 10px;
+  margin-left: 3px;
 }
 
 .custom-button-style {
@@ -50,6 +59,7 @@ img{
     border: solid 1px #9D4FE0;
 
   }
+
 `;
 
 export default Wrapper;
