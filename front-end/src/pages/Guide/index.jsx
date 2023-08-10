@@ -22,7 +22,8 @@ function Guide() {
 
   const goToConnect = () => {
     if (connection == 'true') {
-      openModal();
+      setIsModalOpen(true);
+
     } else {
       navigate("/connect");
     }
@@ -39,13 +40,8 @@ function Guide() {
       name: "1. 기기 연결하기",
       description: (
         <div>
-          기기를 연결해주세요. <br /> 아직 연결하지 않았다면, <br />아래 버튼을
-          눌러주세요.
-          <div className="btndiv">
-            <button type="button" onClick={goToConnect}>
-              기기 연결
-            </button>
-          </div>
+          기기를 연결해주세요. <br /> 아직 연결하지 않았다면, <br /> 상단
+          '기기 연결하기'를 눌러주세요.
         </div>
       ),
       image: "/videos/otp.png"
@@ -80,10 +76,14 @@ function Guide() {
       <Header />
       <Wrapper>
         <div className="boxes">
-          <h1>동화 여행을 떠나고 싶다면? 😙</h1>
+          <div className="title">
+            <h1>동화 여행을 떠나고 싶다면? 😙</h1>
+            <div className="connect-button" onClick={goToConnect}>
+              기기 연결하기▸
+            </div>
+          </div>
           <div className="real_box">
             {boxes.map(box => (
-
               <div
                 key={box.id}
                 className={`box ${activeBox === box.id ? 'active' : ''}`}
