@@ -5,7 +5,6 @@ font-family: 'Pretendard-Regular';
 text-align: center;
 height: 100%;
 color : #9D4FE0;
-// margin : 0 auto;
 
 .ready-container {
   position: absolute;
@@ -17,7 +16,6 @@ color : #9D4FE0;
 p {
   color: black;
   font-size: 18px;
-  // margin-top: 10px;
 }
 
 h2 {
@@ -31,15 +29,21 @@ h2 {
   margin-left: 100px;
 }
 
+.key-guide {
+  text-align: left;
+  margin-top: 50px;
+}
+
 .icon-ready{
   width : 80px;
   margin : 0 0 5px 20px;
 }
 
 .key-icon {
-  width: 45px;
-  height: 45px;
+  // width: 45px;
+  // height: 45px;
   margin-right: 10px;
+  margin-left: 3px;
 }
 
 .custom-button-style {
