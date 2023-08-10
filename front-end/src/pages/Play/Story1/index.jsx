@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { CustomDialog } from "./styles";
 import Modal from "../../../components/Modal";
