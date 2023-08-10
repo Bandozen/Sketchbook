@@ -2,56 +2,95 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   font-family: 'Pretendard-Regular';
-
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
   height: 80vh;
 
-  img{
-    width : 100px;
-    margin-left : 10px;
+  .btndiv{
+    padding: 1em;
   }
 
-  h2 {
-    font-weight: bold;
+  button {
+    // border: 1.5px solid #a451f7;
+    background-color: #FAC52F;
+    border-radius: 8px;
+    // color: #a451f7;
+    height: 40px;
+    width: 100px;
   }
-  
-  span {
-    color: #a451f7
+
+  .box-name {
+    font-size: 25px;
+  }  
+
+  .box .one{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .two{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .three{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .four{
+    width: 300px;
+    height: 300px;
+  }
+
+  h1 {
+    font-weight: bold;
+    margin-bottom: 40px;
+    font-size: 35px;
+  }
+
+  .boxes {
+    display: flex;
+    justify-content: space-between;
   }
   
   .box {
-    margin-top: 50px;
-    
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    padding: 3% 5%;    
-  }
-  
-  ol{
-    margin: 20px 0 40px;
-  }
-
-  li {
-    font-size: 23px;
-    line-height: 42px;
-  }
-
-  .btndiv{
+    width: 300px;
+    height: 400px;
+    background-color: #F8F8F8;
+    position: relative;
     display: flex;
-    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 10px;
   }
   
-  button {
-    color: #a451f7;
-    border-radius: 8px;
-    border: 1px solid #a451f7;
-    background-color: #ffffff;
-    padding: 10px 20px;
-    font-weight: bold;
+  .box.active img {
+    opacity: 0.1; /* 이미지 투명도 조정 */
+  }
+
+  .box.active .box-name {
+    color: white;
+  }
+
+  .box.active {
+    background-color: #333;
+    color: white;
+  }
+  
+  .description {
+    position: absolute;
+    color: white;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
   }
-  `;
-  
-  export default Wrapper;
+`;
+
+export default Wrapper;
