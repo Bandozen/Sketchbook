@@ -2,12 +2,10 @@ import { Outlet, useNavigate } from "react-router";
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CustomDialog } from "./styles";
-import Modal from "../../../components/Modal";
 
 
 function Story1() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
