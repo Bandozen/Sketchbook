@@ -2,10 +2,22 @@ import { Outlet, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { CustomDialog } from "./styles";
-
+import axios from "axios";
 
 function Story1() {
   const navigate = useNavigate();
+
+  const stop = (e) => {
+    axios
+      .get("/api/devices/stop")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -24,7 +36,9 @@ function Story1() {
           renderCustomDialog(
             "동화가 끝났어요. 다른 동화를 보러 가 볼까요?",
             () => {
+              stop();
               navigate("/books");
+              
             }
           );
           return;
