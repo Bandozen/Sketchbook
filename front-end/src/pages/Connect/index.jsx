@@ -6,15 +6,12 @@ import axios from "axios";
 import isConnected from "../../utils/isConnected";
 
 function useInterval(callback, delay) {
-
   const savedCallback = useRef();
 
-  // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
 
-  // Set up the interval.
   useEffect(() => {
     function tick() {
       savedCallback.current();
@@ -28,43 +25,36 @@ function useInterval(callback, delay) {
 
 function Connect() {
   const [isModalOpen, setModalOpen] = useState(false);
+
   function Modal({ isOpen, onClose }) {
     if (!isOpen) return null;
-  
+
     const handleBackdropClick = (e) => {
-      // 여기에서 바깥 부분 클릭을 확인
       if (e.target === e.currentTarget) {
         onClose();
       }
     };
-  
+
     return (
       <div className="modal" onClick={handleBackdropClick}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
           <span className="close-button" onClick={onClose}>X</span>
-          <h2>OTP 생성</h2>
-          <div className="timerCount">{otp}</div>
-          <div className="btndiv">
-            <button type="button" onClick={handleClick}>
-              {button.buttonText}
-            </button>
+          <h3>OTP 생성</h3>
+          <div className="timerCount">
+            {otp}
+            <div className="timer">
+              {
+                `${parseInt(button.timerCount / 60)}:${(button.timerCount % 60).toString().padStart(2, '0')}`
+              }
+
+            </div>
           </div>
         </div>
       </div>
     );
   }
-  
-  
-  const [activeBox, setActiveBox] = useState(null);
 
-  //   console.log(`
-  // ╭ ◜◝ ͡ ◜◝ ͡  ◜◝ ͡ ◜◝ ͡  ◜◝ ╮
-  //         기기연결 페이지
-  // OTP 기기 연결 해야 동화를 보지요
-  // ╰ ◟◞ ͜  ◟ ͜   ◟◞ ͜  ◟ ͜   ◟◞ ╯
-  //                   O
-  //                 °
-  // `)
+  const [activeBox, setActiveBox] = useState(null);
   const [button, setButton] = useState({
     buttonText: "OTP 생성하기",
     timerActive: false,
@@ -85,11 +75,15 @@ function Connect() {
         timerActive: true,
         timerCount: 180,
         tryCount: prevButton.tryCount + 1,
-      })); // 3분(180초)로 타이머 설정
+      }));
     }
   };
 
-  // axios createOtp
+  const handleOpenModal = () => {
+    handleClick();
+    setModalOpen(true);
+  };
+
   const createOtp = () => {
     axios
       .get("/api/devices/issue")
@@ -99,39 +93,33 @@ function Connect() {
       .catch((err) => {
         console.log(err);
       });
-    // SetOtp(12345);
-    // console.log(button.tryCount);
   };
 
   const navigate = useNavigate();
-  // 타이머 로직을 담당하는 함수
+
   const tick = () => {
     if (button.timerCount > 0) {
       setButton((prevButton) => ({
         ...prevButton,
         timerCount: prevButton.timerCount - 1,
-        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${(prevButton.timerCount - 1) % 60
-          }`,
+        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${(prevButton.timerCount - 1) % 60}`,
       }));
 
       axios
         .get("/api/devices/checkConnect")
         .then((res) => {
           const connection = isConnected();
-          if (connection == "true") {
+          if (connection === "true") {
             return navigate("/books");
           }
         })
         .catch((err) => {
           console.log(err);
         });
-      // SetOtp(12345);
-      // console.log(button.tryCount);
     } else {
       if (button.tryCount < 3) {
         handleClick();
       } else {
-        // 타이머가 끝났을 때 초기 상태로 돌아감
         setButton((prevButton) => ({
           ...prevButton,
           buttonText: "OTP 생성하기",
@@ -144,7 +132,6 @@ function Connect() {
     }
   };
 
-  // useInterval 훅스를 사용하여 1초마다 타이머 업데이트
   useInterval(tick, button.timerActive ? 1000 : null);
 
   const boxes = [
@@ -192,7 +179,7 @@ function Connect() {
           <div className="title">
             <h1>기기 연결 가이드 👀</h1>
             <div className="btndiv">
-              <div className="connect-button" onClick={() => setModalOpen(true)}> 
+              <div className="connect-button" onClick={handleOpenModal}>
                 OTP 생성하기▸
               </div>
             </div>
@@ -212,12 +199,7 @@ function Connect() {
             ))}
           </div>
         </div>
-        {/* <div className="btndiv">
-          <button type="button" onClick={handleClick}>
-            {button.buttonText}
-          </button>
-        </div> */}
-        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} /> 
+        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       </Wrapper>
     </>
   );

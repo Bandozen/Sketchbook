@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import Wrapper from "./styles";
 import CheckStep from "../../components/CheckStep";
+import isConnected from "../../utils/isConnected";
 
 function Check() {
   const [activeStep, setActiveStep] = useState(1);
+  const connection = isConnected();
 
   useEffect(() => {
-    const checkWindow = window.open(
-      "",
-      "Print Window",
-      "width=800,height=600, left=700, top=100"
-    );
-    checkWindow.location.href = "http://192.168.100.246:8300";
-  }, []);
+    if (connection === "true") {
+      const checkWindow = window.open(
+        "",
+        "Print Window",
+        "width=800,height=600, left=700, top=100"
+      );
+      checkWindow.location.href = "http://192.168.100.246:8300";
+    }
+  }, [connection]);
 
   return (
     <Wrapper>
