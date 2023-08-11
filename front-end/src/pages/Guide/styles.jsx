@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   font-family: 'Pretendard-Regular';
   .title {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
     width: 100%;
@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     h1 {
       font-weight: bold;
       font-size: 35px;
+      margin-left: 10px;
     }
   }
   
@@ -46,7 +47,9 @@ const Wrapper = styled.div`
     align-items: center; 
     justify-content: center; 
     flex-direction: column;
-    padding: 100px;
+    padding-top: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
   }
 
 

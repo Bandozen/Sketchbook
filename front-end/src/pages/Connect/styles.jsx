@@ -56,7 +56,7 @@ font-family: 'Pretendard-Regular';
 
 .title {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
   width: 100%;
@@ -65,21 +65,22 @@ font-family: 'Pretendard-Regular';
   h1 {
     font-weight: bold;
     font-size: 35px;
+    margin-left: 10px;
   }
 }
 
 .connect-button {
-
   text-align: center; 
   line-height: 40px; 
-  color: #8f39ea;
+  color: #4b8cee;
   font-size: 25px;
-  text-decoration: none; 
+  // text-decoration: none; 
   font-weight: bold;
+  // text-decoration: underline;
 }
 
 .connect-button:hover {
-  color: purple;
+  color: #2c64cd;
 }
 
 .real_box {
@@ -94,7 +95,9 @@ font-family: 'Pretendard-Regular';
   align-items: center; 
   justify-content: center; 
   flex-direction: column;
-  padding: 100px;
+  padding-top: 100px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 
@@ -186,10 +189,23 @@ font-family: 'Pretendard-Regular';
   }
 
   .timerCount{
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    align-items: center;
     margin-top : 20px;
     font-size: 60px;
     font-weight: bold;
+  }
+
+  .timer {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 25px;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 100px;
   }
   `;
   
