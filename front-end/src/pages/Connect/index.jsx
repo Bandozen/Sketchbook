@@ -109,7 +109,7 @@ function Connect() {
         .get("/api/devices/checkConnect")
         .then((res) => {
           const connection = isConnected();
-          if (connection == "true") {
+          if (connection === "true") {
             return navigate("/books");
           }
         })
