@@ -1,5 +1,6 @@
 const { User } = require("../models/users.js");
 const { smtpTransport } = require("../config/email.js");
+const { client } = require("../server.js");
 const ejs = require("ejs");
 const path = require("path");
 var appDir = path.dirname(require.main.filename);
@@ -123,6 +124,8 @@ function logout(req, res) {
           err,
         });
       }
+    client.set(req.user.email, 'logout');
+
 
       // 쿠키삭제를 먼저 진행시켜서 로그아웃을 진행시킨다.
       return res
