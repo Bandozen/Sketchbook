@@ -14,14 +14,17 @@ const ProtectedRoute = () => {
       alert("로그인이 필요한 페이지입니다.");
       navigate("/");
     }
-  }, [auth, navigate]);
+
+    if (connection === 'false' && (location.pathname.startsWith("/Play") || location.pathname === "/check" || location.pathname === "/ready")) {
+      navigate("/connect")
+    } 
+  }, [auth, connection, location.pathname, navigate]);
 
   if (auth) {
-
     if (connection === 'true' && location.pathname === "/connect") {
-
       navigate("/profile")
     }
+
     return <Outlet/>
   }
 };
