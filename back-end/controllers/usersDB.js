@@ -6,6 +6,11 @@ const path = require("path");
 var appDir = path.dirname(require.main.filename);
 let verificationCodes = {};
 const otpGenerator = require("otp-generator");
+const fs = require('fs');
+
+const makrFolder = (dir) => {
+  fs.mkdirSync(dir);
+}
 
 /* 회원가입 API */
 async function register(req, res) {
@@ -13,6 +18,8 @@ async function register(req, res) {
   // client에서 가져오면 그것들을 db에 넣는다.
   const user = new User(req.body);
   // 정보 저장, 에러 시 json 형식으로 전달
+
+  makrFolder("./user/" + user.email)
   await user.save((err, userInfo) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({

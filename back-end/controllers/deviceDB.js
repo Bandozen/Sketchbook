@@ -122,6 +122,7 @@ async function mission(req, res) {
     // client.RPUSHX('tst', "mission");
     client.set(req.user.email, "mission");
     return res.status(200).json({
+      email: req.user.email,
       mission: true,
     });
   } else {
