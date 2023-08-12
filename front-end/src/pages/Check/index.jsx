@@ -5,6 +5,7 @@ import isConnected from "../../utils/isConnected";
 import axios from "axios";
 
 const Livecam = () => {
+  
   const [imageUrl, setImageUrl] = useState("/user/image.jpg");
 
   const fetchNewImage = () => {
@@ -21,7 +22,6 @@ const Livecam = () => {
   return (
     <div className="container">
       <img src={imageUrl} alt="Random Image"/>
-      {/* <img src={imageUrl} alt="Random Image" style={{ width:'640px', height:'480px'}} /> */}
     </div>
   );
 };
@@ -35,6 +35,13 @@ function Check() {
   const capture = () => {
     axios
       .get("/api/devices/capture")
+      .then((res) => {
+        setActiveStep(2);
+        console.log(res.mission);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   useEffect(() => {
