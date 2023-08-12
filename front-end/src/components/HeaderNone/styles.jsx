@@ -3,8 +3,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
 display: flex;
 justify-content: space-between;
-background-color: ${props => props.scrolled ? ' rgba(255, 255, 255, 0.1)' : 'transparent'};
-backdrop-filter: ${props => props.scrolled ? 'blur(10px)' : 'none'};
+
 
 transition: background-color 0.3s ease;
   font-family: 'Pretendard-Regular';
