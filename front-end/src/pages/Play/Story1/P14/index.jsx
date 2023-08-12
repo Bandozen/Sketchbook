@@ -3,12 +3,19 @@ import image from "../../../../play-background/엄마는 카멜레온_14.gif";
 import audio14 from "../../../../play-background/ske_14.mp3";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useEffect } from "react";
 
 function P14() {
   const navigate = useNavigate();
-  setTimeout(() => {
-    navigate("/play/story1/p15");
-  }, 8000);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/play/story1/p15");
+    }, 8000);
+
+    return () => {clearTimeout(timer)}
+  }, [navigate])
+  
 
   const mission = (e) => {
     axios

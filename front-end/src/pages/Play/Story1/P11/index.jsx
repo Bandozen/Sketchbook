@@ -3,13 +3,19 @@ import image from "../../../../play-background/엄마는 카멜레온_11.gif";
 import audio11 from "../../../../play-background/ske_11.mp3";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useEffect } from "react";
 
 function P11() {
   const navigate = useNavigate();
-  setTimeout(() => {
-    navigate("/play/story1/p12");
-  }, 6000);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/play/story1/p12");
+    }, 6000);
+
+    return () => {clearTimeout(timer)}
+  }, [navigate])
+  
   const mission = (e) => {
     axios
       .post("/api/devices/mission", {

@@ -2,6 +2,7 @@ import Wrapper from "./styles";
 import image1 from "../../../../play-background/엄마는 카멜레온_7.gif";
 import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
+import Livecam from "../../../../components/Livecam";
 
 function P7() {
   const mission = (e) => {
@@ -17,9 +18,13 @@ function P7() {
       });
   };
 
+
   return (
     <Wrapper onLoad={mission}>
       <img src={image1} alt="" />
+      {/* 캐릭터 : user/[user_email]/assemble.png */}
+      <Livecam imageName = {"assemble.png"}/>
+
       <audio autoPlay>
         <source src={audio7} type="audio/mp3" />
       </audio>

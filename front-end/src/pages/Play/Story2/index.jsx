@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { CustomDialog } from "./styles";
 import axios from "axios";
 
-function Story1() {
+function Story2() {
   const navigate = useNavigate();
 
   const stop = (e) => {
@@ -32,12 +32,12 @@ function Story1() {
         }
         nextPageNumber = Math.max(1, pageNumber - 1);
       } else if (event.key === "ArrowRight") {
-        if (pageNumber === 17) {
+        if (pageNumber === 3) {
           renderCustomDialog(
-            "동화가 끝났어요. 다른 동화를 보러 가 볼까요?",
+            "아쉽게도 체험판은 여기까지에요.🥺",
             () => {
               stop();
-              navigate("/books");
+              navigate("/main");
               
             }
           );
@@ -48,7 +48,7 @@ function Story1() {
         return;
       }
 
-      const nextPagePath = `/Play/story1/p${nextPageNumber}`;
+      const nextPagePath = `/play/story2/p${nextPageNumber}`;
       window.location.href = nextPagePath;
     };
 
@@ -109,4 +109,4 @@ function Story1() {
   );
 }
 
-export default Story1;
+export default Story2;
