@@ -12,10 +12,6 @@ function Guide() {
   const connection = isConnected();
   const navigate = useNavigate();
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -27,10 +23,6 @@ function Guide() {
     } else {
       navigate("/connect");
     }
-  };
-
-  const goToBooks = () => {
-    navigate("/books");
   };
 
   const boxes = [
@@ -98,7 +90,7 @@ function Guide() {
           </div>
         </div>
       </Wrapper>
-      <Modal closeModal={closeModal} isModalOpen={isModalOpen} message={"기기가 이미 연결되어 있어요."} clickResult={goToBooks}></Modal>
+      <Modal clickResult={closeModal} isModalOpen={isModalOpen} message={"기기가 이미 연결되어 있어요."} ></Modal>
     </>
   );
 }

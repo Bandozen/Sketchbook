@@ -25,13 +25,13 @@ const ProtectedRoute = () => {
   }
 
   useEffect(() => {
-    if (!auth) {
+    if (!auth && location.pathname.startsWith("/play/story2/") === false) {
       openModal();
       navigate("/");
     }
 
     if (connection === "false" &&
-      (location.pathname.startsWith("/Play") ||
+      (location.pathname.startsWith("/play/story1") ||
         location.pathname === "/check" ||
         location.pathname === "/ready")
     ) {

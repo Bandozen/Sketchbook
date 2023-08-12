@@ -10,9 +10,7 @@ function Main() {
     <Wrapper>
       
       <div className="video-container">
-        <video muted autoPlay loop className="video">
-          <source src="/videos/Preview.mp4" type="video/mp4" />
-        </video>
+      <img src="/videos/Preview.gif" alt="GIF" className="gif" />
 
         <div className="text-overlay">
           <h1>SKETCH</h1>

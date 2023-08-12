@@ -71,6 +71,9 @@ function HeaderNone() {
         </div>
         :
         <div className="links">
+          <NavLink to="/play/story2/p1" className={({ isActive }) => isActive ? 'active' : undefined}>
+            체험하기
+          </NavLink>
           <NavLink to="/">
             로그인
           </NavLink>

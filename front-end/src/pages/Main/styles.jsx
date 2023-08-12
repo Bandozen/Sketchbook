@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   overflow: hidden;
 }
 
-.video {
+img {
   position: absolute;
   top: 0;
   left: 0;
