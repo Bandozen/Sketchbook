@@ -136,6 +136,11 @@ async function mission(req, res) {
 
 function getImage(req, res) {
   const newUrl = "/user/image.jpg?${Date.now()}"; // 새로운 url
+  
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+
   return res.status(200).json({
     url: newUrl
   });
