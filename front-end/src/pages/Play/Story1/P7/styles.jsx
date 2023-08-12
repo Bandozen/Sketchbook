@@ -7,9 +7,12 @@ img {
 }
 
 .character {
-    z-index: 9999;
-    width: 300px;
-    height: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 640px;
+    height: 480px;
 }
 `;
 export default Wrapper;

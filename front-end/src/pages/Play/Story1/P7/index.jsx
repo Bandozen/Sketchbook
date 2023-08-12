@@ -33,10 +33,7 @@ function P7() {
     }, []);
   
     return (
-      <div className="container">
         <img className="character" src={imageUrl} alt="Random Image"/>
-        {/* <img src={imageUrl} alt="Random Image" style={{ width:'640px', height:'480px'}} /> */}
-      </div>
     );
   };
 
