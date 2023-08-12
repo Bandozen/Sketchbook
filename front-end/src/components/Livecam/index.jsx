@@ -1,8 +1,12 @@
-import Wrapper from './styles';
 import { useState, useEffect } from 'react';
+import getUserEmail from "../../utils/getUserEmail";
 
-const Livecam = () => {
-  const [imageUrl, setImageUrl] = useState("/user/image.jpg");
+const Livecam = (props) => {
+  const userEmail = getUserEmail();
+
+  // 카메라 화면 : "user/[user_email]/image.jpg"
+  // 캐릭터 : user/[user_email]/assemble.png
+  const [imageUrl, setImageUrl] = useState(`/user/${userEmail}/${props.imageName}`);
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
@@ -16,10 +20,7 @@ const Livecam = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <img src={imageUrl} alt="Random Image" />
-      {/* <img src={imageUrl} alt="Random Image" style={{ width:'640px', height:'480px'}} /> */}
-    </Wrapper>
+    <img src={imageUrl} alt="RandomImage" />
   );
 };
 
