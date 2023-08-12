@@ -13,16 +13,9 @@ const ProtectedRoute = () => {
   const [message, setMessage ] = useState("");
   const [page, setPage] = useState("");
 
-  const openModal = (message, destination) => {
-    setMessage(message);
-    setPage(destination);
+  const openModal = () => {
     setIsModalOpen(true);
   };
-
-  const goTo = () => {
-    navigate(page)
-    setIsModalOpen(false);
-  }
 
   useEffect(() => {
     if (!auth) {
@@ -30,21 +23,11 @@ const ProtectedRoute = () => {
       navigate("/");
     }
 
-    if (connection === "false" &&
-      (location.pathname.startsWith("/Play") ||
-        location.pathname === "/check" ||
-        location.pathname === "/ready")
-    ) {
-      openModal("기기 연결이 필요해요.", "/connect")
-    } else if (connection === "true" && location.pathname === "/connect") {
-      openModal("이미 기기가 연결되었어요.", "/profile")
-    }
   }, [auth, connection, location.pathname, navigate]);
 
   return (
     <>
       <Outlet />
-      <Modal message={message} clickResult={goTo} isModalOpen={isModalOpen} />
     </>
   );
 };
