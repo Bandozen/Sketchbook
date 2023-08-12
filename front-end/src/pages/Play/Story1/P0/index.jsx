@@ -5,19 +5,21 @@ function LiveCam() {
   const [url, setUrl] = useState("");
   
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      // 주기적으로 실행될 작업      
-      // const newUrl = "/assets/arrow.png"; // 새로운 url
-      const newUrl = "/user/image.jpg?${Date.now()}"; // 새로운 url
-      setUrl(newUrl); // 상태 업데이트
-      {/* <img src="/assets/arrow.png" alt="" /> */}
-
+    const intervalId = setInterval(async () => {
+      try {
+        const response = await fetch("/api/devices/getImage"); // 서버에서 이미지를 가져오는 API 호출
+        if (response.ok) {
+          const newImageUrl = await response.text();
+          setUrl(newImageUrl); // 상태 업데이트
+        }
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
     }, 100); // 3초마다 작업 실행
 
     return () => {
       clearInterval(intervalId);
     };
-
   });
 
   return (
@@ -34,3 +36,5 @@ function P0() {
 }
 
 export default P0;
+
+
