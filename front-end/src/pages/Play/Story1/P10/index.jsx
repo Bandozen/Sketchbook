@@ -7,14 +7,14 @@ import { useEffect } from "react";
 
 function P10() {
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const timer = setTimeout(() => {
     navigate("/play/story1/p11");
   }, 6000);
 
   return () => {clearTimeout(timer)}
-  }, [])
+  }, [navigate])
   
 
   const mission = (e) => {
