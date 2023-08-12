@@ -1,39 +1,46 @@
-import React, { useState, useEffect } from "react";
-import Wrapper from "./styles";
+import React, { Component } from 'react';
+import axios from 'axios';
 
-function LiveCam() {
-  const [url, setUrl] = useState("");
-  
-  useEffect(() => {
-    const intervalId = setInterval(async () => {
-      try {
-        const response = await fetch("/api/devices/getImage"); // 서버에서 이미지를 가져오는 API 호출
-        if (response.ok) {
-          const newImageUrl = await response.text();
-          setUrl(newImageUrl); // 상태 업데이트
-        }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
-    }, 100); // 3초마다 작업 실행
-
-    return () => {
-      clearInterval(intervalId);
+class P0 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      photoUrl: '/user/image.jpg'
     };
-  });
+  }
 
-  return (
-    <img src={url} alt="" />
-  );
-}
+  componentDidMount() {
+    // 초기 사진 로드
+    this.fetchPhoto();
 
-function P0() {
-  return (
-    <Wrapper>
-      <LiveCam />
-    </ Wrapper>
-  );
+    // 100ms마다 사진 갱신 요청
+    this.interval = setInterval(this.fetchPhoto, 100);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  fetchPhoto = () => {
+    // 사진을 가져오는 API 엔드포인트로 요청을 보냄
+    axios.get('/api/devices/getImage')
+      .then(response => {
+        this.setState({ photoUrl: response.data.url });
+      })
+      .catch(error => {
+        console.error('Error fetching photo:', error);
+      });
+  }
+
+  render() {
+    const { photoUrl } = this.state;
+
+    return (
+      <div>
+        <img src={photoUrl} alt="Server-provided" />
+      </div>
+    );
+  }
 }
 
 export default P0;
-
