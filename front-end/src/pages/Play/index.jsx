@@ -6,6 +6,7 @@ import Modal from '../../components/Modal';
 function Play() {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -16,6 +17,7 @@ function Play() {
   };
 
   useEffect(() => {
+
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         navigate('/books'); // "esc" 키 누르면 경로 변경

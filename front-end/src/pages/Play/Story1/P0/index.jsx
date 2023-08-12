@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 const P0 = () => {
-  const [imageUrl, setImageUrl] = useState("/assets/arrow.png"); // 이미지의 실제 URL을 넣으세요
+  const [imageUrl, setImageUrl] = useState("/user/image.jpg"); // 이미지의 실제 URL을 넣으세요
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setImageUrl(`/assets/arrow.png?timestamp=${timestamp}`);
+    setImageUrl(`/user/image.jpg?timestamp=${timestamp}`);
   };
 
   useEffect(() => {
