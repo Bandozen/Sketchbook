@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Wrapper from "./styles";
 import CheckStep from "../../components/CheckStep";
+import getUserEmail from "../../utils/getUserEmail";
 import axios from "axios";
+
 let url
 const Livecam = () => {
-  const [imageUrl, setImageUrl] = useState("/assets/arrow.png");
+  const email = getUserEmail()
+  const [imageUrl, setImageUrl] = useState(`/user/${email}/image.jpg`);
   // 카메라 화면 : "user/[user_email]/image.jpg"
   // 캐릭터 : user/[user_email]/assemble.png    
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setImageUrl(`/assets/arrow.png?timestamp=${timestamp}`);
+    setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`);
     url = imageUrl 
   };
 
