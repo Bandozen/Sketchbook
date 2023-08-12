@@ -14,7 +14,7 @@ function P14() {
     }, 8000);
 
     return () => {clearTimeout(timer)}
-  }, [])
+  }, [navigate])
   
 
   const mission = (e) => {
