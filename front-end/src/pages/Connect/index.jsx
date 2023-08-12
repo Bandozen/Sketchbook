@@ -24,8 +24,19 @@ function useInterval(callback, delay) {
 }
 
 function Connect() {
+  const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [activeBox, setActiveBox] = useState(null);
+  const [button, setButton] = useState({
+    buttonText: "OTP 생성하기",
+    timerActive: false,
+    timerCount: 0,
+    tryCount: 0,
+  });
 
+  const [otp, setOtp] = useState("");
+
+ 
   function Modal({ isOpen, onClose }) {
     if (!isOpen) return null;
 
@@ -53,16 +64,6 @@ function Connect() {
       </div>
     );
   }
-
-  const [activeBox, setActiveBox] = useState(null);
-  const [button, setButton] = useState({
-    buttonText: "OTP 생성하기",
-    timerActive: false,
-    timerCount: 0,
-    tryCount: 0,
-  });
-
-  const [otp, setOtp] = useState("");
 
   const handleClick = () => {
     if (
@@ -95,7 +96,6 @@ function Connect() {
       });
   };
 
-  const navigate = useNavigate();
 
   const tick = () => {
     if (button.timerCount > 0) {
