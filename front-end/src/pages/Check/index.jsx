@@ -28,18 +28,7 @@ const Livecam = () => {
 };
 
 function Check() {
-  const [activeStep, setActiveStep] = useState(1);  
-
-  const start = (e) => {
-    axios
-      .get("/api/devices/start")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const [activeStep, setActiveStep] = useState(1);    
   
   const capture = () => {
     axios
@@ -56,7 +45,7 @@ function Check() {
   }
 
   return (
-    <Wrapper onLoad={start}>
+    <Wrapper>      
       <h1 className="check-title">시작하기 전, 확인해주세요!</h1>
       <div className="all">
         <div className="container">
