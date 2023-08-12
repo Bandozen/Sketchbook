@@ -12,6 +12,5 @@ deviceRouter.route('/start').get(Auth, DeviceDB.start);
 deviceRouter.route('/stop').get(Auth, DeviceDB.stop);
 deviceRouter.route('/ready').get(Auth, DeviceDB.ready);
 deviceRouter.route('/mission').post(Auth, DeviceDB.mission);
-deviceRouter.route('/getImage').get(DeviceDB.getImage)
 
 module.exports = deviceRouter;
