@@ -6,9 +6,9 @@ const Wrapper = styled.div`
   text-align: center;
   margin: 80px;
 
-  .container{
-    margin-top: 30px;
-    padding: 0 50px;
+  .all{
+    display:flex;
+    justify-contents: space-around;
   }
 
   h1 {
