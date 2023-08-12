@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   font-family: "Pretendard-Regular";
-
   text-align: center;
   margin: 80px;
 
@@ -11,12 +10,27 @@ const Wrapper = styled.div`
     justify-contents: space-around;
   }
 
+  button:hover{
+    background-color: #ffffff;
+    border: solid 1px #9d4fe0;
+    color: black;
+  }
+
+  button {
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #9d4fe0;
+    color: #ffffff;
+  }
+  // step별 style
   h1 {
     font-weight: bold;
     font-size: 45px;
     color: #9D4FE0;
   }
-
+  
   // 1~5단계별 제목
   h2 {
     font-weight: bold;
@@ -41,6 +55,7 @@ const Wrapper = styled.div`
     object-fit: contain;
     cursor: pointer;
   }
+
 `;
 
 export default Wrapper;

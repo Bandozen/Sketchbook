@@ -75,10 +75,11 @@ function Check() {
           ></CheckStep>
         </div>
         <div>
-          <Livecam />      
-          <button onClick={capture}>캡처임</button>
+          <Livecam />
+          <button onClick={capture}>캡처하기</button>
         </div>
       </div>
+      <button onClick={() => {setActiveStep(activeStep+1)}}>test</button>
     </Wrapper>
   );
 }
