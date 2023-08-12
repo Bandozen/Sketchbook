@@ -70,13 +70,12 @@ function BookCard({ book, onClick }) {
     <>
       <FontWrap>
         <Card
-          style={{ width: "100%", maxWidth: "25rem", margin: "20px 0px 20px 0px" }}
+          style={{ width: "100%", maxWidth: "25rem", margin: "20px 0px 20px 0px", cursor: 'pointer' }}
           onClick={handleModalShow}
         >
           <Card.Img
             variant="top"
             src={book.bookcover}
-            // style={{ width: "24.9rem", height: "30rem" }}
             style={{ width: '100%', height: "30rem" }}
 
           />
@@ -88,7 +87,7 @@ function BookCard({ book, onClick }) {
         </Card>
       </FontWrap>
 
-      <div className='realmodal' style={{display: 'flex'}}>
+      <div className='realmodal' style={{ display: 'flex' }}>
         <Modal show={showModal} onHide={handleModalClose} size="xl">
           <Modal.Header closeButton>
           </Modal.Header>
