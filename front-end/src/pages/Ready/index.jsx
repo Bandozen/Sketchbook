@@ -1,5 +1,6 @@
 import Wrapper from './styles';
 import Button from "react-bootstrap/Button";
+import axios from 'axios'
 
 function Ready() {
   const ready = (e) => {
