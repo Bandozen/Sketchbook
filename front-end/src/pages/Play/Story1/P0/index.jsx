@@ -1,46 +1,24 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
-class P0 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      photoUrl: '/user/image.jpg'
-    };
-  }
+const P0 = () => {
+  const [imageUrl, setImageUrl] = useState("/user/image.jpg"); // 이미지의 실제 URL을 넣으세요
 
-  componentDidMount() {
-    // 초기 사진 로드
-    this.fetchPhoto();
+  const fetchNewImage = () => {
+    const timestamp = new Date().getTime();
+    setImageUrl(`/user/image.jpg?timestamp=${timestamp}`);
+  };
 
-    // 100ms마다 사진 갱신 요청
-    this.interval = setInterval(this.fetchPhoto, 100);
-  }
+  useEffect(() => {
+    fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
+    const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
+  }, []);
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  fetchPhoto = () => {
-    // 사진을 가져오는 API 엔드포인트로 요청을 보냄
-    axios.get('/api/devices/getImage')
-      .then(response => {
-        this.setState({ photoUrl: response.data.url });
-      })
-      .catch(error => {
-        console.error('Error fetching photo:', error);
-      });
-  }
-
-  render() {
-    const { photoUrl } = this.state;
-
-    return (
-      <div>
-        <img src={photoUrl} alt="Server-provided" />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <img src={imageUrl} alt="Random Image" style={{ width:'640px', height:'480px'}} />
+    </div>
+  );
+};
 
 export default P0;
