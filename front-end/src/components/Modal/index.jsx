@@ -9,7 +9,9 @@ function Modal(props) {
     }
   }
   useEffect(() => {
-    document.addEventListener("keyup", handleEnter)
+    if (props.isModalOpen) {
+      document.addEventListener("keyup", handleEnter)
+    }
 
     return () => {
       document.removeEventListener("keyup", handleEnter)
