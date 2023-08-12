@@ -134,6 +134,11 @@ async function mission(req, res) {
   }
 }
 
+function getImage(req, res) {
+  const newUrl = "/user/image.jpg?${Date.now()}"; // 새로운 url
+  return res.send(newUrl);
+}
+
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
@@ -141,3 +146,4 @@ exports.start = start;
 exports.stop = stop;
 exports.ready = ready;
 exports.mission = mission;
+exports.getImage = getImage;
