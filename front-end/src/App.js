@@ -50,7 +50,12 @@ import P14 from "./pages/Play/Story1/P14/index";
 import P15 from "./pages/Play/Story1/P15/index";
 import P16 from "./pages/Play/Story1/P16/index";
 import P17 from "./pages/Play/Story1/P17/index";
-
+//////////////////////////////////////////
+import Story2 from "./pages/Play/Story2";
+//////////////////////////////////////////
+import P2_1 from "./pages/Play/Story2/P1/index";
+import P2_2 from "./pages/Play/Story2/P2/index";
+import P2_3 from "./pages/Play/Story2/P3/index";
 ///////////////////////////////////
 
 const router = createBrowserRouter([
@@ -132,6 +137,15 @@ const router = createBrowserRouter([
               { path: "p15", element: <P15 /> },
               { path: "p16", element: <P16 /> },
               { path: "p17", element: <P17 /> },
+            ],
+          },
+          {
+            path: "story2",
+            element: <Story2 />,
+            children: [
+              { path: "p1", element: <P2_1 /> },
+              { path: "p2", element: <P2_2 /> },
+              { path: "p3", element: <P2_3 /> },
             ],
           },
         ],

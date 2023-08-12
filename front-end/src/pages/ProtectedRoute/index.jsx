@@ -25,7 +25,7 @@ const ProtectedRoute = () => {
   }
 
   useEffect(() => {
-    if (!auth) {
+    if (!auth && location.pathname.startsWith("/play/story2/") === false) {
       openModal();
       navigate("/");
     }

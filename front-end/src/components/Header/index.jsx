@@ -38,6 +38,9 @@ function Header() {
         <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
           책장
         </NavLink>
+        <NavLink to="/play/story2/p1" className={({ isActive }) => isActive ? 'active' : undefined}>
+          체험하기
+        </NavLink>
         <NavLink to="/guide" className={({ isActive }) => isActive ? 'active' : undefined}>
           이용 가이드
         </NavLink>
