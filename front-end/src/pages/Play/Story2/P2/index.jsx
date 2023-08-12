@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Wrapper from "./styles";
-import image1 from "../../../../play-background/엄마는 카멜레온_4.gif";
-import audio4 from "../../../../play-background/ske_4.mp3";
+import image2 from "../../../../play-background/엄마는 카멜레온_2.gif";
+import audio2 from "../../../../play-background/ske_2.mp3";
 import axios from "axios";
 
-function P4() {
+function P2() {
   let navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/play/story1/p5");
+      navigate("/play/story2/p3");
     }, 16000);
+
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머 취소
   }, []); // 빈 의존성 배열을 사용하여 마운트 시에만 타이머 설정
 
@@ -21,7 +22,7 @@ function P4() {
         flag: "0", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
-        // console.log(res.data.mission);
+        // console.log(res.data.mission)
       })
       .catch((err) => {
         console.log(err);
@@ -30,13 +31,13 @@ function P4() {
 
   return (
     <Wrapper onLoad={mission}>
-      <img src={image1} alt="" />
+      <img src={image2} alt="" />
 
       <audio autoPlay>
-        <source src={audio4} type="audio/mp3" />
+        <source src={audio2} type="audio/mp3" />
       </audio>
     </Wrapper>
   );
 }
 
-export default P4;
+export default P2;
