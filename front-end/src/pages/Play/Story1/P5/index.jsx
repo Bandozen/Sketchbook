@@ -10,7 +10,7 @@ function P5() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/Play/story1/P6");
+      navigate("/play/story1/p6");
     }, 24000);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머 취소
