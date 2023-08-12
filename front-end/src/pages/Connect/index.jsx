@@ -4,7 +4,6 @@ import Header from "../../components/Header";
 import Wrapper from "./styles";
 import axios from "axios";
 import isConnected from "../../utils/isConnected";
-import Modal2 from "../../components/Modal";
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -26,8 +25,6 @@ function useInterval(callback, delay) {
 
 function Connect() {
   const navigate = useNavigate();
-  const connection = isConnected();
-  const [ConnectModal, setConnectModal] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [activeBox, setActiveBox] = useState(null);
   const [button, setButton] = useState({
@@ -39,17 +36,7 @@ function Connect() {
 
   const [otp, setOtp] = useState("");
 
-  const closeConnectModal = () => {
-    setConnectModal(false)
-    navigate("/")
-  }
-
-  useEffect(() => {
-    if (connection === "true") {
-      setConnectModal(true);
-    }
-  })
-
+ 
   function Modal({ isOpen, onClose }) {
     if (!isOpen) return null;
 
@@ -214,7 +201,6 @@ function Connect() {
         </div>
         <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       </Wrapper>
-      <Modal2 isModalOpen = {ConnectModal} clickResult={closeConnectModal} message={"기기 연결이 되어 있지 않아요."} />
     </>
   );
 }

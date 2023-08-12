@@ -1,26 +1,7 @@
-import { useState } from 'react';
-import isConnected from '../../utils/isConnected';
 import Wrapper from './styles';
 import Button from "react-bootstrap/Button";
-import Modal from '../../components/Modal';
-import { useNavigate } from 'react-router';
 
 function Ready() {
-  const connection = isConnected();
-  const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useState(() => {
-    if (connection === "false") {
-      setIsModalOpen(true);
-    }
-  })
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    navigate("/connect");
-  }
-
   return (
     <>
       <Wrapper>
@@ -59,8 +40,6 @@ function Ready() {
           </div>
         </div>
       </Wrapper>
-      <Modal isModalOpen={isModalOpen} clickResult={closeModal}
-        message={"기기 연결이 되어 있지 않습니다."} />
     </>
   );
 }
