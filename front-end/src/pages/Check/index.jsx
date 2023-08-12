@@ -6,6 +6,13 @@ import Livecam from "../../components/Livecam";
 
 function Check() {
   const [activeStep, setActiveStep] = useState(1);
+  const [imageUrl, setImageUrl] = useState("");
+  
+  const getImageUrl = (url) => {
+    // 잘 가져와지는지 확인하기 위한 console.log 
+    // console.log(url);
+    setImageUrl(url);
+  }
 
   const capture = () => {
     axios
@@ -50,7 +57,7 @@ function Check() {
           {activeStep === 1 &&
             <>
               {/* 카메라 화면 : "user/[user_email]/image.jpg" */}
-              <Livecam imageName={"image.jpg"} />
+              <Livecam imageName={"image.jpg"} getImageUrl={getImageUrl} />
               <button onClick={capture}>캡처하기</button>
             </>
           }
