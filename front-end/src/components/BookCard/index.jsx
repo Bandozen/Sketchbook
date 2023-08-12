@@ -5,12 +5,23 @@ import Button from "react-bootstrap/Button";
 import { Wrapper, FontWrap } from "./styles";
 import { useNavigate } from 'react-router-dom';
 import isConnected from "../../utils/isConnected";
-
+import axios from "axios";
 
 function BookCard({ book, onClick }) {
   const connection = isConnected();
   let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+
+  const start = (e) => {
+    axios
+      .get("/api/devices/start")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleModalShow = () => {
     setShowModal(true);
@@ -129,7 +140,10 @@ function BookCard({ book, onClick }) {
                     <Button
                       variant="outline-primary"
                       className="custom-button-style"
-                      onClick={StartPlay}
+                      onClick={() => {
+                        StartPlay();
+                        start();
+                      }}
                     >
                       시작하기
                     </Button> :
