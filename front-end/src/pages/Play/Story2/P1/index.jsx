@@ -6,7 +6,7 @@ import audio1 from "../../../../play-background/ske_1.mp3";
 import axios from "axios";
 
 function P1() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,7 +14,7 @@ function P1() {
     }, 5000);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머 취소
-  }, []); // 빈 의존성 배열을 사용하여 마운트 시에만 타이머 설정
+  }, [navigate]); // 빈 의존성 배열을 사용하여 마운트 시에만 타이머 설정
 
   const mission = (e) => {
     axios
