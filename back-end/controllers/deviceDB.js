@@ -134,18 +134,6 @@ async function mission(req, res) {
   }
 }
 
-function getImage(req, res) {
-  const newUrl = "/user/image.jpg"; // 새로운 url
-  
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-
-  return res.status(200).json({
-    url: newUrl
-  });
-}
-
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
@@ -153,4 +141,3 @@ exports.start = start;
 exports.stop = stop;
 exports.ready = ready;
 exports.mission = mission;
-exports.getImage = getImage;
