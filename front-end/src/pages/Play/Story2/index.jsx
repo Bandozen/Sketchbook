@@ -34,7 +34,7 @@ function Story2() {
       } else if (event.key === "ArrowRight") {
         if (pageNumber === 3) {
           renderCustomDialog(
-            "체험판은 여기까지에요. 회원가입을 하고 동화 속 주인공이 되어볼까요?",
+            "아쉽게도 체험판은 여기까지에요.🥺",
             () => {
               stop();
               navigate("/main");
@@ -48,7 +48,7 @@ function Story2() {
         return;
       }
 
-      const nextPagePath = `/Play/story2/p${nextPageNumber}`;
+      const nextPagePath = `/play/story2/p${nextPageNumber}`;
       window.location.href = nextPagePath;
     };
 
