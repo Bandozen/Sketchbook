@@ -6,12 +6,12 @@ import isLogin from '../../utils/isLogin';
 
 function HeaderNone() {
   let navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState();
   const auth = isLogin();
 
   const handleLogout = () => {
     axios
-    .get('/api/users/logout')
+      .get('/api/users/logout')
       .then((res) => {
         if (res.data.success) {
           console.log('Logout successful');
@@ -27,10 +27,10 @@ function HeaderNone() {
 
   const handleScroll = () => {
     const offset = window.scrollY;
-    if (offset > 200 ) {
-      setScrolled(true);
+    if (offset > 200) {
+      setScrolled("true");
     } else {
-      setScrolled(false);
+      setScrolled();
     }
   }
 
@@ -42,7 +42,10 @@ function HeaderNone() {
   }, []);
 
   return (
-    <Wrapper scrolled={scrolled}>
+    <Wrapper style={{
+      "backgroundColor": scrolled ? ' rgba(255, 255, 255, 0.1)' : 'transparent',
+      "backdropFilter": scrolled ? 'blur(10px)' : 'none'
+    }}>
       <Link to="/aboutUs">
         <img
           className="logo"
@@ -50,30 +53,30 @@ function HeaderNone() {
           alt=""
         />
       </Link>
-      {auth?
+      {auth ?
 
         <div className="links">
-        <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
-          책장
-        </NavLink>
-        <NavLink to="/guide" className={({ isActive }) => isActive ? 'active' : undefined}>
-          이용 가이드
-        </NavLink>
-        <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : undefined}>
-          회원 정보
-        </NavLink>
-        <p onClick={handleLogout}>
-          로그아웃
-        </p>
-      </div>
-      :
+          <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
+            책장
+          </NavLink>
+          <NavLink to="/guide" className={({ isActive }) => isActive ? 'active' : undefined}>
+            이용 가이드
+          </NavLink>
+          <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : undefined}>
+            회원 정보
+          </NavLink>
+          <p onClick={handleLogout}>
+            로그아웃
+          </p>
+        </div>
+        :
         <div className="links">
-        <NavLink to="/">
-          로그인
-        </NavLink>
-        
-      </div>
-      
+          <NavLink to="/">
+            로그인
+          </NavLink>
+
+        </div>
+
       }
     </Wrapper>
   );
