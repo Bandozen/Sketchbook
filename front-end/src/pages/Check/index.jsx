@@ -3,20 +3,45 @@ import Wrapper from "./styles";
 import CheckStep from "../../components/CheckStep";
 import isConnected from "../../utils/isConnected";
 import axios from "axios";
-import Livecam from "../../components/Livecam";
+
+const Livecam = () => {
+  
+  const [imageUrl, setImageUrl] = useState("/user/image.jpg");
+
+  const fetchNewImage = () => {
+    const timestamp = new Date().getTime();
+    setImageUrl(`/assets/arrow.png?timestamp=${timestamp}`);
+  };
+
+  useEffect(() => {
+    fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
+    const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
+  }, []);
+
+  return (
+    <div className="container">
+      <img src={imageUrl} alt="Random Image"/>
+    </div>
+  );
+};
+
+
 
 function Check() {
   const [activeStep, setActiveStep] = useState(1);
   const connection = isConnected();
 
   const capture = () => {
-    alert("axios 전송")
-    // axios
-    //   .get("/api/devices/capture")
-    //   .then((res) => {
-    //     console.log(res)
-    //     setActiveStep(2)
-    //   })
+    axios
+      .get("/api/devices/capture")
+      .then((res) => {
+        setActiveStep(2);
+        console.log(res.mission);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   useEffect(() => {
