@@ -6,7 +6,8 @@ import axios from "axios";
 
 let url
 const Livecam = () => {
-  const email = getUserEmail()
+  // const email = getUserEmail()
+  const email = "qaz1234@wsx.edc";// 수정예정
   const [imageUrl, setImageUrl] = useState(`/user/${email}/image.jpg`);
   // 카메라 화면 : "user/[user_email]/image.jpg"
   // 캐릭터 : user/[user_email]/assemble.png    
