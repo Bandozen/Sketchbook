@@ -140,11 +140,31 @@ async function mission(req, res) {
   }
 }
 
+async function downloadImage(url, filename) {
+  try {
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    const imageData = Buffer.from(response.data, 'binary');
+
+    // 이미지를 저장할 경로 설정 (현재 디렉토리 기준)
+    const imagePath = `${filename}`;
+
+    // 파일 저장
+    fs.writeFileSync(imagePath, imageData);
+
+    console.log(`이미지가 ${imagePath}에 저장되었습니다.`);
+  } catch (error) {
+    console.error('이미지 다운로드 에러:', error.message);
+  }
+}
+
 function capture(req, res) {
   const useremail = req.user.email;
-  console.log(useremail);
+  const imgUrl = req.data.imageUrl;
+
+  downloadImage(imgUrl, character.png)
+
   return res.status(200).json({
-    mission: useremail,
+    download: success
   });
 }
 
