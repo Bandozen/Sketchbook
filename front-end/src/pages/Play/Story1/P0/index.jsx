@@ -7,7 +7,7 @@ function LiveCam() {
     const intervalId = setInterval(() => {
       // 주기적으로 실행될 작업
       
-      url = "/assets/arrow.png"
+      url = "/user/imag.jpg"
       console.log(url);
       {/* <img src="/assets/arrow.png" alt="" /> */}
 
