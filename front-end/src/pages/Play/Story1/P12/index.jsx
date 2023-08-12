@@ -14,7 +14,7 @@ function P12() {
     }, 24000);
 
     return () => {clearTimeout(timer)}
-  }, [])
+  }, [navigate])
   
   const mission = (e) => {
     axios

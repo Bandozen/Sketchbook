@@ -14,7 +14,7 @@ function P9() {
     }, 11000);
 
     return () => {clearTimeout(timer)};
-  }, [])
+  }, [navigate])
   
 
   const mission = (e) => {
