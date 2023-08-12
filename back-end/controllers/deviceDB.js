@@ -2,6 +2,12 @@ const { User } = require("../models/users.js");
 const { Device } = require("../models/device");
 const { client } = require("../server.js");
 const otpGenerator = require("otp-generator");
+const fs = require('fs');
+
+const makrFolder = (dir) => {
+  fs.mkdirSync(dir);
+}
+
 let OTP = "0000";
 
 function issue(req, res) {
@@ -134,6 +140,14 @@ async function mission(req, res) {
   }
 }
 
+function capture(req, res) {
+  const useremail = req.user.email;
+  console.log(useremail);
+  return res.status(200).json({
+    mission: useremail,
+  });
+}
+
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
@@ -141,3 +155,4 @@ exports.start = start;
 exports.stop = stop;
 exports.ready = ready;
 exports.mission = mission;
+exports.capture = capture;
