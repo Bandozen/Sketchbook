@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from "react";
-import Wrapper from "./styles";
+import React, { useState, useEffect } from 'react';
 
-function LiveCam() {
-  const [url, setUrl] = useState("");
-  
+const P0 = () => {
+  const [imageUrl, setImageUrl] = useState("/user/image.jpg"); // 이미지의 실제 URL을 넣으세요
+
+  const fetchNewImage = () => {
+    const timestamp = new Date().getTime();
+    setImageUrl(`/user/image.jpg?timestamp=${timestamp}`);
+  };
+
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      // 주기적으로 실행될 작업      
-      // const newUrl = "/assets/arrow.png"; // 새로운 url
-      const newUrl = "/user/image.jpg"; // 새로운 url
-      setUrl(newUrl); // 상태 업데이트
-      {/* <img src="/assets/arrow.png" alt="" /> */}
-
-    }, 100); // 3초마다 작업 실행
-
-  });
+    fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
+    const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
+  }, []);
 
   return (
-    <img src={url} alt="" />
+    <div>
+      <img src={imageUrl} alt="Random Image" style={{ width:'640px', height:'480px'}} />
+    </div>
   );
-}
-
-function P0() {
-  return (
-    <Wrapper>
-      <LiveCam />
-    </ Wrapper>
-  );
-}
+};
 
 export default P0;

@@ -31,7 +31,7 @@ const ProtectedRoute = () => {
     }
 
     if (connection === "false" &&
-      (location.pathname.startsWith("/Play") ||
+      (location.pathname.startsWith("/play") ||
         location.pathname === "/check" ||
         location.pathname === "/ready")
     ) {
