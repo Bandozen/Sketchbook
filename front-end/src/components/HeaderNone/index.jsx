@@ -56,6 +56,9 @@ function HeaderNone() {
       {auth ?
 
         <div className="links">
+          <NavLink to="/play/story2/p1" className={({ isActive }) => isActive ? 'active' : undefined}>
+            체험하기
+          </NavLink>
           <NavLink to="/books" className={({ isActive }) => isActive ? 'active' : undefined}>
             책장
           </NavLink>

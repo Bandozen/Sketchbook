@@ -24,10 +24,10 @@ const Livecam = () => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    // setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
-    setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
-    camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
+    setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
+    // setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
+    // camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
   };
 
   useEffect(() => {
@@ -133,11 +133,6 @@ function Check() {
           <CheckStep
             activeStep={activeStep}
             step={3}
-            message={"음성 인식 확인하기"}
-          ></CheckStep>
-          <CheckStep
-            activeStep={activeStep}
-            step={4}
             message={"캐릭터 연동 확인하기"}
           ></CheckStep>
         </div>
@@ -161,16 +156,7 @@ function Check() {
               <button onClick={record}>위치 확인</button>
             </>
           )}
-          {activeStep === 3 && (
-            <>
-              <div className="image-wrapper">
-                <img src="/assets/char_load.png" />                
-                {/* 마이크 애니메이션 */} 
-              </div>
-              <button onClick={mission}>음성 확인</button>
-            </>
-          )}
-          {activeStep === 4 && (
+          {activeStep === 3 &&  (
             <>
               <div className="image-wrapper">
                 <img src="/assets/char_load.png" />
