@@ -23,7 +23,7 @@ function P7() {
     const [characterUrl, setcharacterUrl] = useState();
     let email;
     axios
-      .get("/api/devices/mail")
+      .get("/api/devices/position")
       .then((res) => {
         email = res.data.email;
         // 카메라 화면 : "user/[user_email]/image.jpg"
