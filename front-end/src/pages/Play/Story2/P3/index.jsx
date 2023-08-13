@@ -31,7 +31,7 @@ function P3() {
 
   return (
     <Wrapper onLoad={mission}>
-      <img src={image1} alt="" />
+      <img className="back-ground" src={image1} alt="" />
 
       <audio autoPlay>
         <source src={audio3} type="audio/mp3" />
