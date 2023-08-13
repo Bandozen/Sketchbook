@@ -18,7 +18,6 @@ function Story2() {
       });
   };
 
-
   useEffect(() => {
     const handleKeyDown = (event) => {
       const currentPath = window.location.pathname;
