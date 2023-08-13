@@ -186,6 +186,28 @@ function mail(req, res) {
   })
 }
 
+async function position(req, res) {
+  const mail = req.user.email;
+  client.select(3);
+
+  let x_diff;
+  let y_diff;
+
+  if(client.LLEN(email) < 2) {
+    x_diff = 0;
+    y_diff = 0;
+  }
+  else {
+    x_diff = client.lPop(email);
+    y_diff = client.lPop(email);
+  }
+
+  return res.status.json({
+    x_diff: x_dixx,
+    y_diff: y_diff
+  })
+}
+
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
@@ -196,3 +218,4 @@ exports.mission = mission;
 exports.record = record;
 exports.capture = capture;
 exports.mail = mail
+exports.position = position;
