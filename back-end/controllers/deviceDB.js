@@ -198,7 +198,7 @@ function mail(req, res) {
 
   return res.status(200).json({
     email: user,
-    x_diff: x_dixx,
+    x_diff: x_diff,
     y_diff: y_diff
   })
 }
