@@ -170,8 +170,8 @@ function capture(req, res) {
 
   console.log(imgUrl);
 
-  downloadImage("http://localhost:3000" + imgUrl, `character.png`, email) // local
-  // downloadImage("i9c102.p.ssafy.io" + imgUrl, `character.png`, email) // 배포
+  // downloadImage("http://localhost:3000" + imgUrl, `character.png`, email) // local
+  downloadImage("i9c102.p.ssafy.io" + imgUrl, `character.png`, email) // 배포
 
   return res.status(200).json({
     download: "succes",
