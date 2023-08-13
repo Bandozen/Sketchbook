@@ -1,51 +1,122 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Wrapper from "./styles";
 import CheckStep from "../../components/CheckStep";
-import getUserEmail from "../../utils/getUserEmail";
 import axios from "axios";
 
-let url
+let camUrl;
+
 const Livecam = () => {
-  const email = getUserEmail()
-  const [imageUrl, setImageUrl] = useState(`/user/${email}/image.jpg`);
-  // 카메라 화면 : "user/[user_email]/image.jpg"
-  // 캐릭터 : user/[user_email]/assemble.png    
+  const [imageUrl, setImageUrl] = useState(`/assets/livecam_loading.jpg`); // local
+  // const [imageUrl, setImageUrl] = useState(`/user/image.jpg`); // 배포
+  let email;
+  axios
+    .get("/api/devices/mail")
+    .then((res) => {
+      email = res.data.email;
+      // 카메라 화면 : "user/[user_email]/image.jpg"
+      // 캐릭터 : user/[user_email]/assemble.png
+      console.log(email);
+    })
+    .catch((err) => {
+      return console.log(err);
+    });
+
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`);
-    url = imageUrl 
+    setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
+    // setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
+    // camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
   };
 
   useEffect(() => {
-    fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
+    fetchNewImage(email); // 컴포넌트가 마운트될 때 이미지 가져오기
     const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   }, []);
 
-  return (
-    <img src={imageUrl} alt="RandomImage" />
-  );
+  return <img src={imageUrl} className="overlay-image" />;
+};
+
+const Charactercam = () => {
+  const [characterUrl, setcharacterUrl] = useState(`/user/char_load.png`);
+  let email;
+  axios
+    .get("/api/devices/mail")
+    .then((res) => {
+      email = res.data.email;
+      // 카메라 화면 : "user/[user_email]/image.jpg"
+      // 캐릭터 : user/[user_email]/assemble.png
+    })
+    .catch((err) => {
+      return console.log(err);
+    });
+
+  const fetchNewImage = () => {
+    const timestamp = new Date().getTime();
+    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+  };
+
+  useEffect(() => {
+    fetchNewImage(email); // 컴포넌트가 마운트될 때 이미지 가져오기
+    const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
+  }, []);
+
+  return <img src={characterUrl} className="overlay-image" />;
 };
 
 function Check() {
-  const [activeStep, setActiveStep] = useState(1);    
-  
+  const [activeStep, setActiveStep] = useState(1);
+  let navigate = useNavigate();
+
   const capture = () => {
     axios
-      .post("/api/devices/capture", { imgUrl: url })
+      .post("/api/devices/capture", { camUrl: camUrl })
       .then((res) => {
         // back에서 찍은 사진을 가져온다.
         // 찍은 사진을 모달로 띄운다.
-        setActiveStep(2)
-
+        setActiveStep(2);
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const mission = (e) => {
+    setActiveStep(activeStep + 1);
+    axios
+      .post("/api/devices/mission", {
+        flag: "1", // mission이 없으면 0 있으면 1
       })
-  }
+      .then((res) => {
+        // console.log(res.data.mission);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const record = (e) => {
+    setActiveStep(activeStep + 1);
+    axios
+      .get("/api/devices/record")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const goToReady = () => {
+    navigate("/ready");
+  };
 
   return (
-    <Wrapper>      
+    <Wrapper>
       <h1 className="check-title">시작하기 전, 확인해주세요!</h1>
       <div className="all">
         <div className="container">
@@ -71,34 +142,45 @@ function Check() {
           ></CheckStep>
         </div>
         <div>
-          {activeStep === 1 &&
+          {activeStep === 1 && (
             <>
               {/* 카메라 화면 : "user/[user_email]/image.jpg" */}
-              <Livecam />
+              <div className="image-wrapper">
+                <img src="/assets/livecam_loading.jpg" />
+                <Livecam />
+              </div>
               <button onClick={capture}>캡처하기</button>
             </>
-          }
-          {activeStep === 2 &&
+          )}
+          {activeStep === 2 && (
             <>
-              <Livecam />
-              <button onClick={capture}>2단계 확인</button>
+              <div className="image-wrapper">
+                <img src="/assets/livecam_loading.jpg" />
+                <Livecam />
+              </div>              
+              <button onClick={record}>위치 확인</button>
             </>
-          }
-          {activeStep === 3 &&
+          )}
+          {activeStep === 3 && (
             <>
-              <Livecam />
-              <button onClick={capture}>3단계 확인</button>
+              <div className="image-wrapper">
+                <img src="/assets/char_load.png" />                
+                {/* 마이크 애니메이션 */} 
+              </div>
+              <button onClick={mission}>음성 확인</button>
             </>
-          }
-          {activeStep === 4 &&
+          )}
+          {activeStep === 4 && (
             <>
-              <Livecam />
-              <button onClick={capture}>확인</button>
+              <div className="image-wrapper">
+                <img src="/assets/char_load.png" />
+                <Charactercam />
+              </div>
+              <button onClick={goToReady}>준비 완료</button>
             </>
-          }
+          )}
         </div>
       </div>
-      <button onClick={() => { setActiveStep(activeStep + 1) }}>test</button>
     </Wrapper>
   );
 }
