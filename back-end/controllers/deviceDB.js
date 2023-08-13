@@ -178,22 +178,25 @@ async function position (req, res) {
   const user = req.user.email;
 
   client.select(3);
+  const type = client.type(user)
 
-  let x_diff;
-  let y_diff;
+  let x_diff = 0;
+  let y_diff = 0;
 
-  if(await client.LLEN(user) < 2) {
-    x_diff = 0;
-    y_diff = 0;
-  }
-  else {
-    let diff = await client.lRange(user, 0, 1);
-    x_diff = parseFloat(diff[0]);
-    y_diff = parseFloat(diff[1]);
-    console.log(x_diff);
-    console.log(y_diff);
-    await client.lPop(user);
-    await client.lPop(user);
+  if(type == 'list') {
+    if(await client.LLEN(user) < 2) {
+      x_diff = 0;
+      y_diff = 0;
+    }
+    else {
+      let diff = await client.lRange(user, 0, 1);
+      x_diff = parseFloat(diff[0]);
+      y_diff = parseFloat(diff[1]);
+      console.log(x_diff);
+      console.log(y_diff);
+      await client.lPop(user);
+      await client.lPop(user);
+    }
   }
 
   return res.status(200).json({
