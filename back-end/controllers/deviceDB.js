@@ -138,14 +138,22 @@ async function mission(req, res) {
   }
 }
 
+async function record(req, res) {
+  client.select(1);
+  // await client.RPUSHX('tst', "ready");
+  await client.set(req.user.email, "record");
+  return res.status(200).json({});
+}
+
+
 async function downloadImage(url, filename, email) {
   try {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     const imageData = Buffer.from(response.data, 'binary');
 
     // 이미지를 저장할 경로 설정 (현재 디렉토리 기준)
-    const imagePath = `/server/user/${email}/${filename}`;
-    // const imagePath = path.join(__dirname , filename);
+    // const imagePath = path.join('dir','..', '/user' ,email, filename); // local
+    const imagePath = `/server/user/${email}/${filename}`; // 배포
 
     // 파일 저장
     fs.writeFileSync(imagePath, imageData);
@@ -157,17 +165,24 @@ async function downloadImage(url, filename, email) {
 }
 
 function capture(req, res) {
-  const imgUrl = req.body.imgUrl;
+  const imgUrl = req.body.camUrl;
   const email = req.user.email;
 
   console.log(imgUrl);
 
-  // downloadImage("http://localhost:3000" + imgUrl, `character.png`, email)
-  downloadImage("i9c102.p.ssafy.io" + imgUrl, `character.png`, email)
+  downloadImage("http://localhost:3000" + imgUrl, `character.png`, email) // local
+  // downloadImage("i9c102.p.ssafy.io" + imgUrl, `character.png`, email) // 배포
 
   return res.status(200).json({
     download: "succes",
   });
+}
+
+function mail(req, res) {
+  const user = req.user.email;
+  return res.status(200).json({
+    email: user
+  })
 }
 
 exports.issue = issue;
@@ -177,4 +192,6 @@ exports.start = start;
 exports.stop = stop;
 exports.ready = ready;
 exports.mission = mission;
+exports.record = record;
 exports.capture = capture;
+exports.mail = mail
