@@ -1,5 +1,9 @@
 import Wrapper from "./styles";
 import image1 from "../../../../play-background/엄마는 카멜레온_7.gif";
+import png1 from "../../../../play-png/7_잔소리1_숙제해.png";
+import png2 from "../../../../play-png/7_잔소리3_빨리빨리.png";
+import png3 from "../../../../play-png/7_잔소리5_씻어라.png";
+
 import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
 // import Livecam from "../../../../components/Livecam";
@@ -43,7 +47,7 @@ function P7() {
 
     const fetchNewImage = () => {
       const timestamp = new Date().getTime();
-      setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+      // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
       // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
     };
 
@@ -59,17 +63,22 @@ function P7() {
 } />;
   };
 
-return (
-  <Wrapper onLoad={mission}>
-    <img className="back-ground" src={image1} alt="" />
-    {/* 캐릭터 : user/[user_email]/assemble.png */}
-    {/* <Livecam imageName = {"assemble.png"}/> */}
-    <Charactercam className="character-cam" />
-    <audio autoPlay>
-      <source src={audio7} type="audio/mp3" />
-    </audio>
-  </Wrapper>
-);
+  return (
+    <Wrapper onLoad={mission}>
+      <img className="back-ground" src={image1} alt="" />
+      {/* 캐릭터 : user/[user_email]/assemble.png */}
+      {/* <Livecam imageName = {"assemble.png"}/> */}
+      <Charactercam className="character-cam" />
+
+        <img className="balloon study" src={png1} alt="숙제해" />
+        <img className="balloon hurry" src={png2} alt="잔소리2" />
+        <img className="balloon wash" src={png3} alt="잔소리3" />
+
+      <audio autoPlay>
+        <source src={audio7} type="audio/mp3" />
+      </audio>
+    </Wrapper>
+  );
 }
 
 export default P7;
