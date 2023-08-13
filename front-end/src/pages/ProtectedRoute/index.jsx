@@ -37,7 +37,7 @@ const ProtectedRoute = () => {
     ) {
       openModal("기기 연결이 필요해요.", "/connect")
     } else if (connection === "true" && location.pathname === "/connect") {
-      openModal("이미 기기가 연결되었어요.", "/profile")
+      openModal("이미 기기가 연결되었어요.", "/books")
     }
   }, [auth, connection, location.pathname, navigate]);
 
