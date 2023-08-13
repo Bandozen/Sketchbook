@@ -20,7 +20,7 @@ function P7() {
   };
 
   const Charactercam = () => {
-    const [characterUrl, setcharacterUrl] = useState(`/assets/char_load.png`);
+    const [characterUrl, setcharacterUrl] = useState();
     let email;
     axios
       .get("/api/devices/mail")
