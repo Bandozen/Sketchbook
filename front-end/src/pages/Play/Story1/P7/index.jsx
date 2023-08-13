@@ -6,8 +6,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function P7() {
-  const [bottom, setBottom] = useState("0px");
-  const [left, setLeft] = useState("0px");
+  const [bottom, setBottom] = useState(0);
+  const [left, setLeft] = useState(0);
 
   const mission = (e) => {
     axios
@@ -32,8 +32,10 @@ function P7() {
         email = res.data.email;
         // 카메라 화면 : "user/[user_email]/image.jpg"
         // 캐릭터 : user/[user_email]/assemble.png
-        x_diff = res.data.x_diff;
-        y_diff = res.data.y_diff;
+        const x_diff = res.data.x_diff;
+        const y_diff = res.data.y_diff;
+
+        console.log(x_diff);
 
         setBottom(bottom + y_diff);
         setLeft(left + x_diff);
@@ -61,7 +63,7 @@ function P7() {
   };
 
 return (
-  <Wrapper onLoad={mission}>
+  <Wrapper>
     <img className="back-ground" src={image1} alt="" />
     {/* 캐릭터 : user/[user_email]/assemble.png */}
     {/* <Livecam imageName = {"assemble.png"}/> */}

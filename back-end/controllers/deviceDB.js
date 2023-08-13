@@ -178,13 +178,14 @@ async function position (req, res) {
   const user = req.user.email;
 
   client.select(3);
-  const type = client.type(user)
+  const type = await client.type(user)
 
   let x_diff = 0;
   let y_diff = 0;
+  console.log(type)
 
   if(type == 'list') {
-    if(await client.LLEN(user) < 2) {
+    if(await client.LLEN(user) <= 2) {
       x_diff = 0;
       y_diff = 0;
     }
