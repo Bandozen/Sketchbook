@@ -31,8 +31,8 @@ function P10() {
   };
 
   return (
-    <Wrapper onLoad={mission}>
-      <img className="back-ground" src={image1} alt="" />
+    <Wrapper>
+      <img className="back-ground" src={image1} alt="" onLoad={mission} />
       <audio autoPlay>
         <source src={audio10} type="audio/mp3" />
       </audio>

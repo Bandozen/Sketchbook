@@ -30,8 +30,8 @@ function P2() {
   };
 
   return (
-    <Wrapper onLoad={mission}>
-      <img className="back-ground" src={image2} alt="" />
+    <Wrapper>
+      <img className="back-ground" src={image2} alt="" onLoad={mission} />
 
       <audio autoPlay>
         <source src={audio2} type="audio/mp3" />

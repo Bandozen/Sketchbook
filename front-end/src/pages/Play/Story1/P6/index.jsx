@@ -13,7 +13,23 @@ function P6() {
       navigate("/play/story1/p7");
     }, 17000);
 
-    return () => {clearTimeout(timer);}
+    const axiosTimer = setTimeout(() => {
+      axios
+      .post("/api/devices/mission", {
+        flag: "1", // mission이 없으면 0 있으면 1
+      })
+      .then((res) => {
+        // console.log(res.data.mission);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }, 6000)
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(axiosTimer);
+    }
   }, [navigate])
   
 
@@ -31,8 +47,8 @@ function P6() {
   };
 
   return (
-    <Wrapper onLoad={mission}>
-      <img className="back-ground" src={image1} alt="" />
+    <Wrapper>
+      <img className="back-ground" src={image1} alt="" onLoad={mission} />
 
       <audio autoPlay>
         <source src={audio6} type="audio/mp3" />

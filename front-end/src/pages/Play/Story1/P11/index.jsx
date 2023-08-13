@@ -19,7 +19,7 @@ function P11() {
   const mission = (e) => {
     axios
       .post("/api/devices/mission", {
-        flag: "0", // mission이 없으면 0 있으면 1
+        flag: "1", // 해당페이지는 미션은 없으나 카메라 구동준비를 위해 flag 1로 지정
       })
       .then((res) => {
         // console.log(res.data.mission);
@@ -30,8 +30,8 @@ function P11() {
   };
 
   return (
-    <Wrapper onLoad={mission}>
-      <img className="back-ground" src={image} alt="" />
+    <Wrapper>
+      <img className="back-ground" src={image} alt="" onLoad={mission} />
       <audio autoPlay>
         <source src={audio11} type="audio/mp3" />
       </audio>
