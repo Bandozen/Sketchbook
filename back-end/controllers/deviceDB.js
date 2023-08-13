@@ -31,7 +31,7 @@ function issue(req, res) {
 }
 
 async function checkConnect(req, res) {
-  client.select(1);
+  await client.select(1);
   client.set(req.user.email, 'ready');
   const flag = await client.get(OTP);
   
@@ -45,7 +45,6 @@ async function checkConnect(req, res) {
             err,
           });
         }
-        client.select(1);
         client.del(OTP);
         res.cookie("isConnected", user.isConnected).status(200).json({
           // isConnected: user.isConnected,
@@ -67,23 +66,20 @@ async function checkConnect(req, res) {
   }
 }
 
-function disconnect(req, res) {
+async function disconnect(req, res) {
+  await client.select(1)
   if (req.user.email == "connect@test.com") {
     res.status(200).json({
       success: true,
     });
   } else {
-    User.findOneAndUpdate(
-      { _id: req.user._id },
-      { isConnected: false },
-      (err, user) => {
+    User.findOneAndUpdate( { _id: req.user._id }, { isConnected: false }, (err, user) => {
         if (err) {
           return res.json({
             success: false,
             err,
           });
         }
-    client.select(1)
     client.set(req.user.email, 'logout');
 
         res
@@ -99,21 +95,21 @@ function disconnect(req, res) {
 }
 
 async function start(req, res) {
-  client.select(1);
+  await client.select(1);
   // await client.RPUSHX("tst", "start");
   await client.set(req.user.email,'start');
   return res.status(200).json({});
 }
 
 async function stop(req, res) {
-  client.select(1);
+  await client.select(1);
   // await client.RPUSHX('tst', "stop");
   await client.set(req.user.email, "stop");
   return res.status(200).json({});
 }
 
 async function ready(req, res) {
-  client.select(1);
+  await client.select(1);
   // await client.RPUSHX('tst', "ready");
   await client.set(req.user.email, "ready");
   return res.status(200).json({});
@@ -122,18 +118,15 @@ async function ready(req, res) {
 async function mission(req, res) {
   const flag = req.body.flag;
 
-  // 미션 관련은 redis 1번 DB에서 관리
-  client.select(1);
+  await client.select(1);
 
   if (flag == "1") {
-    // client.RPUSHX('tst', "mission");
     client.set(req.user.email, "mission");
     return res.status(200).json({
       email: req.user.email,
       mission: true,
     });
   } else {
-    // client.RPUSHX('tst', "story");
     client.set(req.user.email, "story");
     return res.status(200).json({
       mission: false,
@@ -177,22 +170,22 @@ function capture(req, res) {
 async function position (req, res) {
   const user = req.user.email;
 
-  client.select(3);
+  await client.select(4);
   const type = await client.type(user)
 
   let x_diff = 0;
   let y_diff = 0;
   console.log(type)
 
-  if(type == 'list') {
+  if(type === 'list') {
     if(await client.LLEN(user) <= 2) {
       x_diff = 0;
       y_diff = 0;
     }
     else {
       let diff = await client.lRange(user, 0, 1);
-      x_diff = parseFloat(diff[0]);
-      y_diff = parseFloat(diff[1]);
+      x_diff = diff[0];
+      y_diff = diff[1];
       console.log(x_diff);
       console.log(y_diff);
       await client.lPop(user);

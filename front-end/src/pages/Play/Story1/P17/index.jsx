@@ -23,8 +23,8 @@ function P17() {
   
 
   return (
-    <Wrapper onLoad={mission}>
-      <img className="back-ground" src={image17} alt="" />
+    <Wrapper>
+      <img className="back-ground" src={image17} alt="" onLoad={mission} />
       <audio autoPlay>
         <source src={audio17} type="audio/mp3" />
       </audio>
