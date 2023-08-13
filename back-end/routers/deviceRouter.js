@@ -11,7 +11,6 @@ deviceRouter.route('/disconnect').get(Auth, DeviceDB.disconnect);
 deviceRouter.route('/start').get(Auth, DeviceDB.start);
 deviceRouter.route('/stop').get(Auth, DeviceDB.stop);
 deviceRouter.route('/ready').get(Auth, DeviceDB.ready);
-deviceRouter.route('/record').get(Auth, DeviceDB.record);
 deviceRouter.route('/mission').post(Auth, DeviceDB.mission);
 deviceRouter.route('/capture').post(Auth, DeviceDB.capture);
 deviceRouter.route('/position').get(Auth, DeviceDB.position);

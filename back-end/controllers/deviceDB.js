@@ -31,9 +31,10 @@ function issue(req, res) {
 }
 
 async function checkConnect(req, res) {
+  client.select(1);
   client.set(req.user.email, 'ready');
   const flag = await client.get(OTP);
-
+  
   if (flag === "true") {
     User.findOneAndUpdate(
       { _id: req.user._id },
@@ -44,6 +45,7 @@ async function checkConnect(req, res) {
             err,
           });
         }
+        client.select(1);
         client.del(OTP);
         res.cookie("isConnected", user.isConnected).status(200).json({
           // isConnected: user.isConnected,
@@ -81,6 +83,7 @@ function disconnect(req, res) {
             err,
           });
         }
+    client.select(1)
     client.set(req.user.email, 'logout');
 
         res
@@ -120,7 +123,7 @@ async function mission(req, res) {
   const flag = req.body.flag;
 
   // 미션 관련은 redis 1번 DB에서 관리
-  await client.select(1);
+  client.select(1);
 
   if (flag == "1") {
     // client.RPUSHX('tst', "mission");
@@ -137,14 +140,6 @@ async function mission(req, res) {
     });
   }
 }
-
-async function record(req, res) {
-  client.select(1);
-  // await client.RPUSHX('tst', "ready");
-  await client.set(req.user.email, "record");
-  return res.status(200).json({});
-}
-
 
 async function downloadImage(url, filename, email) {
   try {
@@ -192,8 +187,13 @@ async function position (req, res) {
     y_diff = 0;
   }
   else {
-    x_diff = await client.lPop(user);
-    y_diff = await client.lPop(user);
+    let diff = await client.lRange(user, 0, 1);
+    x_diff = parseFloat(diff[0]);
+    y_diff = parseFloat(diff[1]);
+    console.log(x_diff);
+    console.log(y_diff);
+    await client.lPop(user);
+    await client.lPop(user);
   }
 
   return res.status(200).json({
@@ -203,28 +203,6 @@ async function position (req, res) {
   })
 }
 
-// async function position(req, res) {
-//   const mail = req.user.email;
-//   client.select(3);
-
-//   let x_diff;
-//   let y_diff;
-
-//   if(client.LLEN(email) < 2) {
-//     x_diff = 0;
-//     y_diff = 0;
-//   }
-//   else {
-//     x_diff = client.lPop(email);
-//     y_diff = client.lPop(email);
-//   }
-
-//   return res.status.json({
-//     x_diff: x_dixx,
-//     y_diff: y_diff
-//   })
-// }
-
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
@@ -232,7 +210,5 @@ exports.start = start;
 exports.stop = stop;
 exports.ready = ready;
 exports.mission = mission;
-exports.record = record;
 exports.capture = capture;
-// exports.mail = mail
 exports.position = position;
