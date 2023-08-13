@@ -7,8 +7,8 @@ import axios from "axios";
 let camUrl;
 
 const Livecam = () => {
-  const [imageUrl, setImageUrl] = useState(`/assets/livecam_loading.jpg`); // local
-  // const [imageUrl, setImageUrl] = useState(`/user/image.jpg`); // 배포
+  const [imageUrl, setImageUrl] = useState(`/assets/livecam_loading.jpg`);
+  // const [imageUrl, setImageUrl] = useState(`/user/image.jpg`);
   let email;
   axios
     .get("/api/devices/mail")
@@ -24,10 +24,10 @@ const Livecam = () => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
-    // setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
-    // camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
+    // setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    // camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
+    setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
+    camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Livecam = () => {
 };
 
 const Charactercam = () => {
-  const [characterUrl, setcharacterUrl] = useState(`/user/char_load.png`);
+  const [characterUrl, setcharacterUrl] = useState(`/assets/char_load.png`);
   let email;
   axios
     .get("/api/devices/mail")
@@ -55,8 +55,8 @@ const Charactercam = () => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useEffect(() => {
