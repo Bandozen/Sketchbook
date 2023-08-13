@@ -1,10 +1,22 @@
 import Wrapper from './styles';
 import Button from "react-bootstrap/Button";
+import axios from 'axios'
 
 function Ready() {
+  const ready = (e) => {
+    axios
+      .get("/api/devices/ready")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
-      <Wrapper>
+      <Wrapper onLoad={ready}>
         <div className='ready-container'>
           <div className='ready-message'>
             <h2>준비가 됐다면</h2>

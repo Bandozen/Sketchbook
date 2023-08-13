@@ -3,10 +3,8 @@ const { Device } = require("../models/device");
 const { client } = require("../server.js");
 const otpGenerator = require("otp-generator");
 const fs = require('fs');
-
-const makrFolder = (dir) => {
-  fs.mkdirSync(dir);
-}
+const axios = require('axios');
+const path = require('path');
 
 let OTP = "0000";
 
@@ -140,13 +138,14 @@ async function mission(req, res) {
   }
 }
 
-async function downloadImage(url, filename) {
+async function downloadImage(url, filename, email) {
   try {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     const imageData = Buffer.from(response.data, 'binary');
 
     // 이미지를 저장할 경로 설정 (현재 디렉토리 기준)
-    const imagePath = `${filename}`;
+    const imagePath = `/server/user/${email}/${filename}`;
+    // const imagePath = path.join(__dirname , filename);
 
     // 파일 저장
     fs.writeFileSync(imagePath, imageData);
@@ -158,13 +157,16 @@ async function downloadImage(url, filename) {
 }
 
 function capture(req, res) {
-  const useremail = req.user.email;
-  const imgUrl = req.data.imageUrl;
+  const imgUrl = req.body.imgUrl;
+  const email = req.user.email;
 
-  downloadImage(imgUrl, character.png)
+  console.log(imgUrl);
+
+  // downloadImage("http://localhost:3000" + imgUrl, `character.png`, email)
+  downloadImage("i9c102.p.ssafy.io" + imgUrl, `character.png`, email)
 
   return res.status(200).json({
-    download: success
+    download: "succes",
   });
 }
 

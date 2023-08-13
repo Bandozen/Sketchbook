@@ -1,26 +1,44 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Wrapper from "./styles";
 import CheckStep from "../../components/CheckStep";
+import getUserEmail from "../../utils/getUserEmail";
 import axios from "axios";
-import Livecam from "../../components/Livecam";
+
+let url
+const Livecam = () => {
+  // const email = getUserEmail()
+  const email = "qaz1234@wsx.edc";// 수정예정
+  const [imageUrl, setImageUrl] = useState(`/user/${email}/image.jpg`);
+  // 카메라 화면 : "user/[user_email]/image.jpg"
+  // 캐릭터 : user/[user_email]/assemble.png    
+  const fetchNewImage = () => {
+    const timestamp = new Date().getTime();
+    setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`);
+    url = imageUrl 
+  };
+
+  useEffect(() => {
+    fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
+    const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
+  }, []);
+
+  return (
+    <img src={imageUrl} alt="RandomImage" />
+  );
+};
 
 function Check() {
-  const [activeStep, setActiveStep] = useState(1);
-  const [imageUrl, setImageUrl] = useState("");
+  const [activeStep, setActiveStep] = useState(1);    
   
-  const getImageUrl = (url) => {
-    // 잘 가져와지는지 확인하기 위한 console.log 
-    // console.log(url);
-    setImageUrl(url);
-  }
-
   const capture = () => {
     axios
-      .get("/api/devices/capture")
+      .post("/api/devices/capture", { imgUrl: url })
       .then((res) => {
         // back에서 찍은 사진을 가져온다.
         // 찍은 사진을 모달로 띄운다.
-        console.log(res.mission);
+        setActiveStep(2)
+
       })
       .catch((err) => {
         console.log(err);
@@ -28,7 +46,7 @@ function Check() {
   }
 
   return (
-    <Wrapper>
+    <Wrapper>      
       <h1 className="check-title">시작하기 전, 확인해주세요!</h1>
       <div className="all">
         <div className="container">
@@ -57,7 +75,7 @@ function Check() {
           {activeStep === 1 &&
             <>
               {/* 카메라 화면 : "user/[user_email]/image.jpg" */}
-              <Livecam imageName={"image.jpg"} getImageUrl={getImageUrl} />
+              <Livecam />
               <button onClick={capture}>캡처하기</button>
             </>
           }

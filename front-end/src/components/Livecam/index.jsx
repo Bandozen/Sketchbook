@@ -10,7 +10,8 @@ const Livecam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setImageUrl(`/assets/arrow.png?timestamp=${timestamp}`);
+    setImageUrl(`/user/${userEmail}/${props.imageName}?timestamp=${timestamp}`);
+    console.log(imageUrl);
     // 이미지 url 상위 컴포넌트로 전송하기
     props.getImageUrl(imageUrl);
   };
