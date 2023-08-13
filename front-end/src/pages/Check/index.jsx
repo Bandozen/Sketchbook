@@ -24,10 +24,10 @@ const Livecam = () => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
-    // setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
-    // camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
+    // setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    // camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
+    setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
+    camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
   };
 
   useEffect(() => {
@@ -99,18 +99,6 @@ function Check() {
       });
   };
 
-  const record = (e) => {
-    setActiveStep(activeStep + 1);
-    axios
-      .get("/api/devices/record")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const goToReady = () => {
     navigate("/ready");
   };
@@ -153,7 +141,7 @@ function Check() {
                 <img src="/assets/livecam_loading.jpg" />
                 <Livecam />
               </div>              
-              <button onClick={record}>위치 확인</button>
+              <button onClick={mission}>위치 확인</button>
             </>
           )}
           {activeStep === 3 &&  (
