@@ -9,10 +9,10 @@ const Wrapper = styled.div`
     position: relative;
   }
 
-  img {
-    width: 100%;
-    background-size: cover;
-  }
+  // img {
+  //   width: 100%;
+  //   background-size: cover;
+  // }
 
   .image-button {
     position: absolute;

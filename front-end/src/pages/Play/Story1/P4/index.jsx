@@ -30,7 +30,7 @@ function P4() {
 
   return (
     <Wrapper onLoad={mission}>
-      <img src={image1} alt="" />
+      <img className="back-ground" src={image1} alt="" />
 
       <audio autoPlay>
         <source src={audio4} type="audio/mp3" />

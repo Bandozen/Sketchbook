@@ -20,7 +20,7 @@ function P8() {
 
   return (
     <Wrapper onLoad={mission}>
-      <img src={image1} alt="" />
+      <img className="back-ground" src={image1} alt="" />
       <audio autoPlay>
         <source src={audio8} type="audio/mp3" />
       </audio>
