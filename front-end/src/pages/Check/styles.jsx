@@ -56,6 +56,17 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
 
+  .image-wrapper {
+    position: relative;
+  }
+  
+  .overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* 더 높은 값으로 조정하여 겹치는 순서를 변경할 수 있음 */
+  }
+
 `;
 
 export default Wrapper;
