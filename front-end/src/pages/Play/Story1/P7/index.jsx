@@ -6,8 +6,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function P7() {
-  const [bottom, setBottom] = useState("0px");
-  const [left, setLeft] = useState("0px");
+  const [bottom, setBottom] = useState(0);
+  const [left, setLeft] = useState(0);
 
   const mission = (e) => {
     axios
@@ -28,15 +28,14 @@ function P7() {
     axios
       .get("/api/devices/position")
       .then((res) => {
-        console.log(res.data);
         email = res.data.email;
         // 카메라 화면 : "user/[user_email]/image.jpg"
         // 캐릭터 : user/[user_email]/assemble.png
-        x_diff = res.data.x_diff;
-        y_diff = res.data.y_diff;
+        const x_diff = res.data.x_diff;
+        const y_diff = res.data.y_diff;
 
-        setBottom(bottom + y_diff);
-        setLeft(left + x_diff);
+        setBottom((prevBottom) => prevBottom + y_diff);
+        setLeft((prevLeft) => prevLeft + x_diff);
       })
       .catch((err) => {
         return console.log("에러입니다.", err);
@@ -48,14 +47,14 @@ function P7() {
       // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
     };
 
-    useEffect(() => {
+    useEffect(() => { 
       fetchNewImage(email); // 컴포넌트가 마운트될 때 이미지 가져오기
       const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
       return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
     }, [email]);
 
     return <img src={characterUrl} alt="" style={{
-      left: left, bottom: bottom, position: "absolute", zIndex: 1
+      left: `${left}px`, bottom: `${bottom}px`, position: "absolute", zIndex: 1
   }
 } />;
   };
