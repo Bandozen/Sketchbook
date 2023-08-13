@@ -32,7 +32,7 @@ function P15() {
 
   return (
     <Wrapper onLoad={mission}>
-      <img src={image15} alt="" />
+      <img className="back-ground" src={image15} alt="" />
       <audio autoPlay>
         <source src={audio15} type="audio/mp3" />
       </audio>

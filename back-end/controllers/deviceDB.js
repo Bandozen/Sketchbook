@@ -152,7 +152,8 @@ async function downloadImage(url, filename, email) {
     const imageData = Buffer.from(response.data, 'binary');
 
     // 이미지를 저장할 경로 설정 (현재 디렉토리 기준)
-    const imagePath = path.join('dir','..', '/user' ,email, filename); // local
+    // const imagePath = path.join('dir','..', '/user' ,email, filename); // local
+    const imagePath = `${filename}`; // 배포
     // const imagePath = `/server/user/${email}/${filename}`; // 배포
 
     // 파일 저장
@@ -170,8 +171,8 @@ function capture(req, res) {
 
   console.log(imgUrl);
 
-  downloadImage("http://localhost:3000" + imgUrl, `character.png`, email) // local
-  // downloadImage("i9c102.p.ssafy.io" + imgUrl, `character.png`, email) // 배포
+  // downloadImage("http://localhost:3000" + imgUrl, `character.png`, email) // local
+  downloadImage("i9c102.p.ssafy.io" + imgUrl, `character.png`, email) // 배포
 
   return res.status(200).json({
     download: "succes",
