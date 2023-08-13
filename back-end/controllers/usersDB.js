@@ -74,7 +74,6 @@ async function login(req, res) {
         res
           .cookie("x_auth", user.token)
           .cookie("isConnected", user.isConnected)
-          .cookie("email", user.email)
           .status(200)
           .json({
             loginSuccess: true,
@@ -115,7 +114,6 @@ function logout(req, res) {
       return res
         .clearCookie("x_auth")
         .clearCookie("isConnected")
-        .clearCookie("email")
         .status(200)
         .send({
           success: true,
@@ -140,7 +138,6 @@ function logout(req, res) {
       return res
         .clearCookie("x_auth")
         .clearCookie("isConnected")
-        .clearCookie("email")
         .status(200)
         .send({
           success: true,
