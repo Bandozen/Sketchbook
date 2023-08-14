@@ -84,7 +84,11 @@ function Check() {
         console.log(err);
       });
   };
-
+  
+  const sound = () => {
+    setActiveStep(activeStep + 1);    
+  }
+  
   const mission = (e) => {
     setActiveStep(activeStep + 1);
     axios
@@ -121,6 +125,11 @@ function Check() {
           <CheckStep
             activeStep={activeStep}
             step={3}
+            message={"스피커 소리 확인하기"}
+          ></CheckStep>
+          <CheckStep
+            activeStep={activeStep}
+            step={4}
             message={"캐릭터 연동 확인하기"}
           ></CheckStep>
         </div>
@@ -149,6 +158,14 @@ function Check() {
             </>
           )}
           {activeStep === 3 &&  (
+            <>
+              <div className="image-wrapper">
+                <img src="/assets/char_load.png" />
+              </div>
+              <button onClick={sound}>준비 완료</button>
+            </>
+          )}
+          {activeStep === 4 &&  (
             <>
               <div className="image-wrapper">
                 <img src="/assets/char_load.png" />
