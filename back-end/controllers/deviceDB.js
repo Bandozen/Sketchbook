@@ -232,7 +232,7 @@ async function clear(req, res) {
   client.del(user);
 
   return res.status(200).json({
-    success: true,
+    email: user,
   })
 }
 
