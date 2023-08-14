@@ -5,11 +5,12 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react";
 
+let email;
+
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
   const { setBottom, setLeft } = props;
 
-  let email;
 
   useEffect(() => {
     // 위치 정보 업데이트 함수
