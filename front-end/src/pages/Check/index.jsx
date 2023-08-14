@@ -121,6 +121,11 @@ function Check() {
           <CheckStep
             activeStep={activeStep}
             step={3}
+            message={"스피커 소리 확인하기"}
+          ></CheckStep>
+          <CheckStep
+            activeStep={activeStep}
+            step={4}
             message={"캐릭터 연동 확인하기"}
           ></CheckStep>
         </div>
@@ -149,6 +154,15 @@ function Check() {
             </>
           )}
           {activeStep === 3 &&  (
+            <>
+              <div className="image-wrapper">
+                <img src="/assets/char_load.png" />
+                <Charactercam />
+              </div>
+              <button onClick={mission}>준비 완료</button>
+            </>
+          )}
+          {activeStep === 4 &&  (
             <>
               <div className="image-wrapper">
                 <img src="/assets/char_load.png" />
