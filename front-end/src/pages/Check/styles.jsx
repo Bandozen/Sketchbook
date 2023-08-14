@@ -13,14 +13,12 @@ const Wrapper = styled.div`
 
   button:hover {
     background-color: #ffffff;
-    border: solid 1px #9d4fe0;
+    border: solid 2px #9d4fe0;
     color: black;
   }
   
   button {
-    // display: flex;
-    // align-items: center;
-    border: solid 1px #9d4fe0;
+    border: solid 2px #9d4fe0;
     padding: 8px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -44,6 +42,10 @@ const Wrapper = styled.div`
 
   .image-wrapper {
     position: relative;
+    border: solid 2px #9d4fe0;
+    border-radius: 10px;
+    margin: 30px;
+    padding: 5px;
   }
 
   // 라이브캠 로딩 페이지
@@ -63,6 +65,23 @@ const Wrapper = styled.div`
     left: 0;
     bottom: 0;
     z-index: 9999;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading_dot {
+    position: absolute;
+    left: 45%;
+    bottom: 15%;
+    z-index: 9999;
+    animation: spin 2s linear infinite;
   }
 
   .play-btn {
