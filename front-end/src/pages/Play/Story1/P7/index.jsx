@@ -9,22 +9,22 @@ import axios from "axios";
 // import Livecam from "../../../../components/Livecam";
 import { useEffect, useState } from "react";
 
-function P7() {  
+function P7() {
   const mission = (e) => {
     axios
-    .post("/api/devices/mission", {
-      flag: "1", // mission이 없으면 0 있으면 1
-    })
-    .then((res) => {
-      // console.log(res.data.mission);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .post("/api/devices/mission", {
+        flag: "1", // mission이 없으면 0 있으면 1
+      })
+      .then((res) => {
+        // console.log(res.data.mission);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
-  
+
   const Charactercam = () => {
     const [characterUrl, setcharacterUrl] = useState();
     let email;
@@ -50,7 +50,7 @@ function P7() {
       // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
     };
 
-    useEffect(() => { 
+    useEffect(() => {
       fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
       const interval = setInterval(fetchNewImage, 10000); // 200ms마다 이미지 업데이트
       return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
@@ -63,14 +63,14 @@ function P7() {
 
   return (
     <Wrapper >
-      <img className="back-ground" src={image1} alt="" onLoad={mission}/>      
+      <img className="back-ground" src={image1} alt="" onLoad={mission} />
       <div className="character-cam" style={{ left: `${left}px`, bottom: `${bottom}px`, position: "absolute", zIndex: 1 }} >
         <Charactercam />
       </div>
 
-        <img className="balloon study" src={png1} alt="숙제해" />
-        <img className="balloon hurry" src={png2} alt="잔소리2" />
-        <img className="balloon wash" src={png3} alt="잔소리3" />
+      <img className="balloon study" src={png1} alt="숙제해" />
+      <img className="balloon hurry" src={png2} alt="빨리빨리" />
+      <img className="balloon wash" src={png3} alt="씻어라" />
 
       <audio autoPlay>
         <source src={audio7} type="audio/mp3" />
