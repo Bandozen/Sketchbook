@@ -131,6 +131,8 @@ function logout(req, res) {
           err,
         });
       }
+    
+    client.select(1);
     client.set(req.user.email, 'logout');
 
 
