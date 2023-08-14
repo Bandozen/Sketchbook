@@ -61,6 +61,15 @@ function P12() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    axios
+      .get("/api/devices/cleardiff")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+    }, [])
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/play/story1/p13");
     }, 24000);

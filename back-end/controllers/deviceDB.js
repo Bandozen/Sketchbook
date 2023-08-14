@@ -113,8 +113,8 @@ async function start(req, res) {
 
 async function stop(req, res) {
   await client.select(1);
-  await client.set(req.user.email, "stop");
-
+  await client.set(req.user.email, "stop");   
+  
   await client.select(3);
   await client.del(req.user.email);
 
@@ -225,14 +225,25 @@ async function mail(req, res) {
   });
 }
 
-async function clear(req, res) {
+async function cleardiff(req, res) {
   const user = req.user.email;
 
   await client.select(4);
   client.del(user);
 
   return res.status(200).json({
-    success: true,
+    email: user,
+  })
+}
+
+async function clearcord(req, res) {
+  const user = req.user.email;
+
+  await client.select(3);
+  client.del(user);
+
+  return res.status(200).json({
+    email: user,
   })
 }
 
@@ -246,4 +257,5 @@ exports.mission = mission;
 exports.capture = capture;
 exports.position = position;
 exports.mail = mail;
-exports.clear = clear;
+exports.cleardiff = cleardiff;
+exports.clearcord = clearcord;

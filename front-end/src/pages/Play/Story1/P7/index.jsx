@@ -45,8 +45,8 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
@@ -63,6 +63,15 @@ function P7() {
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
 
+  useEffect(() => {
+    axios
+      .get("/api/devices/cleardiff")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+    }, [])
+    
   useEffect(() => {
     const studyElement = document.getElementById("study");
     const character = document.getElementById("character");
