@@ -7,7 +7,7 @@ import png3 from "../../../../play-png/7_잔소리5_씻어라.png";
 import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
 // import Livecam from "../../../../components/Livecam";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 function P7() {  
   const mission = (e) => {
@@ -50,7 +50,7 @@ function P7() {
       // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
     };
 
-    useEffect(() => { 
+    useLayoutEffect(() => { 
       fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
       const interval = setInterval(fetchNewImage, 10000); // 200ms마다 이미지 업데이트
       return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
