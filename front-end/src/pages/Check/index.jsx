@@ -84,7 +84,11 @@ function Check() {
         console.log(err);
       });
   };
-
+  
+  const sound = () => {
+    setActiveStep(activeStep + 1);    
+  }
+  
   const mission = (e) => {
     setActiveStep(activeStep + 1);
     axios
@@ -157,9 +161,8 @@ function Check() {
             <>
               <div className="image-wrapper">
                 <img src="/assets/char_load.png" />
-                <Charactercam />
               </div>
-              <button onClick={mission}>준비 완료</button>
+              <button onClick={sound}>준비 완료</button>
             </>
           )}
           {activeStep === 4 &&  (
