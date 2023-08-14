@@ -70,7 +70,6 @@ const Charactercam = () => {
 };
 
 function Check() {
-  const [playing, setPlaying] = useState(false);
   const [activeStep, setActiveStep] = useState(1);
   const audioRef = useRef(new Audio(check_audio));
   const navigate = useNavigate();
@@ -88,21 +87,6 @@ function Check() {
       });
   };
 
-  const sound = () => {
-    setActiveStep(4);
-  };
-
-  const start = () => {
-    audioRef.current.play();
-    setPlaying(true);
-  };
-
-  const stop = () => {
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-    setPlaying(false);
-  };
-
   const mission = (e) => {
     setActiveStep(3);
     axios
@@ -116,6 +100,18 @@ function Check() {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (activeStep === 3) {
+      audioRef.current.play(); // 스피커 사운드 시작
+      // activeStep이 3일 때 7초 후에 자동으로 activeStep을 4로 변경하고 스피커 사운드 시작
+      const timer = setTimeout(() => {
+        setActiveStep(4);
+      }, 7000); // 7초
+
+      return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머 클리어
+    }
+  }, [activeStep]);
 
   const goToReady = () => {
     navigate("/ready");
@@ -180,16 +176,7 @@ function Check() {
             <>
               <div className="image-wrapper">
                 <img src="/assets/check_speaker.jpg" alt=""/>
-                <div>
-                  <button
-                    className="play-btn"
-                    type="button"
-                    onClick={playing ? stop : start}
-                  >
-                    {playing ? "멈추기" : "재생하기"}
-                  </button>
-                  <button onClick={sound}>스피커 확인</button>
-                </div>
+                <img className="loading_dot" src="/assets/loading_dot.png" alt=""/>
               </div>
             </>
           )}
