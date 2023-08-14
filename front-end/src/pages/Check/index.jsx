@@ -14,10 +14,7 @@ const Livecam = () => {
   axios
     .get("/api/devices/mail")
     .then((res) => {
-      email = res.data.email;
-      // 카메라 화면 : "user/[user_email]/image.jpg"
-      // 캐릭터 : user/[user_email]/assemble.png
-      console.log(email);
+      email = res.data.email;  
     })
     .catch((err) => {
       return console.log(err);
