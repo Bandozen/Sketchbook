@@ -18,7 +18,7 @@ import axios from "axios";
 
 function Books() {
   axios
-    .get("/api/devices/cleardiff")
+    .get("/api/devices/clearcord")
     .then()
     .catch((err) => {
       return console.log("에러입니다.", err);
