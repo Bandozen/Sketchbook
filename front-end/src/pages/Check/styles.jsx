@@ -5,24 +5,22 @@ const Wrapper = styled.div`
   text-align: center;
   margin: 80px;
 
-  .all{
+  .all {
     display: flex;
     justify-contents: space-around;
     align-items: center;
   }
 
-  button:hover{
+  button:hover {
     background-color: #ffffff;
-    border: solid 1px #9d4fe0;
+    border: solid 2px #9d4fe0;
     color: black;
   }
-
+  
   button {
-    // display: flex;
-    // align-items: center;
+    border: solid 2px #9d4fe0;
     padding: 8px 20px;
     border-radius: 5px;
-    border: none;
     cursor: pointer;
     background-color: #9d4fe0;
     color: #ffffff;
@@ -32,9 +30,9 @@ const Wrapper = styled.div`
   h1 {
     font-weight: bold;
     font-size: 45px;
-    color: #9D4FE0;
+    color: #9d4fe0;
   }
-  
+
   // 1~5단계별 제목
   h2 {
     font-weight: bold;
@@ -42,28 +40,14 @@ const Wrapper = styled.div`
     margin-top: 20px;
   }
 
-  .box {
-    border: 1px solid black;
-    padding: 10px;
-    height: 800px;
-    border-radius: 10px;
-    border: 1px solid black;
-    width: 100%;
-  }
-
-  .arrow {
-    width: 10%;
-    height: 10%;
-    position: absolute;
-    right: 10px;
-    object-fit: contain;
-    cursor: pointer;
-  }
-
   .image-wrapper {
     position: relative;
+    border: solid 2px #9d4fe0;
+    border-radius: 10px;
+    margin: 30px;
+    padding: 5px;
   }
-  
+
   // 라이브캠 로딩 페이지
   .loading {
     z-index: 0;
@@ -75,12 +59,33 @@ const Wrapper = styled.div`
     left: 0;
     z-index: 1000; /* 더 높은 값으로 조정하여 겹치는 순서를 변경할 수 있음 */
   }
-  
+
   .guideline {
     position: absolute;
     left: 0;
     bottom: 0;
     z-index: 9999;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading_dot {
+    position: absolute;
+    left: 45%;
+    bottom: 15%;
+    z-index: 9999;
+    animation: spin 2s linear infinite;
+  }
+
+  .play-btn {
+    margin-right: 5px;
   }
 `;
 
