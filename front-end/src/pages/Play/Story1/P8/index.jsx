@@ -4,12 +4,13 @@ import audio8 from "../../../../play-background/ske_8.mp3";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react";
 
+let email;
+
 // mp3 2초+1초 (더이상 나도 못 참겠어요!)
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
   const { setBottom, setLeft } = props;
 
-  let email;
 
   useEffect(() => {
     // 위치 정보 업데이트 함수
