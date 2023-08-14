@@ -99,7 +99,7 @@ function P7() {
 
   return (
     <Wrapper>
-      <button
+      {/* <button
         style={{ position: "absolute", zIndex: "9999" }}
         type="button"
         onClick={() => {
@@ -108,7 +108,7 @@ function P7() {
         }}
       >
         test
-      </button>
+      </button> */}
       <img className="back-ground" src={image1} alt="" />
       <div
         id="character"
