@@ -11,7 +11,7 @@ const Livecam = () => {
   // const [imageUrl, setImageUrl] = useState(`/user/image.jpg`);
   let email;
   axios
-    .get("/api/devices/position")
+    .get("/api/devices/mail")
     .then((res) => {
       email = res.data.email;
       // 카메라 화면 : "user/[user_email]/image.jpg"
@@ -43,7 +43,7 @@ const Charactercam = () => {
   const [characterUrl, setcharacterUrl] = useState(`/assets/char_load.png`);
   let email;
   axios
-    .get("/api/devices/position")
+    .get("/api/devices/mail")
     .then((res) => {
       email = res.data.email;
       // 카메라 화면 : "user/[user_email]/image.jpg"
