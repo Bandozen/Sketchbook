@@ -2,7 +2,6 @@ import Wrapper from "./styles";
 import image1 from "../../../../play-background/엄마는 카멜레온_10.gif";
 import audio10 from "../../../../play-background/ske_10.mp3";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useEffect } from "react";
 
 function P10() {

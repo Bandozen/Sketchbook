@@ -2,7 +2,6 @@ import Wrapper from "./styles";
 import image from "../../../../play-background/엄마는 카멜레온_14.gif";
 import audio14 from "../../../../play-background/ske_14.mp3";
 import { useNavigate } from "react-router";
-import axios from "axios";
 import { useEffect } from "react";
 
 function P14() {
