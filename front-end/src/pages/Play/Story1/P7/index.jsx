@@ -50,7 +50,7 @@ const Charactercam = (props) => {
 
   useLayoutEffect(() => {
     fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
-    const interval = setInterval(fetchNewImage, 10000); // 200ms마다 이미지 업데이트
+    const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
@@ -58,24 +58,12 @@ const Charactercam = (props) => {
 };
 
 function P7() {
-  const mission = (e) => {
-    axios
-      .post("/api/devices/mission", {
-        flag: "1", // mission이 없으면 0 있으면 1
-      })
-      .then((res) => {
-        // console.log(res.data.mission);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
 
   return (
     <Wrapper>
-      <img className="back-ground" src={image1} alt="" onLoad={mission} />
+      <img className="back-ground" src={image1} alt="" />
       <div
         className="character-cam"
         style={{

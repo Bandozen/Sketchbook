@@ -16,22 +16,9 @@ function P11() {
     return () => {clearTimeout(timer)}
   }, [navigate])
   
-  const mission = (e) => {
-    axios
-      .post("/api/devices/mission", {
-        flag: "1", // 해당페이지는 미션은 없으나 카메라 구동준비를 위해 flag 1로 지정
-      })
-      .then((res) => {
-        // console.log(res.data.mission);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <Wrapper>
-      <img className="back-ground" src={image} alt="" onLoad={mission} />
+      <img className="back-ground" src={image} alt="" />
       <audio autoPlay>
         <source src={audio11} type="audio/mp3" />
       </audio>

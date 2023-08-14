@@ -204,6 +204,14 @@ async function position(req, res) {
   });
 }
 
+async function mail(req, res) {
+  const user = req.user.email;
+
+  return res.status(200).json({
+    email: user
+  });
+}
+
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
@@ -213,3 +221,4 @@ exports.ready = ready;
 exports.mission = mission;
 exports.capture = capture;
 exports.position = position;
+exports.mail = mail;
