@@ -60,6 +60,13 @@ function P12() {
   const [left, setLeft] = useState(0);
   const navigate = useNavigate();
 
+  axios
+    .get("/api/devices/clear")
+    .then()
+    .catch((err) => {
+      return console.log("에러입니다.", err);
+    });
+
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/play/story1/p13");
