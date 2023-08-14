@@ -147,7 +147,6 @@ async function downloadImage(url, filename, email) {
     // 이미지를 저장할 경로 설정 (현재 디렉토리 기준)
     // const imagePath = path.join('dir','..', '/user' ,email, filename); // local
     const imagePath = path.join("/server/user", email, filename); // 배포
-    // const imagePath = `/server/user/${email}/${filename}`; // 배포
 
     // 파일 저장
     fs.writeFileSync(imagePath, imageData);
