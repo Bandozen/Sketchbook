@@ -22,8 +22,8 @@ const Charactercam = (props) => {
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
 
-          setBottom((prevBottom) => prevBottom + y_diff);
-          setLeft((prevLeft) => prevLeft + x_diff);
+          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
+          setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -65,12 +65,14 @@ function P16() {
     setCurrentImage(newImage);
   };
 
-  axios
-    .get("/api/devices/clear")
-    .then()
-    .catch((err) => {
-      return console.log("에러입니다.", err);
-    });
+  useEffect(() => {
+    axios
+      .get("/api/devices/cleardiff")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+    }, [])
 
   return (
     <Wrapper>

@@ -8,7 +8,7 @@ import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
 // import Livecam from "../../../../components/Livecam";
 import { useEffect, useLayoutEffect, useState } from "react";
-
+import { useNavigate } from "react-router";
 let email;
 
 const Charactercam = (props) => {
@@ -25,8 +25,8 @@ const Charactercam = (props) => {
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
 
-          setBottom((prevBottom) => prevBottom + y_diff);
-          setLeft((prevLeft) => prevLeft + x_diff);
+          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
+          setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -45,8 +45,8 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
@@ -59,31 +59,70 @@ const Charactercam = (props) => {
 };
 
 function P7() {
-  const [showStudy, setShowStudy] = useState(true);
+  const navigate = useNavigate();
+  const [stage, setStage] = useState(0);
+  const [showStage, setShowStage] = useState({ 0: true, 1: true, 2: true });
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
 
-  axios
-    .get("/api/devices/clear")
-    .then()
-    .catch((err) => {
-      return console.log("에러입니다.", err);
-    });
+  useEffect(() => {
+    axios
+      .get("/api/devices/cleardiff")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+  }, []);
 
   useEffect(() => {
     const studyElement = document.getElementById("study");
-    const studyRect = studyElement.getBoundingClientRect();
-    console.log("test : ", studyRect);
+    const hurryElement = document.getElementById("hurry");
+    const washElement = document.getElementById("wash");
+    const character = document.getElementById("character");
+
+    if (!studyElement || !character || !hurryElement || !washElement) return; // 만약 studyElement 또는 character가 없으면 실행 중단
+
+    const rect = [
+      studyElement.getBoundingClientRect(),
+      hurryElement.getBoundingClientRect(),
+      washElement.getBoundingClientRect(),
+    ];
     
-    if (left <= 714 <= 714 + 362 && bottom >= 1080 - 48) {
-      setShowStudy(false);
-    }
-  });
+    const characterRect = character.getBoundingClientRect();
+
+    const touch = (target) => {
+      let overlap = !(
+        target.right < characterRect.left ||
+        target.left > characterRect.right ||
+        target.bottom < characterRect.top ||
+        target.top > characterRect.bottom
+      );
+
+      if (overlap) {
+        setShowStage((prev) => {
+          return {
+            ...prev,
+            stage: false,
+          }
+        });
+
+        if (target[stage] === false) {
+          setStage(stage => stage + 1);
+          if (stage === 3){
+            navigate("/play/story1/p8");
+          }
+        }
+      }
+    };
+
+    touch(rect[stage]);
+  }, [bottom, left]);
 
   return (
     <Wrapper>
       <img className="back-ground" src={image1} alt="" />
       <div
+        id="character"
         className="character-cam"
         style={{
           left: `${left}px`,
@@ -95,11 +134,12 @@ function P7() {
         <Charactercam setBottom={setBottom} setLeft={setLeft} />
       </div>
 
-      {showStudy && (
+      {showStage[0] && (
         <img id="study" className="balloon study" src={png1} alt="숙제해" />
       )}
-      <img className="balloon hurry" src={png2} alt="잔소리2" />
-      <img className="balloon wash" src={png3} alt="잔소리3" />
+
+      {showStage[1] && <img className="balloon hurry" src={png2} alt="잔소리2" />}
+      {showStage[2] && <img className="balloon wash" src={png3} alt="잔소리3" />}
 
       <audio autoPlay>
         <source src={audio7} type="audio/mp3" />
