@@ -73,14 +73,14 @@ const Wrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1; /* 더 높은 값으로 조정하여 겹치는 순서를 변경할 수 있음 */
+    z-index: 1000; /* 더 높은 값으로 조정하여 겹치는 순서를 변경할 수 있음 */
   }
   
   .guideline {
     position: absolute;
     left: 0;
     bottom: 0;
-    z-index: 2;
+    z-index: 9999;
   }
 `;
 
