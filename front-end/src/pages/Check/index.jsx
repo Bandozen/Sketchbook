@@ -36,7 +36,7 @@ const Livecam = () => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   }, []);
 
-  return <img src={imageUrl} className="overlay-image" />;
+  return <img src={imageUrl} className="overlay-livecam" />;
 };
 
 const Charactercam = () => {
@@ -65,7 +65,7 @@ const Charactercam = () => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   }, []);
 
-  return <img src={characterUrl} className="overlay-image" />;
+  return <img src={characterUrl} className="overlay-livecam" />;
 };
 
 function Check() {
@@ -129,6 +129,7 @@ function Check() {
             <>
               {/* 카메라 화면 : "user/[user_email]/image.jpg" */}
               <div className="image-wrapper">
+                {/* livecam 로딩 페이지 */}
                 <img src="/assets/livecam_loading.jpg" />
                 <Livecam />
               </div>
@@ -138,8 +139,11 @@ function Check() {
           {activeStep === 2 && (
             <>
               <div className="image-wrapper">
-                <img src="/assets/livecam_loading.jpg" />
+                {/* livecam 로딩 페이지 */}
+                <img className="loading" src="/assets/livecam_loading.jpg" />
                 <Livecam />
+                {/* 위치 확인 guideline */}
+                <img className="guideline" src="/assets/livecam_guideline.png" />
               </div>              
               <button onClick={mission}>위치 확인</button>
             </>

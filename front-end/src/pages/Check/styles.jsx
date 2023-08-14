@@ -6,8 +6,9 @@ const Wrapper = styled.div`
   margin: 80px;
 
   .all{
-    display:flex;
+    display: flex;
     justify-contents: space-around;
+    align-items: center;
   }
 
   button:hover{
@@ -17,6 +18,8 @@ const Wrapper = styled.div`
   }
 
   button {
+    // display: flex;
+    // align-items: center;
     padding: 8px 20px;
     border-radius: 5px;
     border: none;
@@ -24,6 +27,7 @@ const Wrapper = styled.div`
     background-color: #9d4fe0;
     color: #ffffff;
   }
+
   // step별 style
   h1 {
     font-weight: bold;
@@ -60,13 +64,24 @@ const Wrapper = styled.div`
     position: relative;
   }
   
-  .overlay-image {
+  // 라이브캠 로딩 페이지
+  .loading {
+    z-index: 0;
+  }
+
+  .overlay-livecam {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1; /* 더 높은 값으로 조정하여 겹치는 순서를 변경할 수 있음 */
+    z-index: 1000; /* 더 높은 값으로 조정하여 겹치는 순서를 변경할 수 있음 */
   }
-
+  
+  .guideline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+  }
 `;
 
 export default Wrapper;
