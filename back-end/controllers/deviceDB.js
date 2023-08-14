@@ -123,7 +123,7 @@ async function mission(req, res) {
 
   await client.select(1);
 
-  if (await client.TYPE(req.user.mail) !== "list") {
+  if (await client.TYPE(req.user.email) !== "list") {
     if (flag == "1") {
       client.set(req.user.email, "mission");
       return res.status(200).json({
