@@ -8,11 +8,12 @@ import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
 // import Livecam from "../../../../components/Livecam";
 import { useEffect, useLayoutEffect, useState } from "react";
+
+let email;
+
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
   const { setBottom, setLeft } = props;
-
-  let email;
 
   useEffect(() => {
     // 위치 정보 업데이트 함수
@@ -49,7 +50,7 @@ const Charactercam = (props) => {
   };
 
   useLayoutEffect(() => {
-    fetchNewImage(email); // 컴포넌트가 마운트될 때 이미지 가져오기
+    fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
     const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });

@@ -208,6 +208,7 @@ async function position(req, res) {
       await client.lPop(user);
     }
   }
+  console.log(user);
 
   return res.status(200).json({
     email: user,
