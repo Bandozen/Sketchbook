@@ -65,12 +65,14 @@ function P16() {
     setCurrentImage(newImage);
   };
 
-  axios
-    .get("/api/devices/cleardiff")
-    .then()
-    .catch((err) => {
-      return console.log("에러입니다.", err);
-    });
+  useEffect(() => {
+    axios
+      .get("/api/devices/cleardiff")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+    }, [])
 
   return (
     <Wrapper>

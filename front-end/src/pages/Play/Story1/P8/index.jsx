@@ -59,12 +59,14 @@ function P8() {
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
 
-  axios
-    .get("/api/devices/cleardiff")
-    .then()
-    .catch((err) => {
-      return console.log("에러입니다.", err);
-    });
+  useEffect(() => {
+    axios
+      .get("/api/devices/cleardiff")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+    }, [])
   
   return (
     <Wrapper>
