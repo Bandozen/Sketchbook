@@ -16,22 +16,9 @@ function P12() {
     return () => {clearTimeout(timer)}
   }, [navigate])
   
-  const mission = (e) => {
-    axios
-      .post("/api/devices/mission", {
-        flag: "1", // mission이 없으면 0 있으면 1
-      })
-      .then((res) => {
-        // console.log(res.data.mission);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <Wrapper>
-      <img className="back-ground" src={image} alt="" onLoad={mission} />
+      <img className="back-ground" src={image} alt="" />
       <audio autoPlay>
         <source src={audio12} type="audio/mp3" />
       </audio>

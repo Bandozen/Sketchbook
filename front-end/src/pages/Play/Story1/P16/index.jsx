@@ -13,22 +13,9 @@ function P16() {
     setCurrentImage(newImage);
   };
 
-  const mission = (e) => {
-    axios
-      .post("/api/devices/mission", {
-        flag: "1", // mission이 없으면 0 있으면 1
-      })
-      .then((res) => {
-        // console.log(res.data.mission);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <Wrapper>
-      <img className="back-ground" src={currentImage} alt="" onLoad={mission} />
+      <img className="back-ground" src={currentImage} alt="" />
       <audio autoPlay>
         <source src={audio16} type="audio/mp3" />
       </audio>

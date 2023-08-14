@@ -14,5 +14,6 @@ deviceRouter.route('/ready').get(Auth, DeviceDB.ready);
 deviceRouter.route('/mission').post(Auth, DeviceDB.mission);
 deviceRouter.route('/capture').post(Auth, DeviceDB.capture);
 deviceRouter.route('/position').get(Auth, DeviceDB.position);
+deviceRouter.route('/mail').get(Auth, DeviceDB.mail);
 
 module.exports = deviceRouter;
