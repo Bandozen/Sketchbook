@@ -45,8 +45,8 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
@@ -59,6 +59,7 @@ const Charactercam = (props) => {
 };
 
 function P7() {
+  const [showStudy, setShowStudy] = useState(true);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
 
@@ -68,6 +69,15 @@ function P7() {
     .catch((err) => {
       return console.log("에러입니다.", err);
     });
+  useEffect(() => {
+    const studyElement = document.getElementById("study");
+    const studyRect = studyElement.getBoundingClientRect();
+    console.log("test : ", studyRect);
+    
+    if (left <= 714 <= 714 + 362 && bottom >= 1080 - 48) {
+      setShowStudy(false);
+    }
+  });
 
   return (
     <Wrapper>
@@ -84,7 +94,9 @@ function P7() {
         <Charactercam setBottom={setBottom} setLeft={setLeft} />
       </div>
 
-      <img className="balloon study" src={png1} alt="숙제해" />
+      {showStudy && (
+        <img id="study" className="balloon study" src={png1} alt="숙제해" />
+      )}
       <img className="balloon hurry" src={png2} alt="잔소리2" />
       <img className="balloon wash" src={png3} alt="잔소리3" />
 
