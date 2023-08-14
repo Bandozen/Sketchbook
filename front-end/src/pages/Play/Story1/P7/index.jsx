@@ -8,7 +8,7 @@ import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
 // import Livecam from "../../../../components/Livecam";
 import { useEffect, useLayoutEffect, useState } from "react";
-
+import { useNavigate } from "react-router";
 let email;
 
 const Charactercam = (props) => {
@@ -25,8 +25,8 @@ const Charactercam = (props) => {
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
 
-          setBottom((prevBottom) => prevBottom + y_diff);
-          setLeft((prevLeft) => prevLeft + x_diff);
+          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
+          setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -59,7 +59,9 @@ const Charactercam = (props) => {
 };
 
 function P7() {
-  const [showStudy, setShowStudy] = useState(true);
+  const navigate = useNavigate();
+  const [stage, setStage] = useState(0);
+  const [showStage, setShowStage] = useState({ 0: true, 1: true, 2: true });
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
 
@@ -70,45 +72,54 @@ function P7() {
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
-    }, [])
-    
+  }, []);
+
   useEffect(() => {
     const studyElement = document.getElementById("study");
+    const hurryElement = document.getElementById("hurry");
+    const washElement = document.getElementById("wash");
     const character = document.getElementById("character");
-    if (!studyElement || !character) return; // 만약 studyElement 또는 character가 없으면 실행 중단
 
-    const studyRect = studyElement.getBoundingClientRect();
+    if (!studyElement || !character || !hurryElement || !washElement) return; // 만약 studyElement 또는 character가 없으면 실행 중단
+
+    const rect = [
+      studyElement.getBoundingClientRect(),
+      hurryElement.getBoundingClientRect(),
+      washElement.getBoundingClientRect(),
+    ];
+    
     const characterRect = character.getBoundingClientRect();
 
-    console.log(studyRect);
-    console.log(characterRect);
+    const touch = (target) => {
+      let overlap = !(
+        target.right < characterRect.left ||
+        target.left > characterRect.right ||
+        target.bottom < characterRect.top ||
+        target.top > characterRect.bottom
+      );
 
-    let overlap = !(
-      studyRect.right < characterRect.left ||
-      studyRect.left > characterRect.right ||
-      studyRect.bottom < characterRect.top ||
-      studyRect.top > characterRect.bottom
-    );
+      if (overlap) {
+        setShowStage((prev) => {
+          return {
+            ...prev,
+            stage: false,
+          }
+        });
 
-    console.log(overlap);
+        if (target[stage] === false) {
+          setStage(stage => stage + 1);
+          if (stage === 3){
+            navigate("/play/story1/p8");
+          }
+        }
+      }
+    };
 
-    if (overlap) {
-      setShowStudy(false);
-    }
+    touch(rect[stage]);
   }, [bottom, left]);
 
   return (
     <Wrapper>
-      {/* <button
-        style={{ position: "absolute", zIndex: "9999" }}
-        type="button"
-        onClick={() => {
-          setBottom(200);
-          setLeft(712);
-        }}
-      >
-        test
-      </button> */}
       <img className="back-ground" src={image1} alt="" />
       <div
         id="character"
@@ -123,12 +134,12 @@ function P7() {
         <Charactercam setBottom={setBottom} setLeft={setLeft} />
       </div>
 
-      {showStudy && (
+      {showStage[0] && (
         <img id="study" className="balloon study" src={png1} alt="숙제해" />
       )}
 
-      <img className="balloon hurry" src={png2} alt="잔소리2" />
-      <img className="balloon wash" src={png3} alt="잔소리3" />
+      {showStage[1] && <img className="balloon hurry" src={png2} alt="잔소리2" />}
+      {showStage[2] && <img className="balloon wash" src={png3} alt="잔소리3" />}
 
       <audio autoPlay>
         <source src={audio7} type="audio/mp3" />
