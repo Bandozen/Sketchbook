@@ -5,8 +5,15 @@ const otpGenerator = require("otp-generator");
 const fs = require("fs");
 const axios = require("axios");
 const path = require("path");
+const { Cipher } = require("crypto");
 
 let OTP = "0000";
+
+const delDir = (dir) => {
+  fs.unlink(dir, (err) => {
+    console.log(err);
+  });
+}
 
 async function issue(req, res) {
   const { email } = req.user;
@@ -100,15 +107,17 @@ async function disconnect(req, res) {
 
 async function start(req, res) {
   await client.select(1);
-  // await client.RPUSHX("tst", "start");
   await client.set(req.user.email, "start");
   return res.status(200).json({});
 }
 
 async function stop(req, res) {
   await client.select(1);
-  // await client.RPUSHX('tst', "stop");
   await client.set(req.user.email, "stop");
+
+  await client.select(3);
+  await client.del(req.user.email);
+
   return res.status(200).json({});
 }
 
@@ -116,6 +125,9 @@ async function ready(req, res) {
   await client.select(1);
   // await client.RPUSHX('tst', "ready");
   await client.set(req.user.email, "ready");
+
+  delDir("./user/" + req.user.email +"/image.jpg");
+
   return res.status(200).json({});
 }
 
