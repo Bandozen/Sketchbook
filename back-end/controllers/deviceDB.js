@@ -224,6 +224,17 @@ async function mail(req, res) {
   });
 }
 
+async function clear(req, res) {
+  const user = req.user.email;
+
+  await client.select(4);
+  client.del(user);
+
+  return res.status(200).json({
+    success: true,
+  })
+}
+
 exports.issue = issue;
 exports.checkConnect = checkConnect;
 exports.disconnect = disconnect;
@@ -234,3 +245,4 @@ exports.mission = mission;
 exports.capture = capture;
 exports.position = position;
 exports.mail = mail;
+exports.clear = clear;
