@@ -2,11 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom'; // 필요한 모듈 import 추가
 import Wrapper from './styles';
 import Modal from '../../components/Modal';
+import axios from "axios";
 
 function Play() {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const [isModalOpen, setIsModalOpen] = useState(false);
   
+  const stop = (e) => {
+    axios
+      .get("/api/devices/stop")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -20,6 +31,7 @@ function Play() {
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
+        stop();
         navigate('/books'); // "esc" 키 누르면 경로 변경
       }
     };
