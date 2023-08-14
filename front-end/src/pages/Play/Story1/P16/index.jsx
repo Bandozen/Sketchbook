@@ -65,6 +65,13 @@ function P16() {
     setCurrentImage(newImage);
   };
 
+  axios
+    .get("/api/devices/clear")
+    .then()
+    .catch((err) => {
+      return console.log("에러입니다.", err);
+    });
+
   return (
     <Wrapper>
       <div
