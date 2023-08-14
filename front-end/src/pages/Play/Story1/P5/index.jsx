@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Wrapper from "./styles";
 import image1 from "../../../../play-background/엄마는 카멜레온_5.gif";
 import audio5 from "../../../../play-background/ske_5.mp3";
-import axios from "axios";
 
 function P5() {
   const navigate = useNavigate();

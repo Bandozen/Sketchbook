@@ -20,7 +20,7 @@ const Charactercam = (props) => {
       axios
         .get("/api/devices/position")
         .then((res) => {
-          const email = res.data.email;
+          email = res.data.email;
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
 
