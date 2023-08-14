@@ -65,18 +65,44 @@ function P7() {
 
   useEffect(() => {
     const studyElement = document.getElementById("study");
+    const character = document.getElementById("character");
+    if (!studyElement || !character) return; // 만약 studyElement 또는 character가 없으면 실행 중단
+
     const studyRect = studyElement.getBoundingClientRect();
-    console.log("test : ", studyRect);
-    
-    if (left <= 714 <= 714 + 362 && bottom >= 1080 - 48) {
+    const characterRect = character.getBoundingClientRect();
+
+    console.log(studyRect);
+    console.log(characterRect);
+
+    let overlap = !(
+      studyRect.right < characterRect.left ||
+      studyRect.left > characterRect.right ||
+      studyRect.bottom < characterRect.top ||
+      studyRect.top > characterRect.bottom
+    );
+
+    console.log(overlap);
+
+    if (overlap) {
       setShowStudy(false);
     }
-  });
+  }, [bottom, left]);
 
   return (
     <Wrapper>
+      <button
+        style={{ position: "absolute", zIndex: "9999" }}
+        type="button"
+        onClick={() => {
+          setBottom(200);
+          setLeft(712);
+        }}
+      >
+        test
+      </button>
       <img className="back-ground" src={image1} alt="" />
       <div
+        id="character"
         className="character-cam"
         style={{
           left: `${left}px`,
@@ -91,6 +117,7 @@ function P7() {
       {showStudy && (
         <img id="study" className="balloon study" src={png1} alt="숙제해" />
       )}
+
       <img className="balloon hurry" src={png2} alt="잔소리2" />
       <img className="balloon wash" src={png3} alt="잔소리3" />
 
