@@ -33,6 +33,7 @@ async function issue(req, res) {
 async function checkConnect(req, res) {
   await client.select(1);
   client.set(req.user.email, "ready");
+  await client.select(0);
   const flag = await client.get(OTP);
 
   if (flag === "true") {
