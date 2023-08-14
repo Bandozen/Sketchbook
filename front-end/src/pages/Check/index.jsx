@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Wrapper from "./styles";
 import CheckStep from "../../components/CheckStep";
 import axios from "axios";
+import check_audio from "../../play-background/check_narration.mp3";
 
 let camUrl;
 
@@ -27,7 +28,7 @@ const Livecam = () => {
     // setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
     // camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
     setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
-    camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}` // 배포
+    camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}`; // 배포
   };
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const Livecam = () => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   }, []);
 
-  return <img src={imageUrl} className="overlay-livecam" />;
+  return <img src={imageUrl} className="overlay-livecam" alt="" />;
 };
 
 const Charactercam = () => {
@@ -65,12 +66,13 @@ const Charactercam = () => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   }, []);
 
-  return <img src={characterUrl} className="overlay-livecam" />;
+  return <img src={characterUrl} className="overlay-livecam" alt=""/>;
 };
 
 function Check() {
   const [activeStep, setActiveStep] = useState(1);
-  let navigate = useNavigate();
+  const audioRef = useRef(new Audio(check_audio));
+  const navigate = useNavigate();
 
   const capture = () => {
     axios
@@ -84,13 +86,9 @@ function Check() {
         console.log(err);
       });
   };
-  
-  const sound = () => {
-    setActiveStep(activeStep + 1);    
-  }
-  
+
   const mission = (e) => {
-    setActiveStep(activeStep + 1);
+    setActiveStep(3);
     axios
       .post("/api/devices/mission", {
         flag: "1", // mission이 없으면 0 있으면 1
@@ -102,6 +100,18 @@ function Check() {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (activeStep === 3) {
+      audioRef.current.play(); // 스피커 사운드 시작
+      // activeStep이 3일 때 7초 후에 자동으로 activeStep을 4로 변경하고 스피커 사운드 시작
+      const timer = setTimeout(() => {
+        setActiveStep(4);
+      }, 7000); // 7초
+
+      return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머 클리어
+    }
+  }, [activeStep]);
 
   const goToReady = () => {
     navigate("/ready");
@@ -133,13 +143,14 @@ function Check() {
             message={"캐릭터 연동 확인하기"}
           ></CheckStep>
         </div>
+
         <div>
           {activeStep === 1 && (
             <>
               {/* 카메라 화면 : "user/[user_email]/image.jpg" */}
               <div className="image-wrapper">
                 {/* livecam 로딩 페이지 */}
-                <img src="/assets/livecam_loading.jpg" />
+                <img src="/assets/livecam_loading.jpg" alt="" />
                 <Livecam />
               </div>
               <button onClick={capture}>캡처하기</button>
@@ -149,26 +160,30 @@ function Check() {
             <>
               <div className="image-wrapper">
                 {/* livecam 로딩 페이지 */}
-                <img className="loading" src="/assets/livecam_loading.jpg" />
+                <img className="loading" src="/assets/livecam_loading.jpg" alt=""/>
                 <Livecam />
                 {/* 위치 확인 guideline */}
-                <img className="guideline" src="/assets/livecam_guideline.png" />
-              </div>              
+                <img
+                  className="guideline"
+                  src="/assets/livecam_guideline.png"
+                  alt=""
+                />
+              </div>
               <button onClick={mission}>위치 확인</button>
             </>
           )}
-          {activeStep === 3 &&  (
+          {activeStep === 3 && (
             <>
               <div className="image-wrapper">
-                <img src="/assets/char_load.png" />
+                <img src="/assets/check_speaker.jpg" alt=""/>
+                <img className="loading_dot" src="/assets/loading_dot.png" alt=""/>
               </div>
-              <button onClick={sound}>준비 완료</button>
             </>
           )}
-          {activeStep === 4 &&  (
+          {activeStep === 4 && (
             <>
               <div className="image-wrapper">
-                <img src="/assets/char_load.png" />
+                <img src="/assets/char_load.png" alt=""/>
                 <Charactercam />
               </div>
               <button onClick={goToReady}>준비 완료</button>
