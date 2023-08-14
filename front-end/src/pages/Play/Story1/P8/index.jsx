@@ -60,7 +60,7 @@ function P8() {
   const [left, setLeft] = useState(0);
 
   axios
-    .get("/api/devices/clear")
+    .get("/api/devices/cleardiff")
     .then()
     .catch((err) => {
       return console.log("에러입니다.", err);
