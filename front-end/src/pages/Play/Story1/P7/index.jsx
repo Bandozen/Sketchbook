@@ -27,8 +27,8 @@ const Charactercam = (props) => {
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
 
-          setBottom((prevBottom) => prevBottom + y_diff);
-          setLeft((prevLeft) => prevLeft + x_diff);
+          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
+          setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -47,8 +47,8 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
