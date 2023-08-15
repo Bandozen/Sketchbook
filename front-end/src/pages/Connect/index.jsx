@@ -3,16 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header";
 import Wrapper from "./styles";
 import axios from "axios";
+import isConnected from "../../utils/isConnected";
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
 
-  // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
 
-  // Set up the interval.
   useEffect(() => {
     function tick() {
       savedCallback.current();
@@ -25,14 +24,9 @@ function useInterval(callback, delay) {
 }
 
 function Connect() {
-//   console.log(`
-// ╭ ◜◝ ͡ ◜◝ ͡  ◜◝ ͡ ◜◝ ͡  ◜◝ ╮
-//         기기연결 페이지
-// OTP 기기 연결 해야 동화를 보지요
-// ╰ ◟◞ ͜  ◟ ͜   ◟◞ ͜  ◟ ͜   ◟◞ ╯
-//                   O
-//                 °
-// `)
+  const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [activeBox, setActiveBox] = useState(null);
   const [button, setButton] = useState({
     buttonText: "OTP 생성하기",
     timerActive: false,
@@ -41,6 +35,44 @@ function Connect() {
   });
 
   const [otp, setOtp] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/api/devices/clearcord")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+  })
+
+ 
+  function Modal({ isOpen, onClose }) {
+    if (!isOpen) return null;
+
+    const handleBackdropClick = (e) => {
+      if (e.target === e.currentTarget) {
+        onClose();
+      }
+    };
+
+    return (
+      <div className="modal" onClick={handleBackdropClick}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <span className="close-button" onClick={onClose}>X</span>
+          <h3>OTP 생성</h3>
+          <div className="timerCount">
+            {otp}
+            <div className="timer">
+              {
+                `${parseInt(button.timerCount / 60)}:${(button.timerCount % 60).toString().padStart(2, '0')}`
+              }
+
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const handleClick = () => {
     if (
@@ -53,11 +85,15 @@ function Connect() {
         timerActive: true,
         timerCount: 180,
         tryCount: prevButton.tryCount + 1,
-      })); // 3분(180초)로 타이머 설정
+      }));
     }
   };
 
-  // axios createOtp
+  const handleOpenModal = () => {
+    handleClick();
+    setModalOpen(true);
+  };
+
   const createOtp = () => {
     axios
       .get("/api/devices/issue")
@@ -67,40 +103,32 @@ function Connect() {
       .catch((err) => {
         console.log(err);
       });
-    // SetOtp(12345);
-    // console.log(button.tryCount);
   };
 
-  const navigate = useNavigate();
-  // 타이머 로직을 담당하는 함수
+
   const tick = () => {
     if (button.timerCount > 0) {
       setButton((prevButton) => ({
         ...prevButton,
         timerCount: prevButton.timerCount - 1,
-        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${
-          (prevButton.timerCount - 1) % 60
-        }`,
+        buttonText: `${parseInt((prevButton.timerCount - 1) / 60)}:${(prevButton.timerCount - 1) % 60}`,
       }));
 
       axios
         .get("/api/devices/checkConnect")
         .then((res) => {
-          const isConnected = res.data.isConnected;
-          if (isConnected) {
+          const connection = isConnected();
+          if (connection === "true") {
             return navigate("/books");
           }
         })
         .catch((err) => {
           console.log(err);
         });
-      // SetOtp(12345);
-      // console.log(button.tryCount);
     } else {
       if (button.tryCount < 3) {
         handleClick();
       } else {
-        // 타이머가 끝났을 때 초기 상태로 돌아감
         setButton((prevButton) => ({
           ...prevButton,
           buttonText: "OTP 생성하기",
@@ -113,33 +141,74 @@ function Connect() {
     }
   };
 
-  // useInterval 훅스를 사용하여 1초마다 타이머 업데이트
   useInterval(tick, button.timerActive ? 1000 : null);
+
+  const boxes = [
+    {
+      id: 1,
+      className: 'one',
+      name: "1. 기기 전원 켜기",
+      description: (
+        <div>
+          기기의 전원을 켜주세요.
+        </div>
+      ),
+      image: "/videos/turnon.png"
+    }
+    ,
+    {
+      id: 2, className: 'two', name: "2. 와이파이 연결하기", description: (
+        <div>
+          기기 와이파이를 연결해주세요.
+        </div>
+      ), image: "/videos/wifi.png"
+    },
+    {
+      id: 3, className: 'three', name: "3. OTP 생성하기", description: (
+        <div>
+          상단의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요. <br /> 3분간 유효해요.
+        </div>
+      ), image: "/videos/realotp.png"
+    },
+    {
+      id: 4, className: 'four', name: "4. 기기에 입력하기", description: (
+        <div>
+          기기 키패드에 해당 OTP번호를  <br /> 입력해주세요. <br /> 동화 플레이할 준비 끝! 👍
+        </div>
+      ), image: "/videos/input.png"
+    }
+  ];
+
 
   return (
     <>
       <Header />
       <Wrapper>
-        <div className="box">
-          <h2>
-            기기연결, <span>어떻게</span> 하나요?
-            <img src={process.env.PUBLIC_URL + "/assets/emoji.png"} alt="" />
-          </h2>
-          <ol>
-            <li>기기의 전원을 켜주세요.</li>
-            <li>기기에 와이파이를 연결해주세요.</li>
-            <li>
-              웹 페이지의 OTP 생성하기 버튼을 눌러 OTP 번호를 확인해주세요.
-            </li>
-            <li>기기의 키패드에 해당 OTP 번호를 입력해주세요.</li>
-          </ol>
-          <div className="btndiv">
-            <button type="button" onClick={handleClick}>
-              {button.buttonText}
-            </button>
+        <div className="boxes">
+          <div className="title">
+            <h1>기기 연결 가이드 👀</h1>
+            <div className="btndiv">
+              <div className="connect-button" onClick={handleOpenModal}>
+                OTP 생성하기▸
+              </div>
+            </div>
           </div>
-          <div className="timerCount">{otp}</div>
+          <div className="real_box">
+            {boxes.map(box => (
+              <div
+                key={box.id}
+                className={`box ${activeBox === box.id ? 'active' : ''}`}
+                onMouseEnter={() => setActiveBox(box.id)}
+                onMouseLeave={() => setActiveBox(null)}
+              >
+                <img className={box.className} src={box.image} alt={`박스${box.id}`} />
+                {activeBox === box.id && <div className="description">{box.description}</div>}
+                <span className="box-name">{box.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
+        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       </Wrapper>
     </>
   );

@@ -2,56 +2,123 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   font-family: 'Pretendard-Regular';
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-
-  img{
-    width : 100px;
-    margin-left : 10px;
-  }
-
-  h2 {
-    font-weight: bold;
-  }
-  
-  span {
-    color: #a451f7
-  }
-  
-  .box {
-    margin-top: 50px;
-    
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    padding: 3% 5%;    
-  }
-  
-  ol{
-    margin: 20px 0 40px;
-  }
-
-  li {
-    font-size: 23px;
-    line-height: 42px;
-  }
-
-  .btndiv{
+  .title {
     display: flex;
-    justify-content: center; 
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+    // width: 2750px;
+  
+    h1 {
+      font-weight: bold;
+      font-size: 35px;
+      margin-left: 10px;
+    }
   }
   
-  button {
-    color: #a451f7;
-    border-radius: 8px;
-    border: 1px solid #a451f7;
-    background-color: #ffffff;
-    padding: 10px 20px;
+  .connect-button {
+    // display: inline-block; 
+    // background-color: #F8F8F8;
+    // border-radius: 8px;
+    // height: 40px;
+    // width: 100px;
+    text-align: center; 
+    line-height: 40px; 
+    color: #8f39ea;
+    font-size: 25px;
+    text-decoration: none; 
     font-weight: bold;
-    font-size: 20px;
   }
-  `;
   
-  export default Wrapper;
+  .connect-button:hover {
+    color: purple;
+  }
+  
+  .real_box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+
+  .boxes{
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
+    padding-top: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+
+
+  .box-name {
+    font-size: 25px;
+  }  
+
+  .box .one{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .two{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .three{
+    width: 300px;
+    height: 300px;
+  }
+
+  .box .four{
+    width: 300px;
+    height: 300px;
+  }
+
+
+  h1 {
+    font-weight: bold;
+    font-size: 35px;
+  }
+
+  .box {
+    width: 300px;
+    height: 400px;
+    background-color: #F8F8F8;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  
+  .box.active img {
+    opacity: 0.1; /* 이미지 투명도 조정 */
+  }
+
+  .box.active .box-name {
+    color: white;
+  }
+
+  .box.active {
+    background-color: #333;
+    color: white;
+  }
+  
+  .description {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+`;
+
+export default Wrapper;

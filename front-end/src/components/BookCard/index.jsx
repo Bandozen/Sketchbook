@@ -5,12 +5,23 @@ import Button from "react-bootstrap/Button";
 import { Wrapper, FontWrap } from "./styles";
 import { useNavigate } from 'react-router-dom';
 import isConnected from "../../utils/isConnected";
-
+import axios from "axios";
 
 function BookCard({ book, onClick }) {
   const connection = isConnected();
   let navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+
+  const start = (e) => {
+    axios
+      .get("/api/devices/start")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleModalShow = () => {
     setShowModal(true);
@@ -30,7 +41,12 @@ function BookCard({ book, onClick }) {
   };
 
   const goToConnect = () => {
-    navigate('/connect');
+    if (book.id !== 1) {
+      onClick();
+      return;
+    } else {
+      navigate('/connect');
+    }
   }
 
   // 출력 버튼 클릭
@@ -65,13 +81,14 @@ function BookCard({ book, onClick }) {
     <>
       <FontWrap>
         <Card
-          style={{ width: "100%", maxWidth: "25rem", margin: "20px 0px 20px 0px" }}
+          style={{ width: "100%", maxWidth: "25rem", margin: "20px 0px 20px 0px", cursor: 'pointer' }}
           onClick={handleModalShow}
         >
           <Card.Img
             variant="top"
             src={book.bookcover}
-            style={{ width: "24.9rem", height: "30rem" }}
+            style={{ width: '100%', height: "30rem" }}
+
           />
           <Card.Body>
             <Card.Title style={{ textAlign: "center", fontSize: "24px" }}>
@@ -81,7 +98,7 @@ function BookCard({ book, onClick }) {
         </Card>
       </FontWrap>
 
-      <div className='realmodal' style={{display: 'flex'}}>
+      <div className='realmodal' style={{ display: 'flex' }}>
         <Modal show={showModal} onHide={handleModalClose} size="xl">
           <Modal.Header closeButton>
           </Modal.Header>
@@ -123,7 +140,10 @@ function BookCard({ book, onClick }) {
                     <Button
                       variant="outline-primary"
                       className="custom-button-style"
-                      onClick={StartPlay}
+                      onClick={() => {
+                        StartPlay();
+                        start();
+                      }}
                     >
                       시작하기
                     </Button> :

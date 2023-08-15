@@ -1,10 +1,16 @@
 const { User } = require("../models/users.js");
 const { smtpTransport } = require("../config/email.js");
+const { client } = require("../server.js");
 const ejs = require("ejs");
 const path = require("path");
 var appDir = path.dirname(require.main.filename);
 let verificationCodes = {};
 const otpGenerator = require("otp-generator");
+const fs = require('fs');
+
+const makrFolder = (dir) => {
+  fs.mkdirSync(dir);
+}
 
 /* 회원가입 API */
 async function register(req, res) {
@@ -12,6 +18,8 @@ async function register(req, res) {
   // client에서 가져오면 그것들을 db에 넣는다.
   const user = new User(req.body);
   // 정보 저장, 에러 시 json 형식으로 전달
+
+  makrFolder("./user/" + user.email)
   await user.save((err, userInfo) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({
@@ -69,7 +77,7 @@ async function login(req, res) {
           .status(200)
           .json({
             loginSuccess: true,
-            userid: user._id,
+            // userid: user._id,
           });
       });
     });
@@ -123,6 +131,10 @@ function logout(req, res) {
           err,
         });
       }
+    
+    client.select(1);
+    client.set(req.user.email, 'logout');
+
 
       // 쿠키삭제를 먼저 진행시켜서 로그아웃을 진행시킨다.
       return res
@@ -173,7 +185,7 @@ async function mail(req, res) {
     }
     res.json({
       message: "메일이 무사히 전송되었습니다.",
-      number: number,
+      // number: number,
     });
     smtpTransport.close();
   });
@@ -237,7 +249,7 @@ async function tempPassword(req, res) {
     }
     res.json({
       message: "메일이 무사히 전송되었습니다.",
-      tempPassword: tempPassword,
+      // tempPassword: tempPassword,
     });
     smtpTransport.close();
   });
@@ -271,13 +283,13 @@ async function changePassword(req, res) {
   await User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) {
       return res.json({
-        success: false,
         err,
       });
     }
     user.comparePassword(prePassword, (err, isMatch) => {
       if (!isMatch) {
         return res.json({
+          success: false,
           message: "현재 비밀번호가 틀렸습니다.",
         });
       }
