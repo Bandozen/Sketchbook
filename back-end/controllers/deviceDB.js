@@ -209,17 +209,20 @@ async function position(req, res) {
   console.log(type);
 
   if (type === "list") {
-    if ((await client.LLEN(user)) <= 2) {
+    if ((await client.LLEN(user)) <= 6) {
       x_diff = 0;
       y_diff = 0;
     } else {
-      let diff = await client.lRange(user, 0, 1);
+      let diff = await client.lRange(user, 0, 6);
       x_diff = diff[0];
       y_diff = diff[1];
-      console.log(x_diff);
-      console.log(y_diff);
-      await client.lPop(user);
-      await client.lPop(user);
+      left_x = diff[2];
+      left_y = diff[3];
+      right_x = diff[4];
+      right_y = diff[5];
+      for (let i = 0; i < 6; i++) {
+        await client.lPop(user);
+      }
     }
   }
   console.log(user);
@@ -228,6 +231,10 @@ async function position(req, res) {
     email: user,
     x_diff: x_diff,
     y_diff: y_diff,
+    left_x: left_x,
+    left_y: left_y,
+    right_x: right_x,
+    right_y: right_y,
   });
 }
 
