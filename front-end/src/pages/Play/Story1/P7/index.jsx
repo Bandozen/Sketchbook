@@ -16,11 +16,12 @@ import { useNavigate } from "react-router-dom";
 import checkOverlap from "../../../../utils/checkOverlap";
 
 let email;
+
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
-  const { setBottom, setLeft } = props;
+  const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // 위치 정보 업데이트 함수
     const updatePosition = () => {
       axios
@@ -29,9 +30,17 @@ const Charactercam = (props) => {
           email = res.data.email;
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
+          const left_x = parseFloat(res.data.left_x);
+          const left_y = parseFloat(res.data.left_y);
+          const right_x = parseFloat(res.data.right_x);
+          const right_y = parseFloat(res.data.right_y);
 
-          setBottom((prevBottom) => prevBottom + y_diff);
-          setLeft((prevLeft) => prevLeft + x_diff);
+          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
+          setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
+          setLhTop(left_y);
+          setLhLeft(left_x);
+          setRhTop(right_y);
+          setRhLeft(right_x);
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -42,7 +51,7 @@ const Charactercam = (props) => {
     updatePosition();
 
     // 10초마다 API 호출
-    const interval = setInterval(updatePosition, 200);
+    const interval = setInterval(updatePosition, 100);
 
     // 컴포넌트 언마운트 시 인터벌 정리
     return () => clearInterval(interval);
@@ -50,13 +59,13 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
     fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
-    const interval = setInterval(fetchNewImage, 200); // 200ms마다 이미지 업데이트
+    const interval = setInterval(fetchNewImage, 100); // 200ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
@@ -69,20 +78,24 @@ function P7() {
   const [stage, setStage] = useState(0);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
+  const [LhTop, setLhTop] = useState(0);
+  const [LhLeft, setLhLeft] = useState(0);
+  const [RhTop, setRhTop] = useState(0);
+  const [RhLeft, setRhLeft] = useState(0);
+
   const audioElement = new Audio(boom1);
   const audio2Element = new Audio(boom2);
 
   useEffect(() => {
-    if (stage === 0 && checkOverlap("study")) {
+    if (stage === 0 && checkOverlap("study", LhLeft, LhTop, RhLeft, RhTop)) {
       setStage(1);
       audioElement.play();
-    } else if (stage === 1 && checkOverlap("hurry")) {
+    } else if (stage === 1 && checkOverlap("hurry", LhLeft, LhTop, RhLeft, RhTop)) {
       setStage(2);
       audioElement.play();
-    } else if (stage === 2 && checkOverlap("wash")) {
+    } else if (stage === 2 && checkOverlap("wash", LhLeft, LhTop, RhLeft, RhTop)) {
       setStage(3);
     }
-
   }, [bottom, left, stage]);
 
   if (stage === 3) {
@@ -95,7 +108,7 @@ function P7() {
   return (
     <Wrapper>
       {/* 로컬 작동 확인용 */}
-      <div style={{ position: "absolute", zIndex: "9999", display: "flex" }}>
+      {/* <div style={{ position: "absolute", zIndex: "9999", display: "flex" }}>
         <button
           type="button"
           onClick={() => {
@@ -125,7 +138,7 @@ function P7() {
         >
           test3
         </button>
-      </div>
+      </div> */}
       <img className="back-ground" src={image1} alt="" />
       <div
         id="character"
