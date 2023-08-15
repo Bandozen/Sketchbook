@@ -7,9 +7,6 @@ const Wrapper = styled.div`
   z-index: 9999;
 }
 
-.balloon {
-  // z-index: 1000;
-}
 
 // 1번째, 오른쪽 "빨리빨리"
 .hurry {

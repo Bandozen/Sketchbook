@@ -9,6 +9,13 @@ const Wrapper = styled.div`
     position: relative;
   }
 
+  #hand{
+    position: absolute;
+    width : 300px;
+    height : 400px;
+    right : 100px;
+  }
+
   // img {
   //   width: 100%;
   //   background-size: cover;
