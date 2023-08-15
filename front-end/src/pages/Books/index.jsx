@@ -28,7 +28,7 @@ function Books() {
     
   const ready = (e) => {
     axios
-      .get("/api/devices/ready")
+      .get("/api/devices/booksready")
       .then((res) => {
         console.log(res);
       })
