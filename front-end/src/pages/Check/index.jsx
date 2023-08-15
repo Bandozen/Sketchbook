@@ -30,7 +30,7 @@ const Livecam = () => {
 
   useEffect(() => {
     fetchNewImage(email); // 컴포넌트가 마운트될 때 이미지 가져오기
-    const interval = setInterval(fetchNewImage, 50); // 200ms마다 이미지 업데이트
+    const interval = setInterval(fetchNewImage, 100); // 200ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   }, []);
 
@@ -59,7 +59,7 @@ const Charactercam = () => {
 
   useEffect(() => {
     fetchNewImage(email); // 컴포넌트가 마운트될 때 이미지 가져오기
-    const interval = setInterval(fetchNewImage, 50); // 200ms마다 이미지 업데이트
+    const interval = setInterval(fetchNewImage, 100); // 200ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   }, []);
 
