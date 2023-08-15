@@ -4,6 +4,15 @@ import Wrapper from './styles';
 
 function Main() {
 
+    useEffect(() => {
+    axios
+      .get("/api/devices/clearcord")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+  })
+
 
   return (
 
