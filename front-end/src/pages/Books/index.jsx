@@ -17,16 +17,18 @@ import bookData from "../../dummy-data/bookData";
 import axios from "axios";
 
 function Books() {
-  axios
-    .get("/api/devices/clearcord")
-    .then()
-    .catch((err) => {
-      return console.log("에러입니다.", err);
-    });
+  useEffect(() => {
+    axios
+      .get("/api/devices/clearcord")
+      .then()
+      .catch((err) => {
+        return console.log("에러입니다.", err);
+      });
+  })
     
   const ready = (e) => {
     axios
-      .get("/api/devices/ready")
+      .get("/api/devices/booksready")
       .then((res) => {
         console.log(res);
       })
