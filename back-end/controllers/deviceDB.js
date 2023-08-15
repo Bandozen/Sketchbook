@@ -132,6 +132,19 @@ async function ready(req, res) {
   return res.status(200).json({});
 }
 
+async function booksready(req, res) {
+  await client.select(1);
+  // await client.RPUSHX('tst', "ready");
+  await client.set(req.user.email, "ready");
+
+  delDir("./user/" + req.user.email +"/image.jpg");
+  delDir("./user/" + req.user.email +"/assemble.png");
+  delDir("./user/" + req.user.email +"/character.png");
+  delDir("./user/" + req.user.email +"/character_rmbg.png");
+
+  return res.status(200).json({});
+}
+
 async function mission(req, res) {
   const flag = req.body.flag;
 
@@ -254,6 +267,7 @@ exports.disconnect = disconnect;
 exports.start = start;
 exports.stop = stop;
 exports.ready = ready;
+exports.booksready = booksready;
 exports.mission = mission;
 exports.capture = capture;
 exports.position = position;
