@@ -3,6 +3,8 @@ import image1 from "../../../../play-background/엄마는 카멜레온_8.gif";
 import audio8 from "../../../../play-background/ske_8.mp3";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import checkOverlap from "../../../../utils/checkOverlap";
 
 let email;
 
@@ -56,6 +58,8 @@ const Charactercam = (props) => {
 };
 
 function P8() {
+  const navigate = useNavigate();
+  const [stage, setStage] = useState(0);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
 
@@ -67,6 +71,16 @@ function P8() {
         return console.log("에러입니다.", err);
       });
     }, [])
+    
+    useEffect(() => {
+      if (checkOverlap("cleaner")) {
+        setStage(1);
+      }
+    }, [bottom, left, stage]);
+
+    if (stage === 1) {
+      navigate("/play/story1/p9");
+    }
   
   return (
     <Wrapper>
@@ -81,6 +95,7 @@ function P8() {
       >
         <Charactercam setBottom={setBottom} setLeft={setLeft} />
       </div>
+      <div id="cleaner" style={{ position: 'absolute', width: '350px', height: '250px', top: '70%', left: '75%' }}></div>
 
       <img className="back-ground" src={image1} alt="" />
       <audio autoPlay>
