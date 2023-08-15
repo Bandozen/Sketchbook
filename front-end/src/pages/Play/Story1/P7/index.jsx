@@ -59,7 +59,7 @@ const Charactercam = (props) => {
     // return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
-  return <img src={characterUrl} alt="" onLoad={() => { updatePosition(); fetchNewImage(); }} />;
+  return <img src={characterUrl} alt="" style={{ width: '768px', height: '576px' }} onLoad={() => { updatePosition(); fetchNewImage(); }} />;
 };
 
 function P7() {

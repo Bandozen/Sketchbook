@@ -12,6 +12,12 @@ const checkOverlap = (elementId) => {
         targetRect.bottom < characterRect.top ||
         targetRect.top > characterRect.bottom
     );
+    // return (
+    //     targetRect.right >= characterRect.left &&
+    //     targetRect.left <= characterRect.right &&
+    //     targetRect.bottom >= characterRect.top &&
+    //     targetRect.top <= characterRect.bottom
+    // );
 };
 
 export default checkOverlap;
