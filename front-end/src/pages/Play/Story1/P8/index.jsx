@@ -65,8 +65,8 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
