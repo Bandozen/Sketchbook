@@ -67,16 +67,16 @@ function P7() {
   const [left, setLeft] = useState(0);
 
   useEffect(() => {
-    if (stage === 0 && checkOverlap("study")) {
+    if (stage === 0 && checkOverlap("hurry")) {
       setStage(1);
-    } else if (stage === 1 && checkOverlap("hurry")) {
+    } else if (stage === 1 && checkOverlap("study")) {
       setStage(2);
     } else if (stage === 2 && checkOverlap("wash")) {
       setStage(3);
     }
-    
+
   }, [bottom, left, stage]);
-  
+
   if (stage === 3) {
     navigate("/play/story1/p8");
   }
@@ -130,10 +130,10 @@ function P7() {
       </div>
 
       {stage === 0 && (
-        <img id="study" className="balloon study" src={png1} alt="숙제해" />
+        <img id="hurry" className="balloon hurry" src={png2} alt="잔소리2" />
       )}
       {stage === 1 && (
-        <img id="hurry" className="balloon hurry" src={png2} alt="잔소리2" />
+        <img id="study" className="balloon study" src={png1} alt="숙제해" />
       )}
       {stage === 2 && (
         <img id="wash" className="balloon wash" src={png3} alt="잔소리3" />
