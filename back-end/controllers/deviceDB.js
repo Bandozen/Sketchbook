@@ -127,7 +127,7 @@ async function ready(req, res) {
   await client.set(req.user.email, "ready");
 
   delDir("./user/" + req.user.email +"/image.jpg");
-  delDir("./user/" + req.user.email +"/asemble.png");
+  delDir("./user/" + req.user.email +"/assemble.png");
 
   return res.status(200).json({});
 }
