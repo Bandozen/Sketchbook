@@ -15,9 +15,9 @@ let email;
 
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
-  const { setBottom, setLeft } = props;
+  const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // 위치 정보 업데이트 함수
     const updatePosition = () => {
       axios
@@ -26,9 +26,17 @@ const Charactercam = (props) => {
           email = res.data.email;
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
+          const left_x = parseFloat(res.data.left_x);
+          const left_y = parseFloat(res.data.left_y);
+          const right_x = parseFloat(res.data.right_x);
+          const right_y = parseFloat(res.data.right_y);
 
           setBottom((prevBottom) => prevBottom + y_diff + y_diff);
           setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
+          setLhTop(left_y);
+          setLhLeft(left_x);
+          setRhTop(right_y);
+          setRhLeft(right_x);
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -65,6 +73,10 @@ function P16() {
   const [success, setSuccess] = useState(false);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
+  const [LhTop, setLhTop] = useState(0);
+  const [LhLeft, setLhLeft] = useState(0);
+  const [RhTop, setRhTop] = useState(0);
+  const [RhLeft, setRhLeft] = useState(0);
   const [audioFinished, setAudioFinished] = useState(false);
   const audioElement = new Audio(boom);
 
@@ -73,7 +85,7 @@ function P16() {
 
   useEffect(() => {
     if (audioFinished) {
-      if (success === false && checkOverlap("hand")) {
+      if (success === false && checkOverlap("hand", LhLeft, LhTop, RhLeft, RhTop)) {
         setSuccess(true);
         setCurrentImage(newImage);
       }
