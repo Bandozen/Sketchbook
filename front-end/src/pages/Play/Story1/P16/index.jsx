@@ -1,16 +1,21 @@
 import Wrapper from "./styles";
 import image from "../../../../play-background/엄마는 카멜레온_16.png";
 import newImage from "../../../../play-background/엄마는 카멜레온_16_엄마손.png";
+
 import audio16 from "../../../../play-background/ske_16.mp3";
+import boom from "../../../../play-background/success_clear.mp3";
+
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react";
+import { useNavigate } from "react-router";
+
+import checkOverlap from "../../../../utils/checkOverlap";
 
 let email;
 
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
   const { setBottom, setLeft } = props;
-
 
   useEffect(() => {
     // 위치 정보 업데이트 함수
@@ -52,30 +57,60 @@ const Charactercam = (props) => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
-  return <img src={characterUrl} alt="" />;
+  return <img id="character" src={characterUrl} alt="" />;
 };
 
 function P16() {
+  const navigate = useNavigate();
+  const [success, setSuccess] = useState(false);
   const [bottom, setBottom] = useState(0);
   const [left, setLeft] = useState(0);
+  const [audioFinished, setAudioFinished] = useState(false);
+  const audioElement = new Audio(boom);
 
   const [currentImage, setCurrentImage] = useState(image);
-  const handleImageChange = () => {
-    // 이미지 변경 로직
-    setCurrentImage(newImage);
-  };
+
 
   useEffect(() => {
+    if (audioFinished) {
+      if (success === false && checkOverlap("hand")) {
+        setSuccess(true);
+        setCurrentImage(newImage);
+      }
+    }
+
     axios
       .get("/api/devices/cleardiff")
       .then()
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
-    }, [])
+
+  }, [bottom, left])
+
+  if (success) {
+    audioElement.play();
+    audioElement.onended = () => {
+      navigate("/play/story1/p17");
+    };
+  }
 
   return (
     <Wrapper>
+      {/* 테스트용 버튼 */}
+      {/* <div style={{ position: "absolute", zIndex: "9999", display: "flex" }}>
+        <button
+          type="button"
+          onClick={() => {
+            setBottom(200);
+            setLeft(712);
+          }}
+        >
+          test
+        </button>
+      </div> */}
+      <div id="hand">
+      </div>
       <div
         className="character-cam"
         style={{
@@ -89,10 +124,10 @@ function P16() {
       </div>
 
       <img className="back-ground" src={currentImage} alt="" />
-      <audio autoPlay>
+      <audio autoPlay onEnded={() => {setAudioFinished(true)}}>
         <source src={audio16} type="audio/mp3" />
       </audio>
-      <button onClick={handleImageChange}>이미지 변경</button>
+      {/* <button onClick={handleImageChange}>이미지 변경</button> */}
     </Wrapper>
   );
 }
