@@ -141,13 +141,13 @@ function P7() {
       </div>
 
       {stage === 0 && (
-        <img id="study" className="balloon study" src={png1} alt="숙제해" />
+        <img id="study" className="study" src={png1} alt="숙제해" />
       )}
       {stage === 1 && (
-        <img id="hurry" className="balloon hurry" src={png2} alt="잔소리2" />
+        <img id="hurry" className="hurry" src={png2} alt="잔소리2" />
       )}
       {stage === 2 && (
-        <img id="wash" className="balloon wash" src={png3} alt="잔소리3" />
+        <img id="wash" className="wash" src={png3} alt="잔소리3" />
       )}
 
       <audio autoPlay>
