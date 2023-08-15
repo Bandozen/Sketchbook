@@ -13,7 +13,7 @@ const delDir = (dir) => {
   fs.unlink(dir, (err) => {
     console.log(err);
   });
-}
+};
 
 async function issue(req, res) {
   const { email } = req.user;
@@ -113,8 +113,8 @@ async function start(req, res) {
 
 async function stop(req, res) {
   await client.select(1);
-  await client.set(req.user.email, "stop");   
-  
+  await client.set(req.user.email, "stop");
+
   await client.select(3);
   await client.del(req.user.email);
 
@@ -126,8 +126,8 @@ async function ready(req, res) {
   // await client.RPUSHX('tst', "ready");
   await client.set(req.user.email, "ready");
 
-  delDir("./user/" + req.user.email +"/image.jpg");
-  delDir("./user/" + req.user.email +"/assemble.png");
+  delDir("./user/" + req.user.email + "/image.jpg");
+  delDir("./user/" + req.user.email + "/assemble.png");
 
   return res.status(200).json({});
 }
@@ -137,10 +137,10 @@ async function booksready(req, res) {
   // await client.RPUSHX('tst', "ready");
   await client.set(req.user.email, "ready");
 
-  delDir("./user/" + req.user.email +"/image.jpg");
-  delDir("./user/" + req.user.email +"/assemble.png");
-  delDir("./user/" + req.user.email +"/character.png");
-  delDir("./user/" + req.user.email +"/character_rmbg.png");
+  delDir("./user/" + req.user.email + "/image.jpg");
+  delDir("./user/" + req.user.email + "/assemble.png");
+  delDir("./user/" + req.user.email + "/character.png");
+  delDir("./user/" + req.user.email + "/character_rmbg.png");
 
   return res.status(200).json({});
 }
@@ -150,7 +150,7 @@ async function mission(req, res) {
 
   await client.select(1);
 
-  if (await client.TYPE(req.user.email) !== "list") {
+  if ((await client.TYPE(req.user.email)) !== "list") {
     if (flag == "1") {
       client.set(req.user.email, "mission");
       return res.status(200).json({
@@ -212,6 +212,10 @@ async function position(req, res) {
     if ((await client.LLEN(user)) <= 6) {
       x_diff = 0;
       y_diff = 0;
+      left_x = 0;
+      left_y = 0;
+      right_x = 0;
+      right_y = 0;
     } else {
       let diff = await client.lRange(user, 0, 6);
       x_diff = diff[0];
@@ -242,7 +246,7 @@ async function mail(req, res) {
   const user = req.user.email;
 
   return res.status(200).json({
-    email: user
+    email: user,
   });
 }
 
@@ -254,7 +258,7 @@ async function cleardiff(req, res) {
 
   return res.status(200).json({
     email: user,
-  })
+  });
 }
 
 async function clearcord(req, res) {
@@ -265,7 +269,7 @@ async function clearcord(req, res) {
 
   return res.status(200).json({
     email: user,
-  })
+  });
 }
 
 exports.issue = issue;
