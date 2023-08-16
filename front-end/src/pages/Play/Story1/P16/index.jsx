@@ -122,6 +122,14 @@ function P16() {
 
   useEffect(() => {
     if (audioFinished) {
+      console.log(
+        charcord.bottom,
+        charcord.left,
+        charcord.LhLeft,
+        charcord.LhTop,
+        charcord.RhLeft,
+        charcord.RhTop
+      );
       if (
         success === false &&
         checkOverlap(
@@ -133,7 +141,11 @@ function P16() {
         )
       ) {
         setSuccess(true);
+        audioElement.play();
         setCurrentImage(newImage);
+        audioElement.onended = () => {
+          navigate("/play/story1/p17");
+        };
       }
     }
   }, [
@@ -144,13 +156,6 @@ function P16() {
     charcord.RhLeft,
     charcord.RhTop,
   ]);
-
-  if (success) {
-    audioElement.play();
-    audioElement.onended = () => {
-      navigate("/play/story1/p17");
-    };
-  }
 
   return (
     <Wrapper>
