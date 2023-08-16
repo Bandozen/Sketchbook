@@ -15,7 +15,8 @@ let email;
 
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
-  const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
+  // const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
+  const { setCharcord } = props;
 
   useLayoutEffect(() => {
     // 위치 정보 업데이트 함수
@@ -31,12 +32,25 @@ const Charactercam = (props) => {
           const right_x = parseFloat(res.data.right_x);
           const right_y = parseFloat(res.data.right_y);
 
-          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
-          setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
-          setLhTop(left_y);
-          setLhLeft(left_x);
-          setRhTop(right_y);
-          setRhLeft(right_x);
+          // setBottom((prevBottom) => prevBottom + y_diff + y_diff);
+          // setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
+          // setLhTop(left_y);
+          // setLhLeft(left_x);
+          // setRhTop(right_y);
+          // setRhLeft(right_x);
+          setCharcord((prevCharcord) => {
+            const newBottom = prevCharcord.bottom + y_diff + y_diff;
+            const newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+
+            return ({
+              bottom : newBottom,
+              left: newLeft,
+              LhTop: 384 + left_y - newBottom,
+              LhLeft: left_x + newLeft,
+              RhTop: 384 + right_y - newBottom,
+              RhLeft: right_x + newLeft
+            })
+          })
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -71,34 +85,42 @@ const Charactercam = (props) => {
 function P16() {
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
-  const [bottom, setBottom] = useState(0);
-  const [left, setLeft] = useState(0);
-  const [LhTop, setLhTop] = useState(0);
-  const [LhLeft, setLhLeft] = useState(0);
-  const [RhTop, setRhTop] = useState(0);
-  const [RhLeft, setRhLeft] = useState(0);
+  // const [bottom, setBottom] = useState(0);
+  // const [left, setLeft] = useState(0);
+  // const [LhTop, setLhTop] = useState(0);
+  // const [LhLeft, setLhLeft] = useState(0);
+  // const [RhTop, setRhTop] = useState(0);
+  // const [RhLeft, setRhLeft] = useState(0);
+  const [charcord, setCharcord] = useState({
+    bottom: 0,
+    left: 0,
+    LhLeft: 0,
+    LhTop: 384,
+    RhLeft: 0,
+    RhTop: 384,
+  })
   const [audioFinished, setAudioFinished] = useState(false);
   const audioElement = new Audio(boom);
 
   const [currentImage, setCurrentImage] = useState(image);
 
-
   useEffect(() => {
-    if (audioFinished) {
-      if (success === false && checkOverlap("hand", LhLeft, LhTop, RhLeft, RhTop)) {
-        setSuccess(true);
-        setCurrentImage(newImage);
-      }
-    }
-
     axios
       .get("/api/devices/cleardiff")
       .then()
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
+    }, [])
 
-  }, [bottom, left])
+  useEffect(() => {
+    if (audioFinished) {
+      if (success === false && checkOverlap("hand", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
+        setSuccess(true);
+        setCurrentImage(newImage);
+      }
+    }
+  }, [charcord.bottom, charcord.left, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop])
 
   if (success) {
     audioElement.play();
@@ -126,13 +148,13 @@ function P16() {
       <div
         className="character-cam"
         style={{
-          left: `${left}px`,
-          bottom: `${bottom}px`,
+          left: `${charcord.left}px`,
+          bottom: `${charcord.bottom}px`,
           position: "absolute",
           zIndex: 1,
         }}
       >
-        <Charactercam setBottom={setBottom} setLeft={setLeft} />
+        <Charactercam setCharcord={setCharcord} />
       </div>
 
       <img className="back-ground" src={currentImage} alt="" />

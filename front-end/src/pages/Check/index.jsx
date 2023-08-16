@@ -22,8 +22,8 @@ const Livecam = () => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    // setImageUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // camUrl = `/assets/assemble.png?timestamp=${timestamp}`; // local
+    // setImageUrl(`/assets/test.png?timestamp=${timestamp}`); //local
+    // camUrl = `/assets/test.png?timestamp=${timestamp}`; // local
     setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
     camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}`; // 배포
   };
