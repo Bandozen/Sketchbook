@@ -43,19 +43,26 @@ const Charactercam = (props) => {
           // setRhTop(right_y);
           // setRhLeft(right_x);
           setCharcord((prevCharcord) => {
+            let newLeft;
+            if (prevCharcord.left < 0) {
+              newLeft = 0;
+            } else if (prevCharcord.left > 895) {
+              newLeft = 895;
+            } else {
+              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+            }
             const newBottom = prevCharcord.bottom + y_diff + y_diff;
-            const newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
 
-            return ({
-              bottom : newBottom,
+            return {
+              bottom: newBottom,
               left: newLeft,
               LhTop: 384 + left_y - newBottom,
               LhLeft: left_x + newLeft,
               RhTop: 384 + right_y - newBottom,
-              RhLeft: right_x + newLeft
-            })
+              RhLeft: right_x + newLeft,
+            };
+          });
         })
-      })
         .catch((err) => {
           return console.log("에러입니다.", err);
         });
@@ -86,7 +93,6 @@ const Charactercam = (props) => {
   return <img src={characterUrl} alt="" />;
 };
 
-
 function P7() {
   const navigate = useNavigate();
   const [stage, setStage] = useState(0);
@@ -103,7 +109,8 @@ function P7() {
     LhTop: 384,
     RhLeft: 0,
     RhTop: 384,
-  })
+  });
+  const [audioFinished, setAudioFinished] = useState(false);
 
   useEffect(() => {
     axios
@@ -112,22 +119,59 @@ function P7() {
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
-    }, [])
+  }, []);
 
   const audioElement = new Audio(boom1);
   const audio2Element = new Audio(boom2);
 
   useEffect(() => {
-    if (stage === 0 && checkOverlap("study", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
-      setStage(1);
-      audioElement.play();
-    } else if (stage === 1 && checkOverlap("hurry", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
-      setStage(2);
-      audioElement.play();
-    } else if (stage === 2 && checkOverlap("wash", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
-      setStage(3);
+    if (audioFinished) {
+      if (
+        stage === 0 &&
+        checkOverlap(
+          "study",
+          charcord.LhLeft,
+          charcord.LhTop,
+          charcord.RhLeft,
+          charcord.RhTop
+        )
+      ) {
+        setStage(1);
+        audioElement.play();
+      } else if (
+        stage === 1 &&
+        checkOverlap(
+          "hurry",
+          charcord.LhLeft,
+          charcord.LhTop,
+          charcord.RhLeft,
+          charcord.RhTop
+        )
+      ) {
+        setStage(2);
+        audioElement.play();
+      } else if (
+        stage === 2 &&
+        checkOverlap(
+          "wash",
+          charcord.LhLeft,
+          charcord.LhTop,
+          charcord.RhLeft,
+          charcord.RhTop
+        )
+      ) {
+        setStage(3);
+      }
     }
-  }, [charcord.bottom, charcord.left, stage, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop]);
+  }, [
+    charcord.bottom,
+    charcord.left,
+    stage,
+    charcord.LhLeft,
+    charcord.LhTop,
+    charcord.RhLeft,
+    charcord.RhTop,
+  ]);
 
   if (stage === 3) {
     audio2Element.play();
@@ -194,7 +238,12 @@ function P7() {
         <img id="wash" className="wash" src={png3} alt="잔소리3" />
       )}
 
-      <audio autoPlay>
+      <audio
+        autoPlay
+        onEnded={() => {
+          setAudioFinished(true);
+        }}
+      >
         <source src={audio7} type="audio/mp3" />
       </audio>
     </Wrapper>
