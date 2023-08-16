@@ -3,6 +3,7 @@ import image from "../../../../play-background/엄마는 카멜레온_11.gif";
 import audio11 from "../../../../play-background/ske_11.mp3";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import axios from "axios";
 
 function P11() {
   const navigate = useNavigate();  
