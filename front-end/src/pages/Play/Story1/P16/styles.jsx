@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   #hand{
     position: absolute;
     width : 300px;
-    height : 400px;
+    height : 500px;
     right : 100px;
   }
 
