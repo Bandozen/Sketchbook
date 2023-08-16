@@ -36,7 +36,14 @@ const Charactercam = (props) => {
           // setRhLeft(right_x);         
           setCharcord((prevCharcord) => {
             const newBottom = prevCharcord.bottom + y_diff + y_diff;
-            const newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+            let newLeft;
+            if (prevCharcord.left < 0) {
+              newLeft = 0;
+            } else if (prevCharcord.left > 895) {
+              newLeft = 895;
+            } else {
+              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+            }
 
             return ({
               bottom : newBottom,
@@ -79,6 +86,8 @@ const Charactercam = (props) => {
 };
 
 function P8() {
+  const [audioFinished, setAudioFinished] = useState(false);
+
   const navigate = useNavigate();
   const [stage, setStage] = useState(0);
   // const [bottom, setBottom] = useState(0);
@@ -108,8 +117,10 @@ function P8() {
     
     
     useEffect(() => {
-      if (checkOverlap("cleaner", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
-        setStage(1);
+      if (audioFinished) {
+        if (checkOverlap("cleaner", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
+          setStage(1);
+        }
       }
 
       // console.log(charcord.left, charcord.bottom, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop);      
@@ -136,7 +147,9 @@ function P8() {
       <div id="cleaner" style={{ position: 'absolute', width: '350px', height: '250px', top: '70%', left: '75%' }}></div>
 
       <img className="back-ground" src={image1} alt="" />
-      <audio autoPlay>
+      <audio autoPlay onEnded={() => {
+          setAudioFinished(true);
+        }}>
         <source src={audio8} type="audio/mp3" />
       </audio>
     </Wrapper>
