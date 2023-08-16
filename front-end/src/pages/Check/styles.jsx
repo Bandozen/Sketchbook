@@ -44,10 +44,13 @@ const Wrapper = styled.div`
     position: relative;
     border: solid 2px #9d4fe0;
     border-radius: 10px;
-    margin: 30px;
-    padding: 5px;
+    margin: 20px;
   }
 
+  img {
+    margin: 10px;
+  }
+  
   // 라이브캠 로딩 페이지
   .loading {
     z-index: 0;
