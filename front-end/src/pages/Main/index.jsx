@@ -1,17 +1,20 @@
+import React, { useEffect } from 'react';
 import { Outlet } from 'react-router';
 
 import Wrapper from './styles';
+import axios from "axios";
+
 
 function Main() {
 
-    useEffect(() => {
+  useEffect(() => {
     axios
       .get("/api/devices/clearcord")
       .then()
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
-  })
+  }, [])
 
 
   return (

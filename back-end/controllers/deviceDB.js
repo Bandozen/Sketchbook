@@ -206,10 +206,14 @@ async function position(req, res) {
 
   let x_diff = 0;
   let y_diff = 0;
+  let left_x = 0;
+  let left_y = 0;
+  let right_x = 0;
+  let right_y = 0;
   console.log(type);
 
   if (type === "list") {
-    if ((await client.LLEN(user)) <= 6) {
+    if ((await client.LLEN(user)) < 6) {
       x_diff = 0;
       y_diff = 0;
       left_x = 0;

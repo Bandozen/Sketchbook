@@ -11,7 +11,8 @@ let email;
 // mp3 2초+1초 (더이상 나도 못 참겠어요!)
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
-  const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
+  // const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
+  const { setCharcord } = props;
 
   useLayoutEffect(() => {
     // 위치 정보 업데이트 함수
@@ -27,12 +28,32 @@ const Charactercam = (props) => {
           const right_x = parseFloat(res.data.right_x);
           const right_y = parseFloat(res.data.right_y);
 
-          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
-          setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
-          setLhTop(left_y);
-          setLhLeft(left_x);
-          setRhTop(right_y);
-          setRhLeft(right_x);
+          // setBottom((prevBottom) => prevBottom + y_diff + y_diff);
+          // setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
+          // setLhTop(384 + left_y);
+          // setLhLeft(left_x);
+          // setRhTop(384 + right_y);
+          // setRhLeft(right_x);         
+          setCharcord((prevCharcord) => {
+            const newBottom = prevCharcord.bottom + y_diff + y_diff;
+            let newLeft;
+            if (prevCharcord.left < 0) {
+              newLeft = 0;
+            } else if (prevCharcord.left > 895) {
+              newLeft = 895;
+            } else {
+              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+            }
+
+            return ({
+              bottom : newBottom,
+              left: newLeft,
+              LhTop: 384 + left_y - newBottom,
+              LhLeft: left_x + newLeft,
+              RhTop: 384 + right_y - newBottom,
+              RhLeft: right_x + newLeft
+            })
+          })
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -65,14 +86,24 @@ const Charactercam = (props) => {
 };
 
 function P8() {
+  const [audioFinished, setAudioFinished] = useState(false);
+
   const navigate = useNavigate();
   const [stage, setStage] = useState(0);
-  const [bottom, setBottom] = useState(0);
-  const [left, setLeft] = useState(0);
-  const [LhTop, setLhTop] = useState(0);
-  const [LhLeft, setLhLeft] = useState(0);
-  const [RhTop, setRhTop] = useState(0);
-  const [RhLeft, setRhLeft] = useState(0);
+  // const [bottom, setBottom] = useState(0);
+  // const [left, setLeft] = useState(0);
+  // const [LhTop, setLhTop] = useState(0);
+  // const [LhLeft, setLhLeft] = useState(0);
+  // const [RhTop, setRhTop] = useState(0);
+  // const [RhLeft, setRhLeft] = useState(0);
+  const [charcord, setCharcord] = useState({
+    bottom: 0,
+    left: 0,
+    LhLeft: 0,
+    LhTop: 384,
+    RhLeft: 0,
+    RhTop: 384,
+  })
 
 
   useEffect(() => {
@@ -84,11 +115,16 @@ function P8() {
       });
     }, [])
     
+    
     useEffect(() => {
-      if (checkOverlap("cleaner", LhLeft, LhTop, RhLeft, RhTop)) {
-        setStage(1);
+      if (audioFinished) {
+        if (checkOverlap("cleaner", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
+          setStage(1);
+        }
       }
-    }, [bottom, left, stage]);
+
+      // console.log(charcord.left, charcord.bottom, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop);      
+    }, [charcord.bottom, charcord.left, stage, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop]);
 
     if (stage === 1) {
       navigate("/play/story1/p9");
@@ -99,18 +135,21 @@ function P8() {
       <div
         className="character-cam"
         style={{
-          left: `${left}px`,
-          bottom: `${bottom}px`,
+          left: `${charcord.left}px`,
+          bottom: `${charcord.bottom}px`,
           position: "absolute",
           zIndex: 1,
         }}
       >
-        <Charactercam setBottom={setBottom} setLeft={setLeft} />
+        {/* <Charactercam setBottom={setBottom} setLeft={setLeft} setLhTop={setLhTop} setLhLeft={setLhLeft} setRhTop={setRhTop} setRhLeft={setRhLeft} /> */}
+        <Charactercam setCharcord={setCharcord} />
       </div>
       <div id="cleaner" style={{ position: 'absolute', width: '350px', height: '250px', top: '70%', left: '75%' }}></div>
 
       <img className="back-ground" src={image1} alt="" />
-      <audio autoPlay>
+      <audio autoPlay onEnded={() => {
+          setAudioFinished(true);
+        }}>
         <source src={audio8} type="audio/mp3" />
       </audio>
     </Wrapper>
