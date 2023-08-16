@@ -5,14 +5,30 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 
 function P11() {
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/play/story1/p12");
     }, 6000);
 
-    return () => {clearTimeout(timer)}
+    const axiosTimer = setTimeout(() => {
+      axios
+      .post("/api/devices/mission", {
+        flag: "1", // mission이 없으면 0 있으면 1
+      })
+      .then((res) => {
+        // console.log(res.data.mission);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }, 6000)
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(axiosTimer);
+    }
   }, [navigate])
   
   return (
