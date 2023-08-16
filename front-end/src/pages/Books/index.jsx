@@ -24,7 +24,7 @@ function Books() {
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
-  })
+  }, [])
     
   const ready = (e) => {
     axios
