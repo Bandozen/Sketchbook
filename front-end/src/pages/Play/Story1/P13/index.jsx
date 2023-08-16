@@ -12,7 +12,7 @@ function P13() {
       navigate("/play/story1/p14");
     }, 8000);
 
-    return () => {clearTimeout(timer)};
+    return () => { clearTimeout(timer) };
   }, [navigate])
 
   return (
