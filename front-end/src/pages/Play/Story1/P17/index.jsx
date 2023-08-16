@@ -16,7 +16,7 @@ function P17() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setModalOpen(true);
-    }, 32000);
+    }, 31000);
 
     return () => {
       clearTimeout(timer);
