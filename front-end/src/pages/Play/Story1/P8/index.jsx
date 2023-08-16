@@ -57,7 +57,7 @@ const Charactercam = (props) => {
     updatePosition();
 
     // 10초마다 API 호출
-    const interval = setInterval(updatePosition, 1000);
+    const interval = setInterval(updatePosition, 100);
 
     // 컴포넌트 언마운트 시 인터벌 정리
     return () => clearInterval(interval);
@@ -65,13 +65,13 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
     fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
-    const interval = setInterval(fetchNewImage, 1000); // 200ms마다 이미지 업데이트
+    const interval = setInterval(fetchNewImage, 100); // 200ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
@@ -91,9 +91,9 @@ function P8() {
     bottom: 0,
     left: 0,
     LhLeft: 0,
-    LhTop: 0,
+    LhTop: 384,
     RhLeft: 0,
-    RhTop: 0,
+    RhTop: 384,
   })
 
 
@@ -112,7 +112,7 @@ function P8() {
         setStage(1);
       }
 
-      console.log(charcord.left, charcord.bottom, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop);      
+      // console.log(charcord.left, charcord.bottom, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop);      
     }, [charcord.bottom, charcord.left, stage, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop]);
 
     if (stage === 1) {
