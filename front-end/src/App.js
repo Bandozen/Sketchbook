@@ -56,6 +56,14 @@ import Story2 from "./pages/Play/Story2";
 import P2_1 from "./pages/Play/Story2/P1/index";
 import P2_2 from "./pages/Play/Story2/P2/index";
 import P2_3 from "./pages/Play/Story2/P3/index";
+//////////////////////////////////////////
+import Story3 from "./pages/Play/Story3";
+//////////////////////////////////////////
+import P3_1 from "./pages/Play/Story1/P1/index";
+import P3_6 from "./pages/Play/Story3/P6/index";
+import P3_7 from "./pages/Play/Story3/P7/index";
+import P3_15 from "./pages/Play/Story3/P15/index";
+import P3_16 from "./pages/Play/Story3/P16/index";
 ///////////////////////////////////
 
 const router = createBrowserRouter([
@@ -148,6 +156,17 @@ const router = createBrowserRouter([
               { path: "p3", element: <P2_3 /> },
             ],
           },
+          {
+            path: "story3",
+            element: <Story3 />,
+            children: [
+              { path: "p1", element: <P3_1 /> },
+              { path: "p6", element: <P3_6 /> },
+              { path: "p7", element: <P3_7 /> },
+              { path: "p15", element: <P3_15 /> },
+              { path: "p16", element: <P3_16 /> },
+            ],
+          },
         ],
       },
       {
@@ -176,9 +195,9 @@ function App() {
   // 　/>　 <│　　　/∨　　　│ 　* √1∨*
   // <＼　　∠＼　　/>　　　〈〉　* /＼*
   // ~ 앗싸~ 오늘도 활기차게 발랄하게~ 오예~~!!! ^^
-  
+
   // `);
-  
+
   return (
     <div>
       <RouterProvider router={router} />

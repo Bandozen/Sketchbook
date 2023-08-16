@@ -1,15 +1,18 @@
 import Wrapper from "./styles";
-import image1 from "../../../../play-background/엄마는 카멜레온_8.gif";
-import audio8 from "../../../../play-background/ske_8.mp3";
+import image from "../../../../play-background/엄마는 카멜레온_16.png";
+import newImage from "../../../../play-background/엄마는 카멜레온_16_엄마손.png";
+
+import audio16 from "../../../../play-background/ske_16.mp3";
 import boom from "../../../../play-background/success_clear.mp3";
+
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 import checkOverlap from "../../../../utils/checkOverlap";
 
 let email;
 
-// mp3 2초+1초 (더이상 나도 못 참겠어요!)
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
   // const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
@@ -31,10 +34,10 @@ const Charactercam = (props) => {
 
           // setBottom((prevBottom) => prevBottom + y_diff + y_diff);
           // setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
-          // setLhTop(384 + left_y);
+          // setLhTop(left_y);
           // setLhLeft(left_x);
-          // setRhTop(384 + right_y);
-          // setRhLeft(right_x);         
+          // setRhTop(right_y);
+          // setRhLeft(right_x);
           setCharcord((prevCharcord) => {
             const newBottom = prevCharcord.bottom + y_diff + y_diff;
             let newLeft;
@@ -46,15 +49,15 @@ const Charactercam = (props) => {
               newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
             }
 
-            return ({
-              bottom : newBottom,
+            return {
+              bottom: newBottom,
               left: newLeft,
               LhTop: 384 + left_y - newBottom,
               LhLeft: left_x + newLeft,
               RhTop: 384 + right_y - newBottom,
-              RhLeft: right_x + newLeft
-            })
-          })
+              RhLeft: right_x + newLeft,
+            };
+          });
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -83,14 +86,12 @@ const Charactercam = (props) => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
-  return <img src={characterUrl} alt="" />;
+  return <img id="character" src={characterUrl} alt="" />;
 };
 
-function P8() {
-  const [audioFinished, setAudioFinished] = useState(false);
-
+function P16() {
   const navigate = useNavigate();
-  const [stage, setStage] = useState(0);
+  const [success, setSuccess] = useState(false);
   // const [bottom, setBottom] = useState(0);
   // const [left, setLeft] = useState(0);
   // const [LhTop, setLhTop] = useState(0);
@@ -104,8 +105,11 @@ function P8() {
     LhTop: 384,
     RhLeft: 0,
     RhTop: 384,
-  })
+  });
+  const [audioFinished, setAudioFinished] = useState(false);
+  const audioElement = new Audio(boom);
 
+  const [currentImage, setCurrentImage] = useState(image);
 
   useEffect(() => {
     axios
@@ -114,29 +118,60 @@ function P8() {
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
-    }, [])
-    
-  const audioElement = new Audio(boom);
+  }, []);
 
-    useEffect(() => {
-      if (audioFinished) {
-        if (checkOverlap("cleaner", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
-          setStage(1);
-        }
+  useEffect(() => {
+    if (audioFinished) {
+      console.log(
+        charcord.bottom,
+        charcord.left,
+        charcord.LhLeft,
+        charcord.LhTop,
+        charcord.RhLeft,
+        charcord.RhTop
+      );
+      if (
+        success === false &&
+        checkOverlap(
+          "hand",
+          charcord.LhLeft,
+          charcord.LhTop,
+          charcord.RhLeft,
+          charcord.RhTop
+        )
+      ) {
+        setSuccess(true);
+        audioElement.play();
+        setCurrentImage(newImage);
+        audioElement.onended = () => {
+          navigate("/play/story3/p17");
+        };
       }
-
-      // console.log(charcord.left, charcord.bottom, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop);      
-    }, [charcord.bottom, charcord.left, stage, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop]);
-
-    if (stage === 1) {
-      audioElement.play();
-      audioElement.onended = () => {
-        navigate("/play/story1/p9");
-      };
     }
-  
+  }, [
+    charcord.bottom,
+    charcord.left,
+    charcord.LhLeft,
+    charcord.LhTop,
+    charcord.RhLeft,
+    charcord.RhTop,
+  ]);
+
   return (
     <Wrapper>
+      {/* 테스트용 버튼 */}
+      {/* <div style={{ position: "absolute", zIndex: "9999", display: "flex" }}>
+        <button
+          type="button"
+          onClick={() => {
+            setBottom(200);
+            setLeft(712);
+          }}
+        >
+          test
+        </button>
+      </div> */}
+      <div id="hand"></div>
       <div
         className="character-cam"
         style={{
@@ -146,19 +181,21 @@ function P8() {
           zIndex: 1,
         }}
       >
-        {/* <Charactercam setBottom={setBottom} setLeft={setLeft} setLhTop={setLhTop} setLhLeft={setLhLeft} setRhTop={setRhTop} setRhLeft={setRhLeft} /> */}
         <Charactercam setCharcord={setCharcord} />
       </div>
-      <div id="cleaner" style={{ position: 'absolute', width: '350px', height: '250px', top: '70%', left: '75%' }}></div>
 
-      <img className="back-ground" src={image1} alt="" />
-      <audio autoPlay onEnded={() => {
+      <img className="back-ground" src={currentImage} alt="" />
+      <audio
+        autoPlay
+        onEnded={() => {
           setAudioFinished(true);
-        }}>
-        <source src={audio8} type="audio/mp3" />
+        }}
+      >
+        <source src={audio16} type="audio/mp3" />
       </audio>
+      {/* <button onClick={handleImageChange}>이미지 변경</button> */}
     </Wrapper>
   );
 }
 
-export default P8;
+export default P16;
