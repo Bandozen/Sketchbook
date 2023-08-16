@@ -40,17 +40,24 @@ const Charactercam = (props) => {
           // setRhLeft(right_x);
           setCharcord((prevCharcord) => {
             const newBottom = prevCharcord.bottom + y_diff + y_diff;
-            const newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+            let newLeft;
+            if (prevCharcord.left < 0) {
+              newLeft = 0;
+            } else if (prevCharcord.left > 895) {
+              newLeft = 895;
+            } else {
+              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+            }
 
-            return ({
-              bottom : newBottom,
+            return {
+              bottom: newBottom,
               left: newLeft,
               LhTop: 384 + left_y - newBottom,
               LhLeft: left_x + newLeft,
               RhTop: 384 + right_y - newBottom,
-              RhLeft: right_x + newLeft
-            })
-          })
+              RhLeft: right_x + newLeft,
+            };
+          });
         })
         .catch((err) => {
           return console.log("에러입니다.", err);
@@ -98,7 +105,7 @@ function P16() {
     LhTop: 384,
     RhLeft: 0,
     RhTop: 384,
-  })
+  });
   const [audioFinished, setAudioFinished] = useState(false);
   const audioElement = new Audio(boom);
 
@@ -111,16 +118,32 @@ function P16() {
       .catch((err) => {
         return console.log("에러입니다.", err);
       });
-    }, [])
+  }, []);
 
   useEffect(() => {
     if (audioFinished) {
-      if (success === false && checkOverlap("hand", charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)) {
+      if (
+        success === false &&
+        checkOverlap(
+          "hand",
+          charcord.LhLeft,
+          charcord.LhTop,
+          charcord.RhLeft,
+          charcord.RhTop
+        )
+      ) {
         setSuccess(true);
         setCurrentImage(newImage);
       }
     }
-  }, [charcord.bottom, charcord.left, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop])
+  }, [
+    charcord.bottom,
+    charcord.left,
+    charcord.LhLeft,
+    charcord.LhTop,
+    charcord.RhLeft,
+    charcord.RhTop,
+  ]);
 
   if (success) {
     audioElement.play();
@@ -143,8 +166,7 @@ function P16() {
           test
         </button>
       </div> */}
-      <div id="hand">
-      </div>
+      <div id="hand"></div>
       <div
         className="character-cam"
         style={{
@@ -158,7 +180,12 @@ function P16() {
       </div>
 
       <img className="back-ground" src={currentImage} alt="" />
-      <audio autoPlay onEnded={() => {setAudioFinished(true)}}>
+      <audio
+        autoPlay
+        onEnded={() => {
+          setAudioFinished(true);
+        }}
+      >
         <source src={audio16} type="audio/mp3" />
       </audio>
       {/* <button onClick={handleImageChange}>이미지 변경</button> */}
