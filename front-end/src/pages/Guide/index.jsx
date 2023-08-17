@@ -17,7 +17,7 @@ function Guide() {
   };
 
   const goToConnect = () => {
-    if (connection == 'true') {
+    if (connection === 'true') {
       setIsModalOpen(true);
 
     } else {

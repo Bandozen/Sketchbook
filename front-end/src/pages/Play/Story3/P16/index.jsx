@@ -15,7 +15,6 @@ let email;
 
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
-  // const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
   const { setCharcord } = props;
 
   useLayoutEffect(() => {
@@ -54,7 +53,7 @@ const Charactercam = (props) => {
           });
         })
         .catch((err) => {
-          return console.log("에러입니다.", err);
+          return console.error(err);
         });
     };
 
@@ -86,12 +85,6 @@ const Charactercam = (props) => {
 function P16() {
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
-  // const [bottom, setBottom] = useState(0);
-  // const [left, setLeft] = useState(0);
-  // const [LhTop, setLhTop] = useState(0);
-  // const [LhLeft, setLhLeft] = useState(0);
-  // const [RhTop, setRhTop] = useState(0);
-  // const [RhLeft, setRhLeft] = useState(0);
   const [charcord, setCharcord] = useState({
     bottom: 0,
     left: 0,
@@ -110,20 +103,13 @@ function P16() {
       .get("/api/devices/cleardiff")
       .then()
       .catch((err) => {
-        return console.log("에러입니다.", err);
+        return console.error(err);
       });
   }, []);
 
   useEffect(() => {
     if (audioFinished) {
-      console.log(
-        charcord.bottom,
-        charcord.left,
-        charcord.LhLeft,
-        charcord.LhTop,
-        charcord.RhLeft,
-        charcord.RhTop
-      );
+     
       if (
         success === false &&
         checkOverlap(
@@ -153,18 +139,6 @@ function P16() {
 
   return (
     <Wrapper>
-      {/* 테스트용 버튼 */}
-      {/* <div style={{ position: "absolute", zIndex: "9999", display: "flex" }}>
-        <button
-          type="button"
-          onClick={() => {
-            setBottom(200);
-            setLeft(712);
-          }}
-        >
-          test
-        </button>
-      </div> */}
       <div id="hand"></div>
       <div
         className="character-cam"
@@ -187,7 +161,6 @@ function P16() {
       >
         <source src={audio16} type="audio/mp3" />
       </audio>
-      {/* <button onClick={handleImageChange}>이미지 변경</button> */}
     </Wrapper>
   );
 }

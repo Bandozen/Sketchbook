@@ -1,4 +1,3 @@
-import Wrapper from "./styles";
 import image1 from "../../../../play-background/엄마는 카멜레온_6.gif";
 import audio6 from "../../../../play-background/ske_6.mp3";
 import { useNavigate } from "react-router-dom";
@@ -18,13 +17,13 @@ function P6() {
   }, [navigate])  
 
   return (
-    <Wrapper>
+    <div>
       <img className="back-ground" src={image1} alt="" onLoad={mission} />
 
       <audio autoPlay>
         <source src={audio6} type="audio/mp3" />
       </audio>
-    </Wrapper>
+    </div>
   );
 }
 

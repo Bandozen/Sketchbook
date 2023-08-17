@@ -11,7 +11,6 @@ function Story2() {
     axios
       .get("/api/devices/stop")
       .then((res) => {
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);

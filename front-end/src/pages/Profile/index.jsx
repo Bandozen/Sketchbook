@@ -3,31 +3,26 @@ import { useNavigate } from "react-router-dom";
 import InputGroup from "react-bootstrap/InputGroup";
 import axios from "axios";
 
-// sytled_components
 import Wrapper from "./styles";
 
-// Bootstrap
 import Form from "react-bootstrap/Form";
 
-// Components
 import Header from "../../components/Header";
 
-// utils
 import isConnected from "../../utils/isConnected";
 ///////////////////////////////////////////////
 
 function Profile() {
-  // console.log(`
-  // 책 좀 골라볼까나
-  // .　　　 ∧,,_∧
-  // 　　 ⊂ ( ･ω･ )つ-
-  // 　 ／／/　　 /::/
-  // 　 |::|/⊂ヽノ|::|」
-  // ／￣￣☆￣￣￣／|
-  // ＿＿＿＿＿＿／　| |
-  // |------ー----ー|／
-
-  // `)
+//   console.log(`
+//   책 좀 골라볼까나
+//   .　　　 ∧,,_∧
+//   　　 ⊂ ( ･ω･ )つ-
+//   　 ／／/　　 /::/
+//   　 |::|/⊂ヽノ|::|」
+//   ／￣￣☆￣￣￣／|
+//   ＿＿＿＿＿＿／　| |
+//   |------ー----ー|／
+// `)
   var connection = isConnected();
   let navigate = useNavigate();
 
@@ -124,13 +119,13 @@ function Profile() {
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    if (form.pw == "") {
+    if (form.pw === "") {
       return alert("기존 비밀번호를 입력해주세요");
     }
-    if (form.newPw == "") {
+    if (form.newPw === "") {
       return alert("새로운 비밀번호를 입력해주세요");
     }
-    if (form.newPwCheck == "") {
+    if (form.newPwCheck === "") {
       return alert("새로운 비밀번호 확인을 입력해주세요");
     }
     if (form.newPw !== form.newPwCheck) {
@@ -157,7 +152,7 @@ function Profile() {
         }));
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -168,7 +163,6 @@ function Profile() {
       .get("/api/devices/disconnect")
       .then((res) => {
         if (res.data.success) {
-          console.log("disconncet successful");
           navigate("/profile");
         } else {
           console.error("disconncet failed:", res.data.success);

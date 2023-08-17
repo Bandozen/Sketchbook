@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Wrapper from "./styles";
 import image1 from "../../../../play-background/엄마는 카멜레온_1.gif";
 import audio1 from "../../../../play-background/ske_1.mp3";
 import axios from "axios";
@@ -22,21 +21,20 @@ function P1() {
         flag: "1", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
-        // console.log(res.data.mission)
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
   return (
-    <Wrapper>
+    <div>
       <img className="back-ground" src={image1} alt="" onLoad={mission} />
 
       <audio autoPlay>
         <source src={audio1} type="audio/mp3" />
       </audio>
-    </Wrapper>
+    </div>
   );
 }
 

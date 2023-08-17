@@ -1,22 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-// Link
 import "bootstrap/dist/css/bootstrap.min.css";
-
-// CSS
 import "./App.css";
 
 import Main from "./pages/Main/index";
-// import MainSecond from "./pages/MainSecond/index";
 import Connect from "./pages/Connect/index";
 import Guide from "./pages/Guide/index";
 import Books from "./pages/Books/index";
 import Check from "./pages/Check/index";
-// import SoundCheck from "./pages/Check/SoundCheck";
-// import MotionCheck from "./pages/Check/MotionCheck";
-// import CaptureCheck from "./pages/Check/CaptureCheck";
-// import DistanceCheck from "./pages/Check/DistanceCheck";
-// import CombineCheck from "./pages/Check/CombineCheck";
 import Ready from "./pages/Ready";
 import Play from "./pages/Play/index";
 import Profile from "./pages/Profile/index";
@@ -27,8 +17,6 @@ import Signup from "./pages/Main/Signup/index";
 import Choose from "./pages/Main/Choose/index";
 import ProtectedRoute from "./pages/ProtectedRoute/index";
 import PublicRoute from "./pages/PublicRoute/index";
-import Device from "./pages/Device/index";
-import DeviceOTP from "./pages/DeviceOTP/index";
 import AboutUs from "./pages/AboutUs/index";
 import Story1 from "./pages/Play/Story1";
 //////////////////////////////////////////
@@ -52,12 +40,12 @@ import P16 from "./pages/Play/Story1/P16/index";
 import P17 from "./pages/Play/Story1/P17/index";
 //////////////////////////////////////////
 import Story2 from "./pages/Play/Story2";
-//////////////////////////////////////////
 import P2_1 from "./pages/Play/Story2/P1/index";
 import P2_2 from "./pages/Play/Story2/P2/index";
 import P2_3 from "./pages/Play/Story2/P3/index";
 //////////////////////////////////////////
 import Story3 from "./pages/Play/Story3";
+
 //////////////////////////////////////////
 import P3_1 from "./pages/Play/Story3/P1/index";
 import P3_6 from "./pages/Play/Story3/P6/index";
@@ -107,13 +95,6 @@ const router = createBrowserRouter([
       {
         path: "/check",
         element: <Check />,
-        // children: [
-        //   { path: "capture", element: <CaptureCheck /> },
-        //   { path: "distance", element: <DistanceCheck /> },
-        //   { path: "motion", element: <MotionCheck /> },
-        //   { path: "sound", element: <SoundCheck /> },
-        //   { path: "combine", element: <CombineCheck /> },
-        // ],
       },
       {
         path: "/ready",
@@ -177,26 +158,19 @@ const router = createBrowserRouter([
         path: "/code",
         element: <Code />,
       },
-      {
-        path: "/device",
-        element: <Device />,
-      },
-      {
-        path: "/deviceOTP",
-        element: <DeviceOTP />,
-      },
+     
     ],
   },
 ]);
 
 function App() {
-  // console.log(`
-  // ＼●　 ●＿　　＼●　 　＜●〉　* ● *
-  // 　/>　 <│　　　/∨　　　│ 　* √1∨*
-  // <＼　　∠＼　　/>　　　〈〉　* /＼*
-  // ~ 앗싸~ 오늘도 활기차게 발랄하게~ 오예~~!!! ^^
+  console.log(`
+  ＼●　 ●＿　　＼●　 　＜●〉　* ● *
+  　/>　 <│　　　/∨　　　│ 　* √1∨*
+  <＼　　∠＼　　/>　　　〈〉　* /＼*
+  ~ 앗싸~ 오늘도 활기차게 발랄하게~ 오예~~!!! ^^
 
-  // `);
+  `);
 
   return (
     <div>

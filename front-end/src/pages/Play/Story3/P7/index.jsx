@@ -9,7 +9,6 @@ import boom2 from "../../../../play-background/success_yeah.mp3";
 
 import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
-// import Livecam from "../../../../components/Livecam";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -57,7 +56,7 @@ const Charactercam = (props) => {
           });
         })
         .catch((err) => {
-          return console.log("에러입니다.", err);
+          return console.error(err);
         });
     };
 

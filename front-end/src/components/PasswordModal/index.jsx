@@ -18,10 +18,9 @@ function PasswordModal(props) {
       alert("입력하신 " + email + "로 임시 비밀번호를 보냈습니다.")
       axios.post("api/users/tempPassword", {email: email})
         .then((res) => {
-          console.log(res);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
       props.closeModal();
     } else {

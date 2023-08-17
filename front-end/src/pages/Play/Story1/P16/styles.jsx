@@ -16,10 +16,6 @@ const Wrapper = styled.div`
     right : 100px;
   }
 
-  // img {
-  //   width: 100%;
-  //   background-size: cover;
-  // }
 
   .image-button {
     position: absolute;
