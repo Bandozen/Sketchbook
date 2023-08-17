@@ -10,7 +10,6 @@ import Check from "./pages/Check/index";
 import Ready from "./pages/Ready";
 import Play from "./pages/Play/index";
 import Profile from "./pages/Profile/index";
-import Code from "./pages/Code/index";
 import NotFound from "./pages/NotFound/index";
 import Login from "./pages/Main/Login/index";
 import Signup from "./pages/Main/Signup/index";
@@ -153,10 +152,6 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
-      },
-      {
-        path: "/code",
-        element: <Code />,
       },
      
     ],
