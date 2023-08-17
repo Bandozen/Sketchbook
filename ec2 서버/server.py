@@ -54,7 +54,6 @@ while True:
     frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
     
     image_filename = f"/home/ubuntu/user/{email}/image.jpg"
-    #image_filename = "/home/ubuntu/user/image.jpg"
     cv2.imwrite(image_filename, frame)
     print("Image saved")
     flag1 = 1
