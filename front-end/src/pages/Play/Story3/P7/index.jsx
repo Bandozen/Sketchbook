@@ -34,6 +34,8 @@ const Charactercam = (props) => {
           const right_x = parseFloat(res.data.right_x);
           const right_y = parseFloat(res.data.right_y);
 
+          console.log(x_diff)
+
           setCharcord((prevCharcord) => {
             let newLeft;
             if (prevCharcord.left < 0) {
@@ -44,6 +46,7 @@ const Charactercam = (props) => {
               newLeft = prevCharcord.left + x_diff + x_diff;
             }
             const newBottom = prevCharcord.bottom + y_diff;
+            // const newLeft = prevCharcord.left + x_diff + x_diff;
 
             return {
               bottom: newBottom,
@@ -109,6 +112,9 @@ function P7() {
 
   const audioElement = new Audio(boom1);
   const audio2Element = new Audio(boom2);
+
+  console.log(charcord.left, charcord.bottom, charcord.LhLeft, charcord.LhTop, charcord.RhLeft, charcord.RhTop)
+
 
   useEffect(() => {
     if (audioFinished) {
