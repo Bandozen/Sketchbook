@@ -32,14 +32,14 @@ const Charactercam = (props) => {
           const right_y = parseFloat(res.data.right_y);
 
           setCharcord((prevCharcord) => {
-            const newBottom = prevCharcord.bottom + y_diff + y_diff;
+            const newBottom = prevCharcord.bottom + y_diff;
             let newLeft;
             if (prevCharcord.left < 0) {
               newLeft = 0;
             } else if (prevCharcord.left > 895) {
               newLeft = 895;
             } else {
-              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+              newLeft = prevCharcord.left + x_diff + x_diff;
             }
 
             return {
