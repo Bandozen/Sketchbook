@@ -18,7 +18,7 @@ function P15() {
   
   return (
     <div>
-      <img className="back-ground" src={image15} alt="" onLoad={mission} />
+      <img className="back-ground" src={image15} alt="" />
       <audio autoPlay>
         <source src={audio15} type="audio/mp3" />
       </audio>
