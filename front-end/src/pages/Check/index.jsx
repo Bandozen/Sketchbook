@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -63,6 +63,7 @@ const Charactercam = () => {
 };
 
 function Check() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeStep, setActiveStep] = useState(1);
   const audioRef = useRef(new Audio(check_audio));
   const navigate = useNavigate();
@@ -104,7 +105,8 @@ function Check() {
   }, [activeStep]);
 
   const goToReady = () => {
-    navigate("/ready");
+    const bookId = searchParams.get("bookId");
+    navigate(`/ready?bookId=${bookId}`);
   };
 
   return (

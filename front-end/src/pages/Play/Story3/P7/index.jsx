@@ -162,7 +162,7 @@ function P7() {
   if (stage === 3) {
     audio2Element.play();
     audio2Element.onended = () => {
-      navigate("/play/story3/p15");
+      navigate("/play/story3/p12");
     };
   }
 

@@ -20,10 +20,10 @@ const Charactercam = (props) => {
           const x_diff = parseFloat(res.data.x_diff);
           const y_diff = parseFloat(res.data.y_diff);
 
-          setBottom((prevBottom) => prevBottom + y_diff );
+          setBottom((prevBottom) => prevBottom + y_diff + y_diff);
 
           setLeft((prevLeft) => {
-            const newLeft = prevLeft + x_diff + x_diff;
+            const newLeft = prevLeft + x_diff + x_diff + x_diff;
             if (newLeft < 0) return 0;
             else if (newLeft > 895) return 895;
             else return newLeft;
@@ -75,7 +75,7 @@ function P12() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/play/story1/p13");
+      navigate("/play/story3/p15");
     }, 24000);
 
     return () => {

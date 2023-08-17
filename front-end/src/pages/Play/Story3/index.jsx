@@ -29,11 +29,17 @@ function Story3() {
         } else if (pageNumber === 7) {
           const prevPagePath = `/Play/story3/p6`;
           window.location.href = prevPagePath;
-        } else if (pageNumber === 15) {
+        } else if (pageNumber === 12) {
           const prevPagePath = `/Play/story3/p7`;
+          window.location.href = prevPagePath;
+        } else if (pageNumber === 15) {
+          const prevPagePath = `/Play/story3/p12`;
           window.location.href = prevPagePath;
         } else if (pageNumber === 16) {
           const prevPagePath = `/Play/story3/p15`;
+          window.location.href = prevPagePath;
+        } else if (pageNumber === 17) {
+          const prevPagePath = `/Play/story3/p16`;
           window.location.href = prevPagePath;
         } else {
           return;
@@ -46,12 +52,18 @@ function Story3() {
           const nextPagePath = `/Play/story3/p7`;
           window.location.href = nextPagePath;
         } else if (pageNumber === 7) {
+          const nextPagePath = `/Play/story3/p12`;
+          window.location.href = nextPagePath;
+        } else if (pageNumber === 12) {
           const nextPagePath = `/Play/story3/p15`;
           window.location.href = nextPagePath;
         } else if (pageNumber === 15) {
           const nextPagePath = `/Play/story3/p16`;
           window.location.href = nextPagePath;
         } else if (pageNumber === 16) {
+          const nextPagePath = `/Play/story3/p17`;
+          window.location.href = nextPagePath;
+        } else if (pageNumber === 17) {
           renderCustomDialog(
             "동화가 끝났어요. 다른 동화를 보러 가 볼까요?",
             () => {

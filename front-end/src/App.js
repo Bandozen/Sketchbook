@@ -44,13 +44,13 @@ import P2_2 from "./pages/Play/Story2/P2/index";
 import P2_3 from "./pages/Play/Story2/P3/index";
 //////////////////////////////////////////
 import Story3 from "./pages/Play/Story3";
-
-//////////////////////////////////////////
 import P3_1 from "./pages/Play/Story3/P1/index";
 import P3_6 from "./pages/Play/Story3/P6/index";
 import P3_7 from "./pages/Play/Story3/P7/index";
+import P3_12 from "./pages/Play/Story3/P12/index";
 import P3_15 from "./pages/Play/Story3/P15/index";
 import P3_16 from "./pages/Play/Story3/P16/index";
+import P3_17 from "./pages/Play/Story3/P17/index";
 ///////////////////////////////////
 
 const router = createBrowserRouter([
@@ -143,8 +143,10 @@ const router = createBrowserRouter([
               { path: "p1", element: <P3_1 /> },
               { path: "p6", element: <P3_6 /> },
               { path: "p7", element: <P3_7 /> },
+              { path: "p12", element: <P3_12 /> },
               { path: "p15", element: <P3_15 /> },
               { path: "p16", element: <P3_16 /> },
+              { path: "p17", element: <P3_17 /> },
             ],
           },
         ],

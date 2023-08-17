@@ -46,20 +46,22 @@ async function checkConnect(req, res) {
   await client.select(0);
   const flag = await client.get(OTP);
 
-  if (flag === "true") {
+  console.log(flag);
+
+  if (flag == "true") {
     User.findOneAndUpdate({ _id: req.user._id }, { isConnected: true }, (err, user) => {
         if (err) {
           return res.json({ err });
         }
         client.del(OTP);
-        res.cookie("isConnected", user.isConnected).status(200);
+        res.cookie("isConnected", user.isConnected).status(200).json({});
       });
   } else {
     User.findOne({ _id: req.user._id }, (err, user) => {
       if (err) {
          return res.json({ err });
       }
-      res.cookie("isConnected", user.isConnected).status(200);
+      res.cookie("isConnected", user.isConnected).status(200).json({});
     });
   }
 }
@@ -93,7 +95,7 @@ async function disconnect(req, res) {
 async function start(req, res) {
   await client.select(1);
   await client.set(req.user.email, "start");
-  return res.status(200);
+  return res.status(200).json({});
 }
 
 // 기기에 카메라 정지 명령 전송
@@ -105,7 +107,7 @@ async function stop(req, res) {
   await client.select(3);
   await client.del(req.user.email);
 
-  return res.status(200);
+  return res.status(200).json({});
 }
 
 // 기기에 대기 명령 전송
@@ -117,7 +119,7 @@ async function ready(req, res) {
   delDir("./user/" + req.user.email + "/image.jpg");
   delDir("./user/" + req.user.email + "/assemble.png");
 
-  return res.status(200);
+  return res.status(200).json({});
 }
 
 // 책장에서 파일정리 명령어 전송
@@ -131,7 +133,7 @@ async function booksready(req, res) {
   delDir("./user/" + req.user.email + "/character.png");
   delDir("./user/" + req.user.email + "/character_rmbg.png");
 
-  return res.status(200);
+  return res.status(200).json({});
 }
 
 // 동화 페이지 별 미션 여부 명령어 전송
@@ -181,7 +183,7 @@ function capture(req, res) {
   // downloadImage("http://localhost:3000" + imgUrl, `character.png`, email) // local
   downloadImage("https://i9c102.p.ssafy.io" + imgUrl, `character.png`, email); // 배포
 
-  return res.status(200);
+  return res.status(200).json({});
 }
 
 // 기기에서 전달 받은 캐릭터 위치 계산 
