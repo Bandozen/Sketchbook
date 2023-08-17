@@ -12,14 +12,15 @@ def clear():
 
 def confirm():
     value = otp_entry.get()
-    email = ""
+    email = None
+    redis_client.select(0)
     email = redis_client.get(value)
-    if email != "":
+    if email != None:
         redis_client.set(value, 'true')
         print(email)
         subprocess.run(["python", "/home/pi/sketchbook/wait.py", email])
     else:
-        entry.delete(0, tk.END)
+        otp_entry.delete(0, tk.END)
 
 redis_host = "i9c102.p.ssafy.io"
 redis_port = 6379  # Redis 포트 번호

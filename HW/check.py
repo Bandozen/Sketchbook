@@ -21,6 +21,7 @@ ec2_private_key = '/home/pi/sketchbook/I9C102T.pem'
 # SSH 클라이언트 생성
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+private_key = paramiko.RSAKey.from_private_key_file(ec2_private_key)
 
 while True:
     value = redis_client.get(email)
@@ -30,7 +31,6 @@ while True:
         if (value == "start"):
             try:
                 # EC2 인스턴스에 연결
-                private_key = paramiko.RSAKey.from_private_key_file(ec2_private_key)
                 client.connect(ec2_ip, username=ec2_username, pkey=private_key)
 
                 # 원격에서 실행시킬 파이썬 파일 경로와 명령어
@@ -50,7 +50,6 @@ while True:
             
             try:
                 # EC2 인스턴스에 연결
-                private_key = paramiko.RSAKey.from_private_key_file(ec2_private_key)
                 client.connect(ec2_ip, username=ec2_username, pkey=private_key)
 
                 # 원격에서 실행시킬 파이썬 파일 경로와 명령어
@@ -70,12 +69,12 @@ while True:
         elif (value == "story"):
             subprocess.run(["python", "/home/pi/sketchbook/cam.py", email])
         elif (value == "mission"):
-            subprocess.run(["python", "/home/pi/sketchbook/points_test.py", email])
+            subprocess.run(["python", "/home/pi/sketchbook/points.py", email])
         elif (value == "stop"):
-            subprocess.Popen(["pkill", "-f", "wait.py"])
+            subprocess.run(["pkill", "-f", "wait.py"])
             subprocess.Popen(["python", "/home/pi/sketchbook/wait.py", email])
             break
         elif (value == "logout"):
-            subprocess.Popen(["pkill", "-f", "wait.py"])
+            subprocess.run(["pkill", "-f", "wait.py"])
             subprocess.Popen(["python", "/home/pi/sketchbook/otp.py"])
             break
