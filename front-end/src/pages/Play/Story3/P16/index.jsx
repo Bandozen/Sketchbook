@@ -1,16 +1,13 @@
 import Wrapper from "./styles";
-import image1 from "../../../../play-background/엄마는 카멜레온_7.gif";
-import png1 from "../../../../play-png/7_잔소리1_숙제해.png";
-import png2 from "../../../../play-png/7_잔소리3_빨리빨리.png";
-import png3 from "../../../../play-png/7_잔소리5_씻어라.png";
+import image from "../../../../play-background/엄마는 카멜레온_16.png";
+import newImage from "../../../../play-background/엄마는 카멜레온_16_엄마손.png";
 
-import boom1 from "../../../../play-background/success_clear.mp3";
-import boom2 from "../../../../play-background/success_yeah.mp3";
+import audio16 from "../../../../play-background/ske_16.mp3";
+import boom from "../../../../play-background/success_clear.mp3";
 
-import audio7 from "../../../../play-background/ske_7.mp3";
 import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import checkOverlap from "../../../../utils/checkOverlap";
 
@@ -35,15 +32,15 @@ const Charactercam = (props) => {
           const right_y = parseFloat(res.data.right_y);
 
           setCharcord((prevCharcord) => {
+            const newBottom = prevCharcord.bottom + y_diff;
             let newLeft;
             if (prevCharcord.left < 0) {
               newLeft = 0;
             } else if (prevCharcord.left > 895) {
               newLeft = 895;
             } else {
-              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+              newLeft = prevCharcord.left + x_diff + x_diff;
             }
-            const newBottom = prevCharcord.bottom + y_diff + y_diff;
 
             return {
               bottom: newBottom,
@@ -82,12 +79,12 @@ const Charactercam = (props) => {
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
-  return <img src={characterUrl} alt="" />;
+  return <img id="character" src={characterUrl} alt="" />;
 };
 
-function P7() {
+function P16() {
   const navigate = useNavigate();
-  const [stage, setStage] = useState(0);
+  const [success, setSuccess] = useState(false);
   const [charcord, setCharcord] = useState({
     bottom: 0,
     left: 0,
@@ -97,6 +94,9 @@ function P7() {
     RhTop: 384,
   });
   const [audioFinished, setAudioFinished] = useState(false);
+  const audioElement = new Audio(boom);
+
+  const [currentImage, setCurrentImage] = useState(image);
 
   useEffect(() => {
     axios
@@ -107,70 +107,40 @@ function P7() {
       });
   }, []);
 
-  const audioElement = new Audio(boom1);
-  const audio2Element = new Audio(boom2);
-
   useEffect(() => {
     if (audioFinished) {
+     
       if (
-        stage === 0 &&
+        success === false &&
         checkOverlap(
-          "study",
+          "hand",
           charcord.LhLeft,
           charcord.LhTop,
           charcord.RhLeft,
           charcord.RhTop
         )
       ) {
-        setStage(1);
+        setSuccess(true);
         audioElement.play();
-      } else if (
-        stage === 1 &&
-        checkOverlap(
-          "hurry",
-          charcord.LhLeft,
-          charcord.LhTop,
-          charcord.RhLeft,
-          charcord.RhTop
-        )
-      ) {
-        setStage(2);
-        audioElement.play();
-      } else if (
-        stage === 2 &&
-        checkOverlap(
-          "wash",
-          charcord.LhLeft,
-          charcord.LhTop,
-          charcord.RhLeft,
-          charcord.RhTop
-        )
-      ) {
-        setStage(3);
+        setCurrentImage(newImage);
+        audioElement.onended = () => {
+          navigate("/play/story3/p17");
+        };
       }
     }
   }, [
     charcord.bottom,
     charcord.left,
-    stage,
     charcord.LhLeft,
     charcord.LhTop,
     charcord.RhLeft,
     charcord.RhTop,
   ]);
 
-  if (stage === 3) {
-    audio2Element.play();
-    audio2Element.onended = () => {
-      navigate("/play/story1/p8");
-    };
-  }
-
   return (
     <Wrapper>
-      <img className="back-ground" src={image1} alt="" />
+      <div id="hand"></div>
       <div
-        id="character"
         className="character-cam"
         style={{
           left: `${charcord.left}px`,
@@ -182,26 +152,17 @@ function P7() {
         <Charactercam setCharcord={setCharcord} />
       </div>
 
-      {stage === 0 && (
-        <img id="study" className="study" src={png1} alt="숙제해" />
-      )}
-      {stage === 1 && (
-        <img id="hurry" className="hurry" src={png2} alt="잔소리2" />
-      )}
-      {stage === 2 && (
-        <img id="wash" className="wash" src={png3} alt="잔소리3" />
-      )}
-
+      <img className="back-ground" src={currentImage} alt="" />
       <audio
         autoPlay
         onEnded={() => {
           setAudioFinished(true);
         }}
       >
-        <source src={audio7} type="audio/mp3" />
+        <source src={audio16} type="audio/mp3" />
       </audio>
     </Wrapper>
   );
 }
 
-export default P7;
+export default P16;

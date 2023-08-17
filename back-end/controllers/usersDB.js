@@ -14,17 +14,14 @@ const makrFolder = (dir) => {
 
 /* 회원가입 API */
 async function register(req, res) {
-  // 회원가입할 때 필요한 정보들을
-  // client에서 가져오면 그것들을 db에 넣는다.
   const user = new User(req.body);
-  // 정보 저장, 에러 시 json 형식으로 전달
 
-  makrFolder("./user/" + user.email)
+  // 서버에 해당 이메일 폴더를 만듦
+  makrFolder("./user/" + user.email);
+
   await user.save((err, userInfo) => {
     if (err) return res.json({ success: false, err });
-    return res.status(200).json({
-      success: true,
-    });
+    return res.status(200).json({ success: true });
   });
 }
 

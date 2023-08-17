@@ -41,9 +41,9 @@ const Charactercam = (props) => {
             } else if (prevCharcord.left > 895) {
               newLeft = 895;
             } else {
-              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+              newLeft = prevCharcord.left + x_diff + x_diff;
             }
-            const newBottom = prevCharcord.bottom + y_diff + y_diff;
+            const newBottom = prevCharcord.bottom + y_diff;
 
             return {
               bottom: newBottom,
@@ -63,7 +63,7 @@ const Charactercam = (props) => {
     // 컴포넌트 마운트 시 처음 한 번 호출
     updatePosition();
 
-    // 10초마다 API 호출
+    // 100ms마다 API 호출
     const interval = setInterval(updatePosition, 100);
 
     // 컴포넌트 언마운트 시 인터벌 정리
@@ -78,7 +78,7 @@ const Charactercam = (props) => {
 
   useLayoutEffect(() => {
     fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
-    const interval = setInterval(fetchNewImage, 100); // 200ms마다 이미지 업데이트
+    const interval = setInterval(fetchNewImage, 100); // 100ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
@@ -103,7 +103,7 @@ function P7() {
       .get("/api/devices/cleardiff")
       .then()
       .catch((err) => {
-        return console.error(err);
+        return console.log("에러입니다.", err);
       });
   }, []);
 
@@ -162,7 +162,7 @@ function P7() {
   if (stage === 3) {
     audio2Element.play();
     audio2Element.onended = () => {
-      navigate("/play/story1/p8");
+      navigate("/play/story3/p15");
     };
   }
 

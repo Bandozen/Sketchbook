@@ -16,7 +16,6 @@ const Wrapper = styled.div`
     right : 100px;
   }
 
-
   .image-button {
     position: absolute;
     top: 50%; /* 이미지 중앙에 위치 */
