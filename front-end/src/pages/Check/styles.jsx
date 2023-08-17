@@ -58,8 +58,8 @@ const Wrapper = styled.div`
 
   .overlay-livecam {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 0px;
+    left: 0px;
     z-index: 1000; /* 더 높은 값으로 조정하여 겹치는 순서를 변경할 수 있음 */
   }
 

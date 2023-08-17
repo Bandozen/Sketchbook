@@ -41,9 +41,9 @@ const Charactercam = (props) => {
             } else if (prevCharcord.left > 895) {
               newLeft = 895;
             } else {
-              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+              newLeft = prevCharcord.left + x_diff + x_diff;
             }
-            const newBottom = prevCharcord.bottom + y_diff + y_diff;
+            const newBottom = prevCharcord.bottom + y_diff;
 
             return {
               bottom: newBottom,
@@ -72,8 +72,8 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
@@ -110,7 +110,8 @@ function P7() {
   const audioElement = new Audio(boom1);
   const audio2Element = new Audio(boom2);
 
-  useEffect(() => {
+    useEffect(() => {  
+
     if (audioFinished) {
       if (
         stage === 0 &&
@@ -121,7 +122,7 @@ function P7() {
           charcord.RhLeft,
           charcord.RhTop
         )
-      ) {
+      ) {   
         setStage(1);
         audioElement.play();
       } else if (
@@ -133,9 +134,9 @@ function P7() {
           charcord.RhLeft,
           charcord.RhTop
         )
-      ) {
-        setStage(2);
-        audioElement.play();
+      ) {        
+          setStage(2);
+          audioElement.play();
       } else if (
         stage === 2 &&
         checkOverlap(
@@ -146,7 +147,7 @@ function P7() {
           charcord.RhTop
         )
       ) {
-        setStage(3);
+        setStage(3); 
       }
     }
   }, [
