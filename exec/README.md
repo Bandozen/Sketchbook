@@ -35,7 +35,7 @@
 | 서정빈 | 김진주 | 박근창 | 안민 | 이지은 | 조찬익 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
 |<img src="images/profile/서정빈.jpg" width="100" height="130" style="border-radius: 10px;">|<img src="images/profile/김진주.jpg" width="100" height="130" style="border-radius: 10px;">|<img src="images/profile/박근창.jpg" width="100" height="130" style="border-radius: 10px;">|<img src="images/profile/안민.jpg" width="100" height="130" style="border-radius: 10px;">|<img src="images/profile/이지은.jpg" width="100" height="130" style="border-radius: 10px;">|<img src="images/profile/조찬익.jpg" width="100" height="130" style="border-radius: 10px;">|
-| Release/Backend<br/> Team Leader | Frontend <br/> Developer | Hardware <br/> Developer | Frontend <br/> Develper | FrontEnd <br> Developer | Backend <br> Developer |
+| Release/Backend<br/> Team Leader | Frontend <br/> Developer | Hardware <br/> Developer | Frontend <br/> Develper | FrontEnd <br> Leader | Backend <br> Developer |
 
 
 <br/>
