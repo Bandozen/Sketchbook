@@ -19,7 +19,6 @@ let email;
 
 const Charactercam = (props) => {
   const [characterUrl, setcharacterUrl] = useState();
-  // const { setBottom, setLeft, setLhTop, setLhLeft, setRhTop, setRhLeft } = props;
   const { setCharcord } = props;
 
   useLayoutEffect(() => {
@@ -36,12 +35,6 @@ const Charactercam = (props) => {
           const right_x = parseFloat(res.data.right_x);
           const right_y = parseFloat(res.data.right_y);
 
-          // setBottom((prevBottom) => prevBottom + y_diff + y_diff);
-          // setLeft((prevLeft) => prevLeft + x_diff + x_diff + x_diff);
-          // setLhTop(left_y);
-          // setLhLeft(left_x);
-          // setRhTop(right_y);
-          // setRhLeft(right_x);
           setCharcord((prevCharcord) => {
             let newLeft;
             if (prevCharcord.left < 0) {
@@ -49,9 +42,9 @@ const Charactercam = (props) => {
             } else if (prevCharcord.left > 895) {
               newLeft = 895;
             } else {
-              newLeft = prevCharcord.left + x_diff + x_diff + x_diff;
+              newLeft = prevCharcord.left + x_diff + x_diff;
             }
-            const newBottom = prevCharcord.bottom + y_diff + y_diff;
+            const newBottom = prevCharcord.bottom + y_diff;
 
             return {
               bottom: newBottom,
@@ -71,7 +64,7 @@ const Charactercam = (props) => {
     // 컴포넌트 마운트 시 처음 한 번 호출
     updatePosition();
 
-    // 10초마다 API 호출
+    // 100ms마다 API 호출
     const interval = setInterval(updatePosition, 100);
 
     // 컴포넌트 언마운트 시 인터벌 정리
@@ -80,13 +73,13 @@ const Charactercam = (props) => {
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
-    // setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
+    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
+    setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
   useLayoutEffect(() => {
     fetchNewImage(); // 컴포넌트가 마운트될 때 이미지 가져오기
-    const interval = setInterval(fetchNewImage, 100); // 200ms마다 이미지 업데이트
+    const interval = setInterval(fetchNewImage, 100); // 100ms마다 이미지 업데이트
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   });
 
@@ -96,12 +89,6 @@ const Charactercam = (props) => {
 function P7() {
   const navigate = useNavigate();
   const [stage, setStage] = useState(0);
-  // const [bottom, setBottom] = useState(0);
-  // const [left, setLeft] = useState(0);
-  // const [LhTop, setLhTop] = useState(0);
-  // const [LhLeft, setLhLeft] = useState(0);
-  // const [RhTop, setRhTop] = useState(0);
-  // const [RhLeft, setRhLeft] = useState(0);
   const [charcord, setCharcord] = useState({
     bottom: 0,
     left: 0,
@@ -182,38 +169,6 @@ function P7() {
 
   return (
     <Wrapper>
-      {/* 로컬 작동 확인용 */}
-      {/* <div style={{ position: "absolute", zIndex: "9999", display: "flex" }}>
-        <button
-          type="button"
-          onClick={() => {
-            setBottom(200);
-            setLeft(712);
-          }}
-        >
-          test
-        </button>
-        <button
-
-          type="button"
-          onClick={() => {
-            setBottom(0);
-            setLeft(712);
-          }}
-        >
-          test2
-        </button>
-        <button
-
-          type="button"
-          onClick={() => {
-            setBottom(0);
-            setLeft(0);
-          }}
-        >
-          test3
-        </button>
-      </div> */}
       <img className="back-ground" src={image1} alt="" />
       <div
         id="character"
