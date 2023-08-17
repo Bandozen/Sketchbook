@@ -35,6 +35,9 @@ function Header() {
         />
       </Link>
       <div className="links">
+        <NavLink to="/play/story3/p1" className={({ isActive }) => isActive ? 'active' : undefined}>
+          시연 동화
+        </NavLink>
         <NavLink to="/play/story2/p1" className={({ isActive }) => isActive ? 'active' : undefined}>
           체험하기
         </NavLink>
