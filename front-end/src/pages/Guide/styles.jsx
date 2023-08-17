@@ -18,11 +18,6 @@ const Wrapper = styled.div`
   }
   
   .connect-button {
-    // display: inline-block; 
-    // background-color: #F8F8F8;
-    // border-radius: 8px;
-    // height: 40px;
-    // width: 100px;
     text-align: center; 
     line-height: 40px; 
     color: #8f39ea;
@@ -51,8 +46,6 @@ const Wrapper = styled.div`
     padding-left: 100px;
     padding-right: 100px;
   }
-
-
 
   .box-name {
     font-size: 25px;

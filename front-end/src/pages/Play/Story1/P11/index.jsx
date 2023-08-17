@@ -1,4 +1,3 @@
-import Wrapper from "./styles";
 import image from "../../../../play-background/엄마는 카멜레온_11.gif";
 import audio11 from "../../../../play-background/ske_11.mp3";
 import { useNavigate } from "react-router";
@@ -19,7 +18,6 @@ function P11() {
         flag: "1", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
-        // console.log(res.data.mission);
       })
       .catch((err) => {
         console.log(err);
@@ -33,12 +31,12 @@ function P11() {
   }, [navigate])
   
   return (
-    <Wrapper>
+    <div>
       <img className="back-ground" src={image} alt="" />
       <audio autoPlay>
         <source src={audio11} type="audio/mp3" />
       </audio>
-    </Wrapper>
+    </div>
   );
 }
 

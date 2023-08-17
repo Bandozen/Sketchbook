@@ -11,10 +11,9 @@ function Story3() {
     axios
       .get("/api/devices/stop")
       .then((res) => {
-        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -64,9 +63,6 @@ function Story3() {
       }
     };
 
-    //   const nextPagePath = `/Play/story3/p${nextPageNumber}`;
-    //   window.location.href = nextPagePath;
-    // };
 
     const renderCustomDialog = (message, callback) => {
       const dialog = document.createElement("div");

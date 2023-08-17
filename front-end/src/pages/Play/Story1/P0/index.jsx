@@ -16,7 +16,7 @@ const P0 = () => {
 
   return (
     <div>
-      <img src={imageUrl} alt="Random Image" style={{ width:'640px', height:'480px'}} />
+      <img src={imageUrl} alt="" style={{ width:'640px', height:'480px'}} />
     </div>
   );
 };

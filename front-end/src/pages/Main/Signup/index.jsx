@@ -85,8 +85,6 @@ export default function Signup() {
           axios
             .post("/api/users/mail", { email: useremail })
             .then((res) => {
-              // console.log(res.data);
-              // alert("인증 코드를 이메일로 발송했습니다.");
             })
             .catch((err) => {
               console.log(err);

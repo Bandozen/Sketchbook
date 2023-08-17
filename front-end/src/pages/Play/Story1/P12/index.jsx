@@ -1,4 +1,3 @@
-import Wrapper from "./styles";
 import image from "../../../../play-background/엄마는 카멜레온_12.gif";
 import audio12 from "../../../../play-background/ske_12.mp3";
 import { useNavigate } from "react-router";
@@ -85,7 +84,7 @@ function P12() {
   }, [navigate]);
 
   return (
-    <Wrapper>
+    <div>
       <img className="back-ground" src={image} alt="" />
       <div
         className="character-cam"
@@ -102,7 +101,7 @@ function P12() {
       <audio autoPlay>
         <source src={audio12} type="audio/mp3" />
       </audio>
-    </Wrapper>
+    </div>
   );
 }
 

@@ -1,4 +1,3 @@
-import Wrapper from "./styles";
 import image1 from "../../../../play-background/엄마는 카멜레온_6.gif";
 import audio6 from "../../../../play-background/ske_6.mp3";
 import { useNavigate } from "react-router-dom";
@@ -19,10 +18,9 @@ function P6() {
         flag: "1", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
-        // console.log(res.data.mission);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     }, 6000)
 
@@ -39,21 +37,20 @@ function P6() {
         flag: "0", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
-        // console.log(res.data.mission);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
   return (
-    <Wrapper>
+    <div>
       <img className="back-ground" src={image1} alt="" onLoad={mission} />
 
       <audio autoPlay>
         <source src={audio6} type="audio/mp3" />
       </audio>
-    </Wrapper>
+    </div>
   );
 }
 

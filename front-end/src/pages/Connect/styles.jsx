@@ -46,7 +46,6 @@ font-family: 'Pretendard-Regular';
   border-radius: 5px;
   font-size: 16px;
   transition: background-color 0.3s;
-  // border: 1px solid #8f39ea;
 }
 
 .btndiv button:hover {
@@ -74,9 +73,7 @@ font-family: 'Pretendard-Regular';
   line-height: 40px; 
   color: #4b8cee;
   font-size: 25px;
-  // text-decoration: none; 
   font-weight: bold;
-  // text-decoration: underline;
 }
 
 .connect-button:hover {
@@ -126,10 +123,6 @@ font-family: 'Pretendard-Regular';
   height: 300px;
 }
 
-// h1 {
-//   font-weight: bold;
-//   font-size: 35px;
-// }
 
 .boxes {
   display: flex;

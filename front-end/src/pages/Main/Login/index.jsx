@@ -67,8 +67,7 @@ export default function Login() {
         password: password,
       })
       .then((res) => {
-        // console.log(res.data);
-        if (res.data.loginSuccess == false) {
+        if (res.data.loginSuccess === false) {
           alert("일치하는 회원정보가 없습니다.");
           return;
         } else {
