@@ -18,7 +18,7 @@ function P6() {
 
   return (
     <div>
-      <img className="back-ground" src={image1} alt="" onLoad={mission} />
+      <img className="back-ground" src={image1} alt="" />
 
       <audio autoPlay>
         <source src={audio6} type="audio/mp3" />
