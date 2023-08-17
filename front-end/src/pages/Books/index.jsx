@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
-
-// Bootstrap
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Pagination from "react-bootstrap/Pagination";
-
-// Styles, Icons
 import Wrapper from "./styles";
 import { BiSearchAlt2 } from "react-icons/bi";
-
-// Components
 import Header from "../../components/Header";
 import BookCard from "../../components/BookCard";
-
 import bookData from "../../dummy-data/bookData";
 import axios from "axios";
 
@@ -22,7 +15,7 @@ function Books() {
       .get("/api/devices/clearcord")
       .then()
       .catch((err) => {
-        return console.log("에러입니다.", err);
+        return console.error(err);
       });
   }, [])
     
@@ -30,10 +23,9 @@ function Books() {
     axios
       .get("/api/devices/booksready")
       .then((res) => {
-        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 

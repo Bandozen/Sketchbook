@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
+
 import Wrapper from "./styles";
 import CheckStep from "../../components/CheckStep";
-import axios from "axios";
 import check_audio from "../../play-background/check_narration.mp3";
 
 let camUrl;
 
 const Livecam = () => {
   const [imageUrl, setImageUrl] = useState(`/assets/livecam_loading.jpg`);
-  // const [imageUrl, setImageUrl] = useState(`/user/image.jpg`);
   let email;
   axios
     .get("/api/devices/mail")
@@ -17,13 +18,11 @@ const Livecam = () => {
       email = res.data.email;  
     })
     .catch((err) => {
-      return console.log(err);
+      return console.error(err);
     });
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    // setImageUrl(`/assets/test.png?timestamp=${timestamp}`); //local
-    // camUrl = `/assets/test.png?timestamp=${timestamp}`; // local
     setImageUrl(`/user/${email}/image.jpg?timestamp=${timestamp}`); // 배포
     camUrl = `/user/${email}/image.jpg?timestamp=${timestamp}`; // 배포
   };
@@ -44,16 +43,13 @@ const Charactercam = () => {
     .get("/api/devices/mail")
     .then((res) => {
       email = res.data.email;
-      // 카메라 화면 : "user/[user_email]/image.jpg"
-      // 캐릭터 : user/[user_email]/assemble.png
     })
     .catch((err) => {
-      return console.log(err);
+      return console.error(err);
     });
 
   const fetchNewImage = () => {
     const timestamp = new Date().getTime();
-    // setcharacterUrl(`/assets/assemble.png?timestamp=${timestamp}`); //local
     setcharacterUrl(`/user/${email}/assemble.png?timestamp=${timestamp}`); // 배포
   };
 
@@ -75,12 +71,10 @@ function Check() {
     axios
       .post("/api/devices/capture", { camUrl: camUrl })
       .then((res) => {
-        // back에서 찍은 사진을 가져온다.
-        // 찍은 사진을 모달로 띄운다.
         setActiveStep(2);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -91,10 +85,9 @@ function Check() {
         flag: "1", // mission이 없으면 0 있으면 1
       })
       .then((res) => {
-        // console.log(res.data.mission);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 

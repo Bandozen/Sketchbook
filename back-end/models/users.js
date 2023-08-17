@@ -37,10 +37,6 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: "false"
     },
-    deviceIP: {
-      type: String,
-      default: ""
-    }
   },
   {
     versionKey: false,

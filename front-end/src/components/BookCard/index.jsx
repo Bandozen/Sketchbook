@@ -16,10 +16,9 @@ function BookCard({ book, onClick }) {
     axios
       .get("/api/devices/start")
       .then((res) => {
-        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -32,7 +31,7 @@ function BookCard({ book, onClick }) {
   };
 
   const StartPlay = () => {
-    if (book.id !== 1) {
+    if (book.id !== 1 && book.id !== 2) {
       onClick();
       return;
     } else {
@@ -41,7 +40,7 @@ function BookCard({ book, onClick }) {
   };
 
   const goToConnect = () => {
-    if (book.id !== 1) {
+    if (book.id !== 1 && book.id !== 2) {
       onClick();
       return;
     } else {

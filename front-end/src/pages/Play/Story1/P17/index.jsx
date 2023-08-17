@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-import Wrapper from "./styles";
 import image17 from "../../../../play-background/엄마는 카멜레온_17.gif";
 import audio17 from "../../../../play-background/ske_17.mp3";
 import { useNavigate } from "react-router";
-import { CustomDialog } from "../styles"; // Story1에서 CustomDialog 가져오기
-// import axios from "axios";
-
-// mp3 18초?
-// 미션 끝나면 동화 종료 직전에 모달창 뜨게하기 !
+import { CustomDialog } from "../styles";
 
 function P17() {
   const navigate = useNavigate();
@@ -29,7 +24,7 @@ function P17() {
 
 
   return (
-    <Wrapper>
+    <div>
       <img className="back-ground" src={image17} alt="" />
       <audio autoPlay>
         <source src={audio17} type="audio/mp3" />
@@ -40,7 +35,7 @@ function P17() {
           <button onClick={handleCloseModal}>확인</button>
         </CustomDialog>
       )}
-    </Wrapper>
+    </div>
   );
 }
 
