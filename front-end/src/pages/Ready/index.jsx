@@ -1,8 +1,10 @@
 import Wrapper from './styles';
 import Button from "react-bootstrap/Button";
 import axios from 'axios'
+import { useSearchParams } from 'react-router-dom';
 
 function Ready() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const ready = (e) => {
     axios
       .get("/api/devices/ready")
@@ -12,6 +14,8 @@ function Ready() {
         console.error(err);
       });
   };
+
+  const bookId = searchParams.get("bookId")
 
   return (
     <>
@@ -25,14 +29,26 @@ function Ready() {
           <br />
           <div>
             <div className="btndiv">
-              <a href="/play/story1/p1">
+             { bookId === "1" && 
+                <a href="/play/story1/p1">
                 <Button
                   variant="outline-primary"
                   className="custom-button-style"
-                >
+                  >
                   시작하기
                 </Button>
               </a>
+                }
+              {bookId === "2" &&
+                <a href="/play/story3/p1">
+                <Button
+                  variant="outline-primary"
+                  className="custom-button-style"
+                  >
+                  시작하기
+                </Button>
+              </a>
+                }
             </div>
           </div>
 
