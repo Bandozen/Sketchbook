@@ -23,34 +23,50 @@ function Story3() {
     const handleKeyDown = (event) => {
       const currentPath = window.location.pathname;
       const pageNumber = Number(currentPath.split("/").pop().slice(1));
-      let nextPageNumber;
-
       if (event.key === "ArrowLeft") {
-        if (pageNumber === 1) {
-          renderCustomDialog("첫 페이지에요.");
+        if (pageNumber === 6) {
+          const prevPagePath = `/Play/story3/p1`;
+          window.location.href = prevPagePath;
+        } else if (pageNumber === 7) {
+          const prevPagePath = `/Play/story3/p6`;
+          window.location.href = prevPagePath;
+        } else if (pageNumber === 15) {
+          const prevPagePath = `/Play/story3/p7`;
+          window.location.href = prevPagePath;
+        } else if (pageNumber === 16) {
+          const prevPagePath = `/Play/story3/p15`;
+          window.location.href = prevPagePath;
+        } else {
           return;
         }
-        nextPageNumber = Math.max(1, pageNumber - 1);
       } else if (event.key === "ArrowRight") {
-        if (pageNumber === 16) {
+        if (pageNumber === 1) {
+          const nextPagePath = `/Play/story3/p6`;
+          window.location.href = nextPagePath;
+        } else if (pageNumber === 6) {
+          const nextPagePath = `/Play/story3/p7`;
+          window.location.href = nextPagePath;
+        } else if (pageNumber === 7) {
+          const nextPagePath = `/Play/story3/p15`;
+          window.location.href = nextPagePath;
+        } else if (pageNumber === 15) {
+          const nextPagePath = `/Play/story3/p16`;
+          window.location.href = nextPagePath;
+        } else if (pageNumber === 16) {
           renderCustomDialog(
             "동화가 끝났어요. 다른 동화를 보러 가 볼까요?",
             () => {
               stop();
               navigate("/books");
-              
             }
           );
-          return;
         }
-        nextPageNumber = Math.min(17, pageNumber + 1);
-      } else {
-        return;
       }
-
-      const nextPagePath = `/Play/story3/p${nextPageNumber}`;
-      window.location.href = nextPagePath;
     };
+
+    //   const nextPagePath = `/Play/story3/p${nextPageNumber}`;
+    //   window.location.href = nextPagePath;
+    // };
 
     const renderCustomDialog = (message, callback) => {
       const dialog = document.createElement("div");
