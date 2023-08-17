@@ -35,7 +35,7 @@ function BookCard({ book, onClick }) {
       onClick();
       return;
     } else {
-      navigate('/check');
+      navigate(`/check?bookId=${book.id}`);
     }
   };
 
