@@ -182,7 +182,7 @@ async function mail(req, res) {
     }
     res.json({
       message: "메일이 무사히 전송되었습니다.",
-      // number: number,
+      number: number,
     });
     smtpTransport.close();
   });
