@@ -32,7 +32,7 @@ function BookCard({ book, onClick }) {
   };
 
   const StartPlay = () => {
-    if (book.id !== 1) {
+    if (book.id !== 1 && book.id !== 2) {
       onClick();
       return;
     } else {
@@ -41,7 +41,7 @@ function BookCard({ book, onClick }) {
   };
 
   const goToConnect = () => {
-    if (book.id !== 1) {
+    if (book.id !== 1 && book.id !== 2) {
       onClick();
       return;
     } else {

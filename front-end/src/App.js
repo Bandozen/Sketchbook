@@ -59,7 +59,7 @@ import P2_3 from "./pages/Play/Story2/P3/index";
 //////////////////////////////////////////
 import Story3 from "./pages/Play/Story3";
 //////////////////////////////////////////
-import P3_1 from "./pages/Play/Story1/P1/index";
+import P3_1 from "./pages/Play/Story3/P1/index";
 import P3_6 from "./pages/Play/Story3/P6/index";
 import P3_7 from "./pages/Play/Story3/P7/index";
 import P3_15 from "./pages/Play/Story3/P15/index";
