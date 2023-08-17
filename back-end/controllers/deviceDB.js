@@ -116,8 +116,8 @@ async function ready(req, res) {
   await client.set(req.user.email, "ready");
 
   // 저장된 캡처 이미지 제거
-  // delDir("./user/" + req.user.email + "/image.jpg");
-  // delDir("./user/" + req.user.email + "/assemble.png");
+  delDir("./user/" + req.user.email + "/image.jpg");
+  delDir("./user/" + req.user.email + "/assemble.png");
 
   return res.status(200).json({});
 }
@@ -128,10 +128,10 @@ async function booksready(req, res) {
   await client.set(req.user.email, "ready");
 
   // 저장된 캡처 이미지 및 변환된 캐릭터이미지 제거
-  // delDir("./user/" + req.user.email + "/image.jpg");
-  // delDir("./user/" + req.user.email + "/assemble.png");
-  // delDir("./user/" + req.user.email + "/character.png");
-  // delDir("./user/" + req.user.email + "/character_rmbg.png");
+  delDir("./user/" + req.user.email + "/image.jpg");
+  delDir("./user/" + req.user.email + "/assemble.png");
+  delDir("./user/" + req.user.email + "/character.png");
+  delDir("./user/" + req.user.email + "/character_rmbg.png");
 
   return res.status(200).json({});
 }
