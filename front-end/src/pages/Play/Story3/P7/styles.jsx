@@ -27,9 +27,9 @@ const Wrapper = styled.div`
 // 3번째, 왼쪽 "씻어라"
 .wash {
   position: absolute;
-  bottom: 30%;
+  bottom: 20%;
   left: 5%;
-  transform: rotate(200deg);
+  transform: rotate(180deg);
 }
 `;
 export default Wrapper;
