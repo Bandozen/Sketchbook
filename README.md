@@ -1,6 +1,6 @@
 # 스케치북, 아이의 상상은 현실이 된다
 <div align="left">
-<img width="300" src="images\logo_with.png">
+<img width="300" src="exec/images/logo_with.png">
 </div>
 
 ## 🖍 스케치북 소개:
