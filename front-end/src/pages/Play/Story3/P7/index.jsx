@@ -44,6 +44,7 @@ const Charactercam = (props) => {
               newLeft = prevCharcord.left + x_diff + x_diff;
             }
             const newBottom = prevCharcord.bottom + y_diff;
+            // const newLeft = prevCharcord.left + x_diff + x_diff;
 
             return {
               bottom: newBottom,
@@ -109,6 +110,7 @@ function P7() {
 
   const audioElement = new Audio(boom1);
   const audio2Element = new Audio(boom2);
+
 
   useEffect(() => {
     if (audioFinished) {

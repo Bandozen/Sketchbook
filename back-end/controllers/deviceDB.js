@@ -46,7 +46,6 @@ async function checkConnect(req, res) {
   await client.select(0);
   const flag = await client.get(OTP);
 
-  console.log(flag);
 
   if (flag == "true") {
     User.findOneAndUpdate({ _id: req.user._id }, { isConnected: true }, (err, user) => {
