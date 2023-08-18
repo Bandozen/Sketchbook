@@ -18,7 +18,6 @@ function P10() {
       flag: "1", // mission이 없으면 0 있으면 1
     })
     .then((res) => {
-      // console.log(res.data.mission);
     })
     .catch((err) => {
       console.log(err);

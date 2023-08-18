@@ -74,7 +74,6 @@ export default function Signup() {
     axios
       .post("/api/users/idCheck", { email: useremail })
       .then((res) => {
-        // console.log(res.data)
         const { registerService, message } = res.data;
         if (!isValidEmail) {
           alert("이메일 형식을 확인해주세요.");
