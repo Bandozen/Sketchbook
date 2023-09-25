@@ -112,7 +112,7 @@
 <br/>
 
 ## 📹 하드웨어 구성
-![image](exec/images/sketchbook_hardware.gif)
+![image](exec/images/sketchbook_hardware.png)
 
 ## 📚 사용기술스택
 - Front-End
