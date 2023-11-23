@@ -46,7 +46,7 @@
 <br/>
 
 ## UCC
-[![Video](./exec/images/UCC커버.png)](./exec/공통PJT_광주_1반_C102_UCC경진대회.mp4)
+[![Video](./exec/images/UCC커버.png)](https://www.youtube.com/watch?v=4Wc6SwcSVR8)
 
 <br/>
 
