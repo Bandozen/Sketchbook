@@ -46,7 +46,7 @@
 <br/>
 
 ## 🎬 UCC
-[![Video](./exec/images/UCC커버.png)](#)
+[![Video](./exec/images/UCC커버.png)](https://www.youtube.com/watch?v=4Wc6SwcSVR8)
 
 <br/>
 
