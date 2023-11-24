@@ -6,6 +6,11 @@ import redis
 import sys
 import paramiko
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 def draw_keypoints(frame, keypoints, confidence):
     y, x, c = frame.shape
     shaped = np.squeeze(np.multiply(keypoints, [y, x, 1]))
@@ -48,9 +53,9 @@ async def process_frame(frame):
     return keypoints_with_scores, flipped_frame
 
 # 외부 Redis 서버 정보
-redis_host = "i9c102.p.ssafy.io"
-redis_port = 6379  # Redis 포트 번호
-redis_password = "3btic102"  # 사용자 인증이 설정된 경우
+redis_host = os.getenv('REDIS_HOST')
+redis_port = os.getenv('REDIS_PORT')
+redis_password = os.getenv('REDIS_PASSWORD')
 
 # 외부 Redis 서버에 연결
 redis_client = redis.Redis(host=redis_host, port=redis_port, password=redis_password, db=2)
@@ -59,7 +64,7 @@ email = sys.argv[1]
 redis_client.delete(email)
 
 # EC2 인스턴스의 접속 정보
-ec2_ip = 'i9c102.p.ssafy.io'
+ec2_ip = os.getenv('SERVER_IP')  # 서버 주소
 ec2_username = 'ubuntu'
 ec2_private_key = '/home/pi/sketchbook/I9C102T.pem'
 

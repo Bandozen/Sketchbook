@@ -5,7 +5,10 @@ const fs = require("fs");
 const axios = require("axios");
 const path = require("path");
 
+const dotenv = require("dotenv");
+
 let OTP = "0000";
+dotenv.config();
 
 // 서버에 저장된 파일을 지우는 함수
 const delDir = (dir) => {
@@ -178,9 +181,10 @@ async function downloadImage(url, filename, email) {
 function capture(req, res) {
   const imgUrl = req.body.camUrl;
   const email = req.user.email;
+  const address = process.env.ADDRESS;
 
   // downloadImage("http://localhost:3000" + imgUrl, `character.png`, email) // local
-  downloadImage("https://i9c102.p.ssafy.io" + imgUrl, `character.png`, email); // 배포
+  downloadImage(address + imgUrl, `character.png`, email); // 배포
 
   return res.status(200).json({});
 }

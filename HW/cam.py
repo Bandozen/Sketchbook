@@ -2,11 +2,15 @@ import redis
 import cv2
 import sys
 
-# 외부 Redis 서버 정보
-redis_host = "i9c102.p.ssafy.io"
-redis_port = 6379  # Redis 포트 번호
-redis_password = "3btic102"  # 사용자 인증이 설정된 경우
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+
+# 외부 Redis 서버 정보
+redis_host = os.getenv('REDIS_HOST')
+redis_port = os.getenv('REDIS_PORT')
+redis_password = os.getenv('REDIS_PASSWORD')
 # 외부 Redis 서버에 연결
 redis_client = redis.Redis(host=redis_host, port=redis_port, password=redis_password, db=1)
 email = sys.argv[1]

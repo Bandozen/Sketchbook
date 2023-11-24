@@ -5,10 +5,14 @@ from PIL import Image
 import aioredis
 import asyncio
 import sys
+from dotenv import load_dotenv
+import os
 
-redis_host = "i9c102.p.ssafy.io"
-redis_port = 6379  # Redis 포트 번호
-redis_password = "3btic102"  # 사용자 인증이 설정된 경우
+load_dotenv()
+
+redis_host = os.getenv('REDIS_HOST')
+redis_port = os.getenv('REDIS_PORT')
+redis_password = os.getenv('REDIS_PASSWORD')
 
 async def main():
     redis_pool = await aioredis.create_redis_pool(
